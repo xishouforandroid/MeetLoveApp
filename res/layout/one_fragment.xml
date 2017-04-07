@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/black"
+            android:gravity="center_vertical"
+            >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="推荐"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:id="@+id/title"
+                />
+        <ImageView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:src="@drawable/icon_navbar_search"
+                  android:layout_alignParentRight="true"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="15dp"
+                  android:id="@+id/btn_right"
+                />
+    </RelativeLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_weight="1"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:background="@color/white"
+                  android:layout_height="0dp">
+        <GridView android:layout_width="match_parent"
+                  android:numColumns="2"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:id="@+id/gridView1"
+                  android:verticalSpacing="0dp"
+                  android:horizontalSpacing="0dp"
+                  android:layout_weight="1"
+                  android:stretchMode="columnWidth"
+                  android:layout_height="wrap_content">
+        </GridView>
+        <TextView android:layout_width="match_parent"
+                  android:text="更多"
+                  android:layout_marginRight="12dp"
+                  android:layout_marginBottom="6dp"
+                  android:gravity="right"
+                  android:id="@+id/btn_one"
+                  android:textSize="16sp"
+                  android:textColor="@color/main_color"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_weight="1"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:background="@color/white"
+                  android:layout_height="0dp">
+        <GridView android:layout_width="match_parent"
+                  android:numColumns="2"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:id="@+id/gridView2"
+                  android:verticalSpacing="0dp"
+                  android:horizontalSpacing="0dp"
+                  android:layout_weight="1"
+                  android:stretchMode="columnWidth"
+                  android:layout_height="wrap_content">
+        </GridView>
+        <TextView android:layout_width="match_parent"
+                  android:text="更多"
+                  android:layout_marginRight="12dp"
+                  android:layout_marginBottom="6dp"
+                  android:gravity="right"
+                  android:id="@+id/btn_two"
+                  android:textSize="16sp"
+                  android:textColor="@color/main_color"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

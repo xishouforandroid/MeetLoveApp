@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+
+            <ImageView android:layout_width="wrap_content"
+                       android:src="@drawable/bigpic_verify_v"
+                       android:layout_height="wrap_content"/>
+
+           <LinearLayout android:layout_width="match_parent"
+                         android:background="@color/white"
+                         android:orientation="vertical"
+                         android:padding="8dp"
+                         android:layout_height="wrap_content">
+               <TextView android:layout_width="wrap_content"
+                         android:text="详情"
+                         android:layout_marginLeft="8dp"
+                         android:textColor="@color/text_color"
+                         android:textSize="16sp"
+                         android:layout_height="wrap_content"/>
+               <TextView android:layout_width="match_parent"
+                         android:lineSpacingMultiplier="1.4"
+                         android:textColor="@color/text_color"
+                         android:text="·认证成功后您将升级为诚信会员；\n·认证会员有此权限;\n·我们会提供线下一对一VIP服务;\n·需缴纳1000元诚信保证金，可退"
+                         android:padding="8dp"
+                         android:textSize="13sp"
+                         android:gravity="center|left"
+                         android:layout_height="wrap_content"/>
+           </LinearLayout>
+
+            <Button android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_below="@+id/pwr"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="微信支付"
+                    android:textStyle="bold"
+                    android:id="@+id/btn_1"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_big_active"
+                    android:layout_height="wrap_content"/>
+            <Button android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_below="@+id/pwr"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="支付宝支付"
+                    android:textStyle="bold"
+                    android:id="@+id/btn_2"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_big_active"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.lbins.meetlove.widget.ReboundScrollView>
+</LinearLayout>

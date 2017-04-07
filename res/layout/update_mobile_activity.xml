@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <EditText android:layout_width="match_parent"
+              android:textColor="@color/textColortwo"
+              android:textColorHint="@color/textColortwo"
+              android:hint="新手机号"
+              android:layout_marginTop="15dp"
+              android:layout_marginLeft="15dp"
+              android:layout_marginRight="15dp"
+              android:padding="10dp"
+              android:numeric="integer"
+              android:drawablePadding="15dp"
+              android:background="@drawable/icon_input_bg"
+              android:drawableLeft="@drawable/icon_input_phone"
+              android:id="@+id/mobile"
+              android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <EditText android:layout_width="wrap_content"
+                  android:textColor="@color/textColortwo"
+                  android:textColorHint="@color/textColortwo"
+                  android:hint="验证码"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginLeft="15dp"
+                  android:layout_marginRight="15dp"
+                  android:padding="10dp"
+                  android:numeric="integer"
+                  android:drawablePadding="15dp"
+                  android:background="@drawable/icon_input_bg_short"
+                  android:drawableLeft="@drawable/icon_input_verifycode"
+                  android:id="@+id/card"
+                  android:layout_height="wrap_content"/>
+        <Button android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:layout_below="@+id/pwr"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="15dp"
+                android:text="验证码"
+                android:textStyle="bold"
+                android:id="@+id/btn_card"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_short_active"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_below="@+id/pwr"
+            android:layout_marginTop="85dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="完成"
+            android:textStyle="bold"
+            android:id="@+id/btn_save"
+            android:textSize="16sp"
+            android:textColor="@color/textColortwo"
+            android:background="@drawable/btn_big_unactive"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

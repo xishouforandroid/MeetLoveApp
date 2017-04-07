@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="60dp">
+
+    <LinearLayout android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:id="@+id/foot_liner_one"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+                   android:src="@drawable/tabicon_recommand_p"
+                   android:id="@+id/foot_one"
+                   android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_weight="1"
+                  android:id="@+id/foot_liner_two"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/foot_two"
+                   android:src="@drawable/tabicon_msg"
+                   android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/foot_liner_three"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/foot_three"
+                   android:src="@drawable/tabicon_contact"
+                   android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_weight="1"
+                  android:id="@+id/foot_liner_four"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/foot_four"
+                   android:src="@drawable/tabicon_mine"
+                   android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

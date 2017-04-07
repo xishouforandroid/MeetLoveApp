@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:background="@color/white"
+                  android:padding="10dp"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <com.lbins.meetlove.widget.RoundImageView
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_margin="6dp"
+                android:src="@drawable/default_cover1"
+                android:id="@+id/cover"
+                />
+        <RelativeLayout android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:text="李灵黛"
+                      android:id="@+id/nickname"
+                      android:layout_centerHorizontal="true"
+                      android:textSize="22sp"
+                      android:textColor="@color/textColor"
+                      android:layout_marginTop="15dp"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="企业推荐"
+                      android:id="@+id/is_tuijian"
+                      android:layout_marginLeft="15dp"
+                      android:layout_marginTop="8dp"
+                      android:layout_below="@+id/nickname"
+                      android:textColor="@color/main_color"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="交往中"
+                      android:id="@+id/is_state"
+                      android:layout_marginRight="15dp"
+                      android:layout_marginTop="8dp"
+                      android:layout_alignParentRight="true"
+                      android:layout_below="@+id/nickname"
+                      android:textColor="@color/main_color"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:padding="12dp"
+                      android:id="@+id/sign"
+                      android:textColor="@color/textColortwo"
+                      android:layout_below="@+id/is_tuijian"
+                      android:text="个性签名：非诚勿扰，相信我亲爱的你就在这里。"
+                      android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+                  android:background="@color/white"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="108dp"
+                      android:layout_gravity="center"
+                      android:gravity="center"
+                      android:layout_marginLeft="8dp"
+                      android:layout_height="wrap_content">
+            <ImageView android:layout_width="18dp"
+                       android:id="@+id/vip_1"
+                       android:src="@drawable/icon_verify_id_enabled"
+                       android:layout_height="18dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="认证"
+                      android:id="@+id/vip_2"
+                      android:layout_marginRight="8dp"
+                      android:textColor="@color/main_color"
+                      android:layout_height="wrap_content"/>
+            <ImageView android:layout_width="18dp"
+                       android:id="@+id/vip_3"
+                       android:layout_marginLeft="8dp"
+                       android:src="@drawable/icon_verify_honesty_enabled"
+                       android:layout_height="18dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="诚信"
+                      android:id="@+id/vip_4"
+                      android:textColor="@color/main_color"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:layout_gravity="center"
+                      android:gravity="center"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="86年"
+                      android:id="@+id/age"
+                      android:textColor="@color/textColortwo"
+                      android:layout_gravity="center"
+                      android:gravity="center"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="163cm"
+                      android:id="@+id/heightl"
+                      android:textColor="@color/textColortwo"
+                      android:layout_gravity="center"
+                      android:gravity="center"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="沈阳"
+                      android:id="@+id/address"
+                      android:textColor="@color/textColortwo"
+                      android:layout_gravity="center"
+                      android:gravity="center"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_marginTop="15dp"
+          android:background="@color/sign_mood_nomal_0"
+          android:layout_height="0.1dp"></View>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:padding="10dp"
+                  android:gravity="center_vertical"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_photo"
+                  android:layout_height="75dp">
+        <ImageView android:layout_width="35dp"
+                   android:src="@drawable/icon_mine_photo"
+                   android:layout_marginLeft="8dp"
+                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="相册"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/text_color"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+        <com.lbins.meetlove.widget.PictureGridview
+                android:id="@+id/gridview"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:layout_marginLeft="15dp"
+                android:horizontalSpacing="0dip"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0dip"
+                />
+    </LinearLayout>
+    <Button android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_below="@+id/pwr"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="添加到通讯录"
+            android:textStyle="bold"
+            android:onClick="AddToFriends"
+            android:id="@+id/btn_login"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_big_active"
+            android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

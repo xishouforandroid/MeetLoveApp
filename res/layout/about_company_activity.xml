@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                 android:layout_weight="1"
+                                                 android:layout_height="wrap_content">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="vertical"
+                          android:weightSum="1"
+                          android:id="@+id/liner_1"
+                          android:layout_height="wrap_content">
+
+                <TextView android:layout_width="match_parent"
+                          android:background="@color/white"
+                          android:padding="25dp"
+                          android:textSize="16sp"
+                          android:layout_gravity="center"
+                          android:gravity="center|left"
+                          android:textColor="@color/textColor"
+                          android:lineSpacingMultiplier="1.4"
+                          android:text="致力于做婚恋领域的领导者和创新者，真实婚恋的开创者和践行者"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="match_parent"
+                          android:background="@color/white"
+                          android:gravity="right"
+                          android:padding="8dp"
+                          android:textSize="16sp"
+                          android:textColor="@color/textColor"
+                          android:lineSpacingMultiplier="1.4"
+                          android:text="---幸福牵手吧          "
+                          android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="使命"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="25dp"
+                          android:textColor="@color/textColor"
+                          android:textStyle="bold"
+                          android:textSize="18sp"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="10dp"
+                          android:textSize="16sp"
+                          android:layout_marginRight="25dp"
+                          android:text="脱单如此容易，幸福触手可及"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="愿景"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="25dp"
+                          android:textColor="@color/textColor"
+                          android:textStyle="bold"
+                          android:textSize="18sp"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="10dp"
+                          android:textSize="16sp"
+                          android:layout_marginRight="25dp"
+                          android:text="做用户生活中最亲密的朋友，让用户生活更幸福"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="价值观"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="25dp"
+                          android:textColor="@color/textColor"
+                          android:textStyle="bold"
+                          android:textSize="18sp"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginTop="10dp"
+                          android:textSize="16sp"
+                          android:layout_marginRight="25dp"
+                          android:text="真诚，便捷，创新，热爱"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+    </com.lbins.meetlove.widget.ReboundScrollView>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:gravity="center"
+                          android:padding="8dp"
+                          android:orientation="vertical"
+                          android:layout_alignParentBottom="true"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="幸福牵手吧 版权所有"
+                          android:textSize="13sp"
+                          android:textColor="@color/foot_color_default"
+                          android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="Copyright @ 2016-2017 All Rights Reserved"
+                          android:textSize="13sp"
+                          android:layout_marginTop="3dp"
+                          android:textColor="@color/foot_color_default"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+</LinearLayout>

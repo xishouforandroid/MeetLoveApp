@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="15dp"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_mobile"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="手机号码修改"
+                          android:drawableRight="@drawable/icon_small_list_more"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_pwr"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="密码修改"
+                          android:drawableRight="@drawable/icon_small_list_more"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="15dp"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_black"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="黑名单"
+                          android:drawableRight="@drawable/icon_small_list_more"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_msg"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="接收新消息通知"
+                          android:layout_weight="1"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+                <ImageView android:layout_width="wrap_content"
+                           android:id="@+id/btn_switch"
+                           android:src="@drawable/icon_switchbtn_on"
+                           android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="15dp"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_suggest"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="反馈与投诉"
+                          android:drawableRight="@drawable/icon_small_list_more"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_about"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="关于"
+                          android:drawableRight="@drawable/icon_small_list_more"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                  android:layout_marginTop="35dp"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_height="0.1dp"></View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="10dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_quite"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="退出登录"
+                          android:gravity="center"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.lbins.meetlove.widget.ReboundScrollView>
+
+</LinearLayout>

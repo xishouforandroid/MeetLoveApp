@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+        <com.lbins.meetlove.widget.RoundImageView
+                    android:layout_width="98dp"
+                   android:layout_marginTop="15dp"
+                   android:layout_centerHorizontal="true"
+                   android:src="@drawable/launcher"
+                    android:id="@+id/title"
+                   android:layout_height="98dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="幸福牵手吧"
+                  android:layout_marginTop="20dp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_below="@+id/title"
+                  android:textColor="@color/main_color"
+                  android:textSize="18sp"
+                  android:layout_height="wrap_content"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_centerInParent="true"
+              android:id="@+id/line_1"
+              android:background="@color/sign_mood_nomal_0"
+              android:layout_height="0.1dp"></View>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                      android:layout_below="@+id/line_1"
+                      android:background="@drawable/btn_dark_shape"
+                      android:id="@+id/liner_about"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="match_parent"
+                      android:text="公司介绍"
+                      android:drawableRight="@drawable/icon_small_list_more"
+                      android:layout_marginLeft="15dp"
+                      android:layout_gravity="center_vertical"
+                      android:textColor="@color/text_color"
+                      android:textSize="16sp"
+                      android:layout_marginRight="8dp"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:id="@+id/line_2"
+              android:layout_below="@+id/liner_about"
+              android:layout_height="0.1dp"></View>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="10dp"
+                     android:layout_below="@+id/line_2"
+                      android:background="@drawable/btn_dark_shape"
+                      android:id="@+id/liner_version"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:text="版本更新"
+                      android:layout_weight="1"
+                      android:layout_marginLeft="15dp"
+                      android:layout_gravity="center_vertical"
+                      android:textColor="@color/text_color"
+                      android:textSize="16sp"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="V1.6"
+                      android:id="@+id/version"
+                      android:layout_marginRight="8dp"
+                      android:textColor="@color/textColortwo"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:gravity="center"
+                      android:padding="8dp"
+                      android:orientation="vertical"
+                      android:layout_alignParentBottom="true"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:text="幸福牵手吧 版权所有"
+                      android:textSize="13sp"
+                      android:textColor="@color/foot_color_default"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="联系我们：86:（024）31054568"
+                      android:textSize="13sp"
+                      android:layout_marginTop="3dp"
+                      android:textColor="@color/main_color"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="（周一至周日 早9:00-晚5:00）"
+                      android:textSize="13sp"
+                      android:layout_marginTop="3dp"
+                      android:textColor="@color/foot_color_default"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="Copyright @ 2016-2017 All Rights Reserved"
+                      android:textSize="13sp"
+                      android:layout_marginTop="3dp"
+                      android:textColor="@color/foot_color_default"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
