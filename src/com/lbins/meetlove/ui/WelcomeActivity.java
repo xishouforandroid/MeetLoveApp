@@ -51,7 +51,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
                 startActivity(loadIntent);
                 finish();
             } else {
-                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_mobile", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("password", ""), String.class))){
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mobile", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("password", ""), String.class))){
                     loginData();
                 }else{
                     Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
@@ -67,7 +67,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
     private void loginData(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                InternetURL.LOGIN__URL,
+                InternetURL.appLogin,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -107,7 +107,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", getGson().fromJson(getSp().getString("mm_emp_mobile", ""), String.class));
+                params.put("mobile", getGson().fromJson(getSp().getString("mobile", ""), String.class));
                 params.put("password", getGson().fromJson(getSp().getString("password", ""), String.class));
                 return params;
             }
@@ -124,6 +124,27 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
 
 
     public void saveAccount(final Emp emp) {
+        save("empid", emp.getEmpid());
+        save("mobile", emp.getPassword());
+        save("nickname", emp.getNickname());
+        save("cover", emp.getCover());
+        save("sign", emp.getSign());
+        save("age", emp.getAge());
+        save("sex", emp.getSex());
+        save("heightl", emp.getHeightl());
+        save("education", emp.getEducation());
+        save("provinceid", emp.getProvinceid());
+        save("cityid", emp.getCityid());
+        save("areaid", emp.getAreaid());
+        save("marriage", emp.getMarriage());
+        save("company", emp.getCompany());
+        save("likeids", emp.getLikeids());
+        save("state", emp.getState());
+        save("cardpic", emp.getCardpic());
+        save("rzstate1", emp.getRzstate1());
+        save("rzstate2", emp.getRzstate2());
+        save("rzstate3", emp.getRzstate3());
+        save("is_use", emp.getIs_use());
         //登录成功，绑定百度云推送
 //        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
             //进行绑定

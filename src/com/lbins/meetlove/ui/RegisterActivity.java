@@ -6,13 +6,24 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.data.Data;
+import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.util.StringUtil;
+import com.lbins.meetlove.widget.CustomProgressDialog;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
@@ -26,6 +37,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private TextView sex_woman;
 
     private LinearLayout sex_liner;
+
+    private String sex = "1";//0女 1男
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,29 +98,32 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_login:
             {
                 //点击注册
-//                if(StringUtil.isNullOrEmpty(mobile.getText().toString())){
-//                    showMsg(RegisterActivity.this, res.getString(R.string.error_login_one));
-//                    return;
-//                }
-//                if(StringUtil.isNullOrEmpty(pwr.getText().toString())){
-//                    showMsg(RegisterActivity.this, res.getString(R.string.error_login_two));
-//                    return;
-//                }
-//                if(pwr.getText().toString().length() > 18 || pwr.getText().toString().length()<6){
-//                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_six_eighteen));
-//                    return;
-//                }
-//                if(StringUtil.isNullOrEmpty(pwrsure.getText().toString())){
-//                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_again));
-//                    return;
-//                }
-//                if(!pwr.getText().toString().equals(pwrsure.getText().toString())){
-//                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_two_no));
-//                    return;
-//                }
-                Intent intent = new Intent(RegisterActivity.this, RegUpdateActivity.class);
-                startActivity(intent);
+                if(StringUtil.isNullOrEmpty(mobile.getText().toString())){
+                    showMsg(RegisterActivity.this, res.getString(R.string.error_login_one));
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(pwr.getText().toString())){
+                    showMsg(RegisterActivity.this, res.getString(R.string.error_login_two));
+                    return;
+                }
+                if(pwr.getText().toString().length() > 18 || pwr.getText().toString().length()<6){
+                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_six_eighteen));
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(pwrsure.getText().toString())){
+                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_again));
+                    return;
+                }
+                if(!pwr.getText().toString().equals(pwrsure.getText().toString())){
+                    showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_two_no));
+                    return;
+                }
 
+                progressDialog = new CustomProgressDialog(RegisterActivity.this, "正在注册",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                reg();
             }
                 break;
             case R.id.sex_man:
@@ -116,6 +132,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 sex_liner.setBackground(res.getDrawable(R.drawable.btn_sex_left));
                 sex_man.setTextColor(res.getColor(R.color.white));
                 sex_woman.setTextColor(res.getColor(R.color.main_color));
+                sex = "1";
             }
                 break;
             case R.id.sex_woman:
@@ -124,6 +141,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 sex_liner.setBackground(res.getDrawable(R.drawable.btn_sex_right));
                 sex_man.setTextColor(res.getColor(R.color.main_color));
                 sex_woman.setTextColor(res.getColor(R.color.white));
+                sex = "0";
             }
                 break;
         }
@@ -146,14 +164,67 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 //都不是空的
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().equals(pwrsure.getText().toString()) && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
-                    btn_login.setClickable(true);
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
                 }else {
-                    btn_login.setClickable(false);
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
                 }
             }
         }
     };
+
+    private void reg(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appReg,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code = jo.getString("code");
+                                if (Integer.parseInt(code) == 200) {
+                                    Intent intent =  new Intent(RegisterActivity.this, RegUpdateActivity.class);
+                                    startActivity(intent);
+                                }  else {
+                                    showMsg(RegisterActivity.this,  jo.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RegisterActivity.this, "注册失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile.getText().toString());
+                params.put("password", pwr.getText().toString());
+                params.put("sex", sex);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
 }

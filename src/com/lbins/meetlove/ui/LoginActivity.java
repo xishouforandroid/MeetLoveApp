@@ -48,7 +48,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         res = getResources();
-
 //        DemoHelper.getInstance().logout(false, new EMCallBack() {
 //            @Override
 //            public void onSuccess() {
@@ -67,10 +66,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("password", ""), String.class))){
             pwr.setText(getGson().fromJson(getSp().getString("password", ""), String.class));
         }
-
-        Intent intent = new Intent(LoginActivity.this,
-                MainActivity.class);
-        startActivity(intent);
     }
 
     private void initView() {
@@ -118,29 +113,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.btn_find:
                 //找回密码
             {
-//                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, ForgetPwrActivity.class);
+                startActivity(intent);
             }
                 break;
             case R.id.btn_login:
                 //登录
-//                if (StringUtil.isNullOrEmpty(mobile.getText().toString())) {
-//                    showMsg(LoginActivity.this, res.getString(R.string.error_login_one));
-//                    return;
-//                }
-//                if (StringUtil.isNullOrEmpty(pwr.getText().toString())) {
-//                    showMsg(LoginActivity.this, res.getString(R.string.error_login_two));
-//                    return;
-//                }
-//                progressDialog = new CustomProgressDialog(LoginActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-//                progressDialog.setCancelable(true);
-//                progressDialog.setIndeterminate(true);
-//                progressDialog.show();
-//                loginData();
             {
-                Intent intent = new Intent(LoginActivity.this,
-                        MainActivity.class);
-                startActivity(intent);
+                if (StringUtil.isNullOrEmpty(mobile.getText().toString())) {
+                    showMsg(LoginActivity.this, res.getString(R.string.error_login_one));
+                    return;
+                }
+                if(mobile.getText().toString().length() != 11 ){
+                    showMsg(LoginActivity.this, "请检查手机号是否正确");
+                    return;
+                }
+                if (StringUtil.isNullOrEmpty(pwr.getText().toString())) {
+                    showMsg(LoginActivity.this, res.getString(R.string.error_login_two));
+                    return;
+                }
+                progressDialog = new CustomProgressDialog(LoginActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                loginData();
             }
                 break;
             case R.id.btn_fwtk:
@@ -164,7 +160,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void loginData(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                InternetURL.LOGIN__URL,
+                InternetURL.appLogin,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -200,7 +196,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", mobile.getText().toString());
+                params.put("mobile", mobile.getText().toString());
                 params.put("password", pwr.getText().toString());
                 return params;
             }
@@ -216,6 +212,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     public void saveAccount(final Emp emp) {
+        save("empid", emp.getEmpid());
+        save("password", pwr.getText().toString());
+        save("mobile", emp.getPassword());
+        save("nickname", emp.getNickname());
+        save("cover", emp.getCover());
+        save("sign", emp.getSign());
+        save("age", emp.getAge());
+        save("sex", emp.getSex());
+        save("heightl", emp.getHeightl());
+        save("education", emp.getEducation());
+        save("provinceid", emp.getProvinceid());
+        save("cityid", emp.getCityid());
+        save("areaid", emp.getAreaid());
+        save("marriage", emp.getMarriage());
+        save("company", emp.getCompany());
+        save("likeids", emp.getLikeids());
+        save("state", emp.getState());
+        save("cardpic", emp.getCardpic());
+        save("rzstate1", emp.getRzstate1());
+        save("rzstate2", emp.getRzstate2());
+        save("rzstate3", emp.getRzstate3());
+        save("is_use", emp.getIs_use());
         Intent intent = new Intent(LoginActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
@@ -313,10 +331,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //都不是空的
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
-                    btn_login.setClickable(true);
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
                 }else {
-                    btn_login.setClickable(false);
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
                 }
             }

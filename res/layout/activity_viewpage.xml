@@ -16,4 +16,15 @@
         </android.support.v4.view.ViewPager>
     </LinearLayout>
 
+    <TextView android:layout_width="wrap_content"
+              android:text="知道了"
+              android:textColor="@color/textColor"
+              android:textSize="16sp"
+              android:visibility="gone"
+              android:id="@+id/txt"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentBottom="true"
+              android:padding="15dp"
+              android:layout_height="wrap_content"/>
+
 </RelativeLayout>

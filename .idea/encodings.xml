@@ -59,7 +59,6 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_phone.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_navbar_back.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_switchbtn_on.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_switchbtn_on.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_verify_checkbox_checked.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/no_pic.png" charset="UTF-8" />
@@ -69,7 +68,6 @@
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_normal_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_press_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_shape.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/layout/QuitePopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/activity_viewpage.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/custom_progress_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/foot.xml" charset="UTF-8" />
@@ -132,7 +130,6 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/GuirenHttpUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/StringUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/CircleImageView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/CircleImageView2.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/CustomProgressDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/MyTextView2.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/PictureGridview.java" charset="UTF-8" />

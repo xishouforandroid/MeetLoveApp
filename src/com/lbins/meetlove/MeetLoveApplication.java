@@ -66,7 +66,7 @@ public class MeetLoveApplication extends Application {
         requestQueue = Volley.newRequestQueue(this);
         gson = new Gson();
         lxThread = Executors.newFixedThreadPool(20);
-        sp = getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
+        sp = getSharedPreferences("meetlove_manage", Context.MODE_PRIVATE);
         imageLoader = new com.android.volley.toolbox.ImageLoader(requestQueue, new BitmapCache());
         initImageLoader(this);
 
@@ -140,7 +140,7 @@ public class MeetLoveApplication extends Application {
      */
     public SharedPreferences getSp() {
         if (sp == null) {
-            sp = getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
+            sp = getSharedPreferences("meetlove_manage", Context.MODE_PRIVATE);
         }
         return sp;
     }
