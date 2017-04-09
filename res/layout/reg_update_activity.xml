@@ -167,7 +167,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="山东省滨州市"
+                              android:text="选择省市"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/address"

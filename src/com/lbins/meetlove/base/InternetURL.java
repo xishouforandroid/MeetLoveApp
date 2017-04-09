@@ -29,7 +29,10 @@ public class InternetURL {
     public static final String appProvinces = INTERNAL + "appProvinces.do";
     //获得城市
     public static final String appCitys = INTERNAL + "appCitys.do";
-
+    //获得兴趣爱好列表
+    public static final String appLikes = INTERNAL + "appLikes.do";
+    //完善资料
+    public static final String appUpdateProfile = INTERNAL + "appUpdateProfile.do";
 
 
 

@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,14 +19,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.OnClickContentItemListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
-import com.lbins.meetlove.data.CityData;
 import com.lbins.meetlove.data.EmpData;
-import com.lbins.meetlove.data.ProvinceData;
 import com.lbins.meetlove.module.City;
 import com.lbins.meetlove.module.Province;
 import com.lbins.meetlove.util.CompressPhotoUtil;
@@ -98,6 +98,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     private String provinceid = "";
     private String cityid = "";
     private String marragieID = "";
+    private String likeids= "";
 
     //择偶要求
     private String agestart="";
@@ -107,8 +108,6 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     private String educationID2="";
     private String marragieID2 = "";
 
-    private List<Province> provinces = new ArrayList<Province>();
-    private List<City> citys = new ArrayList<City>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +115,6 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.reg_update_activity);
         empid =getIntent().getExtras().getString("empid");
         initView();
-
-        getProvince();
-        getCity();
     }
 
     private void initView() {
@@ -156,8 +152,33 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         heightl_marry.setOnClickListener(this);
         education_marry.setOnClickListener(this);
         marry_marry.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
 
+        sign.addTextChangedListener(watcher);
+        nickname.addTextChangedListener(watcher);
+        company.addTextChangedListener(watcher);
     }
+
+    private TextWatcher watcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!StringUtil.isNullOrEmpty(sign.getText().toString()) && !StringUtil.isNullOrEmpty(nickname.getText().toString())&& !StringUtil.isNullOrEmpty(company.getText().toString())){
+                btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+            }else{
+                btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+            }
+        }
+    };
 
     @Override
     public void onClick(View view) {
@@ -192,6 +213,8 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             case R.id.address:
             {
                 //所在地
+                Intent intent = new Intent(RegUpdateActivity.this, SelectAreaActivity.class);
+                startActivityForResult(intent, 1000);
             }
             break;
             case R.id.marragie:
@@ -203,6 +226,8 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             case R.id.likes:
             {
                 //爱好
+                Intent intent = new Intent(RegUpdateActivity.this, LikesActivity.class);
+                startActivityForResult(intent, 1001);
             }
             break;
 
@@ -232,8 +257,159 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                 showPopMarry2();
             }
             break;
+            case R.id.btn_login:
+            {
+                if(StringUtil.isNullOrEmpty(sign.getText().toString())){
+                    showMsg(RegUpdateActivity.this, "请输入个性签名");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(nickname.getText().toString())){
+                    showMsg(RegUpdateActivity.this, "请输入姓名");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(ageStr)){
+                    showMsg(RegUpdateActivity.this, "请选择您的年龄");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(heightlStr)){
+                    showMsg(RegUpdateActivity.this, "请选择您的身高");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(educationID)){
+                    showMsg(RegUpdateActivity.this, "请选择您的学历");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(provinceid) || StringUtil.isNullOrEmpty(cityid)){
+                    showMsg(RegUpdateActivity.this, "请选择您的所在地");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(marragieID)){
+                    showMsg(RegUpdateActivity.this, "请选择您的婚姻状况");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(company.getText().toString())){
+                    showMsg(RegUpdateActivity.this, "请输入工作单位");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(likeids)){
+                    showMsg(RegUpdateActivity.this, "请选择您的兴趣爱好");
+                    return;
+                }
+
+                //------------择偶标准-0------
+
+                if(StringUtil.isNullOrEmpty(agestart) || StringUtil.isNullOrEmpty(ageend)){
+                    showMsg(RegUpdateActivity.this, "请选择择偶年龄范围");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(heightlstart) || StringUtil.isNullOrEmpty(heightlend)){
+                    showMsg(RegUpdateActivity.this, "请选择择偶身高范围");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(educationID2)){
+                    showMsg(RegUpdateActivity.this, "请选择择偶学历");
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(marragieID2)){
+                    showMsg(RegUpdateActivity.this, "请选择择偶婚姻状况");
+                    return;
+                }
+                progressDialog = new CustomProgressDialog(RegUpdateActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                reg();
+            }
+                break;
         }
     }
+
+    private void reg(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appUpdateProfile,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code = jo.getString("code");
+                                if (Integer.parseInt(code) == 200) {
+                                    save("empid", empid);
+                                    save("nickname", nickname.getText().toString());
+                                    save("sign", sign.getText().toString());
+                                    save("age", ageStr);
+                                    save("heightl", heightlStr);
+                                    save("education", educationID);
+                                    save("provinceid", provinceid);
+                                    save("cityid", cityid);
+                                    save("marriage", marragieID);
+                                    save("company", company.getText().toString());
+                                    save("likeids", likeids);
+                                    save("state", "1");
+                                    save("is_use", "1");
+                                    Intent intent = new Intent(RegUpdateActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }  else {
+                                    showMsg(RegUpdateActivity.this,  jo.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RegUpdateActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid", empid);
+                params.put("sign", sign.getText().toString());
+                params.put("nickname", nickname.getText().toString());
+                params.put("age", ageStr);
+                params.put("heightl", heightlStr);
+                params.put("education", educationID);
+                params.put("provinceid", provinceid);
+                params.put("cityid", cityid);
+                params.put("marriage", marragieID);
+                params.put("company", company.getText().toString());
+                params.put("likeids", likeids);
+                params.put("state", "1");
+
+                params.put("agestart", agestart);
+                params.put("ageend", ageend);
+                params.put("heightlstart", heightlstart);
+                params.put("heightlend", heightlend);
+                params.put("educationm", educationID2);
+                params.put("marriagem", marragieID2);
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 
     public void showDialogPhoto(){
         photosWindow = new SelectPhotoPopWindow(RegUpdateActivity.this, itemsOnClickPhoto);
@@ -314,7 +490,30 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                     setPicToView(data);
                 }
                 break;
-
+            case 1000:
+            {
+                if(resultCode == 10001){
+                    City cityObj = (City) data.getExtras().get("cityObj");
+                    Province provinceObj = (Province) data.getExtras().get("provinceObj");
+                    if(provinceObj != null && cityObj != null){
+                        address.setText(provinceObj.getPname() + cityObj.getCityName());
+                        provinceid = provinceObj.getProvinceid();
+                        cityid = cityObj.getCityid();
+                    }
+                }
+            }
+                break;
+            case 1001:
+            {
+                if(resultCode == 1001){
+                    String likeNames = (String) data.getExtras().get("likeNames");
+                    likeids = (String) data.getExtras().get("likesids");
+                    if(!StringUtil.isNullOrEmpty(likeNames)){
+                        likes.setText(likeNames);
+                    }
+                }
+            }
+                break;
             default:
                 break;
         }
@@ -1017,131 +1216,5 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         }
     };
 
-
-    public void showArea(){
-        popAreaWindow = new PopAreaWindow(RegUpdateActivity.this);
-        //显示窗口
-        setBackgroundAlpha(0.5f);//设置屏幕透明度
-
-        popAreaWindow.setBackgroundDrawable(new BitmapDrawable());
-        popAreaWindow.setFocusable(true);
-        popAreaWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        popAreaWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                setBackgroundAlpha(1.0f);
-            }
-        });
-    }
-
-
-
-    private void getProvince(){
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.appProvinces,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                String code = jo.getString("code");
-                                if (Integer.parseInt(code) == 200) {
-                                    ProvinceData data = getGson().fromJson(s, ProvinceData.class);
-                                    provinces.clear();
-                                    provinces.addAll(data.getData());
-                                }  else {
-                                    showMsg(RegUpdateActivity.this,  jo.getString("message"));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(RegUpdateActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("password", pwr.getText().toString());
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
-
-    private void getCity(){
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.appCitys,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                String code = jo.getString("code");
-                                if (Integer.parseInt(code) == 200) {
-                                    CityData data = getGson().fromJson(s, CityData.class);
-                                    citys.clear();
-                                    citys.addAll(data.getData());
-                                }  else {
-                                    showMsg(RegUpdateActivity.this,  jo.getString("message"));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(RegUpdateActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("provinceid", provinceid);
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
 
 }

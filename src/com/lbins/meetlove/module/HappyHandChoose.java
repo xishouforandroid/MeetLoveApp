@@ -9,7 +9,8 @@ public class HappyHandChoose {
     private String ageend;
     private String heightlstart;
     private String heightlend;
-    private String education;
+    private String educationm;
+    private String marriagem;
 
     public String getChooseid() {
         return chooseid;
@@ -51,11 +52,19 @@ public class HappyHandChoose {
         this.heightlend = heightlend;
     }
 
-    public String getEducation() {
-        return education;
+    public String getEducationm() {
+        return educationm;
     }
 
-    public void setEducation(String education) {
-        this.education = education;
+    public void setEducationm(String educationm) {
+        this.educationm = educationm;
+    }
+
+    public String getMarriagem() {
+        return marriagem;
+    }
+
+    public void setMarriagem(String marriagem) {
+        this.marriagem = marriagem;
     }
 }

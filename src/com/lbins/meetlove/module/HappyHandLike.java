@@ -1,9 +1,11 @@
 package com.lbins.meetlove.module;
 
+import java.io.Serializable;
+
 /**
  * Created by zhl on 2017/4/3.
  */
-public class HappyHandLike {
+public class HappyHandLike implements Serializable {
     private String likeid;
     private String likename;
     private String is_use;

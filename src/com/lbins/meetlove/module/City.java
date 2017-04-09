@@ -1,9 +1,11 @@
 package com.lbins.meetlove.module;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/8/17.
  */
-public class City {
+public class City implements Serializable {
     private String cid;
     private String cityid;
     private String areaid;

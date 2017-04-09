@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+    <com.lbins.meetlove.widget.PictureGridview
+            android:id="@+id/gridview"
+            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:horizontalSpacing="15dip"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="25dip"
+            />
+
+    <Button android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_below="@+id/pwr"
+            android:layout_marginTop="85dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="确 定"
+            android:textStyle="bold"
+            android:id="@+id/btnSure"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_big_unactive"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

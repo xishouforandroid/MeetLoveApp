@@ -1,11 +1,13 @@
 package com.lbins.meetlove.module;
 
+import java.io.Serializable;
+
 /**
  * Created by zhl on 2015/2/25.
  */
-public class Province {
+public class Province implements Serializable{
     private String pid;
-    private String provinceId;
+    private String provinceid;
     private String pname;
 
     public String getPid() {
@@ -16,12 +18,13 @@ public class Province {
         this.pid = pid;
     }
 
-    public String getProvinceId() {
-        return provinceId;
+
+    public String getProvinceid() {
+        return provinceid;
     }
 
-    public void setProvinceId(String provinceId) {
-        this.provinceId = provinceId;
+    public void setProvinceid(String provinceid) {
+        this.provinceid = provinceid;
     }
 
     public String getPname() {
