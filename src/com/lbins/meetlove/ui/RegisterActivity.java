@@ -15,8 +15,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
-import com.lbins.meetlove.data.Data;
-import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONException;
@@ -184,7 +182,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
+                                    String empid = jo.getString("data");
+                                    save("empid", empid);
+                                    save("password", pwr.getText().toString());
+                                    save("mobile", mobile.getText().toString());
+                                    save("sex", sex);
+                                    save("is_use", "2");
                                     Intent intent =  new Intent(RegisterActivity.this, RegUpdateActivity.class);
+                                    intent.putExtra("empid", empid);
                                     startActivity(intent);
                                 }  else {
                                     showMsg(RegisterActivity.this,  jo.getString("message"));

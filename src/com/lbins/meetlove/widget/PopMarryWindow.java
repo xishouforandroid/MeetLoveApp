@@ -15,19 +15,19 @@ import com.lbins.meetlove.R;
  * author: ${zhanghailong}
  * Date: 2015/3/19
  * Time: 20:58
- * 类的功能、说明写在此处.
  */
-public class SelectPhotoPopWindow extends PopupWindow {
-    private TextView btn_photo, btn_camera, btn_cancel;
+public class PopMarryWindow extends PopupWindow {
+    private TextView btn1, btn2, btn3, btn_cancel;
     private View mMenuView;
 
-    public SelectPhotoPopWindow(Activity context, View.OnClickListener itemsOnClick) {
+    public PopMarryWindow(Activity context, View.OnClickListener itemsOnClick) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mMenuView = inflater.inflate(R.layout.item_pop_select_photo, null);
-        btn_photo = (TextView) mMenuView.findViewById(R.id.btn_photo);
-        btn_camera = (TextView) mMenuView.findViewById(R.id.btn_camera);
+        mMenuView = inflater.inflate(R.layout.pop_marry, null);
+        btn1 = (TextView) mMenuView.findViewById(R.id.btn1);
+        btn2 = (TextView) mMenuView.findViewById(R.id.btn2);
+        btn3 = (TextView) mMenuView.findViewById(R.id.btn3);
         btn_cancel = (TextView) mMenuView.findViewById(R.id.btn_cancel);
         //取消按钮
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +38,9 @@ public class SelectPhotoPopWindow extends PopupWindow {
             }
         });
         //设置按钮监听
-        btn_photo.setOnClickListener(itemsOnClick);
-        btn_camera.setOnClickListener(itemsOnClick);
+        btn1.setOnClickListener(itemsOnClick);
+        btn2.setOnClickListener(itemsOnClick);
+        btn3.setOnClickListener(itemsOnClick);
 
         //设置SelectPicPopupWindow的View
         this.setContentView(mMenuView);

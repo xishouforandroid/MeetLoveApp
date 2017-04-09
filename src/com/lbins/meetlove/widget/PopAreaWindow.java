@@ -10,36 +10,28 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.widget.wheel.OnWheelChangedListener;
+import com.lbins.meetlove.widget.wheel.WheelView;
+import com.lbins.meetlove.widget.wheel.adapter.ArrayWheelAdapter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author: ${zhanghailong}
  * Date: 2015/3/19
  * Time: 20:58
- * 类的功能、说明写在此处.
  */
-public class SelectPhotoPopWindow extends PopupWindow {
-    private TextView btn_photo, btn_camera, btn_cancel;
+public class PopAreaWindow extends PopupWindow {
+    private TextView btnSure;
     private View mMenuView;
 
-    public SelectPhotoPopWindow(Activity context, View.OnClickListener itemsOnClick) {
+    public PopAreaWindow(Activity context) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mMenuView = inflater.inflate(R.layout.item_pop_select_photo, null);
-        btn_photo = (TextView) mMenuView.findViewById(R.id.btn_photo);
-        btn_camera = (TextView) mMenuView.findViewById(R.id.btn_camera);
-        btn_cancel = (TextView) mMenuView.findViewById(R.id.btn_cancel);
-        //取消按钮
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                //销毁弹出框
-                dismiss();
-            }
-        });
-        //设置按钮监听
-        btn_photo.setOnClickListener(itemsOnClick);
-        btn_camera.setOnClickListener(itemsOnClick);
+        mMenuView = inflater.inflate(R.layout.pop_area, null);
+        btnSure = (TextView) mMenuView.findViewById(R.id.btnSure);
 
         //设置SelectPicPopupWindow的View
         this.setContentView(mMenuView);

@@ -61,11 +61,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //        });
         registerBoradcastReceiver();
         initView();
+        //查看是否有用户  是否使用用户----0否 1是 2尚未维护资料
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("empid",""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("is_use",""), String.class)) ){
+            if("2".equals(getGson().fromJson(getSp().getString("is_use",""), String.class))){
+                //尚未完善资料
+                Intent intent =  new Intent(LoginActivity.this, RegUpdateActivity.class);
+                intent.putExtra("empid", getGson().fromJson(getSp().getString("empid",""), String.class));
+                startActivity(intent);
+            }
+            if("0".equals(getGson().fromJson(getSp().getString("is_use",""), String.class))){
+                //用户被禁用
+                showMsg(LoginActivity.this, "该用户已被禁用，请联系客服！");
+            }
+        }
+
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mobile", ""), String.class)) ){
             mobile.setText(getGson().fromJson(getSp().getString("mobile", ""), String.class));
         }if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("password", ""), String.class))){
             pwr.setText(getGson().fromJson(getSp().getString("password", ""), String.class));
         }
+
     }
 
     private void initView() {

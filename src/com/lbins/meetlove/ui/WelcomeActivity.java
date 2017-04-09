@@ -52,7 +52,27 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
                 finish();
             } else {
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mobile", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("password", ""), String.class))){
-                    loginData();
+                    //查看是否有用户  是否使用用户----0否 1是 2尚未维护资料
+                    if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("empid",""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("is_use",""), String.class)) ){
+                        if("2".equals(getGson().fromJson(getSp().getString("is_use",""), String.class))){
+                            //尚未完善资料
+                            Intent intent =  new Intent(WelcomeActivity.this, RegUpdateActivity.class);
+                            intent.putExtra("empid", getGson().fromJson(getSp().getString("empid",""), String.class));
+                            startActivity(intent);
+                            finish();
+                        }
+                        else if("0".equals(getGson().fromJson(getSp().getString("is_use",""), String.class))){
+                            //用户被禁用
+                            showMsg(WelcomeActivity.this, "该用户已被禁用，请联系客服！");
+                        }else{
+                            loginData();
+                        }
+                    }else {
+                        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }else{
                     Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -82,6 +102,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
                                     showMsg(WelcomeActivity.this, jo.getString("message"));
                                     Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -100,7 +121,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
                         }
                         Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                         startActivity(intent);
-                        Toast.makeText(WelcomeActivity.this, "登录失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
         ) {

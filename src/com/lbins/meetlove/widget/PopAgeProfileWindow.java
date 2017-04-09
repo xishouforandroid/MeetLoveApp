@@ -7,39 +7,70 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.adapter.ItemAgeAdapter;
+import com.lbins.meetlove.adapter.OnClickContentItemListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author: ${zhanghailong}
  * Date: 2015/3/19
  * Time: 20:58
- * 类的功能、说明写在此处.
  */
-public class SelectPhotoPopWindow extends PopupWindow {
-    private TextView btn_photo, btn_camera, btn_cancel;
+public class PopAgeProfileWindow extends PopupWindow {
+    private TextView  btnSure;
+    private ListView lstv1;
     private View mMenuView;
+    private ItemAgeAdapter adapter1;
+    private List<String> arrays1 = new ArrayList<String>();
 
-    public SelectPhotoPopWindow(Activity context, View.OnClickListener itemsOnClick) {
+    private TextView startage;
+
+    private OnClickContentItemListener onClickContentItemListener;
+
+    public void setOnClickContentItemListener(OnClickContentItemListener onClickContentItemListener) {
+        this.onClickContentItemListener = onClickContentItemListener;
+    }
+
+    public PopAgeProfileWindow(Activity context, final List<String> arrays1) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mMenuView = inflater.inflate(R.layout.item_pop_select_photo, null);
-        btn_photo = (TextView) mMenuView.findViewById(R.id.btn_photo);
-        btn_camera = (TextView) mMenuView.findViewById(R.id.btn_camera);
-        btn_cancel = (TextView) mMenuView.findViewById(R.id.btn_cancel);
-        //取消按钮
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        mMenuView = inflater.inflate(R.layout.pop_age_profile, null);
+        this.arrays1 = arrays1;
+        lstv1 = (ListView) mMenuView.findViewById(R.id.lstv1);
+        btnSure = (TextView) mMenuView.findViewById(R.id.btnSure);
+        adapter1 = new ItemAgeAdapter(arrays1, context);
+        lstv1.setAdapter(adapter1);
 
-            public void onClick(View v) {
-                //销毁弹出框
-                dismiss();
+        startage = (TextView) mMenuView.findViewById(R.id.startage);
+
+        lstv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(arrays1.size()>position){
+                    String string = arrays1.get(position);
+                    startage.setText(string);
+                }
             }
         });
+
+        //取消按钮
+
         //设置按钮监听
-        btn_photo.setOnClickListener(itemsOnClick);
-        btn_camera.setOnClickListener(itemsOnClick);
+//        btnSure.setOnClickListener(itemsOnClick);
+        btnSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(0, 3, startage.getText().toString());
+            }
+        });
 
         //设置SelectPicPopupWindow的View
         this.setContentView(mMenuView);
