@@ -88,7 +88,6 @@
     <file url="file://$PROJECT_DIR$/res/layout/pop_heightl.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_heightl_profile.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_marry.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/layout/pop_photo.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_quite_suggest.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_report.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_update_pwr_photo.xml" charset="UTF-8" />
@@ -162,6 +161,5 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectSuggestPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/UpdatePwrPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/ViewPageItemView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/wheel/XmlParserHandler.java" charset="GBK" />
   </component>
 </project>

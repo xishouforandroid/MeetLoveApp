@@ -42,9 +42,9 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
         try {
             // 3秒后跳转到登录界面
             Thread.sleep(1500);
-            SharedPreferences.Editor editor = getSp().edit();
             boolean isFirstRun = getSp().getBoolean("isFirstRun", true);
             if (isFirstRun) {
+                SharedPreferences.Editor editor = getSp().edit();
                 editor.putBoolean("isFirstRun", false);
                 editor.commit();
                 Intent loadIntent = new Intent(WelcomeActivity.this, AboutActivity.class);
@@ -146,7 +146,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
 
     public void saveAccount(final Emp emp) {
         save("empid", emp.getEmpid());
-        save("mobile", emp.getPassword());
+        save("mobile", emp.getMobile());
         save("nickname", emp.getNickname());
         save("cover", emp.getCover());
         save("sign", emp.getSign());
@@ -166,6 +166,17 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
         save("rzstate2", emp.getRzstate2());
         save("rzstate3", emp.getRzstate3());
         save("is_use", emp.getIs_use());
+        save("pname", emp.getPname());
+        save("cityName", emp.getCityName());
+
+        save("chooseid", emp.getChooseid());
+        save("agestart", emp.getAgestart());
+        save("ageend", emp.getAgeend());
+        save("heightlstart", emp.getHeightlstart());
+        save("heightlend", emp.getHeightlend());
+        save("educationm", emp.getEducationm());
+        save("marriagem", emp.getMarriagem());
+
         //登录成功，绑定百度云推送
 //        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
             //进行绑定

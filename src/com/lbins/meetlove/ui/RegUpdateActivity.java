@@ -2,6 +2,7 @@ package com.lbins.meetlove.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -20,13 +21,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.MainActivity;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.OnClickContentItemListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.EmpData;
+import com.lbins.meetlove.data.HappyHandLikeData;
 import com.lbins.meetlove.module.City;
+import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.module.HappyHandLike;
 import com.lbins.meetlove.module.Province;
 import com.lbins.meetlove.util.CompressPhotoUtil;
 import com.lbins.meetlove.util.StringUtil;
@@ -108,6 +113,10 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     private String educationID2="";
     private String marragieID2 = "";
 
+    private TextView txt_pic;
+    private TextView mobile;
+
+    private List<HappyHandLike> likeLists = new ArrayList<>();//兴趣爱好集合
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +124,170 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.reg_update_activity);
         empid =getIntent().getExtras().getString("empid");
         initView();
+
+        initData();
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("likeids", ""), String.class))){
+            //兴趣爱好查询
+            getLikes();
+        }
+    }
+
+    //实例化
+    private void initData() {
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("nickname", ""), String.class))){
+            nickname.setText(getGson().fromJson(getSp().getString("nickname", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cover", ""), String.class))){
+            imageLoader.displayImage(getGson().fromJson(getSp().getString("cover", ""), String.class), cover, MeetLoveApplication.txOptions, animateFirstListener);
+            txt_pic.setText("更换头像");
+        }else {
+            txt_pic.setText("上传照片");
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("sign", ""), String.class))){
+            sign.setText(getGson().fromJson(getSp().getString("sign", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mobile", ""), String.class))){
+            mobile.setText(getGson().fromJson(getSp().getString("mobile", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("age", ""), String.class))){
+            age.setText(getGson().fromJson(getSp().getString("age", ""), String.class)+"年");
+            ageStr = getGson().fromJson(getSp().getString("age", ""), String.class);
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightl", ""), String.class))){
+            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class)+"cm");
+            heightlStr = getGson().fromJson(getSp().getString("heightl", ""), String.class);
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("education", ""), String.class))){
+            educationID = getGson().fromJson(getSp().getString("education", ""), String.class);
+            switch (Integer.parseInt(getGson().fromJson(getSp().getString("education", ""), String.class))){
+                case 1:
+                {
+                    education.setText("高中及以下");
+                }
+                    break;
+                case 2:
+                {
+                    education.setText("中专");
+                }
+                break;
+                case 3:
+                {
+                    education.setText("专科");
+                }
+                break;
+                case 4:
+                {
+                    education.setText("本科");
+                }
+                break;
+                case 5:
+                {
+                    education.setText("研究生及以上");
+                }
+                break;
+            }
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("pname", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityName", ""), String.class))){
+            address.setText(getGson().fromJson(getSp().getString("pname", ""), String.class)+getGson().fromJson(getSp().getString("cityName", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("provinceid", ""), String.class))){
+            provinceid = getGson().fromJson(getSp().getString("provinceid", ""), String.class);
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityid", ""), String.class))){
+            cityid = getGson().fromJson(getSp().getString("cityid", ""), String.class);
+        }
+
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("marriage", ""), String.class))){
+            marragieID = getGson().fromJson(getSp().getString("marriage", ""), String.class);
+            switch (Integer.parseInt(getGson().fromJson(getSp().getString("marriage", ""), String.class))){
+                case 1:
+                {
+                    marragie.setText("未婚");
+                }
+                break;
+                case 2:
+                {
+                    marragie.setText("离异");
+                }
+                break;
+                case 3:
+                {
+                    marragie.setText("丧偶");
+                }
+                break;
+            }
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("company", ""), String.class))){
+            company.setText(getGson().fromJson(getSp().getString("company", ""), String.class)+"cm");
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("likeids", ""), String.class))){
+            likeids = getGson().fromJson(getSp().getString("likeids", ""), String.class);
+        }
+
+        //-------------择偶要求------------------
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("agestart", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("ageend", ""), String.class))){
+            age_marry.setText(getGson().fromJson(getSp().getString("agestart", ""), String.class)+"-" + getGson().fromJson(getSp().getString("ageend", ""), String.class)+"年");
+            agestart = getGson().fromJson(getSp().getString("agestart", ""), String.class);
+            ageend = getGson().fromJson(getSp().getString("ageend", ""), String.class);
+
+        }
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightlstart", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightlend", ""), String.class))){
+            heightl_marry.setText(getGson().fromJson(getSp().getString("heightlstart", ""), String.class)+"-" + getGson().fromJson(getSp().getString("heightlend", ""), String.class)+"年");
+            heightlstart = getGson().fromJson(getSp().getString("heightlstart", ""), String.class);
+            heightlend = getGson().fromJson(getSp().getString("heightlend", ""), String.class);
+        }
+
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("educationm", ""), String.class))){
+            educationID2 = getGson().fromJson(getSp().getString("educationm", ""), String.class);
+            switch (Integer.parseInt(getGson().fromJson(getSp().getString("educationm", ""), String.class))){
+                case 1:
+                {
+                    education_marry.setText("高中及以下");
+                }
+                break;
+                case 2:
+                {
+                    education_marry.setText("中专");
+                }
+                break;
+                case 3:
+                {
+                    education_marry.setText("专科");
+                }
+                break;
+                case 4:
+                {
+                    education_marry.setText("本科");
+                }
+                break;
+                case 5:
+                {
+                    education_marry.setText("研究生及以上");
+                }
+                break;
+            }
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("marriagem", ""), String.class))){
+            marragieID2 = getGson().fromJson(getSp().getString("marriagem", ""), String.class);
+            switch (Integer.parseInt(getGson().fromJson(getSp().getString("marriagem", ""), String.class))){
+                case 1:
+                {
+                    marry_marry.setText("未婚");
+                }
+                break;
+                case 2:
+                {
+                    marry_marry.setText("离异");
+                }
+                break;
+                case 3:
+                {
+                    marry_marry.setText("丧偶");
+                }
+                break;
+            }
+        }
+
     }
 
     private void initView() {
@@ -133,6 +306,8 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         marragie = (TextView) this.findViewById(R.id.marragie);
         likes = (TextView) this.findViewById(R.id.likes);
         company = (EditText) this.findViewById(R.id.company);
+        txt_pic = (TextView) this.findViewById(R.id.txt_pic);
+        mobile = (TextView) this.findViewById(R.id.mobile);
 
         age_marry = (TextView) this.findViewById(R.id.age_marry);
         heightl_marry = (TextView) this.findViewById(R.id.heightl_marry);
@@ -336,22 +511,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
-                                    save("empid", empid);
-                                    save("nickname", nickname.getText().toString());
-                                    save("sign", sign.getText().toString());
-                                    save("age", ageStr);
-                                    save("heightl", heightlStr);
-                                    save("education", educationID);
-                                    save("provinceid", provinceid);
-                                    save("cityid", cityid);
-                                    save("marriage", marragieID);
-                                    save("company", company.getText().toString());
-                                    save("likeids", likeids);
-                                    save("state", "1");
-                                    save("is_use", "1");
-                                    Intent intent = new Intent(RegUpdateActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    EmpData data = getGson().fromJson(s, EmpData.class);
+                                    saveAccount(data.getData());
+
                                 }  else {
                                     showMsg(RegUpdateActivity.this,  jo.getString("message"));
                                 }
@@ -390,6 +552,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                 params.put("likeids", likeids);
                 params.put("state", "1");
 
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("chooseid", ""), String.class))){
+                    params.put("chooseid", getGson().fromJson(getSp().getString("chooseid", ""), String.class));
+                }
                 params.put("agestart", agestart);
                 params.put("ageend", ageend);
                 params.put("heightlstart", heightlstart);
@@ -410,7 +575,53 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         getRequestQueue().add(request);
     }
 
+    public void saveAccount(final Emp emp) {
+        save("empid", emp.getEmpid());
+        save("mobile", emp.getMobile());
+        save("nickname", emp.getNickname());
+        save("cover", emp.getCover());
+        save("sign", emp.getSign());
+        save("age", emp.getAge());
+        save("sex", emp.getSex());
+        save("heightl", emp.getHeightl());
+        save("education", emp.getEducation());
+        save("provinceid", emp.getProvinceid());
+        save("cityid", emp.getCityid());
+        save("areaid", emp.getAreaid());
+        save("marriage", emp.getMarriage());
+        save("company", emp.getCompany());
+        save("likeids", emp.getLikeids());
+        save("state", emp.getState());
+        save("cardpic", emp.getCardpic());
+        save("rzstate1", emp.getRzstate1());
+        save("rzstate2", emp.getRzstate2());
+        save("rzstate3", emp.getRzstate3());
+        save("is_use", emp.getIs_use());
+        save("pname", emp.getPname());
+        save("cityName", emp.getCityName());
 
+        save("chooseid", emp.getChooseid());
+        save("agestart", emp.getAgestart());
+        save("ageend", emp.getAgeend());
+        save("heightlstart", emp.getHeightlstart());
+        save("heightlend", emp.getHeightlend());
+        save("educationm", emp.getEducationm());
+        save("marriagem", emp.getMarriagem());
+
+        boolean isFirstRun = getSp().getBoolean("isFirstRun", true);
+        if (isFirstRun) {
+            SharedPreferences.Editor editor = getSp().edit();
+            editor.putBoolean("isFirstRun", false);
+            editor.commit();
+            Intent intent = new Intent(RegUpdateActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            //已经登录过了
+            finish();
+        }
+
+    }
     public void showDialogPhoto(){
         photosWindow = new SelectPhotoPopWindow(RegUpdateActivity.this, itemsOnClickPhoto);
         //显示窗口
@@ -1217,4 +1428,71 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     };
 
 
+
+
+    private void getLikes(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appLikesBylikeIds,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code = jo.getString("code");
+                                if (Integer.parseInt(code) == 200) {
+                                    HappyHandLikeData data = getGson().fromJson(s, HappyHandLikeData.class);
+                                    if(data != null){
+                                        likeLists.clear();
+                                        likeLists.addAll(data.getData());
+                                        if(likeLists != null){
+                                            String str = "";
+                                            for(HappyHandLike happyHandLike:likeLists){
+                                                str = str+ happyHandLike.getLikename()+",";
+                                            }
+                                            if(str.length()>1){
+                                                str = str.substring(0,str.length()-1);
+                                            }
+                                            likes.setText(str);
+                                        }
+                                    }
+                                }  else {
+                                    showMsg(RegUpdateActivity.this,  jo.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RegUpdateActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("likeids", getGson().fromJson(getSp().getString("likeids", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 }

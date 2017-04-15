@@ -229,7 +229,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void saveAccount(final Emp emp) {
         save("empid", emp.getEmpid());
         save("password", pwr.getText().toString());
-        save("mobile", emp.getPassword());
+        save("mobile", emp.getMobile());
         save("nickname", emp.getNickname());
         save("cover", emp.getCover());
         save("sign", emp.getSign());
@@ -249,6 +249,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("rzstate2", emp.getRzstate2());
         save("rzstate3", emp.getRzstate3());
         save("is_use", emp.getIs_use());
+        save("pname", emp.getPname());
+        save("cityName", emp.getCityName());
+
+        save("chooseid", emp.getChooseid());
+        save("agestart", emp.getAgestart());
+        save("ageend", emp.getAgeend());
+        save("heightlstart", emp.getHeightlstart());
+        save("heightlend", emp.getHeightlend());
+        save("educationm", emp.getEducationm());
+        save("marriagem", emp.getMarriagem());
+
         Intent intent = new Intent(LoginActivity.this,
                                 MainActivity.class);
                         startActivity(intent);

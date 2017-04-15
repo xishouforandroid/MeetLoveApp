@@ -107,8 +107,8 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                     }
                     if(listSelect.size()==3){
                         //说明选中了三个兴趣爱好
-                        String likeNames = listSelect.get(0).getLikename()+"，"+listSelect.get(1).getLikename()+"，"+listSelect.get(2).getLikename();
-                        String likesids = listSelect.get(0).getLikeid()+"，"+listSelect.get(1).getLikeid()+"，"+listSelect.get(2).getLikeid();
+                        String likeNames = listSelect.get(0).getLikename()+","+listSelect.get(1).getLikename()+","+listSelect.get(2).getLikename();
+                        String likesids = listSelect.get(0).getLikeid()+","+listSelect.get(1).getLikeid()+","+listSelect.get(2).getLikeid();
                         Intent intent = new Intent();
                         intent.putExtra("likeNames", likeNames);
                         intent.putExtra("likesids", likesids);

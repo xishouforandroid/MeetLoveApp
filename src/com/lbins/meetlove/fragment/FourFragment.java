@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemPicAdapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.ui.MineRenzhengActivity;
 import com.lbins.meetlove.ui.MineSettingActivity;
+import com.lbins.meetlove.ui.RegUpdateActivity;
+import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.PictureGridview;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -53,6 +56,8 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
 
     private ImageView btn_right;
 
+    private TextView txt_pic;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +68,73 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         view = inflater.inflate(R.layout.four_fragment, null);
         res = getActivity().getResources();
         initView();
+        initData();
         return view;
+    }
+
+    private void initData() {
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("nickname", ""), String.class))){
+            nickname.setText(getGson().fromJson(getSp().getString("nickname", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cover", ""), String.class))){
+            imageLoader.displayImage(getGson().fromJson(getSp().getString("cover", ""), String.class), cover, MeetLoveApplication.txOptions, animateFirstListener);
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("state", ""), String.class))){
+            if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                //单身
+                is_state.setText("单身");
+            }
+            if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                //交往中
+                is_state.setText("交往中");
+            }
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("sign", ""), String.class))){
+            sign.setText("个性签名:"+getGson().fromJson(getSp().getString("sign", ""), String.class));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("age", ""), String.class))){
+            age.setText(getGson().fromJson(getSp().getString("age", ""), String.class) + "年");
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightl", ""), String.class))){
+            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class) + "cm");
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityName", ""), String.class))){
+            address.setText(getGson().fromJson(getSp().getString("cityName", ""), String.class));
+        }
+
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+            if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                //进行身份认证了
+                vip_2.setTextColor(res.getColor(R.color.main_color));
+            }else {
+                vip_2.setTextColor(res.getColor(R.color.textColortwo));
+            }
+        }else {
+            vip_2.setTextColor(res.getColor(R.color.textColortwo));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
+            if("1".equals(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
+                vip_1.setImageDrawable(res.getDrawable(R.drawable.icon_verify_id_enabled));
+            }else {
+                vip_1.setImageDrawable(res.getDrawable(R.drawable.icon_verify_id_disable));
+            }
+        }else {
+            vip_1.setImageDrawable(res.getDrawable(R.drawable.icon_verify_id_disable));
+        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
+            if("1".equals(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
+                //进行身份认证了
+                vip_3.setImageDrawable(res.getDrawable(R.drawable.icon_verify_honesty_enabled));
+                vip_4.setTextColor(res.getColor(R.color.main_color));
+            }else {
+                vip_3.setImageDrawable(res.getDrawable(R.drawable.icon_verify_honesty_disable));
+                vip_4.setTextColor(res.getColor(R.color.textColortwo));
+            }
+        }else {
+            vip_3.setImageDrawable(res.getDrawable(R.drawable.icon_verify_honesty_disable));
+            vip_4.setTextColor(res.getColor(R.color.textColortwo));
+        }
+
     }
 
     void initView(){
@@ -140,7 +211,10 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             break;
             case R.id.cover:
             {
-                //头像
+                //头像点击
+                Intent intent =  new Intent(getActivity(), RegUpdateActivity.class);
+                intent.putExtra("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                startActivity(intent);
             }
                 break;
             case R.id.sign:

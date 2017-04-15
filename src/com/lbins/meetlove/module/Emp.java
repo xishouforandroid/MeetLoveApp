@@ -27,6 +27,91 @@ public class Emp
     private String rzstate2;
     private String rzstate3;
     private String is_use;
+    //城市
+    //择偶要求
+    private String chooseid;
+    private String agestart;
+    private String ageend;
+    private String heightlstart;
+    private String heightlend;
+    private String educationm;
+    private String marriagem;
+
+    //城市
+    private String pname;
+    private String cityName;
+
+    public String getChooseid() {
+        return chooseid;
+    }
+
+    public void setChooseid(String chooseid) {
+        this.chooseid = chooseid;
+    }
+
+    public String getAgestart() {
+        return agestart;
+    }
+
+    public void setAgestart(String agestart) {
+        this.agestart = agestart;
+    }
+
+    public String getAgeend() {
+        return ageend;
+    }
+
+    public void setAgeend(String ageend) {
+        this.ageend = ageend;
+    }
+
+    public String getHeightlstart() {
+        return heightlstart;
+    }
+
+    public void setHeightlstart(String heightlstart) {
+        this.heightlstart = heightlstart;
+    }
+
+    public String getHeightlend() {
+        return heightlend;
+    }
+
+    public void setHeightlend(String heightlend) {
+        this.heightlend = heightlend;
+    }
+
+    public String getEducationm() {
+        return educationm;
+    }
+
+    public void setEducationm(String educationm) {
+        this.educationm = educationm;
+    }
+
+    public String getMarriagem() {
+        return marriagem;
+    }
+
+    public void setMarriagem(String marriagem) {
+        this.marriagem = marriagem;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
     public String getEmpid() {
         return empid;
