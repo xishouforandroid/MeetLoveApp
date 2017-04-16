@@ -15,8 +15,6 @@
       <root url="jar://$PROJECT_DIR$/libs/libammsdk.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/libapshare.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/locSDK_6.13.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/MobCommons-2016.0624.1326.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/MobTools-2016.0624.1326.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/Msc.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/mta-sdk-1.6.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/open_sdk_r5756.jar!/" />
@@ -25,7 +23,6 @@
       <root url="jar://$PROJECT_DIR$/libs/pinyin4j-2.5.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/pushservice-5.1.0.48.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/qiniu-android-sdk-7.0.7.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/SMSSDK-2.1.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/SocialSDK_alipay.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/SocialSDK_email.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/SocialSDK_QQ_Simplify.jar!/" />
@@ -41,6 +38,9 @@
       <root url="jar://$PROJECT_DIR$/libs/umeng_social_tool.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/universal-image-loader-1.9.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/volley-1.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/MobCommons-2017.0321.1624.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/MobTools-2017.0321.1624.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/SMSSDK-2.1.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

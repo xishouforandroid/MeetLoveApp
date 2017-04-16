@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.base.ActivityTack;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.widget.QuitePopWindow;
 import com.lbins.meetlove.widget.SelectSuggestPopWindow;
@@ -167,7 +168,8 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
             quitePopWindow.dismiss();
             switch (v.getId()) {
                 case R.id.btn_quite: {
-                    showMsg(MineSettingActivity.this, "退出");
+                    save("password", "");
+                    ActivityTack.getInstanse().popUntilActivity(LoginActivity.class);
                 }
                 break;
                 default:

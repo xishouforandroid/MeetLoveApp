@@ -46,5 +46,11 @@ public class InternetURL {
     public static final String appSaveSuggest = INTERNAL +   "appSaveSuggest.do";
     //投诉保存
     public static final String appSaveReport = INTERNAL +   "appSaveReport.do";
+    //修改手机号码
+    public static final String appUpdateMoible = INTERNAL +   "appUpdateMoible.do";
+    //修改密码根据用户ID
+    public static final String appUpdatePwrById = INTERNAL +   "appUpdatePwrById.do";
+    //修改密码根据用户手机号
+    public static final String appUpdatePwrByMobile = INTERNAL +   "appUpdatePwrByMobile.do";
 
 }

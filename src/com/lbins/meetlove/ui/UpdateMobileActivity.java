@@ -18,6 +18,11 @@ import android.widget.Toast;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.utils.SMSLog;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
@@ -25,6 +30,9 @@ import com.lbins.meetlove.receiver.SMSBroadcastReceiver;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/8/30.
@@ -122,8 +130,10 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(mobile.getText().toString()) && !StringUtil.isNullOrEmpty(card.getText().toString())){
                 btn_save.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_save.setTextColor(getResources().getColor(R.color.white));
             }else {
                 btn_save.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_save.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
     };
@@ -167,6 +177,7 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
                 break;
         }
     }
+
     class MyTimer extends CountDownTimer {
 
         public MyTimer(long millisInFuture, long countDownInterval) {
@@ -177,6 +188,7 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         public void onFinish() {
             btn_card.setText(res.getString(R.string.daojishi_three));
             btn_card.setClickable(true);//可点击
+            btn_card.setBackground(res.getDrawable(R.drawable.btn_short_active));
         }
 
         @Override
@@ -196,18 +208,14 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
                 System.out.println("--------result" + event);
                 //短信注册成功后，返回MainActivity,然后提示新好友
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功
-//                    Toast.makeText(getApplicationContext(), "提交验证码成功", Toast.LENGTH_SHORT).show();
-//                    reg();
-
+                    updateData();
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     //已经验证
                     Toast.makeText(getApplicationContext(), R.string.code_msg_one, Toast.LENGTH_SHORT).show();
                 }
 
             } else {
-//				((Throwable) data).printStackTrace();
                 Toast.makeText(UpdateMobileActivity.this, R.string.code_msg_two, Toast.LENGTH_SHORT).show();
-//					Toast.makeText(MainActivity.this, "123", Toast.LENGTH_SHORT).show();
                 int status = 0;
                 try {
                     ((Throwable) data).printStackTrace();
@@ -239,4 +247,62 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         this.unregisterReceiver(mSMSBroadcastReceiver);
     }
 
+
+    private void updateData() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appUpdateMoible,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    showMsg(UpdateMobileActivity.this, "修改手机号码成功！");
+                                    save("mobile", mobile.getText().toString());
+                                    finish();
+                                } else {
+                                    Toast.makeText(UpdateMobileActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(UpdateMobileActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(UpdateMobileActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile.getText().toString());
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 }
