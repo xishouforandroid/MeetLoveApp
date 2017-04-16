@@ -40,8 +40,11 @@ public class InternetURL {
     public static final String appLikesBylikeIds = INTERNAL + "appLikesBylikeIds.do";
     //获取公司介绍
     public static final String appAboutUs = INTERNAL + "appAboutUs.do";
-
     //版本检查
     public static final String getVersionCode = INTERNAL +   "getVersionCode.do";
+    //反馈保存
+    public static final String appSaveSuggest = INTERNAL +   "appSaveSuggest.do";
+    //投诉保存
+    public static final String appSaveReport = INTERNAL +   "appSaveReport.do";
 
 }

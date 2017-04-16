@@ -8,15 +8,23 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.TextView;
+import android.widget.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.util.StringUtil;
+import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.QuitePopWindow;
 import com.lbins.meetlove.widget.ReportPopWindow;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/8/30.
@@ -60,10 +68,26 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
             case R.id.btn_1:
             {
                 //提交
-                if(StringUtil.isNullOrEmpty(content.getText().toString())){
-                    showMsg(AddReportActivity.this, "请输入要反馈的内容！");
+                if(StringUtil.isNullOrEmpty(nickname.getText().toString())){
+                    showMsg(AddReportActivity.this, "请输入投诉对象！");
+                    return;
+                }if(StringUtil.isNullOrEmpty(content.getText().toString())){
+                    showMsg(AddReportActivity.this, "请输入投诉原因！");
                     return;
                 }
+                if(nickname.getText().toString().length()>50){
+                    showMsg(AddReportActivity.this, "举报对象超出字符长度限制！");
+                    return;
+                }
+                if(content.getText().toString().length()>250){
+                    showMsg(AddReportActivity.this, "内容最多250个字！");
+                    return;
+                }
+                progressDialog = new CustomProgressDialog(AddReportActivity.this, "请稍后",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                saveData();
             }
                 break;
             case R.id.btn_tsxz:
@@ -95,6 +119,10 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(content.getText().toString()) && !StringUtil.isNullOrEmpty(nickname.getText().toString())){
                 btn_1.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_1.setTextColor(getResources().getColor(R.color.white));
+            }else {
+                btn_1.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_1.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
     };
@@ -138,5 +166,63 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
         ((Activity) AddReportActivity.this).getWindow().setAttributes(lp);
     }
 
+
+    private void saveData() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appSaveReport,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    showMsg(AddReportActivity.this, "提交投诉信息成功，谢谢您的参与！");
+                                    finish();
+                                } else {
+                                    Toast.makeText(AddReportActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(AddReportActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(AddReportActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nickname", nickname.getText().toString());
+                params.put("content", content.getText().toString());
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
 }
