@@ -21,6 +21,7 @@ import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.HappyHandLikeData;
 import com.lbins.meetlove.module.HappyHandLike;
 import com.lbins.meetlove.util.StringUtil;
+import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.PictureGridview;
 import org.json.JSONObject;
 
@@ -46,6 +47,10 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.likes_activity);
         initView();
+        progressDialog = new CustomProgressDialog(LikesActivity.this, "请稍后",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         getDataLikes();
     }
 

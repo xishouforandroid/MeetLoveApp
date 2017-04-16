@@ -63,10 +63,10 @@
 
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <permission
-            android:name="com.Lbins.TvvApp.permission.C2D_MESSAGE"
+            android:name="com.lbins.meetlove.permission.C2D_MESSAGE"
             android:protectionLevel="signature"
             />
-    <uses-permission android:name="com.Lbins.TvvApp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.lbins.meetlove.permission.C2D_MESSAGE" />
 
     <!-- renren sso Permission for Unit Test -->
     <!-- QQ、QQ空间所需权限 -->
@@ -79,10 +79,10 @@
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <permission
-            android:name="com.Lbins.TvvApp.permission.MIPUSH_RECEIVE"
+            android:name="com.lbins.meetlove.permission.MIPUSH_RECEIVE"
             android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.Lbins.TvvApp.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="com.lbins.meetlove.permission.MIPUSH_RECEIVE" />
 
     <uses-feature
             android:name="android.hardware.location"

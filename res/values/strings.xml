@@ -16,6 +16,7 @@
     <string name="code_msg_one">验证码已经发送</string>
     <string name="code_msg_two">验证码错误</string>
     <string name="get_data_error">获得数据失败，请稍后重试！</string>
+    <string name="check_new_version">检查版本,请稍后！</string>
 
 
 </resources>

@@ -608,10 +608,10 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
 
-        boolean isFirstRun = getSp().getBoolean("isFirstRun", true);
+        boolean isFirstRun = getSp().getBoolean("isFirstRunUpdate", true);
         if (isFirstRun) {
             SharedPreferences.Editor editor = getSp().edit();
-            editor.putBoolean("isFirstRun", false);
+            editor.putBoolean("isFirstRunUpdate", false);
             editor.commit();
             Intent intent = new Intent(RegUpdateActivity.this, MainActivity.class);
             startActivity(intent);

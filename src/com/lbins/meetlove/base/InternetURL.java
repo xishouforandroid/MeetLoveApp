@@ -6,6 +6,8 @@ public class InternetURL {
 //    public static final String INTERNAL =  "http://120.27.108.66:8080/";
 
     public static final String QINIU_URL =  "http://oo4c4r583.bkt.clouddn.com/";
+    //更新链接
+    public static final String UPDATE_URL =  "http://a.app.qq.com/o/simple.jsp?pkgname=com.lbins.myapp";
     //mob
     public static final String APP_MOB_KEY = "1cadf0af8fa55";
     public static final String APP_MOB_SCRECT = "0f7d21f71e2d1a02376e142298da8003";
@@ -36,8 +38,10 @@ public class InternetURL {
     public static final String appUpdateProfile = INTERNAL + "appUpdateProfile.do";
     //根据兴趣爱好IDs查询爱好兴趣集合
     public static final String appLikesBylikeIds = INTERNAL + "appLikesBylikeIds.do";
+    //获取公司介绍
+    public static final String appAboutUs = INTERNAL + "appAboutUs.do";
 
     //版本检查
-    public static final String CHECK_VERSION_CODE_URL = INTERNAL +   "getVersionCode.do";
+    public static final String getVersionCode = INTERNAL +   "getVersionCode.do";
 
 }
