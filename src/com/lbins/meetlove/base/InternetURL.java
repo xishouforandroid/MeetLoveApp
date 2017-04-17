@@ -52,5 +52,7 @@ public class InternetURL {
     public static final String appUpdatePwrById = INTERNAL +   "appUpdatePwrById.do";
     //修改密码根据用户手机号
     public static final String appUpdatePwrByMobile = INTERNAL +   "appUpdatePwrByMobile.do";
+    //身份认证---身份证上传
+    public static final String appUpdateCard = INTERNAL +   "appUpdateCard.do";
 
 }

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/libs/AMap_Location_V3.2.0_20161206.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/MobCommons-2016.0624.1326.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/MobCommons-2017.0321.1624.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/MobTools-2016.0624.1326.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/MobTools-2017.0321.1624.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/Msc.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/SMSSDK-2.1.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SMSSDK-2.1.4.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_QQ_Simplify.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_Sina_Simplify.jar" charset="UTF-8" />
