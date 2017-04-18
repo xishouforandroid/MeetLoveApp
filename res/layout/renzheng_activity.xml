@@ -26,8 +26,9 @@
                           android:layout_height="wrap_content">
                 <ImageView android:layout_width="140dp"
                            android:id="@+id/idcard"
+                           android:scaleType="fitXY"
                            android:src="@drawable/bigpic_idcard"
-                           android:layout_height="wrap_content"/>
+                           android:layout_height="95dp"/>
                 <TextView android:layout_width="match_parent"
                           android:textColor="@color/main_color"
                           android:textSize="16sp"

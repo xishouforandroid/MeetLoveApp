@@ -1,7 +1,10 @@
 package com.lbins.meetlove.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,11 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemPicAdapter;
 import com.lbins.meetlove.base.BaseFragment;
+import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.ui.MineRenzhengActivity;
 import com.lbins.meetlove.ui.MineSettingActivity;
 import com.lbins.meetlove.ui.RegUpdateActivity;
@@ -22,7 +28,15 @@ import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.PictureGridview;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
+import com.umeng.socialize.utils.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +72,10 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
 
     private TextView txt_pic;
 
+    private UMShareListener mShareListener;
+    private ShareAction mShareAction;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +85,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.four_fragment, null);
         res = getActivity().getResources();
+        mShareListener = new CustomShareListener(getActivity());
         initView();
         initData();
         return view;
@@ -200,6 +219,25 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             case R.id.liner_share:
             {
                 //分享
+                UMImage image = new UMImage(getActivity(), R.drawable.launcher);
+                String title =  "脱单如此容易，幸福触手可及";
+                String content = "致力于做婚恋领域的领导者和创新者，真实婚恋的开创者和践行者";
+
+                 /*无自定按钮的分享面板*/
+                mShareAction = new ShareAction(getActivity()).setDisplayList(
+                        SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
+                        SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+                        )
+                        .withText(content)
+                        .withTitle(title)
+                        .withTargetUrl(InternetURL.UPDATE_URL)
+                        .withMedia(image)
+                        .setCallback(mShareListener);
+
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
+                mShareAction.open(config);
             }
             break;
             case R.id.liner_set:
@@ -223,6 +261,79 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             }
                 break;
         }
+    }
+
+    private static class CustomShareListener implements UMShareListener {
+
+        private WeakReference<MainActivity> mActivity;
+
+        private CustomShareListener(Context context) {
+            mActivity = new WeakReference(context);
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+//                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                        &&platform!=SHARE_MEDIA.EMAIL
+                        &&platform!=SHARE_MEDIA.FLICKR
+                        &&platform!=SHARE_MEDIA.FOURSQUARE
+                        &&platform!=SHARE_MEDIA.TUMBLR
+                        &&platform!=SHARE_MEDIA.POCKET
+                        &&platform!=SHARE_MEDIA.PINTEREST
+                        &&platform!=SHARE_MEDIA.LINKEDIN
+                        &&platform!=SHARE_MEDIA.INSTAGRAM
+                        &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                        &&platform!=SHARE_MEDIA.YNOTE
+                        &&platform!=SHARE_MEDIA.EVERNOTE){
+//                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                    &&platform!=SHARE_MEDIA.EMAIL
+                    &&platform!=SHARE_MEDIA.FLICKR
+                    &&platform!=SHARE_MEDIA.FOURSQUARE
+                    &&platform!=SHARE_MEDIA.TUMBLR
+                    &&platform!=SHARE_MEDIA.POCKET
+                    &&platform!=SHARE_MEDIA.PINTEREST
+                    &&platform!=SHARE_MEDIA.LINKEDIN
+                    &&platform!=SHARE_MEDIA.INSTAGRAM
+                    &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                    &&platform!=SHARE_MEDIA.YNOTE
+                    &&platform!=SHARE_MEDIA.EVERNOTE){
+                if (t != null) {
+                    Log.d("throw", "throw:" + t.getMessage());
+                }
+            }
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 屏幕横竖屏切换时避免出现window leak的问题
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mShareAction.close();
     }
 
 }

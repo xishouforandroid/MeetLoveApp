@@ -4,6 +4,7 @@
           android:versionCode="1"
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="21"/>
+
     <!-- 允许程序打开网络sockets(必选配置) -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序访问有关的网络信息(必选配置) -->
@@ -94,6 +95,7 @@
             android:name="android.hardware.location.network"
             android:required="false" />
 
+
     <application android:label="@string/app_name"
                  android:theme="@android:style/Theme.NoTitleBar"
                  android:name=".MeetLoveApplication"
@@ -131,6 +133,89 @@
         <activity android:name=".ui.GroupDetailActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.SelectAreaActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.LikesActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+
+
+        <meta-data
+                android:name="UMENG_APPKEY"
+                android:value="58e343148f4a9d14d2001d3e" >
+        </meta-data>
+        <meta-data
+                android:name="UMENG_CHANNEL"
+                android:value="Umeng" >
+        </meta-data>
+        <!-- ###################注册SDK使用的Activity###################### -->
+        <!--分享编辑页-->
+        <activity
+                android:name="com.umeng.socialize.editorpage.ShareActivity"
+                android:theme="@style/Theme.UMDefault"
+                android:excludeFromRecents="true"/>
+
+        <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
+        <activity
+                android:name="com.umeng.qq.tencent.AuthActivity"
+                android:launchMode="singleTask"
+                android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105717314" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name="com.umeng.qq.tencent.AssistActivity"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <!-- ###################添加UmengAppkey###################### -->
+        <meta-data
+                android:name="UMENG_APPKEY"
+                android:value="582de4c5aed1796448001b1d" >
+        </meta-data>
+
+        <!-- QQ、QQ空间所需权限 -->
+
+        <activity
+                android:name=".wxapi.WXPayEntryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+                android:name=".wxapi.WXEntryActivity"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="true"
+                android:screenOrientation="portrait" />
+
+        <!-- *************************    related to Share START **************************** -->
+        <!-- Share edit page-->
+
+        <activity
+                android:name=".apshare.ShareEntryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+        <activity
+                android:name="com.alipay.sdk.app.H5AuthActivity"
+                android:configChanges="orientation|keyboardHidden|navigation"
+                android:exported="false"
+                android:screenOrientation="behind"
+                android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+                android:name="com.mob.tools.MobUIShell"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateHidden|adjustResize"
+                />
 
     </application>
 </manifest>

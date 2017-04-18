@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.widget.CustomProgressDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.concurrent.ExecutorService;
 
@@ -90,6 +91,8 @@ public class BaseActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart(mPageName);
+        MobclickAgent.onResume(mContext);
     }
 
     @Override
@@ -142,6 +145,9 @@ public class BaseActivity extends FragmentActivity {
 
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd(mPageName);
+        MobclickAgent.onPause(mContext);
+
     }
 
 
