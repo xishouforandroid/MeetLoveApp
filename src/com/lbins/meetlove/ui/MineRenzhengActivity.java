@@ -426,6 +426,8 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
                                     btn_1.setTextColor(res.getColor(R.color.textColortwo));
                                     btn_1.setText("身份已认证");
                                     showMsg(MineRenzhengActivity.this, "身份认证成功！");
+                                    Intent intent1 = new Intent("rzstate1_success");
+                                    sendBroadcast(intent1);
                                 }else{
                                     showMsg(MineRenzhengActivity.this, jo.getString("message"));
                                 }

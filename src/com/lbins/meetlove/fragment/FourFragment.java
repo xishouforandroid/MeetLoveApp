@@ -1,10 +1,11 @@
 package com.lbins.meetlove.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
@@ -85,6 +85,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.four_fragment, null);
         res = getActivity().getResources();
+        registerBoradcastReceiver();
         mShareListener = new CustomShareListener(getActivity());
         initView();
         initData();
@@ -334,6 +335,32 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mShareAction.close();
+    }
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("rzstate1_success")) {
+                vip_2.setTextColor(res.getColor(R.color.main_color));
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("rzstate1_success");
+        //注册广播
+        getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 
 }
