@@ -55,4 +55,13 @@ public class InternetURL {
     //身份认证---身份证上传
     public static final String appUpdateCard = INTERNAL +   "appUpdateCard.do";
 
+
+    //传订单给服务端--生成订单
+    public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";
+    //更新订单状态
+    public static final String UPDATE_ORDER_TOSERVER = INTERNAL + "orderUpdate.do";
+    //微信支付
+    public static final String SEND_ORDER_TOSERVER_WX = INTERNAL + "orderSaveWx.do";
+
+
 }

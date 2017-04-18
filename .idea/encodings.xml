@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/jniLibs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/AMap_Location_V3.2.0_20161206.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/MobCommons-2017.0321.1624.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/MobTools-2017.0321.1624.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/Msc.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SMSSDK-2.1.4.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_QQ_Simplify.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/SocialSDK_QQ_Simplify.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_Sina_Simplify.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_WeiXin_Full.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/SocialSDK_WeiXin_Full.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/SocialSDK_alipay.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/alipaySdk-20160516.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/android-async-http-1.4.8.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/android-support-v4.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/armeabi" charset="UTF-8" />
@@ -22,35 +18,25 @@
     <file url="file://$PROJECT_DIR$/libs/greendao-1.3.0-beta-1.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/gson-2.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/happy-dns-0.2.5.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/happy-dns-0.2.5.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpcore-4.3.2.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/httpcore-4.3.2.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/httpmime-4.3.5.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpmime-4.3.5.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/hyphenatechat_3.2.1.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/libammsdk.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/libapshare.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/locSDK_6.13.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/mta-sdk-1.6.2.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/open_sdk_r5781.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/org.apache.http.legacy.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/parse-android-1.13.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/pinyin4j-2.5.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/pushservice-5.1.0.48.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/qiniu-android-sdk-7.0.7.2.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng-analytics-v6.1.0.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/umeng_integrate_tool.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng_shareboard_widget.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng_social_api.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng_social_net.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng_social_shareboard.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/umeng_social_shareview.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/umeng_social_tool.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/universal-image-loader-1.9.4.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/utdid4all-1.0.4.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/volley-1.0.19.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/wechat-sdk-android-with-mta-1.1.6.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/weiboSDKCore_3.1.4.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/custom_dialog_frame.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/push_bottom_in.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/push_bottom_out.xml" charset="UTF-8" />
@@ -148,6 +134,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/InternetURL.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/MyBaseFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/Data.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/OrderInfoAndSignDATA.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Area.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/City.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Emp.java" charset="UTF-8" />
@@ -165,11 +152,16 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandOrder.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandPhoto.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/KefuTel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Order.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Permission.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Province.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Report.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/SuggestObj.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/VersonCodeObj.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/Base64.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/OrderInfoAndSign.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/PayResult.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/SignUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/receiver/SMSBroadcastReceiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AboutActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/RegistMsgActivity.java" charset="UTF-8" />
