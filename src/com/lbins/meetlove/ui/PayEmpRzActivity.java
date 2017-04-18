@@ -1,9 +1,5 @@
 package com.lbins.meetlove.ui;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +17,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
@@ -43,7 +38,10 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.StringReader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/8/30.
@@ -71,10 +69,8 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
-//                        Toast.makeText(OrderMakeActivity.this, "支付成功",
-//                                Toast.LENGTH_SHORT).show();
-                        //更新订单状态
-                        updateMineOrder();
+                        Toast.makeText(PayEmpRzActivity.this, "支付成功！", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         // 判断resultStatus 为非“9000”则代表可能支付失败
                         // “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -112,7 +108,6 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_emp_rz_activity);
-        registerBoradcastReceiver();
         //微信支付
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
@@ -280,57 +275,6 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         return "sign_type=\"RSA\"";
     }
 
-
-    //更新订单状态
-    void updateMineOrder(){
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.UPDATE_ORDER_TOSERVER,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo =  new JSONObject(s);
-                                String code = jo.getString("code");
-                                if (code.equals("200")) {
-                                    Toast.makeText(PayEmpRzActivity.this, "支付成功！", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }else{
-                                    showMsg(PayEmpRzActivity.this, jo.getString("message"));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                            Toast.makeText(PayEmpRzActivity.this, "支付失败！", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(PayEmpRzActivity.this, "支付失败！", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("out_trade_no",  out_trade_no);
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
     //----------------微信---------------
     public void goToPayWeixin(final Order order){
         // 将该app注册到微信
@@ -485,32 +429,5 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         String appSign = MD5.getMessageDigest(sb.toString().getBytes());
         return appSign;
     }
-
-
-    //广播接收动作
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("pay_wx_success")) {
-//                updateMineOrder();
-            }
-        }
-    };
-
-    //注册广播
-    public void registerBoradcastReceiver() {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("pay_wx_success");
-        //注册广播
-        registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver);
-    }
-
 
 }
