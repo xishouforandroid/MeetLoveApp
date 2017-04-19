@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -55,7 +56,7 @@ public class ItemPicAdapter extends BaseAdapter {
 
         final String cell = records.get(position);
         if (cell != null) {
-//            imageLoader.displayImage(cell.getPicStr(), holder.item_pic, GuirenApplication.options, animateFirstListener);
+            imageLoader.displayImage(cell, holder.item_pic, MeetLoveApplication.txOptions, animateFirstListener);
         }
         return convertView;
     }

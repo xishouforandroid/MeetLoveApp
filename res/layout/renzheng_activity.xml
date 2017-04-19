@@ -31,8 +31,9 @@
                            android:layout_height="95dp"/>
                 <TextView android:layout_width="match_parent"
                           android:textColor="@color/main_color"
-                          android:textSize="16sp"
+                          android:textSize="14sp"
                           android:gravity="center"
+                          android:layout_marginTop="3dp"
                           android:text="请上传身份证照片，仅供审核使用"
                           android:layout_height="wrap_content"/>
 

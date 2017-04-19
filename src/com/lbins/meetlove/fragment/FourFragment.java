@@ -12,8 +12,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
@@ -21,6 +28,8 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemPicAdapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.data.HappyHandPhotoData;
+import com.lbins.meetlove.module.HappyHandPhoto;
 import com.lbins.meetlove.ui.MineRenzhengActivity;
 import com.lbins.meetlove.ui.MineSettingActivity;
 import com.lbins.meetlove.ui.PhotosActivity;
@@ -36,10 +45,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.umeng.socialize.utils.Log;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/7/1.
@@ -90,6 +102,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         mShareListener = new CustomShareListener(getActivity());
         initView();
         initData();
+        getPhotos();
         return view;
     }
 
@@ -159,13 +172,18 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     }
 
     void initView(){
-        picLists.add("");
-        picLists.add("");
-        picLists.add("");
         gridview = (PictureGridview) view.findViewById(R.id.gridview);
         adapterGrid = new ItemPicAdapter(picLists, getActivity());
         gridview.setAdapter(adapterGrid);
         gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), PhotosActivity.class);
+                intent.putExtra("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                startActivity(intent);
+            }
+        });
         cover = (ImageView) view.findViewById(R.id.cover);
         nickname = (TextView) view.findViewById(R.id.nickname);
         is_tuijian = (TextView) view.findViewById(R.id.is_tuijian);
@@ -341,6 +359,77 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         mShareAction.close();
     }
 
+
+
+
+    private void getPhotos() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appPhotos,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandPhotoData data = getGson().fromJson(s, HappyHandPhotoData.class);
+                                    if(data != null){
+                                        HappyHandPhoto happyHandPhoto  = data.getData();
+                                        if(happyHandPhoto != null){
+                                            String photos = happyHandPhoto.getPhotos();
+                                            if(!StringUtil.isNullOrEmpty(photos)){
+                                                String[] arras = photos.split(",");
+                                                if(arras != null){
+                                                    picLists.clear();
+                                                    for(int i=0;i<arras.length;i++){
+                                                        if(!StringUtil.isNullOrEmpty(arras[i])){
+                                                            picLists.add(arras[i]);
+                                                        }
+                                                    }
+                                                }
+                                                adapterGrid.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

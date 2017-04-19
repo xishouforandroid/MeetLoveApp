@@ -31,7 +31,6 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content">
                     <TextView android:layout_width="wrap_content"
-                              android:text="李灵黛"
                               android:id="@+id/nickname"
                               android:layout_centerHorizontal="true"
                               android:textSize="22sp"
@@ -60,7 +59,6 @@
                               android:id="@+id/sign"
                               android:textColor="@color/textColortwo"
                               android:layout_below="@+id/is_tuijian"
-                              android:text="个性签名：非诚勿扰，相信我亲爱的你就在这里。"
                               android:layout_height="wrap_content"/>
                 </RelativeLayout>
             </LinearLayout>
@@ -103,7 +101,6 @@
                               android:layout_height="wrap_content">
                     <TextView android:layout_width="0dp"
                               android:layout_weight="1"
-                              android:text="86年"
                               android:id="@+id/age"
                               android:textColor="@color/textColortwo"
                               android:layout_gravity="center"
@@ -111,7 +108,6 @@
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="0dp"
                               android:layout_weight="1"
-                              android:text="163cm"
                               android:id="@+id/heightl"
                               android:textColor="@color/textColortwo"
                               android:layout_gravity="center"
@@ -119,7 +115,6 @@
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="0dp"
                               android:layout_weight="1"
-                              android:text="沈阳"
                               android:id="@+id/address"
                               android:textColor="@color/textColortwo"
                               android:layout_gravity="center"
