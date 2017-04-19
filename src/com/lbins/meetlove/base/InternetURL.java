@@ -54,6 +54,10 @@ public class InternetURL {
     public static final String appUpdatePwrByMobile = INTERNAL +   "appUpdatePwrByMobile.do";
     //身份认证---身份证上传
     public static final String appUpdateCard = INTERNAL +   "appUpdateCard.do";
+    //相册上传
+    public static final String appSaveOrUpdatePhotos = INTERNAL +   "appSaveOrUpdatePhotos.do";
+    //根据用户ID查询用户相册
+    public static final String appPhotos = INTERNAL +   "appPhotos.do";
 
 
     //传订单给服务端--生成订单

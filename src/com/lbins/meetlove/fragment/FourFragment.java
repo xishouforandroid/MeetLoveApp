@@ -23,6 +23,7 @@ import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.ui.MineRenzhengActivity;
 import com.lbins.meetlove.ui.MineSettingActivity;
+import com.lbins.meetlove.ui.PhotosActivity;
 import com.lbins.meetlove.ui.RegUpdateActivity;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.PictureGridview;
@@ -203,6 +204,9 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             case R.id.liner_photo:
             {
                 //相册
+                Intent intent = new Intent(getActivity(), PhotosActivity.class);
+                intent.putExtra("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                startActivity(intent);
             }
             break;
             case R.id.liner_friends:

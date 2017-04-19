@@ -86,6 +86,14 @@ public class BaseActivity extends FragmentActivity {
                 .putString(key, getMyApp().getGson().toJson(value))
                 .commit();
     }
+    /**
+     * 获取自定义线程池
+     *
+     * @return
+     */
+    public ExecutorService getLxThread() {
+        return getMyApp().getLxThread();
+    }
 
 
     @Override

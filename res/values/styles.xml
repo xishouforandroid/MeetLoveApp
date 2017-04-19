@@ -64,6 +64,9 @@
         <item name="android:paddingRight">30dip</item>
     </style>
 
+    <style name="SetPicCheck" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_set_number_check</item>
+    </style>
 
 
     <style name="bg_main_mine">

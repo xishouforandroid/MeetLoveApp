@@ -49,6 +49,8 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_login.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_active.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_unactive.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/ic_bar_import_course_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/ic_bar_import_course_press.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_bg.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_passwd.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_phone.png" charset="UTF-8" />
@@ -57,12 +59,14 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_verify_checkbox_checked.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/no_pic.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/btn_blue_selector.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_dark_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_jubao_normal_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_jubao_pressed_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_normal_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_press_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/selector_set_number_check.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/umeng_socialize_back_icon.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/umeng_socialize_btn_bg.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/umeng_socialize_copy.png" charset="UTF-8" />
@@ -82,11 +86,18 @@
     <file url="file://$PROJECT_DIR$/res/drawable/umeng_socialize_wxcircle.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/zhuye_item_select.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout-sw550dp-large" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/activity_album.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/activity_album_chance.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/activity_viewpage.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/choose_imageview.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/custom_progress_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/foot.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/gallery_url.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_age.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/item_album_chance.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/item_grid_photos.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_grid_pic.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/item_img_del.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_like.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_photo.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_rzxf.xml" charset="UTF-8" />
@@ -105,7 +116,9 @@
     <file url="file://$PROJECT_DIR$/res/layout/pop_quite_suggest.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_report.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pop_update_pwr_photo.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/publish_mood_gridview_item.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/reg_msg_activity.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/select_imageview.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/socialize_share_menu_item.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/umeng_socialize_oauth_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/viewpage_itemview.xml" charset="UTF-8" />
@@ -119,13 +132,16 @@
     <file url="file://$PROJECT_DIR$/res/values/umeng_socialize_style.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/MeetLoveApplication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AboutViewPageAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AlbumGridViewAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AnimateFirstDisplayListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemAgeAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemLikesAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemPhotosAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemPicAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemTuijianGroupAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemTuijianPeopleAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/OnClickContentItemListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/Publish_mood_GridView_Adapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/TuijianGroupdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/TuijianPeopledapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/ActivityTack.java" charset="UTF-8" />
@@ -135,6 +151,16 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/MyBaseFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/Data.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/OrderInfoAndSignDATA.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/BasePagerAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/EclairMotionEvent.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/GalleryViewPager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/InputStreamWrapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/TouchImageView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/UrlPagerAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/UrlTouchImageView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/WrapMotionEvent.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/media/MediaStoreBucket.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/media/MediaStoreCursorHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Area.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/City.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Emp.java" charset="UTF-8" />
@@ -164,13 +190,25 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/SignUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/receiver/SMSBroadcastReceiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AboutActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AbsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AlbumActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AlbumChanceActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/GalleryUrlActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/ImageDelActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/PublishPicActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/RegistMsgActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/CommonDefine.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/CompressPhotoUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/Constants.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/FileUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/GuirenHttpUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/ImageUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/PicUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/util/StringUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/CircleImageView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/CustomProgressDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/MyTextView2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/NoScrollGridView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/PictureGridview.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/PopAgeProfileWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/PopAgeWindow.java" charset="UTF-8" />
@@ -185,6 +223,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectPhotoPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectRzxfPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectSuggestPopWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SquareLayout.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/UpdatePwrPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/ViewPageItemView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/wxapi" charset="UTF-8" />
