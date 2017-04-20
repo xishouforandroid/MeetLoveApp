@@ -9,9 +9,11 @@
 
 
     <com.lbins.meetlove.widget.RoundImageView
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="6dp"
+            android:maxHeight="108dp"
+            android:maxWidth="108dp"
             android:src="@drawable/default_read_book"
             android:id="@+id/cover"
             />
@@ -31,10 +33,11 @@
                       android:text="书籍是最有耐心，最能忍耐和最让人愉快的伙伴。这里有爱好读书的一群人。"
                       android:textColor="@color/textColortwo"
                       android:layout_marginTop="6dp"
+                      android:singleLine="true"
                       android:textSize="12sp"
                       android:layout_marginLeft="6dp"
                       android:layout_below="@+id/nickname"
-                      android:id="@+id/address"
+                      android:id="@+id/content"
                       android:layout_height="wrap_content"/>
         </RelativeLayout>
 

@@ -1,5 +1,7 @@
 package com.lbins.meetlove.module;
 
+import java.io.Serializable;
+
 /**
  * Created by zhl on 2017/4/3.
  */
@@ -9,7 +11,16 @@ public class HappyHandGroup {
     private String content;
     private String likeid;
     private String topnum;
+    private String pic;
     private String is_use;
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 
     public String getGroupid() {
         return groupid;

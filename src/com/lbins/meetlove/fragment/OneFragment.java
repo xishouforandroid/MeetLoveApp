@@ -21,9 +21,12 @@ import com.lbins.meetlove.adapter.TuijianPeopledapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.EmpsData;
+import com.lbins.meetlove.data.HappyHandGroupData;
 import com.lbins.meetlove.data.HappyHandPhotoData;
 import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.module.HappyHandGroup;
 import com.lbins.meetlove.module.HappyHandPhoto;
+import com.lbins.meetlove.ui.GroupDetailActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
 import com.lbins.meetlove.ui.TuijianGroupActivity;
 import com.lbins.meetlove.ui.TuijianPeopleActivity;
@@ -51,7 +54,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     private TuijianPeopledapter adapter1;
     private TuijianGroupdapter adapter2;
     private List<Emp> list1 = new ArrayList<Emp>();
-    private List<String> list2 = new ArrayList<String>();
+    private List<HappyHandGroup> list2 = new ArrayList<HappyHandGroup>();
 
     private LinearLayout liner_1;
     private TextView no_data;
@@ -68,8 +71,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.one_fragment, null);
         res = getActivity().getResources();
-        list2.add("");
-        list2.add("");
+
         initView();
         progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -77,6 +79,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         progressDialog.show();
         getTuijianren1();
         getTuijianren2();
+        getTuijianGroups();
         return view;
     }
 
@@ -109,6 +112,19 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                     if(emp != null){
                         Intent intent =  new Intent(getActivity(), ProfileEmpActivity.class);
                         intent.putExtra("empid", emp.getEmpid());
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+        gridView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(list2.size()>position){
+                    HappyHandGroup group = list2.get(position);
+                    if(group != null){
+                        Intent intent =  new Intent(getActivity(), GroupDetailActivity.class);
+                        intent.putExtra("groupid", group.getGroupid());
                         startActivity(intent);
                     }
                 }
@@ -267,6 +283,68 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
                 params.put("state", "2");
                 params.put("size", "1");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    private void getTuijianGroups() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appTuijianGroups,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandGroupData data = getGson().fromJson(s, HappyHandGroupData.class);
+                                    if(data != null){
+                                        List<HappyHandGroup> listsGroups = new ArrayList<>();
+                                        listsGroups.addAll(data.getData());
+                                        for(int i=0;i<(listsGroups.size()<2?listsGroups.size():2);i++){
+                                            list2.add(listsGroups.get(i));
+                                        }
+                                    }
+                                    adapter2.notifyDataSetChanged();
+                                }else {
+                                    Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
                 return params;
             }
 

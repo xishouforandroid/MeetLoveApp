@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.module.HappyHandGroup;
 import com.lbins.meetlove.widget.RoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -18,23 +21,15 @@ import java.util.List;
  */
 public class TuijianGroupdapter extends BaseAdapter {
     private ViewHolder holder;
-    private List<String> contents;
+    private List<HappyHandGroup> contents;
     private Context mContext;
-
-    private OnClickContentItemListener onClickContentItemListener;
-
-    public void setOnClickContentItemListener(OnClickContentItemListener onClickContentItemListener) {
-        this.onClickContentItemListener = onClickContentItemListener;
-    }
-
 
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
 
-    public TuijianGroupdapter(List<String> contents, Context mContext) {
+    public TuijianGroupdapter(List<HappyHandGroup> contents, Context mContext) {
         this.contents = contents;
         this.mContext = mContext;
-
     }
 
     @Override
@@ -58,20 +53,25 @@ public class TuijianGroupdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.item_index_tuijian_group, parent, false);
             holder.cover = (RoundImageView) convertView.findViewById(R.id.cover);
+            holder.nickname = (TextView) convertView.findViewById(R.id.nickname);
+            holder.content = (TextView) convertView.findViewById(R.id.content);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final String cell = contents.get(position);//获得元素
+        final HappyHandGroup cell = contents.get(position);//获得元素
         if (cell != null) {
-//            imageLoader.displayImage(cell.getAd_pic(), holder.cover, MeirenmeibaAppApplication.options, animateFirstListener);
-
+            imageLoader.displayImage(cell.getPic(), holder.cover, MeetLoveApplication.options, animateFirstListener);
+            holder.nickname.setText(cell.getTitle());
+            holder.content.setText(cell.getContent());
         }
         return convertView;
     }
 
     class ViewHolder {
         RoundImageView cover;
+        TextView nickname;
+        TextView content;
     }
 
 }

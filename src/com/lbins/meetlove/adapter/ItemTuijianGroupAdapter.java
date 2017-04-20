@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.module.HappyHandGroup;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -17,13 +19,13 @@ import java.util.List;
  */
 public class ItemTuijianGroupAdapter extends BaseAdapter {
     private ViewHolder holder;
-    private List<String> records;
+    private List<HappyHandGroup> records;
     private Context mContext;
 
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
 
-    public ItemTuijianGroupAdapter(List<String> records, Context mContext) {
+    public ItemTuijianGroupAdapter(List<HappyHandGroup> records, Context mContext) {
         this.records = records;
         this.mContext = mContext;
     }
@@ -56,9 +58,11 @@ public class ItemTuijianGroupAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final String cell = records.get(position);
+        final HappyHandGroup cell = records.get(position);
         if (cell != null) {
-//            imageLoader.displayImage(cell.getPicStr(), holder.item_pic, GuirenApplication.options, animateFirstListener);
+            imageLoader.displayImage(cell.getPic(), holder.item_cover, MeetLoveApplication.options, animateFirstListener);
+            holder.state.setText(cell.getContent());
+            holder.nickname.setText(cell.getTitle());
         }
         return convertView;
     }

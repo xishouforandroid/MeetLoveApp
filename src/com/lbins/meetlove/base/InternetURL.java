@@ -62,6 +62,10 @@ public class InternetURL {
     public static final String appTuijianPeoples = INTERNAL +   "appTuijianPeoples.do";
     //根据empid查询会员信息
     public static final String appEmpByEmpId = INTERNAL +   "appEmpByEmpId.do";
+    //推荐群组
+    public static final String appTuijianGroups = INTERNAL +   "appTuijianGroups.do";
+    //根据群组ID查询群详情
+    public static final String appGroupsById = INTERNAL +   "appGroupsById.do";
 
 
     //传订单给服务端--生成订单

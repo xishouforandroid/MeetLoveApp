@@ -11,6 +11,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
+            android:maxHeight="108dp"
+            android:maxWidth="108dp"
             android:src="@drawable/default_cover1"
             android:id="@+id/cover"/>
 
