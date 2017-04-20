@@ -1,16 +1,17 @@
 package com.lbins.meetlove.ui;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -218,7 +219,49 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
     }
 
     public void AddToFriends(View view){
-        //
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+            if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                //进行身份认证了 可以添加好友申请了
+                showFriendsDialog();
+            }else {
+                showMsgDialog();
+            }
+        }else {
+            showMsgDialog();
+        }
+    }
+
+    private void showFriendsDialog() {
+        final Dialog picAddDialog = new Dialog(ProfileEmpActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_friends_dialog, null);
+        final EditText msg = (EditText) picAddInflate.findViewById(R.id.msg);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StringUtil.isNullOrEmpty(msg.getText().toString())){
+                    showMsg(ProfileEmpActivity.this, "请输入申请理由！");
+                }else {
+                    //隐藏键盘
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(msg.getApplicationWindowToken(), 0);
+                    addToFriends(msg.getText().toString());
+                    picAddDialog.dismiss();
+                }
+
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     private void showMsgDialog() {
@@ -379,6 +422,63 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", empid);
                 params.put("size", "3");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+
+    private void addToFriends(final String content) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appSaveFriends,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                   showMsg(ProfileEmpActivity.this, "申请成功，请等待对方确认！");
+                                }else{
+                                    showMsg(ProfileEmpActivity.this, jo.getString("message"));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("empid2", empid);
+                params.put("applytitle", content);
                 return params;
             }
 

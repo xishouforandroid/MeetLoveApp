@@ -2,25 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
-              android:background="@drawable/panel_aleart_bg"
+              android:background="@drawable/bg_text_bigbg"
               android:orientation="vertical">
 
-        <TextView
+        <EditText
                 android:id="@+id/msg"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_gravity="center"
-                android:textSize="20sp"
-                android:layout_marginTop="35dp"
-                android:gravity="center"
-                android:text="请认证"
-                android:textColor="@color/black"/>
+                android:textSize="16sp"
+                android:minHeight="105dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center|top|left"
+                android:background="@drawable/bg_text_field"
+                android:padding="15dp"
+                android:hint="你需要发送验证申请，等待对方通过"
+                android:textColor="@color/text_color"/>
 
         <LinearLayout android:layout_width="match_parent"
                       android:padding="3dp"
-                      android:layout_marginTop="35dp"
+                      android:layout_marginTop="15dp"
                       android:layout_centerHorizontal="true"
                       android:gravity="center_horizontal"
                       android:layout_below="@+id/msg"
@@ -40,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_small_active"
                     android:textSize="14sp"
-                    android:text="去认证"
+                    android:text="发送"
                     android:textColor="@color/white"/>
         </LinearLayout>
 

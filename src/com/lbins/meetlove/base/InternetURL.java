@@ -66,6 +66,8 @@ public class InternetURL {
     public static final String appTuijianGroups = INTERNAL +   "appTuijianGroups.do";
     //根据群组ID查询群详情
     public static final String appGroupsById = INTERNAL +   "appGroupsById.do";
+    //申请加好友
+    public static final String appSaveFriends = INTERNAL +   "appSaveFriends.do";
 
 
     //传订单给服务端--生成订单
