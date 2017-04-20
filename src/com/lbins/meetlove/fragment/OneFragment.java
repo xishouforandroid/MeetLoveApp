@@ -96,8 +96,14 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent =  new Intent(getActivity(), ProfileEmpActivity.class);
-                startActivity(intent);
+                if(list1.size()>position){
+                    Emp emp = list1.get(position);
+                    if(emp != null){
+                        Intent intent =  new Intent(getActivity(), ProfileEmpActivity.class);
+                        intent.putExtra("empid", emp.getEmpid());
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }

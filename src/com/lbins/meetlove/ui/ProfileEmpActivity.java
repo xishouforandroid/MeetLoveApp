@@ -39,10 +39,13 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
     private ItemPicAdapter adapterGrid;
     private List<String> picLists = new ArrayList<String>();
 
+    private String empid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_emp_activity);
+        empid = getIntent().getExtras().getString("empid");
         res = getResources();
         initView();
         initView();

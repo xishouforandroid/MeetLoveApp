@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.util.StringUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -17,13 +20,13 @@ import java.util.List;
  */
 public class ItemTuijianPeopleAdapter extends BaseAdapter {
     private ViewHolder holder;
-    private List<String> records;
+    private List<Emp> records;
     private Context mContext;
 
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
 
-    public ItemTuijianPeopleAdapter(List<String> records, Context mContext) {
+    public ItemTuijianPeopleAdapter(List<Emp> records, Context mContext) {
         this.records = records;
         this.mContext = mContext;
     }
@@ -56,9 +59,33 @@ public class ItemTuijianPeopleAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final String cell = records.get(position);
+        final Emp cell = records.get(position);
         if (cell != null) {
-//            imageLoader.displayImage(cell.getPicStr(), holder.item_pic, GuirenApplication.options, animateFirstListener);
+
+            if(!StringUtil.isNullOrEmpty(cell.getCover())){
+                imageLoader.displayImage(cell.getCover(), holder.item_cover, MeetLoveApplication.txOptions, animateFirstListener);
+            }
+            if(!StringUtil.isNullOrEmpty(cell.getState())){
+                if("1".equals(cell.getState())){
+                    //单身
+                    holder.state.setText("单身");
+                }
+                if("2".equals(cell.getState())){
+                    //交往中
+                    holder.state.setText("交往中");
+                }
+            }
+            String str = "";
+            if (!StringUtil.isNullOrEmpty(cell.getAge())){
+                str += cell.getAge().substring(2,4)+"年 ";
+            }
+            if(!StringUtil.isNullOrEmpty(cell.getHeightl())){
+                str += cell.getHeightl() + "CM ";
+            }
+            if (!StringUtil.isNullOrEmpty(cell.getCityName())){
+                str +=cell.getCityName();
+            }
+            holder.nickname.setText(str);
         }
         return convertView;
     }
