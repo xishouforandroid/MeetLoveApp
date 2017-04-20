@@ -52,7 +52,7 @@
                                         android:layout_height="match_parent">
                             <com.lbins.meetlove.widget.PictureGridview
                                     android:id="@+id/gridView1"
-                                    android:layout_centerVertical="true"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:horizontalSpacing="0dp"
@@ -68,7 +68,7 @@
                                       android:layout_below="@+id/gridView1"
                                       android:layout_marginBottom="6dp"
                                       android:gravity="right"
-                                      android:layout_marginTop="6dp"
+                                      android:layout_marginTop="3dp"
                                       android:id="@+id/btn_one"
                                       android:textSize="14sp"
                                       android:textColor="@color/main_color"
@@ -100,7 +100,7 @@
                                     >
                         <com.lbins.meetlove.widget.PictureGridview
                                 android:id="@+id/gridView2"
-                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:horizontalSpacing="0dp"
@@ -117,7 +117,7 @@
                                   android:layout_marginBottom="6dp"
                                   android:gravity="right"
                                   android:id="@+id/btn_two"
-                                  android:layout_marginTop="6dp"
+                                  android:layout_marginTop="3dp"
                                   android:textSize="14sp"
                                   android:textColor="@color/main_color"
                                   android:layout_height="wrap_content"/>

@@ -18,14 +18,12 @@
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:layout_margin="6dp"
-                android:src="@drawable/default_cover1"
                 android:id="@+id/cover"
                 />
         <RelativeLayout android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
             <TextView android:layout_width="wrap_content"
-                      android:text="李灵黛"
                       android:id="@+id/nickname"
                       android:layout_centerHorizontal="true"
                       android:textSize="22sp"
@@ -41,7 +39,6 @@
                       android:textColor="@color/main_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="交往中"
                       android:id="@+id/is_state"
                       android:layout_marginRight="15dp"
                       android:layout_marginTop="8dp"
@@ -54,7 +51,6 @@
                       android:id="@+id/sign"
                       android:textColor="@color/textColortwo"
                       android:layout_below="@+id/is_tuijian"
-                      android:text="个性签名：非诚勿扰，相信我亲爱的你就在这里。"
                       android:layout_height="wrap_content"/>
         </RelativeLayout>
     </LinearLayout>
@@ -97,7 +93,6 @@
                       android:layout_height="wrap_content">
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
-                      android:text="86年"
                       android:id="@+id/age"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"
@@ -105,7 +100,6 @@
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
-                      android:text="163cm"
                       android:id="@+id/heightl"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"
@@ -113,7 +107,6 @@
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
-                      android:text="沈阳"
                       android:id="@+id/address"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"

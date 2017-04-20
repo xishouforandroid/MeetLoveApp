@@ -73,7 +73,7 @@ public class AlbumGridViewAdapter extends BaseAdapter implements OnClickListener
         else
             path = "camera_default";
         if (path.contains("default")) {
-            viewHolder.imageView.setImageResource(R.drawable.icon_chat_addphoto);
+            viewHolder.imageView.setImageResource(R.drawable.icon_choosephoto);
         } else {
 
             loader.displayImage("file://" + path, viewHolder.imageView, options);

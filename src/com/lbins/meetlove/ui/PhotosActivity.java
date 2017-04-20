@@ -75,7 +75,7 @@ public class PhotosActivity extends BaseActivity implements View.OnClickListener
         btn_right = (ImageView) this.findViewById(R.id.btn_right);
         if(empid.equals(getGson().fromJson(getSp().getString("empid", ""), String.class))){
             btn_right.setVisibility(View.VISIBLE);
-            btn_right.setImageDrawable(res.getDrawable(R.drawable.icon_navbar_more));
+            btn_right.setImageDrawable(res.getDrawable(R.drawable.icon_navbar_addphoto));
             btn_right.setOnClickListener(this);
         }else{
             btn_right.setVisibility(View.GONE);
@@ -174,6 +174,7 @@ public class PhotosActivity extends BaseActivity implements View.OnClickListener
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", empid);
+                params.put("size", "0");
                 return params;
             }
 

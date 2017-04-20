@@ -364,9 +364,6 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         mShareAction.close();
     }
 
-
-
-
     private void getPhotos() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -423,6 +420,8 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("size", "3");
+
                 return params;
             }
 
@@ -444,6 +443,9 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             if (action.equals("rzstate1_success")) {
                 vip_2.setTextColor(res.getColor(R.color.main_color));
             }
+            if (action.equals("update_photo_success")) {
+                getPhotos();
+            }
         }
     };
 
@@ -451,6 +453,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("rzstate1_success");
+        myIntentFilter.addAction("update_photo_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

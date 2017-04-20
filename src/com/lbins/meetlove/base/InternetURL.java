@@ -60,6 +60,8 @@ public class InternetURL {
     public static final String appPhotos = INTERNAL +   "appPhotos.do";
     //首页推荐人列表
     public static final String appTuijianPeoples = INTERNAL +   "appTuijianPeoples.do";
+    //根据empid查询会员信息
+    public static final String appEmpByEmpId = INTERNAL +   "appEmpByEmpId.do";
 
 
     //传订单给服务端--生成订单

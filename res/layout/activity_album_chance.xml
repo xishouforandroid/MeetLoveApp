@@ -31,6 +31,7 @@
                 android:id="@+id/back"
                 android:paddingLeft="10dp"
                 android:text="返回"
+                android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 />

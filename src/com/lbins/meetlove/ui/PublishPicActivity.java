@@ -3,12 +3,14 @@ package com.lbins.meetlove.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -232,10 +234,34 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
     }
 
     // 选择相册，相机
-    private void showSelectImageDialog() {
+
+    public void showSelectImageDialog(){
         selectPhotoPopWindow = new SelectPhotoPopWindow(PublishPicActivity.this, itemsOnClick);
         //显示窗口
-        selectPhotoPopWindow.showAtLocation(PublishPicActivity.this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPhotoPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPhotoPopWindow.setFocusable(true);
+        selectPhotoPopWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPhotoPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     *            屏幕透明度0.0-1.0 1表示完全不透明
+     */
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) PublishPicActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) PublishPicActivity.this).getWindow().setAttributes(lp);
     }
 
     private void openCamera() {

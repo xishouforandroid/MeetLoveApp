@@ -53,7 +53,6 @@
             android:id="@+id/publish_moopd_gridview_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@drawable/icon_chat_addphoto"
             android:horizontalSpacing="5dip"
             android:numColumns="4"
             android:padding="10dip"
