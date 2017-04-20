@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,9 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     private LinearLayout liner_1;
     private TextView no_data;
 
+    private ImageView btn_right;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +81,10 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     }
 
     void initView(){
+        TextView title = (TextView) view.findViewById(R.id.title);
+        title.setText("推荐");
+        view.findViewById(R.id.back).setVisibility(View.GONE);
+
         liner_1 = (LinearLayout) view.findViewById(R.id.liner_1);
         no_data = (TextView) view.findViewById(R.id.no_data);
 
@@ -106,6 +114,10 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                 }
             }
         });
+
+        btn_right = (ImageView) view.findViewById(R.id.btn_right);
+        btn_right.setImageDrawable(res.getDrawable(R.drawable.icon_navbar_search));
+        btn_right.setOnClickListener(this);
     }
 
 
@@ -126,6 +138,11 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                 startActivity(intent);
             }
                 break;
+            case R.id.btn_right:
+            {
+                //搜索
+            }
+            break;
         }
     }
 

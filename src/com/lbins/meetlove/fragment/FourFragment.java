@@ -177,6 +177,9 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     }
 
     void initView(){
+        view.findViewById(R.id.back).setVisibility(View.GONE);
+        TextView title = (TextView) view.findViewById(R.id.title);
+        title.setText("我");
         gridview = (PictureGridview) view.findViewById(R.id.gridview);
         adapterGrid = new ItemPicAdapter(picLists, getActivity());
         gridview.setAdapter(adapterGrid);

@@ -1428,8 +1428,6 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     };
 
 
-
-
     private void getLikes(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
