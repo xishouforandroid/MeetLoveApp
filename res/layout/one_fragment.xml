@@ -4,7 +4,6 @@
               android:background="@color/bg_gray"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/topbar_height"
@@ -26,70 +25,104 @@
                 android:id="@+id/title"
                 />
         <ImageView android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:gravity="center_vertical"
-                  android:src="@drawable/icon_navbar_search"
-                  android:layout_alignParentRight="true"
-                  android:paddingLeft="10dp"
-                  android:paddingRight="15dp"
-                  android:id="@+id/btn_right"
+                   android:layout_height="match_parent"
+                   android:gravity="center_vertical"
+                   android:src="@drawable/icon_navbar_search"
+                   android:layout_alignParentRight="true"
+                   android:paddingLeft="10dp"
+                   android:paddingRight="15dp"
+                   android:id="@+id/btn_right"
                 />
     </RelativeLayout>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:layout_weight="1"
-                  android:layout_gravity="center"
-                  android:gravity="center"
-                  android:background="@color/white"
-                  android:layout_height="0dp">
-        <GridView android:layout_width="match_parent"
-                  android:numColumns="2"
-                  android:layout_gravity="center"
-                  android:gravity="center"
-                  android:id="@+id/gridView1"
-                  android:verticalSpacing="0dp"
-                  android:horizontalSpacing="0dp"
-                  android:layout_weight="1"
-                  android:stretchMode="columnWidth"
-                  android:layout_height="wrap_content">
-        </GridView>
-        <TextView android:layout_width="match_parent"
-                  android:text="更多"
-                  android:layout_marginRight="12dp"
-                  android:layout_marginBottom="6dp"
-                  android:gravity="right"
-                  android:id="@+id/btn_one"
-                  android:textSize="16sp"
-                  android:textColor="@color/main_color"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:layout_weight="1"
-                  android:layout_gravity="center"
-                  android:gravity="center"
-                  android:background="@color/white"
-                  android:layout_height="0dp">
-        <GridView android:layout_width="match_parent"
-                  android:numColumns="2"
-                  android:layout_gravity="center"
-                  android:gravity="center"
-                  android:id="@+id/gridView2"
-                  android:verticalSpacing="0dp"
-                  android:horizontalSpacing="0dp"
-                  android:layout_weight="1"
-                  android:stretchMode="columnWidth"
-                  android:layout_height="wrap_content">
-        </GridView>
-        <TextView android:layout_width="match_parent"
-                  android:text="更多"
-                  android:layout_marginRight="12dp"
-                  android:layout_marginBottom="6dp"
-                  android:gravity="right"
-                  android:id="@+id/btn_two"
-                  android:textSize="16sp"
-                  android:textColor="@color/main_color"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                         android:layout_height="match_parent">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:layout_height="match_parent">
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:layout_height="0dp">
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:orientation="vertical"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:background="@color/white"
+                                        android:layout_height="match_parent">
+                            <com.lbins.meetlove.widget.PictureGridview
+                                    android:id="@+id/gridView1"
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:horizontalSpacing="0dp"
+                                    android:gravity="center"
+                                    android:numColumns="2"
+                                    android:stretchMode="columnWidth"
+                                    android:verticalSpacing="0dip"
+                                    />
+                            <TextView android:layout_width="wrap_content"
+                                      android:text="更多"
+                                      android:layout_alignParentRight="true"
+                                      android:layout_marginRight="12dp"
+                                      android:layout_below="@+id/gridView1"
+                                      android:layout_marginBottom="6dp"
+                                      android:gravity="right"
+                                      android:layout_marginTop="6dp"
+                                      android:id="@+id/btn_one"
+                                      android:textSize="14sp"
+                                      android:textColor="@color/main_color"
+                                      android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_centerInParent="true"
+                                  android:lineSpacingMultiplier="1.4"
+                                  android:textColor="@color/text_color"
+                                  android:textSize="16sp"
+                                  android:layout_centerHorizontal="true"
+                                  android:layout_centerVertical="true"
+                                  android:visibility="gone"
+                                  android:id="@+id/no_data"
+                                  android:gravity="center_horizontal"
+                                  android:text="您好，暂时没有符合您要求的会员可以推荐\n请您点击搜索按钮浏览更多会员\n祝您早日遇到真爱，找到幸福！"
+                                  android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:background="@color/white"
+                                    >
+                        <com.lbins.meetlove.widget.PictureGridview
+                                android:id="@+id/gridView2"
+                                android:layout_centerVertical="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:horizontalSpacing="0dp"
+                                android:gravity="center"
+                                android:numColumns="2"
+                                android:stretchMode="columnWidth"
+                                android:verticalSpacing="0dip"
+                                />
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="更多"
+                                  android:layout_alignParentRight="true"
+                                  android:layout_marginRight="12dp"
+                                  android:layout_below="@+id/gridView2"
+                                  android:layout_marginBottom="6dp"
+                                  android:gravity="right"
+                                  android:id="@+id/btn_two"
+                                  android:layout_marginTop="6dp"
+                                  android:textSize="14sp"
+                                  android:textColor="@color/main_color"
+                                  android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.lbins.meetlove.widget.ReboundScrollView>
+
 </LinearLayout>

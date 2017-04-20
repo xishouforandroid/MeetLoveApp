@@ -35,6 +35,7 @@ import com.lbins.meetlove.ui.MineSettingActivity;
 import com.lbins.meetlove.ui.PhotosActivity;
 import com.lbins.meetlove.ui.RegUpdateActivity;
 import com.lbins.meetlove.util.StringUtil;
+import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.PictureGridview;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -101,6 +102,10 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         registerBoradcastReceiver();
         mShareListener = new CustomShareListener(getActivity());
         initView();
+        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         initData();
         getPhotos();
         return view;
