@@ -79,6 +79,7 @@
                                android:layout_height="18dp"/>
                     <TextView android:layout_width="wrap_content"
                               android:text="认证"
+                              android:textSize="12sp"
                               android:id="@+id/vip_2"
                               android:layout_marginRight="8dp"
                               android:textColor="@color/main_color"
@@ -90,6 +91,7 @@
                                android:layout_height="18dp"/>
                     <TextView android:layout_width="wrap_content"
                               android:text="诚信"
+                              android:textSize="12sp"
                               android:id="@+id/vip_4"
                               android:textColor="@color/main_color"
                               android:layout_height="wrap_content"/>

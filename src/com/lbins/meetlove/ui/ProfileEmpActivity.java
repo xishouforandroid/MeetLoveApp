@@ -1,5 +1,6 @@
 package com.lbins.meetlove.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -174,6 +175,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         address = (TextView) this.findViewById(R.id.address);
 
         cover.setOnClickListener(this);
+        nickname.setOnClickListener(this);
         this.findViewById(R.id.liner_photo).setOnClickListener(this);
     }
 
@@ -186,6 +188,9 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
             case R.id.cover:
             {
                 //头像
+                Intent intent = new Intent(ProfileEmpActivity.this, ProfileDetailActivity.class);
+                intent.putExtra("empid", empid);
+                startActivity(intent);
             }
                 break;
             case R.id.liner_photo:
@@ -196,6 +201,19 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 startActivity(intent);
             }
                 break;
+            case R.id.nickname:
+            {
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                        //进行身份认证了
+                    }else {
+                        showMsgDialog();
+                    }
+                }else {
+                    showMsgDialog();
+                }
+            }
+                break;
         }
     }
 
@@ -203,12 +221,46 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         //
     }
 
+    private void showMsgDialog() {
+        final Dialog picAddDialog = new Dialog(ProfileEmpActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileEmpActivity.this, MineRenzhengActivity.class);
+                startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     private void initData() {
         if(!StringUtil.isNullOrEmpty(emp.getNickname())){
-            nickname.setText(emp.getNickname());
+            if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    //进行身份认证了
+                    nickname.setText(emp.getNickname());
+                }else {
+                    nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                }
+            }else {
+                nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+            }
         }
         if(!StringUtil.isNullOrEmpty(emp.getCover())){
             imageLoader.displayImage(emp.getCover(), cover, MeetLoveApplication.txOptions, animateFirstListener);

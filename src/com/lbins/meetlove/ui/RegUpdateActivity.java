@@ -1449,7 +1449,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                                         if(likeLists != null){
                                             String str = "";
                                             for(HappyHandLike happyHandLike:likeLists){
-                                                str = str+ happyHandLike.getLikename()+",";
+                                                if(happyHandLike != null){
+                                                    str = str+ happyHandLike.getLikename()+",";
+                                                }
                                             }
                                             if(str.length()>1){
                                                 str = str.substring(0,str.length()-1);
