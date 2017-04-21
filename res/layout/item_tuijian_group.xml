@@ -5,8 +5,8 @@
               android:background="@drawable/btn_white_shape"
               android:layout_height="wrap_content">
     <com.lbins.meetlove.widget.RoundImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="6dp"
             android:src="@drawable/default_read_book"
             android:id="@+id/item_cover"/>

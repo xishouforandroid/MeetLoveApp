@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingLeft="8.0dip"
+                    style="@style/MMListItem"
+                    android:id="@+id/relate_new_friends"
+                    android:background="@drawable/btn_white_shape"
+                    android:layout_height="56.0dip">
+        <com.lbins.meetlove.widget.RoundImageView
+                android:layout_width="40.0dip"
+                android:layout_height="40.0dip"
+                android:layout_margin="3dp"
+                android:src="@drawable/icon_profile_headpic"
+                android:id="@+id/new_friends_cover"/>
+        <TextView android:layout_width="wrap_content"
+                   android:text="10"
+                   android:id="@+id/new_friends_number"
+                   android:gravity="center"
+                   android:layout_marginLeft="33dp"
+                   android:textSize="12sp"
+                   android:textColor="@color/white"
+                   android:background="@drawable/noti_bg_circle"
+                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="新的朋友"
+                  style="@style/MMFontTitleInList"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="8dp"
+                  android:id="@+id/new_friends_title"
+                  android:layout_toRightOf="@+id/new_friends_cover"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp"></View>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="8.0dip"
+            style="@style/MMListItem"
+            android:id="@+id/relate_groups"
+            android:background="@drawable/btn_white_shape"
+            android:layout_height="56.0dip">
+        <com.lbins.meetlove.widget.RoundImageView
+                android:layout_width="40.0dip"
+                android:layout_height="40.0dip"
+                android:layout_margin="3dp"
+                android:src="@drawable/icon_profile_headpic"
+                android:id="@+id/groups_cover"/>
+        <!--<TextView android:layout_width="wrap_content"-->
+                  <!--android:text="10"-->
+                  <!--android:id="@+id/groups_number"-->
+                  <!--android:gravity="center"-->
+                  <!--android:layout_marginLeft="43dp"-->
+                  <!--android:textSize="12sp"-->
+                  <!--android:textColor="@color/white"-->
+                  <!--android:background="@drawable/noti_bg_circle"-->
+                  <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="群聊"
+                  style="@style/MMFontTitleInList"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="8dp"
+                  android:id="@+id/groups_title"
+                  android:layout_toRightOf="@+id/groups_cover"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp"></View>
+</LinearLayout>

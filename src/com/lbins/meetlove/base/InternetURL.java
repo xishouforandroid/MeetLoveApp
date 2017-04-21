@@ -68,6 +68,10 @@ public class InternetURL {
     public static final String appGroupsById = INTERNAL +   "appGroupsById.do";
     //申请加好友
     public static final String appSaveFriends = INTERNAL +   "appSaveFriends.do";
+    //好友列表
+    public static final String appFriends = INTERNAL +   "appFriends.do";
+    //接受好友申请
+    public static final String appAcceptFriends = INTERNAL +   "appAcceptFriends.do";
 
 
     //传订单给服务端--生成订单

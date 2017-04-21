@@ -207,6 +207,9 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                     if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                         //进行身份认证了
+                        Intent intent = new Intent(ProfileEmpActivity.this, ProfileDetailActivity.class);
+                        intent.putExtra("empid", empid);
+                        startActivity(intent);
                     }else {
                         showMsgDialog();
                     }

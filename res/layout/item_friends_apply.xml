@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:padding="3dp"
+                android:background="@drawable/btn_white_shape"
+                android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:src="@drawable/default_cover2"
+            android:id="@+id/item_cover"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="文采"
+              android:layout_marginLeft="6dp"
+              style="@style/MMFontTitleInList"
+              android:id="@+id/nickname"
+              android:layout_toRightOf="@+id/item_cover"
+              android:layout_marginTop="6dp"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="我是文采一"
+              android:textColor="@color/textColortwo"
+              android:textSize="13sp"
+              android:layout_marginLeft="6dp"
+              android:layout_below="@+id/nickname"
+              android:id="@+id/content"
+              android:layout_toRightOf="@+id/item_cover"
+              android:layout_marginTop="4dp"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:text="接受"
+               android:id="@+id/accept"
+               android:gravity="center"
+               android:background="@drawable/btn_small_navbarbtn_enabled"
+               android:textColor="@color/white"
+               android:layout_marginRight="15dp"
+               android:layout_height="wrap_content"/>
+</RelativeLayout>
