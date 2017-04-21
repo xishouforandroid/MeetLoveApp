@@ -25,9 +25,12 @@ import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.data.EmpsData;
+import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.data.HappyHandPhotoData;
 import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.module.Friends;
 import com.lbins.meetlove.module.HappyHandPhoto;
+import com.lbins.meetlove.util.PinyinComparator;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.PictureGridview;
@@ -35,10 +38,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhl on 2016/8/30.
@@ -67,6 +67,8 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
 
     private String empid;
     private Emp emp;
+    private int isFriends = 0;//是否是好友   默认0否 1是
+    private Button btn_login;//按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,8 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         progressDialog.show();
         getEmpById();
         getPhotos();
+        //判断我和他之间的关系
+        getFriends();
     }
 
     private void getEmpById() {
@@ -178,6 +182,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         cover.setOnClickListener(this);
         nickname.setOnClickListener(this);
         this.findViewById(R.id.liner_photo).setOnClickListener(this);
+        btn_login = (Button) this.findViewById(R.id.btn_login);
     }
 
     @Override
@@ -225,7 +230,13 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
             if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                 //进行身份认证了 可以添加好友申请了
-                showFriendsDialog();
+                if(isFriends == 0){
+                    //不是好友  添加好友
+                    showFriendsDialog();
+                }else if(isFriends == 1){
+                    //已经是好友  发消息
+                    //todo
+                }
             }else {
                 showMsgDialog();
             }
@@ -495,4 +506,72 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         getRequestQueue().add(request);
     }
 
+    List<Friends> listsIS = new ArrayList<>();
+
+    private void getFriends() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appFriends,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    FriendsData data = getGson().fromJson(s, FriendsData.class);
+                                    if(data != null){
+                                        listsIS.clear();
+                                        listsIS.addAll(data.getData());
+                                        if(listsIS != null && listsIS.size()>0){
+                                            //是好友
+                                            isFriends = 1;
+                                            btn_login.setText("发消息");
+                                        }else{
+                                            isFriends = 0;
+                                            btn_login.setText("添加到通讯录");
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(ProfileEmpActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("is_check", "1");
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("empid2", empid);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 }

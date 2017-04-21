@@ -32,11 +32,9 @@ import com.lbins.meetlove.adapter.OnClickContentItemListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.EmpData;
+import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.data.HappyHandLikeData;
-import com.lbins.meetlove.module.City;
-import com.lbins.meetlove.module.Emp;
-import com.lbins.meetlove.module.HappyHandLike;
-import com.lbins.meetlove.module.Province;
+import com.lbins.meetlove.module.*;
 import com.lbins.meetlove.util.CompressPhotoUtil;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.*;
@@ -98,6 +96,9 @@ public class ProfileDetailActivity extends BaseActivity implements View.OnClickL
 
     private Resources res;
 
+    private int isFriends = 0;//是否是好友   默认0否 1是
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +112,8 @@ public class ProfileDetailActivity extends BaseActivity implements View.OnClickL
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getEmpById();
-
+        //判断我和他之间的关系
+        getFriends();
     }
 
     private void getEmpById() {
@@ -434,7 +436,13 @@ public class ProfileDetailActivity extends BaseActivity implements View.OnClickL
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                     if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                         //进行身份认证了
-                        showFriendsDialog();
+                        if(isFriends == 0){
+                            //不是好友  添加好友
+                            showFriendsDialog();
+                        }else if(isFriends == 1){
+                            //已经是好友  发消息
+                            //todo
+                        }
                     }else {
                         showMsgDialog();
                     }
@@ -672,5 +680,76 @@ public class ProfileDetailActivity extends BaseActivity implements View.OnClickL
         picAddDialog.setContentView(picAddInflate);
         picAddDialog.show();
     }
+
+
+    List<Friends> listsIS = new ArrayList<>();
+
+    private void getFriends() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appFriends,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    FriendsData data = getGson().fromJson(s, FriendsData.class);
+                                    if(data != null){
+                                        listsIS.clear();
+                                        listsIS.addAll(data.getData());
+                                        if(listsIS != null && listsIS.size()>0){
+                                            //是好友
+                                            isFriends = 1;
+                                            btn_login.setText("发消息");
+                                        }else{
+                                            isFriends = 0;
+                                            btn_login.setText("添加到通讯录");
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(ProfileDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("is_check", "1");
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("empid2", empid);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 
 }

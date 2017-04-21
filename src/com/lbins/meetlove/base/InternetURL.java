@@ -72,6 +72,12 @@ public class InternetURL {
     public static final String appFriends = INTERNAL +   "appFriends.do";
     //接受好友申请
     public static final String appAcceptFriends = INTERNAL +   "appAcceptFriends.do";
+    //提交交往申请
+    public static final String appSaveJiaowang = INTERNAL +   "appSaveJiaowang.do";
+    //查询交往对象
+    public static final String appJiaowangs = INTERNAL +   "appJiaowangs.do";
+    //处理交往请求
+    public static final String appAcceptJiaowang = INTERNAL +   "appAcceptJiaowang.do";
 
 
     //传订单给服务端--生成订单

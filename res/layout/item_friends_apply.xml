@@ -29,14 +29,11 @@
               android:layout_toRightOf="@+id/item_cover"
               android:layout_marginTop="4dp"
               android:layout_height="wrap_content"/>
-    <TextView android:layout_width="wrap_content"
+    <ImageView android:layout_width="wrap_content"
                android:layout_alignParentRight="true"
                android:layout_centerVertical="true"
-               android:text="接受"
                android:id="@+id/accept"
-               android:gravity="center"
-               android:background="@drawable/btn_small_navbarbtn_enabled"
-               android:textColor="@color/white"
+               android:src="@drawable/btn_newfirend_accept"
                android:layout_marginRight="15dp"
                android:layout_height="wrap_content"/>
 </RelativeLayout>

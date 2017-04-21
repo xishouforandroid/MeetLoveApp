@@ -61,7 +61,7 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_friends_apply, null);
             holder.item_cover = (ImageView) convertView.findViewById(R.id.item_cover);
             holder.content = (TextView) convertView.findViewById(R.id.content);
-            holder.accept = (TextView) convertView.findViewById(R.id.accept);
+            holder.accept = (ImageView) convertView.findViewById(R.id.accept);
             holder.nickname = (TextView) convertView.findViewById(R.id.nickname);
             convertView.setTag(holder);
         } else {
@@ -74,19 +74,13 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
             holder.nickname.setText(cell.getEmpid1Nickname());
             holder.content.setText(cell.getApplytitle());
             if("0".equals(cell.getIs_check())){
-                holder.accept.setText("接受");
-                holder.accept.setTextColor(res.getColor(R.color.white));
-                holder.accept.setBackground(res.getDrawable(R.drawable.btn_small_navbarbtn_enabled));
+                holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfirend_accept));
             }
             if("1".equals(cell.getIs_check())){
-                holder.accept.setText("已添加");
-                holder.accept.setBackgroundColor(res.getColor(R.color.white));
-                holder.accept.setTextColor(res.getColor(R.color.textColortwo));
+                holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfriend_alreadyis));
             }
             if("2".equals(cell.getIs_check())){
-                holder.accept.setText("已拒绝");
-                holder.accept.setBackgroundColor(res.getColor(R.color.white));
-                holder.accept.setTextColor(res.getColor(R.color.textColortwo));
+                holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfriend_refused));
             }
             holder.accept.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,7 +95,7 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView item_cover;
         TextView content;
-        TextView accept;
+        ImageView accept;
         TextView nickname;
     }
 }

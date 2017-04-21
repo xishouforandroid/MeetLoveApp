@@ -15,7 +15,7 @@
                 android:layout_width="40.0dip"
                 android:layout_height="40.0dip"
                 android:layout_margin="3dp"
-                android:src="@drawable/icon_profile_headpic"
+                android:src="@drawable/headpic_newfriend"
                 android:id="@+id/new_friends_cover"/>
         <TextView android:layout_width="wrap_content"
                    android:text="10"
@@ -50,7 +50,7 @@
                 android:layout_width="40.0dip"
                 android:layout_height="40.0dip"
                 android:layout_margin="3dp"
-                android:src="@drawable/icon_profile_headpic"
+                android:src="@drawable/headpic_groupchat"
                 android:id="@+id/groups_cover"/>
         <!--<TextView android:layout_width="wrap_content"-->
                   <!--android:text="10"-->

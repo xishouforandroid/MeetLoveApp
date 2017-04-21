@@ -115,11 +115,15 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(friendses.size() > position){
-//                    Intent intent = new Intent(getActivity(), ProfileEmpActivity.class);
-//                    EmpRelateObj empRelateObj = nicks.get(position);
-//                    intent.putExtra("mm_emp_id",empRelateObj.getMm_emp_id2());
-//                    startActivity(intent);
+                if(position > 0){
+                    if(friendses.size() > (position-1)){
+                        Friends friends = friendses.get((position-1));
+                        if(friends != null){
+                            Intent intent = new Intent(getActivity(), ProfileEmpActivity.class);
+                            intent.putExtra("empid", friends.getEmpid2());
+                            startActivity(intent);
+                        }
+                    }
                 }
             }
         });

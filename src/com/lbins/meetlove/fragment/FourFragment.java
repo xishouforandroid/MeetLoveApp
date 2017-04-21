@@ -1,5 +1,6 @@
 package com.lbins.meetlove.fragment;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,10 +31,7 @@ import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.HappyHandPhotoData;
 import com.lbins.meetlove.module.HappyHandPhoto;
-import com.lbins.meetlove.ui.MineRenzhengActivity;
-import com.lbins.meetlove.ui.MineSettingActivity;
-import com.lbins.meetlove.ui.PhotosActivity;
-import com.lbins.meetlove.ui.RegUpdateActivity;
+import com.lbins.meetlove.ui.*;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.PictureGridview;
@@ -216,6 +214,14 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         cover.setOnClickListener(this);
         sign.setOnClickListener(this);
         btn_right.setOnClickListener(this);
+
+        if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+            jwdx_txt.setText("选择交往对象");
+        }
+
+        if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+            jwdx_txt.setText("交往对象资料");
+        }
     }
 
 
@@ -237,7 +243,22 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             break;
             case R.id.liner_friends:
             {
-                //对象
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+
+                        if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                            Intent intent  = new Intent(getActivity(), SelectJwdxActivity.class);
+                            startActivity(intent);
+                        }
+                        if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                            //todo
+                        }
+                    }else {
+                        showMsgDialog();
+                    }
+                }else {
+                    showMsgDialog();
+                }
             }
             break;
             case R.id.liner_rz:
@@ -292,6 +313,31 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             }
                 break;
         }
+    }
+
+    private void showMsgDialog() {
+        final Dialog picAddDialog = new Dialog(getActivity(), R.style.dialog);
+        View picAddInflate = View.inflate(getActivity(), R.layout.msg_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MineRenzhengActivity.class);
+                startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     private static class CustomShareListener implements UMShareListener {

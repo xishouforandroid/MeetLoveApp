@@ -142,6 +142,7 @@
         <activity android:name=".ui.ProfileDetailActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.MineMsgActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.FriendsApplyActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.SelectJwdxActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
         <meta-data
