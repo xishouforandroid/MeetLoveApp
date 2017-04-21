@@ -1,5 +1,6 @@
 package com.lbins.meetlove.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -54,6 +55,8 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
             case R.id.relate_four:
             {
                 //交往消息
+                Intent intent = new Intent(MineMsgActivity.this, JwdxApplyActivity.class);
+                startActivity(intent);
             }
                 break;
         }

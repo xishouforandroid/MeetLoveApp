@@ -13,6 +13,44 @@ public class HappyHandJw {
     private String is_check;
     private String is_use;
 
+    private String empid1Cover;
+    private String empid1Nickname;
+    private String empid2Cover;
+    private String empid2Nickname;
+
+
+    public String getEmpid1Cover() {
+        return empid1Cover;
+    }
+
+    public void setEmpid1Cover(String empid1Cover) {
+        this.empid1Cover = empid1Cover;
+    }
+
+    public String getEmpid1Nickname() {
+        return empid1Nickname;
+    }
+
+    public void setEmpid1Nickname(String empid1Nickname) {
+        this.empid1Nickname = empid1Nickname;
+    }
+
+    public String getEmpid2Cover() {
+        return empid2Cover;
+    }
+
+    public void setEmpid2Cover(String empid2Cover) {
+        this.empid2Cover = empid2Cover;
+    }
+
+    public String getEmpid2Nickname() {
+        return empid2Nickname;
+    }
+
+    public void setEmpid2Nickname(String empid2Nickname) {
+        this.empid2Nickname = empid2Nickname;
+    }
+
     public String getJwid() {
         return jwid;
     }

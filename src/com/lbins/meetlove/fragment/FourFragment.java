@@ -29,7 +29,9 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemPicAdapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.data.HappyHandJwDatas;
 import com.lbins.meetlove.data.HappyHandPhotoData;
+import com.lbins.meetlove.module.HappyHandJw;
 import com.lbins.meetlove.module.HappyHandPhoto;
 import com.lbins.meetlove.ui.*;
 import com.lbins.meetlove.util.StringUtil;
@@ -251,7 +253,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                             startActivity(intent);
                         }
                         if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
-                            //todo
+                            getJwdx();
                         }
                     }else {
                         showMsgDialog();
@@ -484,6 +486,69 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         getRequestQueue().add(request);
     }
 
+    List<HappyHandJw> listjwdxs = new ArrayList<>();
+    private void getJwdx() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appJiaowangs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandJwDatas data = getGson().fromJson(s, HappyHandJwDatas.class);
+                                    listjwdxs.clear();
+                                    listjwdxs.addAll(data.getData());
+                                    if(listjwdxs != null && listjwdxs.size()>0){
+                                        HappyHandJw happyHandJw = listjwdxs.get(0);
+                                        Intent intent = new Intent(getActivity(), ProfileDetailActivity.class);
+                                        intent.putExtra("empid", happyHandJw.getEmpid2());
+                                        startActivity(intent);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("is_check", "1");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -495,6 +560,25 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             if (action.equals("update_photo_success")) {
                 getPhotos();
             }
+            if (action.equals("update_jwdx_success")) {
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //单身
+                        is_state.setText("单身");
+                    }
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //交往中
+                        is_state.setText("交往中");
+                    }
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("选择交往对象");
+                    }
+
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("交往对象资料");
+                    }
+                }
+            }
         }
     };
 
@@ -503,6 +587,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("rzstate1_success");
         myIntentFilter.addAction("update_photo_success");
+        myIntentFilter.addAction("update_jwdx_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

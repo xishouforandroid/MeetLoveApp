@@ -78,6 +78,10 @@ public class InternetURL {
     public static final String appJiaowangs = INTERNAL +   "appJiaowangs.do";
     //处理交往请求
     public static final String appAcceptJiaowang = INTERNAL +   "appAcceptJiaowang.do";
+    //取消邀请
+    public static final String appDeleteJiaowang = INTERNAL +   "appDeleteJiaowang.do";
+
+
 
 
     //传订单给服务端--生成订单
