@@ -122,6 +122,7 @@
     <file url="file://$PROJECT_DIR$/res/layout/item_jwdx_apply.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_like.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_message.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/item_mine_notices.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_photo.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_rzxf.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_suggest.xml" charset="UTF-8" />
@@ -172,6 +173,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemJwdxApplyAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemLikesAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemMessageAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemNoticesAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemPhotosAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemPicAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemTuijianGroupAdapter.java" charset="UTF-8" />

@@ -50,6 +50,8 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
             case R.id.relate_three:
             {
                 //活动公告
+                Intent intent = new Intent(MineMsgActivity.this, NoticesActivity.class);
+                startActivity(intent);
             }
                 break;
             case R.id.relate_four:

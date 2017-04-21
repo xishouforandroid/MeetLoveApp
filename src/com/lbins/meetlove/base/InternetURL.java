@@ -80,6 +80,10 @@ public class InternetURL {
     public static final String appAcceptJiaowang = INTERNAL +   "appAcceptJiaowang.do";
     //取消邀请
     public static final String appDeleteJiaowang = INTERNAL +   "appDeleteJiaowang.do";
+    //活动公告
+    public static final String appNotices = INTERNAL +   "appNotices.do";
+    //公告详情
+    public static final String appNoticeById = INTERNAL +   "appNoticeById.do";
 
 
 
