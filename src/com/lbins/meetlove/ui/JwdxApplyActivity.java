@@ -64,7 +64,7 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
         this.findViewById(R.id.back).setOnClickListener(this);
         this.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) this.findViewById(R.id.title);
-        title.setText("新的朋友");
+        title.setText("交往消息");
 
         lstv = (PullToRefreshListView) this.findViewById(R.id.lstv);
         adapter = new ItemJwdxApplyAdapter(lists, JwdxApplyActivity.this);

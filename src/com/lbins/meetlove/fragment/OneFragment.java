@@ -215,6 +215,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
                 params.put("state", "1");
                 params.put("size", "1");
                 return params;

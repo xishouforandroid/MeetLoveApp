@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.baidu.android.pushservice.PushMessageReceiver;
 import com.google.gson.Gson;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.ui.FriendsApplyActivity;
 import com.lbins.meetlove.ui.MineMsgActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -197,21 +198,18 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
         try {
             Intent intent = new Intent();
             JSONObject custom = new JSONObject(customContent);
-//            int type = custom.getInt("msgtypeid");
-//            switch (type) {
-//                case 1://公告
-//                    //改变底部图标
-////                    Intent msg_notice = new Intent("_msg_notice");
-////                    context.sendBroadcast(msg_notice);
-////                    intent.setClass(context.getApplicationContext(), NoticeActivity.class);
-//                    break;
-//                case 2://与我相关
-////                    Intent msg_record = new Intent("_msg_record");
-////                    context.sendBroadcast(msg_record);
-////                    intent.setClass(context.getApplicationContext(), AndMeAcitvity.class);
-//                    break;
-//            }
-            intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+            int type = custom.getInt("msgtypeid");
+            switch (type) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                    break;
+                case 5:
+                    intent.setClass(context.getApplicationContext(), FriendsApplyActivity.class);
+                    break;
+            }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.getApplicationContext().startActivity(intent);
         } catch (JSONException e) {

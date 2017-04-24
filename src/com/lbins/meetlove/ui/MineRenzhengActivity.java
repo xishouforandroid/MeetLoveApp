@@ -164,8 +164,14 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.idcard:
             {
-                //点击身份证上传
-                showDialogPhoto();
+                //身份认证
+                if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    //身份认证了
+                    showMsg(MineRenzhengActivity.this , "身份已认证!");
+                }else {
+                    //未认证
+                    showDialogPhoto();
+                }
             }
                 break;
             case R.id.btn_1:
