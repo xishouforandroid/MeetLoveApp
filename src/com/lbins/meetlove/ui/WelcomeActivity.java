@@ -9,8 +9,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.baidu.Utils;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.EmpData;
@@ -145,6 +148,10 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
 
 
     public void saveAccount(final Emp emp) {
+        PushManager.startWork(getApplicationContext(),
+                PushConstants.LOGIN_TYPE_API_KEY,
+               Utils.getMetaValue(WelcomeActivity.this, "api_key"));
+
         save("empid", emp.getEmpid());
         save("mobile", emp.getMobile());
         save("nickname", emp.getNickname());

@@ -164,6 +164,7 @@ public class NewsActivity extends BaseActivity implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("page", String.valueOf(pageIndex));
                 return params;
             }
 

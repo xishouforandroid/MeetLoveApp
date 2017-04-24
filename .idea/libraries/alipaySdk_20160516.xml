@@ -17,7 +17,6 @@
       <root url="jar://$PROJECT_DIR$/libs/mta-sdk-1.6.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/parse-android-1.13.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/pinyin4j-2.5.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/pushservice-5.1.0.48.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/qiniu-android-sdk-7.0.7.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/SocialSDK_alipay.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/SocialSDK_QQ_Simplify.jar!/" />
@@ -39,6 +38,7 @@
       <root url="jar://$PROJECT_DIR$/libs/httpclient-cache-4.2.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/httpcore-4.3.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/happy-dns-0.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/pushservice-5.6.0.30.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

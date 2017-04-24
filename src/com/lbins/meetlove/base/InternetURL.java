@@ -92,7 +92,8 @@ public class InternetURL {
     public static final String appMessages = INTERNAL +   "appMessages.do";
     //系统消息详情
     public static final String appMessagesById = INTERNAL +   "appMessagesById.do";
-
+    //百度推送
+    public static final String UPDATE_PUSH_ID = INTERNAL + "updatePushId.do";
 
 
 
