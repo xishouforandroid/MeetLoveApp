@@ -15,16 +15,16 @@
             android:id="@+id/relate_one"
             android:background="@drawable/btn_white_shape"
             android:layout_height="wrap_content">
-        <com.lbins.meetlove.widget.RoundImageView
+        <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:src="@drawable/logo_bordered_256w"
                 android:id="@+id/one_cover"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="10"
                   android:id="@+id/one_number"
                   android:gravity="center"
+                  android:visibility="gone"
                   android:layout_marginLeft="43dp"
                   android:textSize="12sp"
                   android:textColor="@color/white"
@@ -68,18 +68,18 @@
             android:id="@+id/relate_two"
             android:background="@drawable/btn_white_shape"
             android:layout_height="wrap_content">
-        <com.lbins.meetlove.widget.RoundImageView
+        <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:src="@drawable/logo_bordered_256w"
                 android:id="@+id/two_cover"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="10"
                   android:id="@+id/two_number"
                   android:gravity="center"
                   android:layout_marginLeft="43dp"
                   android:textSize="12sp"
+                  android:visibility="gone"
                   android:textColor="@color/white"
                   android:background="@drawable/noti_bg_circle"
                   android:layout_height="wrap_content"/>
@@ -121,16 +121,16 @@
             android:id="@+id/relate_three"
             android:background="@drawable/btn_white_shape"
             android:layout_height="wrap_content">
-        <com.lbins.meetlove.widget.RoundImageView
+        <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:src="@drawable/logo_bordered_256w"
                 android:id="@+id/three_cover"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="10"
                   android:id="@+id/three_number"
                   android:gravity="center"
+                  android:visibility="gone"
                   android:layout_marginLeft="43dp"
                   android:textSize="12sp"
                   android:textColor="@color/white"
@@ -174,18 +174,18 @@
             android:id="@+id/relate_four"
             android:background="@drawable/btn_white_shape"
             android:layout_height="wrap_content">
-        <com.lbins.meetlove.widget.RoundImageView
+        <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:src="@drawable/logo_bordered_256w"
                 android:id="@+id/four_cover"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="10"
                   android:id="@+id/four_number"
                   android:gravity="center"
                   android:layout_marginLeft="43dp"
                   android:textSize="12sp"
+                  android:visibility="gone"
                   android:textColor="@color/white"
                   android:background="@drawable/noti_bg_circle"
                   android:layout_height="wrap_content"/>

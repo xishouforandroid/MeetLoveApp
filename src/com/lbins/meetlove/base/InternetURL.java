@@ -94,6 +94,8 @@ public class InternetURL {
     public static final String appMessagesById = INTERNAL +   "appMessagesById.do";
     //百度推送
     public static final String UPDATE_PUSH_ID = INTERNAL + "updatePushId.do";
+    //系统通知列表
+    public static final String appMsgAllList = INTERNAL + "appMsgAllList.do";
 
 
 

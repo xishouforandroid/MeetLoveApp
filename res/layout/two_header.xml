@@ -11,7 +11,7 @@
                     android:id="@+id/relate_notice"
                     android:background="@drawable/btn_white_shape"
                     android:layout_height="56.0dip">
-        <com.lbins.meetlove.widget.RoundImageView
+        <ImageView
                 android:layout_width="40.0dip"
                 android:layout_height="40.0dip"
                 android:layout_margin="3dp"
