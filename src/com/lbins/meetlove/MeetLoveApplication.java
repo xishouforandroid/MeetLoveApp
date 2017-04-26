@@ -9,6 +9,7 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.lbins.meetlove.base.InternetURL;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -70,7 +71,7 @@ public class MeetLoveApplication extends Application {
         imageLoader = new com.android.volley.toolbox.ImageLoader(requestQueue, new BitmapCache());
         initImageLoader(this);
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+        PlatformConfig.setWeixin(InternetURL.WEIXIN_APPID, InternetURL.WEIXIN_SECRET);
         //新浪微博
         PlatformConfig.setSinaWeibo("3095745864", "b11052a28d07d9affc1f1c8ff3548e77");
         PlatformConfig.setQQZone("1106107422", "4YJXM74wpHS0vSQK");
