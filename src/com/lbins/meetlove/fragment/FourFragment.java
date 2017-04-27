@@ -579,6 +579,16 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                     }
                 }
             }
+
+            if (action.equals("rzstate2_success")) {
+                //会员认证了
+                vip_1.setImageDrawable(res.getDrawable(R.drawable.icon_verify_id_enabled));
+            }
+            if (action.equals("rzstate3_success")) {
+                //诚信认证了
+                vip_3.setImageDrawable(res.getDrawable(R.drawable.icon_verify_honesty_enabled));
+                vip_4.setTextColor(res.getColor(R.color.main_color));
+            }
         }
     };
 
@@ -586,6 +596,8 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("rzstate1_success");
+        myIntentFilter.addAction("rzstate2_success");
+        myIntentFilter.addAction("rzstate3_success");
         myIntentFilter.addAction("update_photo_success");
         myIntentFilter.addAction("update_jwdx_success");
         //注册广播

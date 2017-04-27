@@ -58,6 +58,8 @@ public class MeetLoveApplication extends Application {
     public static String currentCover = "";
     public static String currentName = "";
 
+    public static String is_dxk_order = "";
+
     @Override
     public void onCreate() {
         super.onCreate();

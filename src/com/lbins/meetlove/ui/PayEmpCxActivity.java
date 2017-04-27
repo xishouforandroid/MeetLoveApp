@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
@@ -109,7 +110,7 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
         //微信支付
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
-        
+        MeetLoveApplication.is_dxk_order = "1";
         initView();
     }
 
@@ -140,7 +141,7 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
                 selectPayWay = 0;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
-                order.setPayable_amount("1000");
+                order.setPayable_amount("0.02");
                 order.setTrade_type("1");//0支付宝  1微信
                 order.setOrder_cont("幸福牵手吧诚信保证金，微信支付");
                 order.setIs_dxk_order("1");//0认证服务费  1诚信保证金
@@ -156,7 +157,7 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
                 selectPayWay = 1;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
-                order.setPayable_amount("1000");
+                order.setPayable_amount("0.02");
                 order.setTrade_type("0");//0支付宝  1微信
                 order.setOrder_cont("幸福牵手吧诚信保证金，支付宝支付");
                 order.setIs_dxk_order("1");//0认证服务费  1诚信保证金

@@ -1,7 +1,10 @@
 package com.lbins.meetlove.ui;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -80,6 +83,7 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.renzheng_activity);
+        registerBoradcastReceiver();
         res = getResources();
         initView();
     }
@@ -475,4 +479,40 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
         getRequestQueue().add(request);
     }
 
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("rzstate2_success")) {
+                //会员认证了
+                btn_2.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+                btn_2.setTextColor(res.getColor(R.color.textColortwo));
+                btn_2.setText("会员已认证");
+            }
+            if (action.equals("rzstate3_success")) {
+                //诚信认证了
+                btn_3.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+                btn_3.setTextColor(res.getColor(R.color.textColortwo));
+                btn_3.setText("诚信已认证");
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("rzstate2_success");
+        myIntentFilter.addAction("rzstate3_success");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 }

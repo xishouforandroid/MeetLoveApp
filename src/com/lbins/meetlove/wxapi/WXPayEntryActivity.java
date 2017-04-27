@@ -4,8 +4,10 @@ package com.lbins.meetlove.wxapi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.base.InternetURL;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
@@ -24,7 +26,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
         
-    	api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+    	api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID);
         api.handleIntent(getIntent(), this);
     }
 
@@ -43,31 +45,28 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 	public void onResp(BaseResp resp) {
 		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//			builder.setTitle(R.string.app_tip);
-//			builder.setMessage(getString(R.string.pay_result_callback_msg, resp.errStr +";code=" + String.valueOf(resp.errCode)));
-//			builder.show();
 			Log.d(TAG, "resp.errStr +\";code=\" + String.valueOf(resp.errCode)) = " + resp.errStr + ";code=" + String.valueOf(resp.errCode));
 			if(resp.errCode == 0){
-				//说明支付成功
+				if(MeetLoveApplication.is_dxk_order.equals("0")){
+					save("rzstate2", "1");
+					Intent intent1 = new Intent("rzstate2_success");
+					sendBroadcast(intent1);
+				}else if(MeetLoveApplication.is_dxk_order.equals("1")){
+					save("rzstate3", "1");
+					Intent intent1 = new Intent("rzstate3_success");
+					sendBroadcast(intent1);
+				}
 				showMsg(WXPayEntryActivity.this, "支付成功");
-				//调用逻辑处理
-				Intent intent1 = new Intent("pay_wx_success");
-				sendBroadcast(intent1);
+				finish();
+
 //				ActivityTack.getInstanse().popUntilActivity(OrderMakeActivity.class);
 			}else {
 				//支付失败
 				showMsg(WXPayEntryActivity.this, "支付失败");
+				finish();
 //				ActivityTack.getInstanse().popUntilActivity(OrderMakeActivity.class);
 			}
 		}
-
-//		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//			builder.setTitle(R.string.app_tip);
-//			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-//			builder.show();
-//		}
 	}
 
 }

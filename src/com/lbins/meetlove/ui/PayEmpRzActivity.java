@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
@@ -111,7 +112,7 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         //微信支付
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
-
+        MeetLoveApplication.is_dxk_order = "0";
         initView();
     }
 
@@ -142,7 +143,7 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
                 selectPayWay = 0;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
-                order.setPayable_amount("120");
+                order.setPayable_amount("0.01");
                 order.setTrade_type("1");//0支付宝  1微信
                 order.setOrder_cont("幸福牵手吧会员认证服务费，微信支付");
                 order.setIs_dxk_order("0");//0认证服务费  1诚信保证金
@@ -158,7 +159,7 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
                 selectPayWay = 1;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
-                order.setPayable_amount("120");
+                order.setPayable_amount("0.01");
                 order.setTrade_type("0");//0支付宝  1微信
                 order.setOrder_cont("幸福牵手吧会员认证服务费，支付宝支付");
                 order.setIs_dxk_order("0");//0认证服务费  1诚信保证金
@@ -343,6 +344,7 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         };
         getRequestQueue().add(request);
     }
+
     public Map<String,String> decodeXml(String content) {
         try {
             Map<String, String> xml = new HashMap<String, String>();
