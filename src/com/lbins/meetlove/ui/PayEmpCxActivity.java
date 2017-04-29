@@ -1,5 +1,6 @@
 package com.lbins.meetlove.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -61,27 +62,23 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
-//                    PayResult payResult = new PayResult((String) msg.obj);
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-                    // 支付宝返回此次支付结果及加签，建议对支付宝签名信息拿签约时支付宝提供的公钥做验签
                     String resultInfo = payResult.getResult();
                     String resultStatus = payResult.getResultStatus();
-                    // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(PayEmpCxActivity.this, "支付成功！", Toast.LENGTH_SHORT).show();
+                        save("rzstate3", "1");
+                        Intent intent1 = new Intent("rzstate3_success");
+                        sendBroadcast(intent1);
                         finish();
                     } else {
-                        // 判断resultStatus 为非“9000”则代表可能支付失败
-                        // “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
                         if (TextUtils.equals(resultStatus, "8000")) {
                             Toast.makeText(PayEmpCxActivity.this, "支付结果确认中",
                                     Toast.LENGTH_SHORT).show();
-
                         } else {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             Toast.makeText(PayEmpCxActivity.this, "支付失败",
                                     Toast.LENGTH_SHORT).show();
-
                         }
                     }
                     break;
@@ -107,8 +104,6 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_emp_cx_activity);
-        //微信支付
-        // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
         MeetLoveApplication.is_dxk_order = "1";
         initView();
@@ -236,23 +231,15 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * call alipay sdk pay. 调用SDK支付
-     *
      */
     public void pay(final OrderInfoAndSign orderInfoAndSign) {
-
-        // 完整的符合支付宝参数规范的订单信息
-        final String payInfo = orderInfoAndSign.getOrderInfo() + "&sign=\"" + orderInfoAndSign.getSign() + "\"&"
-                + getSignType();
-
         Runnable payRunnable = new Runnable() {
 
             @Override
             public void run() {
-//                // 构造PayTask 对象
                 PayTask alipay = new PayTask(PayEmpCxActivity.this);
-                Map<String, String> result = alipay.payV2(payInfo, true);
+                Map<String, String> result = alipay.payV2(orderInfoAndSign.getOrderInfo(), true);
                 Log.i("msp", result.toString());
-
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -264,16 +251,6 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
-
-
-    /**
-     * get the sign type we use. 获取签名方式
-     *
-     */
-    public String getSignType() {
-        return "sign_type=\"RSA\"";
-    }
-
 
     //----------------微信---------------
     public void goToPayWeixin(final Order order){

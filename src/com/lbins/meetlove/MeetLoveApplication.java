@@ -77,7 +77,7 @@ public class MeetLoveApplication extends Application {
         //新浪微博
         PlatformConfig.setSinaWeibo("3095745864", "b11052a28d07d9affc1f1c8ff3548e77");
         PlatformConfig.setQQZone("1106107422", "4YJXM74wpHS0vSQK");
-        PlatformConfig.setAlipay("2015111700822536");
+        PlatformConfig.setAlipay("2017041706780367");
     }
 
     @Override

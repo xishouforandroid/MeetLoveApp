@@ -1,5 +1,6 @@
 package com.lbins.meetlove.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -63,7 +64,6 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
-//                    PayResult payResult = new PayResult((String) msg.obj);
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                     // 支付宝返回此次支付结果及加签，建议对支付宝签名信息拿签约时支付宝提供的公钥做验签
                     String resultInfo = payResult.getResult();
@@ -71,6 +71,9 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(PayEmpRzActivity.this, "支付成功！", Toast.LENGTH_SHORT).show();
+                        save("rzstate2", "1");
+                        Intent intent1 = new Intent("rzstate2_success");
+                        sendBroadcast(intent1);
                         finish();
                     } else {
                         // 判断resultStatus 为非“9000”则代表可能支付失败
@@ -241,20 +244,13 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
      *
      */
     public void pay(final OrderInfoAndSign orderInfoAndSign) {
-
-        // 完整的符合支付宝参数规范的订单信息
-        final String payInfo = orderInfoAndSign.getOrderInfo() + "&sign=\"" + orderInfoAndSign.getSign() + "\"&"
-                + getSignType();
-
         Runnable payRunnable = new Runnable() {
 
             @Override
             public void run() {
-//                // 构造PayTask 对象
                 PayTask alipay = new PayTask(PayEmpRzActivity.this);
-                Map<String, String> result = alipay.payV2(payInfo, true);
+                Map<String, String> result = alipay.payV2(orderInfoAndSign.getOrderInfo(), true);
                 Log.i("msp", result.toString());
-
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -267,14 +263,6 @@ public class PayEmpRzActivity extends BaseActivity implements View.OnClickListen
         payThread.start();
     }
 
-
-    /**
-     * get the sign type we use. 获取签名方式
-     *
-     */
-    public String getSignType() {
-        return "sign_type=\"RSA\"";
-    }
 
     //----------------微信---------------
     public void goToPayWeixin(final Order order){
