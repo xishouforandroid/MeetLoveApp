@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.lbins.meetlove.MainActivity;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.baidu.Utils;
@@ -266,84 +270,42 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
 
-        Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
-                        startActivity(intent);
-        finish();
-        //登录成功，绑定百度云推送
-//        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
-            //进行绑定
-//            PushManager.startWork(getApplicationContext(),
-//                    PushConstants.LOGIN_TYPE_API_KEY,
-//                    Utils.getMetaValue(LoginActivity.this, "api_key"));
-//        } else {
-////            如果已经绑定，就保存
-//            save("userId", emp.getUserId());
-//        }
 
-        // 登陆成功，保存用户名密码
-//        save("mm_emp_id", emp.getMm_emp_id());
+        EMClient.getInstance().login(emp.getEmpid(), "123456", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                // ** manually load all local groups and conversation
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
 
-//        MeetLoveApplication.currentCover = emp.getMm_emp_cover();
-//        MeetLoveApplication.currentName = emp.getMm_emp_nickname();
-//
-//        Emp emp1 = DBHelper.getInstance(LoginActivity.this).getEmpByEmpId(emp.getMm_emp_id());
-//        if(emp1 != null){
-//            //说明存在这个用户了
-//        }else{
-//            //不存在该用户 可以保存到数据库
-//            DBHelper.getInstance(LoginActivity.this).saveEmp(emp);
-//        }
-//
-//        // close it before login to make sure DemoDB not overlap
-//        DemoDBManager.getInstance().closeDB();
-//
-//        // reset current user name before login
-//        DemoHelper.getInstance().setCurrentUserName(emp.getHxusername());
-//        final long start = System.currentTimeMillis();
-//        // call login method
-//        EMClient.getInstance().login(emp.getHxusername(), "111111", new EMCallBack() {
-//
-//            @Override
-//            public void onSuccess() {
-//
-//                // ** manually load all local groups and conversation
-//                EMClient.getInstance().groupManager().loadAllGroups();
-//                EMClient.getInstance().chatManager().loadAllConversations();
-//
-//                // update current user's display name for APNs
-//                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(emp.getMm_emp_nickname());
-//                if (!updatenick) {
-////                    Log.e("LoginActivity", "update current user nick fail");
-//                }
-//
-//                // get user's info (this should be get from App's server or 3rd party service)
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+                        MeetLoveApplication.currentUserNick.trim());
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+                // get user's info (this should be get from App's server or 3rd party service)
 //                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-//
-//                Intent intent = new Intent(LoginActivity.this,
-//                        MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//
-//            @Override
-//            public void onProgress(int progress, String status) {
-//            }
-//
-//            @Override
-//            public void onError(final int code, final String message) {
-//                runOnUiThread(new Runnable() {
-//                    public void run() {
-////                        Toast.makeText(getApplicationContext(), getString(R.string.Login_failed) + message,
-////                                Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(LoginActivity.this,
-//                                MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                });
-//            }
-//        });
+
+                Intent intent = new Intent(LoginActivity.this,
+                        MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                showMsg(LoginActivity.this, "聊天系统登录失败，请稍后再试！");
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+
+
     }
 
     private TextWatcher watcher = new TextWatcher() {

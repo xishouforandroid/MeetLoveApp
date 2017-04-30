@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.google.gson.Gson;
+import com.hyphenate.easeui.ui.EaseBaseActivity;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.widget.CustomProgressDialog;
@@ -23,7 +24,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  */
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends EaseBaseActivity {
     private static final int notifiId = 11;
     protected NotificationManager notificationManager;
     /**

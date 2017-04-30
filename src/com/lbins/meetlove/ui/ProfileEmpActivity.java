@@ -23,6 +23,8 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemPicAdapter;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.chat.Constant;
+import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.data.EmpsData;
 import com.lbins.meetlove.data.FriendsData;
@@ -235,7 +237,12 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                     showFriendsDialog();
                 }else if(isFriends == 1){
                     //已经是好友  发消息
-                    //todo
+                    Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
+                    intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                    // it's single chat
+                    intent.putExtra(Constant.EXTRA_USER_ID, empid);
+                    intent.putExtra(Constant.EXTRA_USER_NICKNAME, emp.getNickname());
+                    startActivity(intent);
                 }
             }else {
                 showMsgDialog();

@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.ActivityTack;
 import com.lbins.meetlove.base.BaseActivity;
@@ -168,8 +170,25 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
             quitePopWindow.dismiss();
             switch (v.getId()) {
                 case R.id.btn_quite: {
-                    save("password", "");
-                    ActivityTack.getInstanse().popUntilActivity(LoginActivity.class);
+                    EMClient.getInstance().logout(false, new EMCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            save("password", "");
+                            ActivityTack.getInstanse().popUntilActivity(LoginActivity.class);
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(int i, String s) {
+                            showMsg(MineSettingActivity.this ,"退出程序失败！");
+                        }
+
+                        @Override
+                        public void onProgress(int i, String s) {
+
+                        }
+                    });
+
                 }
                 break;
                 default:

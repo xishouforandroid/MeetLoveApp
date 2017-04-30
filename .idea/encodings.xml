@@ -16,13 +16,11 @@
     <file url="file://$PROJECT_DIR$/libs/armeabi" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/armeabi-v7a" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/bolts-tasks-1.4.0.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/glide-3.6.1.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/greendao-1.3.0-beta-1.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/gson-2.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/happy-dns-0.2.5.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpcore-4.3.2.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpmime-4.3.5.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/hyphenatechat_3.2.1.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/libammsdk.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/libapshare.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/locSDK_6.13.jar" charset="UTF-8" />
@@ -54,9 +52,112 @@
     <file url="file://$PROJECT_DIR$/res/anim/slide_out_to_left.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/slide_out_to_right.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/slide_out_to_top.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/color/em_main_botton_text_color.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_actionbar_camera_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_add.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_add_public_group.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_app_pref_bg.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_btn_style_alert_dialog_background.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_camera_switch_normal.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_camera_switch_pressed.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_contact_list_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_contact_list_selected.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_conversation_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_conversation_selected.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_create_group.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_default_avatar.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_dx_checkbox_gray_on.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_dx_checkbox_off.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_dx_checkbox_on.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_empty_photo.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_groups_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_ic_right_arrow.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_icon_account.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_icon_pwd.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_login_error_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_logo_uidemo.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_mm_title_act_btn_normal.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_mm_title_act_btn_pressed.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_mm_title_back.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_msg_state_fail_resend.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_new_friends_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_profile_headphoto_update_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_roominfo_add_btn_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_roominfo_add_btn_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_seabar_input.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_search_bar_icon_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_settings_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_settings_selected.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_show_head_toast_bg.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_smiley_add_btn_nor.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_smiley_add_btn_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_smiley_minus_btn_nor.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_smiley_minus_btn_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_to_group_details_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_unread_count_bg.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_video_recorder_start_btn.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/em_video_recorder_stop_btn.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_002.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_002_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_007.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_007_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_010.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_010_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_012.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_012_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_013.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_013_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_018.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_018_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_019.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_019_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_020.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_020_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_021.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_021_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_022.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_022_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_024.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_024_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_027.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_027_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_029.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_029_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_030.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_030_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_035.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_035_cover.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_040.gif" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-hdpi/icon_040_cover.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-hdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-ldpi/launcher.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-mdpi/em_unread_count_bg.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-mdpi/launcher.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_add_public_group.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_file_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_file_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_video_call_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_video_call_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_video_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_video_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_voice_call_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_chat_voice_call_pressed.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_create_group.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_group_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_groups_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_icon_mute_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_icon_mute_on.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_icon_speaker_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_icon_speaker_on.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_logo_uidemo.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_new_friends_icon.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_settings_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_settings_selected.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_splash.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_splash_logo.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_to_group_details_normal.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_count_bg.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_dot.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_one.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_two.jpg" charset="UTF-8" />
@@ -86,6 +187,44 @@
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/checkbox_checked_style.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/custom_progress_bar.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_appitem_del_btn.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_bottom_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_gray_normal_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_gray_pressed_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_gray_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_green_normal_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_green_pressed_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_green_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_logout_normal_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_logout_pressed_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_btn_style_alert_dialog_special.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_login_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_myprofile_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_normal_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_register_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_button_selector_shape.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_call_answer_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_call_hangup_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_camera_switch_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_chat_error_item_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_chat_file_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_chat_video_call_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_chat_video_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_chat_voice_call_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_checkbox_bg_gray_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_checkbox_bg_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_context_menu_item_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_main_bottom_item_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_mm_title_act_btn.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_nickename_input_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_photogrid_list_selector.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_roominfo_add_btn.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_smiley_add_btn.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_smiley_minus_btn.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_tab_chat_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_tab_contact_list_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/em_tab_setting_bg.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/indicator_bg_bottom.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/indicator_bg_top.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/mm_listitem.xml" charset="UTF-8" />
@@ -114,10 +253,66 @@
     <file url="file://$PROJECT_DIR$/res/layout-sw550dp-large" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/activity_album.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/activity_album_chance.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/activity_offline_push_settings.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/activity_pick_at_user.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/activity_set_servers.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/activity_viewpage.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/choose_imageview.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/contact_item.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/custom_progress_dialog.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_add_contact.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_black_list.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_call_option.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_chat.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_chatroom_details.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_diagnose.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_edit.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_group_blacklist.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_group_details.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_group_pick_contacts.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_group_search_message.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_group_simle_details.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_main.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_new_chat_room.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_new_friends_msg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_new_group.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_offline_push.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_pick_contact_no_checkbox.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_public_groups.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_public_groups_search.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_register.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_splash.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_user_profile.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_video_call.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_activity_voice_call.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_chat_neterror_item.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_chatroom_member_menu.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_choose_griditem.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_contacts_header.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_context_menu_for_image.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_context_menu_for_location.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_context_menu_for_text.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_context_menu_for_video.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_context_menu_for_voice.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_fragment_conversation_settings.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_fragment_groups.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_fragment_robots.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_grid.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_grid_owner.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_image_grid_fragment.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_layout_loading_data.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_listview_footer_view.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_logout_actionsheet.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_mail_log.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_recorder_activity.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_add_group.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_contact_with_checkbox.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_group.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_invite_msg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_robots.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_row_search_message.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_search_bar_with_padding.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/em_widget_contact_item.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/foot.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/gallery_url.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_age.xml" charset="UTF-8" />
@@ -164,6 +359,15 @@
     <file url="file://$PROJECT_DIR$/res/layout/umeng_socialize_oauth_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/viewpage_itemview.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/welcome.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/menu/em_context_contact_list.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/menu/em_context_tab_contact.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/menu/em_delete_contact.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/menu/em_delete_message.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/menu/em_remove_from_blacklist.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/raw" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/values-large" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/values-w820dp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/values-xlarge" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/values/arrays.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/values/colors.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/values/dimens.xml" charset="UTF-8" />
@@ -199,6 +403,79 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/BaseFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/InternetURL.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/base/MyBaseFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/Constant.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/DemoHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/DemoModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/adapter/GroupAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/adapter/NewFriendsMsgAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/db/DbOpenHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/db/DemoDBManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/db/InviteMessgeDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/db/UserDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/domain/EmojiconExampleGroupData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/domain/InviteMessage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/domain/RobotUser.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/domain/VideoEntity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/parse/ParseManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/parse/UserProfileManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/receiver/CallReceiver.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/receiver/GCMPushBroadCast.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/receiver/StartServiceReceiver.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/runtimepermissions/Permissions.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/runtimepermissions/PermissionsManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/runtimepermissions/PermissionsResultAction.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/AddContactActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/BaseActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/BlacklistActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/CallActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/CallOptionActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ChatActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ChatFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ChatRoomDetailsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ContactListFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ContextMenuActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ConversationListFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/DiagnoseActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/EditActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ExitGroupDialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ForwardMessageActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupBlacklistActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupDetailsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupPickContactsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupSearchMessageActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupSimpleDetailActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/GroupsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ImageGridActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/ImageGridFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/NewChatRoomActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/NewFriendsMsgActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/NewGroupActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/OfflinePushNickActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/OfflinePushSettingsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/PickAtUserActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/PickContactNoCheckboxActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/PublicChatRoomsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/PublicGroupsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/PublicGroupsSeachActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/RecorderVideoActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/RegisterActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/RobotsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/SetServersActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/SettingsFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/SplashActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/UserProfileActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/VideoCallActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/ui/VoiceCallActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/util/ImageCache.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/util/ImageResizer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/util/ImageWorker.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/util/RecyclingBitmapDrawable.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/util/Utils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/utils/PreferenceManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/ChatRowVoiceCall.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/ContactItemView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/MyChronometer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/RecyclingImageView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/Data.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/OrderInfoAndSignDATA.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/BasePagerAdapter.java" charset="UTF-8" />
@@ -253,7 +530,6 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/Base64.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/OrderInfoAndSign.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/PayResult.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/pay/SignUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/receiver/MyPushMessageReceiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/receiver/SMSBroadcastReceiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/ui/AboutActivity.java" charset="UTF-8" />

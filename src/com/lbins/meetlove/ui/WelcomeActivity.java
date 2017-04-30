@@ -3,6 +3,7 @@ package com.lbins.meetlove.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -11,7 +12,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.lbins.meetlove.MainActivity;
+import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.baidu.Utils;
 import com.lbins.meetlove.base.BaseActivity;
@@ -184,24 +188,44 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
 
-        //登录成功，绑定百度云推送
-//        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
-            //进行绑定
-//            PushManager.startWork(getApplicationContext(),
-//                    PushConstants.LOGIN_TYPE_API_KEY,
-//                    Utils.getMetaValue(WelcomeActivity.this, "api_key"));
-//        } else {
-//            //如果已经绑定，就保存
-//            save("userId", emp.getUserId());
-//        }
 
-        // 登陆成功，保存用户名密码
-//        save("mm_emp_id", emp.getMm_emp_id());
+        EMClient.getInstance().login(emp.getEmpid(), "123456", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                // ** manually load all local groups and conversation
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
 
-        Intent intent = new Intent(WelcomeActivity.this,
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+                        MeetLoveApplication.currentUserNick.trim());
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+                // get user's info (this should be get from App's server or 3rd party service)
+//                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+
+                Intent intent = new Intent(WelcomeActivity.this,
                         MainActivity.class);
-        startActivity(intent);
-        finish();
+                startActivity(intent);
+
+                finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Intent intent = new Intent(WelcomeActivity.this,
+                        LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
 
     }
 

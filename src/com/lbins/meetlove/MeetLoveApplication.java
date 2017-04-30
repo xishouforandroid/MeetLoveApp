@@ -9,7 +9,10 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.controller.EaseUI;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.chat.DemoHelper;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -66,6 +69,10 @@ public class MeetLoveApplication extends Application {
         applicationContext = this;
         instance = this;
         application = this;
+
+        //init demo helper
+        DemoHelper.getInstance().init(applicationContext);
+
         requestQueue = Volley.newRequestQueue(this);
         gson = new Gson();
         lxThread = Executors.newFixedThreadPool(20);
@@ -78,6 +85,9 @@ public class MeetLoveApplication extends Application {
         PlatformConfig.setSinaWeibo("3095745864", "b11052a28d07d9affc1f1c8ff3548e77");
         PlatformConfig.setQQZone("1106107422", "4YJXM74wpHS0vSQK");
         PlatformConfig.setAlipay("2017041706780367");
+        //环信
+        EaseUI.getInstance().init(this, null);
+        EMClient.getInstance().setDebugMode(true);
     }
 
     @Override

@@ -334,5 +334,5 @@
     <color name="main_color">#ffa500</color>
     <color name="bg_gray">#f0eff5</color>
 
-
+    <color name="holo_black">#ff111111</color>
 </resources>
