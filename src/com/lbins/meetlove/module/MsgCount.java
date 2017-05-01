@@ -1,5 +1,10 @@
 package com.lbins.meetlove.module;
 
+import com.lbins.meetlove.dao.HappyHandJw;
+import com.lbins.meetlove.dao.HappyHandMessage;
+import com.lbins.meetlove.dao.HappyHandNews;
+import com.lbins.meetlove.dao.HappyHandNotice;
+
 import java.util.List;
 
 /**

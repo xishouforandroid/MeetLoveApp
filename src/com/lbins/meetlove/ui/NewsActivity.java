@@ -16,15 +16,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.ItemNewsAdapter;
-import com.lbins.meetlove.adapter.ItemNoticesAdapter;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.HappyHandMessage;
+import com.lbins.meetlove.dao.HappyHandNews;
 import com.lbins.meetlove.data.HappyHandNewsDatas;
-import com.lbins.meetlove.data.HappyHandNoticeDatas;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
-import com.lbins.meetlove.module.HappyHandNews;
-import com.lbins.meetlove.module.HappyHandNotice;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
@@ -136,6 +135,22 @@ public class NewsActivity extends BaseActivity implements View.OnClickListener {
                                         lists.addAll(data.getData());
                                         lstv.onRefreshComplete();
                                         adapter.notifyDataSetChanged();
+                                        if(lists != null){
+                                            for(HappyHandNews happyHandNews:lists){
+                                                HappyHandNews tmpT = DBHelper.getInstance(NewsActivity.this).getHappyHandNewsById(happyHandNews.getNewsid());
+                                                if(tmpT != null){
+                                                    //说明数据库里有该条记录,更新
+                                                    tmpT.setIs_read("1");
+                                                    DBHelper.getInstance(NewsActivity.this).updateHappyHandNews(tmpT);
+                                                }else{
+                                                    //说明数据库里没有该记录
+                                                    happyHandNews.setIs_read("1");
+                                                    DBHelper.getInstance(NewsActivity.this).saveHappyHandNews(happyHandNews);
+                                                }
+                                            }
+                                        }
+                                        Intent intent1 = new Intent("update_message_success");
+                                        sendBroadcast(intent1);
                                     }
                                     adapter.notifyDataSetChanged();
                                 }else {

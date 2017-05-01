@@ -15,16 +15,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.adapter.ItemJwdxApplyAdapter;
 import com.lbins.meetlove.adapter.ItemNoticesAdapter;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
-import com.lbins.meetlove.data.HappyHandJwDatas;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.HappyHandNews;
+import com.lbins.meetlove.dao.HappyHandNotice;
 import com.lbins.meetlove.data.HappyHandNoticeDatas;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
-import com.lbins.meetlove.module.HappyHandJw;
-import com.lbins.meetlove.module.HappyHandNotice;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
@@ -136,6 +135,22 @@ public class NoticesActivity extends BaseActivity implements View.OnClickListene
                                         lists.addAll(data.getData());
                                         lstv.onRefreshComplete();
                                         adapter.notifyDataSetChanged();
+                                        if(lists != null){
+                                            for(HappyHandNotice happyHandNotice:lists){
+                                                HappyHandNotice tmpT = DBHelper.getInstance(NoticesActivity.this).getHappyHandNoticeById(happyHandNotice.getNoticeid());
+                                                if(tmpT != null){
+                                                    //说明数据库里有该条记录,更新
+                                                    tmpT.setIs_read("1");
+                                                    DBHelper.getInstance(NoticesActivity.this).updateHappyHandNotice(tmpT);
+                                                }else{
+                                                    //说明数据库里没有该记录
+                                                    happyHandNotice.setIs_read("1");
+                                                    DBHelper.getInstance(NoticesActivity.this).saveHappyHandNotice(happyHandNotice);
+                                                }
+                                            }
+                                        }
+                                        Intent intent1 = new Intent("update_message_success");
+                                        sendBroadcast(intent1);
                                     }
                                     adapter.notifyDataSetChanged();
                                 }else {

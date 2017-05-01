@@ -1,11 +1,7 @@
 package com.lbins.meetlove.ui;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -14,21 +10,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.adapter.ItemNoticesAdapter;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.HappyHandNotice;
 import com.lbins.meetlove.data.HappyHandNoticeDataSingle;
-import com.lbins.meetlove.data.HappyHandNoticeDatas;
-import com.lbins.meetlove.library.PullToRefreshBase;
-import com.lbins.meetlove.library.PullToRefreshListView;
-import com.lbins.meetlove.module.HappyHandNotice;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

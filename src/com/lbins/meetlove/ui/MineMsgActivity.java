@@ -1,6 +1,9 @@
 package com.lbins.meetlove.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.*;
 import com.lbins.meetlove.data.HappyHandMessageData;
 import com.lbins.meetlove.data.MsgCountData;
 import com.lbins.meetlove.module.*;
@@ -36,10 +40,21 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
     private TextView three_number;
     private TextView four_number;
 
+    private TextView one_msg;
+    private TextView two_msg;
+    private TextView three_msg;
+    private TextView four_msg;
+
+    private TextView one_dateline;
+    private TextView two_dateline;
+    private TextView three_dateline;
+    private TextView four_dateline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mine_msg_activity);
+        registerBoradcastReceiver();
         initView();
         progressDialog = new CustomProgressDialog(MineMsgActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -63,6 +78,16 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         two_number = (TextView) this.findViewById(R.id.two_number);
         three_number = (TextView) this.findViewById(R.id.three_number);
         four_number = (TextView) this.findViewById(R.id.four_number);
+
+        one_msg = (TextView) this.findViewById(R.id.one_msg);
+        two_msg = (TextView) this.findViewById(R.id.two_msg);
+        three_msg = (TextView) this.findViewById(R.id.three_msg);
+        four_msg = (TextView) this.findViewById(R.id.four_msg);
+
+        one_dateline = (TextView) this.findViewById(R.id.one_dateline);
+        two_dateline = (TextView) this.findViewById(R.id.two_dateline);
+        three_dateline = (TextView) this.findViewById(R.id.three_dateline);
+        four_dateline = (TextView) this.findViewById(R.id.four_dateline);
     }
 
     @Override
@@ -166,9 +191,30 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
             //系统消息
             List<HappyHandMessage> list1 = msgCount.getList1();
             if(list1 != null){
-                if(list1.size() > 0){
+                for(HappyHandMessage happyHandMessage:list1){
+                    HappyHandMessage tmpT =DBHelper.getInstance(MineMsgActivity.this).getHappyHandMessageById(happyHandMessage.getMsgid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MineMsgActivity.this).saveHappyHandMessage(happyHandMessage);
+                    }
+                }
+                if(list1.size()>0){
+                    HappyHandMessage happyHandMessage = list1.get(0);
+                    if(happyHandMessage != null){
+                        one_msg.setText(happyHandMessage.getTitle());
+                        one_dateline.setText(happyHandMessage.getDateline());
+                    }
+                }
+            }
+
+            //查询未读的系统消息
+            List<HappyHandMessage> lists1 = DBHelper.getInstance(MineMsgActivity.this).getHappyHandMessageQuery("0");
+            if(lists1 != null){
+                if(lists1.size() > 0){
                     one_number.setVisibility(View.VISIBLE);
-                    one_number.setText(String.valueOf(list1.size()));
+                    one_number.setText(String.valueOf(lists1.size()));
                 }else {
                     one_number.setVisibility(View.GONE);
                 }
@@ -179,9 +225,29 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
             //系统资讯
             List<HappyHandNews> list2 = msgCount.getList2();
             if(list2 != null){
-                if(list2.size() > 0){
+                for(HappyHandNews happyHandNews:list2){
+                    HappyHandNews tmpT =DBHelper.getInstance(MineMsgActivity.this).getHappyHandNewsById(happyHandNews.getNewsid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MineMsgActivity.this).saveHappyHandNews(happyHandNews);
+                    }
+                }
+                if(list2.size()>0){
+                    HappyHandNews happyHandNews = list2.get(0);
+                    if(happyHandNews != null){
+                        two_msg.setText(happyHandNews.getTitle());
+                        two_dateline.setText(happyHandNews.getDateline());
+                    }
+                }
+            }
+
+            List<HappyHandNews> lists2 = DBHelper.getInstance(MineMsgActivity.this).getHappyHandNewsQuery("0");
+            if(lists2 != null){
+                if(lists2.size() > 0){
                     two_number.setVisibility(View.VISIBLE);
-                    two_number.setText(String.valueOf(list2.size()));
+                    two_number.setText(String.valueOf(lists2.size()));
                 }else {
                     two_number.setVisibility(View.GONE);
                 }
@@ -192,9 +258,28 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
             //活动公告
             List<HappyHandNotice> list3 = msgCount.getList3();
             if(list3 != null){
-                if(list3.size() > 0){
+                for(HappyHandNotice happyHandNotice:list3){
+                    HappyHandNotice tmpT =DBHelper.getInstance(MineMsgActivity.this).getHappyHandNoticeById(happyHandNotice.getNoticeid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MineMsgActivity.this).saveHappyHandNotice(happyHandNotice);
+                    }
+                }
+                if(list3.size()>0){
+                    HappyHandNotice happyHandNotice = list3.get(0);
+                    if(happyHandNotice != null){
+                        three_msg.setText(happyHandNotice.getTitle());
+                        three_dateline.setText(happyHandNotice.getDateline());
+                    }
+                }
+            }
+            List<HappyHandNotice> lists3 = DBHelper.getInstance(MineMsgActivity.this).getHappyHandNoticeQuery("0");
+            if(lists3 != null){
+                if(lists3.size() > 0){
                     three_number.setVisibility(View.VISIBLE);
-                    three_number.setText(String.valueOf(list3.size()));
+                    three_number.setText(String.valueOf(lists3.size()));
                 }else {
                     three_number.setVisibility(View.GONE);
                 }
@@ -208,6 +293,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
                 if(list4.size() > 0){
                     four_number.setVisibility(View.VISIBLE);
                     four_number.setText(String.valueOf(list4.size()));
+                    four_msg.setText("您有新的交往信息");
                 }else {
                     four_number.setVisibility(View.GONE);
                 }
@@ -217,6 +303,39 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("update_message_success")) {
+                initData();
+            }
+            if (action.equals("update_jwdx_success")) {
+                four_number.setVisibility(View.GONE);
+                four_msg.setText("");
+            }
+            if (action.equals("update_jwdx_refuse")) {
+                four_number.setVisibility(View.GONE);
+                four_msg.setText("");
+            }
+        }
+    };
 
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("update_message_success");
+        myIntentFilter.addAction("update_jwdx_success");
+        myIntentFilter.addAction("update_jwdx_refuse");
+        //注册广播
+       registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 
 }

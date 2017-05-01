@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.module.HappyHandNews;
-import com.lbins.meetlove.module.HappyHandNotice;
+import com.lbins.meetlove.dao.HappyHandNews;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 

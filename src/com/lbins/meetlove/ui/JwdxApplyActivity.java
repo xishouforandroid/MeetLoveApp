@@ -20,12 +20,11 @@ import com.lbins.meetlove.adapter.ItemJwdxApplyAdapter;
 import com.lbins.meetlove.adapter.OnClickContentItemListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.HappyHandJw;
 import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.data.HappyHandJwDatas;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
-import com.lbins.meetlove.module.Friends;
-import com.lbins.meetlove.module.HappyHandJw;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
@@ -239,6 +238,8 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
                                     }
                                     if("2".equals(friends.getIs_check())){
                                         //拒绝
+                                        Intent intent1 = new Intent("update_jwdx_refuse");
+                                        sendBroadcast(intent1);
                                     }
                                 }else {
                                     Toast.makeText(JwdxApplyActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();

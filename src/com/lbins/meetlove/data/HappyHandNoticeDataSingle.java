@@ -1,8 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.HappyHandNotice;
 
-import java.util.List;
+import com.lbins.meetlove.dao.HappyHandNotice;
 
 /**
  * Created by zhl on 2017/4/21.

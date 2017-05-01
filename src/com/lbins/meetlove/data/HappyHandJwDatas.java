@@ -1,6 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.HappyHandJw;
+
+import com.lbins.meetlove.dao.HappyHandJw;
 
 import java.util.List;
 

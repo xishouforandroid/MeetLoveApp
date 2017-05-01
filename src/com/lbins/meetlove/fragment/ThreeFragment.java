@@ -22,10 +22,11 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ContactAdapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
+import com.lbins.meetlove.dao.Friends;
 import com.lbins.meetlove.data.EmpsData;
 import com.lbins.meetlove.data.FriendsData;
-import com.lbins.meetlove.library.PullToRefreshListView;
-import com.lbins.meetlove.module.Friends;
 import com.lbins.meetlove.ui.FriendsApplyActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
 import com.lbins.meetlove.util.PinyinComparator;
@@ -168,16 +169,24 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                                         friendses.addAll(data.getData());
                                         Collections.sort(friendses, new PinyinComparator());
                                         adapter.notifyDataSetChanged();
+                                        if(friendses != null){
+                                            for(Friends friends:friendses){
+                                                if(friends != null){
+                                                    Emp emp = new Emp();
+                                                    emp.setEmpid(friends.getEmpid2());
+                                                    emp.setCover(friends.getEmpid2Cover());
+                                                    emp.setNickname(friends.getEmpid2Nickname());
+                                                    DBHelper.getInstance(getActivity()).saveEmp(emp);
+                                                }
+                                            }
+                                        }
                                     }
-                                    adapter.notifyDataSetChanged();
                                 }else {
                                     Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-                        } else {
                         }
                         if(progressDialog != null){
                             progressDialog.dismiss();

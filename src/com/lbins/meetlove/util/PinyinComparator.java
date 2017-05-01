@@ -1,7 +1,8 @@
 package com.lbins.meetlove.util;
 
 
-import com.lbins.meetlove.module.Friends;
+
+import com.lbins.meetlove.dao.Friends;
 
 import java.util.Comparator;
 

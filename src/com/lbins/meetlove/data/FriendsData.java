@@ -1,6 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.Friends;
+
+import com.lbins.meetlove.dao.Friends;
 
 import java.util.List;
 

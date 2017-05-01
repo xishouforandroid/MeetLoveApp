@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.module.Friends;
+import com.lbins.meetlove.dao.Friends;
 
 import java.util.HashMap;
 import java.util.List;

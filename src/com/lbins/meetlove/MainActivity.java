@@ -17,6 +17,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
@@ -29,6 +34,7 @@ import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.DemoHelper;
 import com.lbins.meetlove.chat.db.InviteMessgeDao;
@@ -38,15 +44,21 @@ import com.lbins.meetlove.chat.runtimepermissions.PermissionsResultAction;
 import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.chat.ui.GroupsActivity;
 import com.lbins.meetlove.chat.util.SharePrefConstant;
-import com.lbins.meetlove.dao.DBHelper;
-import com.lbins.meetlove.dao.Emp;
+import com.lbins.meetlove.dao.*;
+import com.lbins.meetlove.data.MsgCountData;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
 import com.lbins.meetlove.fragment.ThreeFragment;
+import com.lbins.meetlove.module.MsgCount;
 import com.lbins.meetlove.ui.LoginActivity;
+import com.lbins.meetlove.ui.MineMsgActivity;
 import com.lbins.meetlove.util.GuirenHttpUtils;
+import com.lbins.meetlove.util.StringUtil;
+import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -62,7 +74,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView foot_two;
     private ImageView foot_three;
     private ImageView foot_four;
-
 
     //设置底部图标
     Resources res;
@@ -80,6 +91,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     // user account was removed
     private boolean isCurrentAccountRemoved = false;
 
+    public static int msgCountUnRead = 0;
+
     /**
      * check if current user account was remove
      */
@@ -91,25 +104,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
-
+        registerBoradcastReceiver();
         res = getResources();
         fm = getSupportFragmentManager();
         initView();
 
         switchFragment(R.id.foot_liner_one);
         inviteMessgeDao = new InviteMessgeDao(this);
-        UserDao userDao = new UserDao(this);
-        //register broadcast receiver to receive the change of group from DemoHelper
         registerBroadcastReceiver();
-
         EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
-        //debug purpose only
         registerInternalDebugReceiver();
 
-        List<Emp> lists = DBHelper.getInstance(MainActivity.this).getEmpList();
-        showMsg(MainActivity.this, String.valueOf(lists.size()));
+        //统计未读消息数
+        getMsgCount();
     }
     private void initView() {
         foot_one = (ImageView) this.findViewById(R.id.foot_one);
@@ -526,14 +534,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             unregisterReceiver(internalDebugReceiver);
         } catch (Exception e) {
         }
-
+        unregisterReceiver(mBroadcastReceiver);
     }
 
     /**
      * update unread message count
      */
     public void updateUnreadLabel() {
-        int count = getUnreadMsgCountTotal();
+        int count = getUnreadMsgCountTotal()+msgCountUnRead;
         if (count > 0) {
             unreadLabel.setText(String.valueOf(count));
             unreadLabel.setVisibility(View.VISIBLE);
@@ -723,6 +731,169 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+    }
+
+
+    private MsgCount msgCount;
+    //统计未读消息数据
+    private void getMsgCount() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appMsgAllList,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    MsgCountData data = getGson().fromJson(s, MsgCountData.class);
+                                    if(data != null){
+                                        msgCount = data.getData();
+                                        if(msgCount != null){
+                                            initDataCount();
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(MainActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+    void initDataCount(){
+        msgCountUnRead = 0;
+        if(msgCount != null){
+            //系统消息
+            List<HappyHandMessage> list1 = msgCount.getList1();
+            if(list1 != null){
+                for(HappyHandMessage happyHandMessage:list1){
+                    HappyHandMessage tmpT = DBHelper.getInstance(MainActivity.this).getHappyHandMessageById(happyHandMessage.getMsgid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MainActivity.this).saveHappyHandMessage(happyHandMessage);
+                    }
+                }
+            }
+
+            //查询未读的系统消息
+            List<HappyHandMessage> lists1 = DBHelper.getInstance(MainActivity.this).getHappyHandMessageQuery("0");
+            if(lists1 != null){
+                msgCountUnRead = msgCountUnRead+lists1.size();
+            }
+
+            //系统资讯
+            List<HappyHandNews> list2 = msgCount.getList2();
+            if(list2 != null){
+                for(HappyHandNews happyHandNews:list2){
+                    HappyHandNews tmpT =DBHelper.getInstance(MainActivity.this).getHappyHandNewsById(happyHandNews.getNewsid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MainActivity.this).saveHappyHandNews(happyHandNews);
+                    }
+                }
+            }
+
+            List<HappyHandNews> lists2 = DBHelper.getInstance(MainActivity.this).getHappyHandNewsQuery("0");
+            if(lists2 != null){
+                msgCountUnRead = msgCountUnRead+lists2.size();
+            }
+
+            //活动公告
+            List<HappyHandNotice> list3 = msgCount.getList3();
+            if(list3 != null){
+                for(HappyHandNotice happyHandNotice:list3){
+                    HappyHandNotice tmpT =DBHelper.getInstance(MainActivity.this).getHappyHandNoticeById(happyHandNotice.getNoticeid());
+                    if(tmpT != null){
+                        //说明数据库里有该条记录
+                    }else{
+                        //说明数据库里没有该记录
+                        DBHelper.getInstance(MainActivity.this).saveHappyHandNotice(happyHandNotice);
+                    }
+                }
+            }
+            List<HappyHandNotice> lists3 = DBHelper.getInstance(MainActivity.this).getHappyHandNoticeQuery("0");
+            if(lists3 != null){
+                msgCountUnRead = msgCountUnRead+lists3.size();
+            }
+
+            //交往消息
+            List<HappyHandJw> list4 = msgCount.getList4();
+            if(list4 != null){
+                msgCountUnRead = msgCountUnRead+list4.size();
+            }
+        }
+        updateUnreadLabel();
+    }
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("update_message_success")) {
+                initDataCount();
+                if (currentTabIndex == 1) {
+                    if (twoFragment != null) {
+                        twoFragment.refresh();
+                    }
+                }
+            }
+            if (action.equals("update_jwdx_success")) {
+                getMsgCount();
+            }
+            if (action.equals("update_jwdx_refuse")) {
+                getMsgCount();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("update_message_success");
+        myIntentFilter.addAction("update_jwdx_success");
+        myIntentFilter.addAction("update_jwdx_refuse");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
 

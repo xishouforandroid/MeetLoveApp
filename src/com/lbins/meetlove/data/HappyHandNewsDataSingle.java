@@ -1,7 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.HappyHandNews;
-import com.lbins.meetlove.module.HappyHandNotice;
+
+import com.lbins.meetlove.dao.HappyHandNews;
 
 /**
  * Created by zhl on 2017/4/21.
