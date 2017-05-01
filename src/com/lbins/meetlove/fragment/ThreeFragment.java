@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ContactAdapter;
@@ -81,7 +82,18 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getFriends();
+        refresh();
         return view;
+    }
+
+
+   public void refresh(){
+       if(MainActivity.friendsCountUnRead > 0){
+           new_friends_number.setVisibility(View.VISIBLE);
+           new_friends_number.setText(String.valueOf(MainActivity.friendsCountUnRead));
+       }else {
+           new_friends_number.setVisibility(View.INVISIBLE);
+       }
     }
 
     void initView(){

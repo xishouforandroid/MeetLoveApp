@@ -76,32 +76,54 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
     @Override
     public void onNotificationArrived(Context context, String title,
                                       String description, String customContentString) {
-
-        String notifyString = "onNotificationArrived  title=\"" + title
-                + "\" description=\"" + description + "\" customContent="
-                + customContentString;
-        Log.d(TAG, notifyString);
-
-        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
-        if (!TextUtils.isEmpty(customContentString)) {
-            JSONObject customJson = null;
-            try {
-                customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mm_notice_id")) {
-                    myvalue = customJson.getString("mm_notice_id");
-                    getNotice(context, myvalue);
-                }else {
-                    //发送通知 修改主页面
-                    Intent intent1 = new Intent("arrived_msg_andMe");
+        try {
+            Intent intent = new Intent();
+            JSONObject custom = new JSONObject(customContentString);
+            int type = custom.getInt("msgtypeid");
+            switch (type) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                {
+                    Intent intent1 = new Intent("update_message_success");
                     context.sendBroadcast(intent1);
                 }
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                    break;
+                case 5:
+                {
+                    Intent intent1 = new Intent("update_contact_success");
+                    context.sendBroadcast(intent1);
+                }
+                    break;
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+//        String notifyString = "onNotificationArrived  title=\"" + title
+//                + "\" description=\"" + description + "\" customContent="
+//                + customContentString;
+//        Log.d(TAG, notifyString);
+
+        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
+//        if (!TextUtils.isEmpty(customContentString)) {
+//            JSONObject customJson = null;
+//            try {
+//                customJson = new JSONObject(customContentString);
+//                String myvalue = null;
+//                if (!customJson.isNull("mm_notice_id")) {
+//                    myvalue = customJson.getString("mm_notice_id");
+//                    getNotice(context, myvalue);
+//                }else {
+//                    //发送通知 修改主页面
+//                    Intent intent1 = new Intent("arrived_msg_andMe");
+//                    context.sendBroadcast(intent1);
+//                }
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public void getNotice(Context context, String notice_id) {

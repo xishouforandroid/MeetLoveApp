@@ -45,6 +45,7 @@ import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.chat.ui.GroupsActivity;
 import com.lbins.meetlove.chat.util.SharePrefConstant;
 import com.lbins.meetlove.dao.*;
+import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.data.MsgCountData;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
@@ -56,6 +57,7 @@ import com.lbins.meetlove.util.GuirenHttpUtils;
 import com.lbins.meetlove.util.StringUtil;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +94,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private boolean isCurrentAccountRemoved = false;
 
     public static int msgCountUnRead = 0;
+    public static int friendsCountUnRead = 0;
 
     /**
      * check if current user account was remove
@@ -118,6 +121,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //统计未读消息数
         getMsgCount();
+        getFriendsCount();
     }
     private void initView() {
         foot_one = (ImageView) this.findViewById(R.id.foot_one);
@@ -556,8 +560,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void updateUnreadAddressLable() {
         runOnUiThread(new Runnable() {
             public void run() {
-                int count = getUnreadAddressCountTotal();
-                if (count > 0) {
+//                int count = getUnreadAddressCountTotal();
+                if (friendsCountUnRead > 0) {
+                    if(currentTabIndex == 2){
+                        threeFragment.refresh();
+                    }
+                    unreadAddressLable.setText(String.valueOf(friendsCountUnRead));
                     unreadAddressLable.setVisibility(View.VISIBLE);
                 } else {
                     unreadAddressLable.setVisibility(View.INVISIBLE);
@@ -864,6 +872,69 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         updateUnreadLabel();
     }
 
+
+
+    private void getFriendsCount() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appFriends,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    FriendsData data = getGson().fromJson(s, FriendsData.class);
+                                    if(data != null){
+                                        List<Friends> listsFriends = new ArrayList<>();
+                                        listsFriends.addAll(data.getData());
+                                        friendsCountUnRead = listsFriends.size();
+                                        updateUnreadAddressLable();
+                                    }
+                                }else {
+                                    Toast.makeText(MainActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid2", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("is_check", "0");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -883,6 +954,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (action.equals("update_jwdx_refuse")) {
                 getMsgCount();
             }
+            if (action.equals("update_contact_success")) {
+                getFriendsCount();
+            }
         }
     };
 
@@ -892,6 +966,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         myIntentFilter.addAction("update_message_success");
         myIntentFilter.addAction("update_jwdx_success");
         myIntentFilter.addAction("update_jwdx_refuse");
+        myIntentFilter.addAction("update_contact_success");
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
