@@ -1,6 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.Emp;
+
+import com.lbins.meetlove.dao.Emp;
 
 /**
  * Created by zhl on 2017/4/4.

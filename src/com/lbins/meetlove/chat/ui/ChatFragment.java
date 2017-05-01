@@ -30,6 +30,7 @@ import com.lbins.meetlove.chat.DemoHelper;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.chat.domain.EmojiconExampleGroupData;
 import com.lbins.meetlove.chat.domain.RobotUser;
+import com.lbins.meetlove.chat.util.SharePrefConstant;
 import com.lbins.meetlove.chat.widget.ChatRowVoiceCall;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
@@ -39,6 +40,8 @@ import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenu;
 import com.hyphenate.util.EasyUtils;
 import com.hyphenate.util.PathUtil;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -213,13 +216,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         
     }
     
-    @Override
-    public void onSetMessageAttributes(EMMessage message) {
-        if(isRobot){
-            //set message extension
-            message.setAttribute("em_robot_message", isRobot);
-        }
-    }
+
     
     @Override
     public EaseCustomChatRowProvider onSetCustomChatRowProvider() {
@@ -448,5 +445,34 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         super.onDestroy();
         //调用该方法可防止红包SDK引起的内存泄漏
 //        RPRedPacketUtil.getInstance().detachView();
+    }
+
+
+    //todo
+    //聊天头像和昵称处理
+    @Override
+    public void onSetMessageAttributes(EMMessage message) {
+        if(isRobot){
+            //set message extension
+            message.setAttribute("em_robot_message", isRobot);
+        }
+        setUserInfoAttribute(message);
+    }
+
+
+    /**
+     * 设置用户的属性，
+     * 通过消息的扩展，传递客服系统用户的属性信息
+     * @param message
+     */
+    private void setUserInfoAttribute(EMMessage message) {
+        Emp empCurrent = DBHelper.getInstance(getActivity()).getEmpById(message.getFrom());
+        try {
+            message.setAttribute(SharePrefConstant.ChatUserId, empCurrent.getEmpid());
+            message.setAttribute(SharePrefConstant.ChatUserNick, empCurrent.getNickname());
+            message.setAttribute(SharePrefConstant.ChatUserPic, empCurrent.getCover()) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

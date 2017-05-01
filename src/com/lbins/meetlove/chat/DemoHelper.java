@@ -42,6 +42,8 @@ import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.chat.ui.VideoCallActivity;
 import com.lbins.meetlove.chat.ui.VoiceCallActivity;
 import com.lbins.meetlove.chat.utils.PreferenceManager;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 
 import java.util.*;
 
@@ -801,21 +803,31 @@ public class DemoHelper {
         appContext.startActivity(intent);
     }
 
+    //todo
+    //聊天头像和昵称处理
 	private EaseUser getUserInfo(String username){
 		// To get instance of EaseUser, here we get it from the user list in memory
 		// You'd better cache it if you get it from your server
         EaseUser user = null;
-        if(username.equals(EMClient.getInstance().getCurrentUser()))
-            return getUserProfileManager().getCurrentUserInfo();
-        user = getContactList().get(username);
-        if(user == null && getRobotList() != null){
-            user = getRobotList().get(username);
-        }
-
-        // if user is not in your contacts, set inital letter for him/her
-        if(user == null){
+//        if(username.equals(EMClient.getInstance().getCurrentUser()))
+//            return getUserProfileManager().getCurrentUserInfo();
+//        user = getContactList().get(username);
+//        if(user == null && getRobotList() != null){
+//            user = getRobotList().get(username);
+//        }
+//
+//        // if user is not in your contacts, set inital letter for him/her
+//        if(user == null){
+//            user = new EaseUser(username);
+//            EaseCommonUtils.setUserInitialLetter(user);
+//        }
+        //todo
+        //聊天头像和昵称处理
+        Emp userInfo = DBHelper.getInstance(appContext).getEmpById(username);
+        if (userInfo != null){
             user = new EaseUser(username);
-            EaseCommonUtils.setUserInitialLetter(user);
+            user.setAvatar(userInfo.getCover());
+            user.setNick(userInfo.getNickname());
         }
         return user;
 	}

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.R;
+import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.runtimepermissions.PermissionsManager;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.util.EasyUtils;
@@ -16,8 +17,8 @@ import com.hyphenate.util.EasyUtils;
 public class ChatActivity extends BaseActivity{
     public static ChatActivity activityInstance;
     private EaseChatFragment chatFragment;
-    String toChatUsername;
-    String nickname;
+    public String toChatUsername;
+    public  String nickname;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -25,8 +26,8 @@ public class ChatActivity extends BaseActivity{
         setContentView(R.layout.em_activity_chat);
         activityInstance = this;
         //get user id or group id
-        toChatUsername = getIntent().getExtras().getString("userId");
-        nickname = getIntent().getExtras().getString("userNickName");
+        toChatUsername = getIntent().getExtras().getString(Constant.EXTRA_USER_ID);
+        nickname = getIntent().getExtras().getString(Constant.EXTRA_USER_NICKNAME);
         //use EaseChatFratFragment
         chatFragment = new ChatFragment();
         //pass parameters to chat fragment

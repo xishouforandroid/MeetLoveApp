@@ -25,6 +25,8 @@ import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.chat.Constant;
@@ -33,6 +35,11 @@ import com.lbins.meetlove.chat.db.InviteMessgeDao;
 import com.lbins.meetlove.chat.db.UserDao;
 import com.lbins.meetlove.chat.runtimepermissions.PermissionsManager;
 import com.lbins.meetlove.chat.runtimepermissions.PermissionsResultAction;
+import com.lbins.meetlove.chat.ui.ChatActivity;
+import com.lbins.meetlove.chat.ui.GroupsActivity;
+import com.lbins.meetlove.chat.util.SharePrefConstant;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
 import com.lbins.meetlove.fragment.ThreeFragment;
@@ -101,7 +108,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //debug purpose only
         registerInternalDebugReceiver();
 
-
+        List<Emp> lists = DBHelper.getInstance(MainActivity.this).getEmpList();
+        showMsg(MainActivity.this, String.valueOf(lists.size()));
     }
     private void initView() {
         foot_one = (ImageView) this.findViewById(R.id.foot_one);
@@ -365,7 +373,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         public void onMessageReceived(List<EMMessage> messages) {
             // notify new message
             for (EMMessage message : messages) {
-//                DemoHelper.getInstance().getNotifier().onNewMsg(message);
+                // 先将头像和昵称保存在本地缓存
+                try {
+                    String ChatUserId = message.getStringAttribute(SharePrefConstant.ChatUserId);
+                    String ChatUserPic = message.getStringAttribute(SharePrefConstant.ChatUserPic);
+                    String ChatUserNick = message.getStringAttribute(SharePrefConstant.ChatUserNick);
+
+                    Emp emp = new Emp();
+                    emp.setEmpid(ChatUserId);
+                    emp.setCover(ChatUserPic);
+                    emp.setNickname(ChatUserNick);
+                    DBHelper.getInstance(MainActivity.this).saveEmp(emp);
+
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+
+
+                DemoHelper.getInstance().getNotifier().onNewMsg(message);
             }
             refreshUIWithMessage();
         }
@@ -440,9 +465,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 String action = intent.getAction();
                 if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
-//                    if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
-//                        GroupsActivity.instance.onResume();
-//                    }
+                    if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
+                        GroupsActivity.instance.onResume();
+                    }
                 }
                 //red packet code : 处理红包回执透传消息
 //                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
@@ -463,13 +488,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         public void onContactDeleted(final String username) {
             runOnUiThread(new Runnable() {
                 public void run() {
-//                    if (ChatActivity.activityInstance != null && ChatActivity.activityInstance.toChatUsername != null &&
-//                            username.equals(ChatActivity.activityInstance.toChatUsername)) {
-//                        String st10 = getResources().getString(R.string.have_you_removed);
-//                        Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, Toast.LENGTH_LONG)
-//                                .show();
-//                        ChatActivity.activityInstance.finish();
-//                    }
+                    if (ChatActivity.activityInstance != null && ChatActivity.activityInstance.toChatUsername != null &&
+                            username.equals(ChatActivity.activityInstance.toChatUsername)) {
+                        String st10 = getResources().getString(R.string.have_you_removed);
+                        Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, Toast.LENGTH_LONG)
+                                .show();
+                        ChatActivity.activityInstance.finish();
+                    }
                 }
             });
             updateUnreadAddressLable();

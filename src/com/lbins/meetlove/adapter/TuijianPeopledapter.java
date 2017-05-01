@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomImageView;
 import com.lbins.meetlove.widget.RoundImageView;

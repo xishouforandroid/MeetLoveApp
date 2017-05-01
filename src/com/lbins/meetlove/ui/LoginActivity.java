@@ -25,17 +25,15 @@ import com.hyphenate.chat.EMClient;
 import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.baidu.Utils;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.data.EmpData;
-import com.lbins.meetlove.module.Emp;
 import com.lbins.meetlove.util.GuirenHttpUtils;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -270,6 +268,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
 
+        DBHelper.getInstance(LoginActivity.this).saveEmp(emp);
 
         EMClient.getInstance().login(emp.getEmpid(), "123456", new EMCallBack() {
             @Override

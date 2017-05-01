@@ -20,8 +20,9 @@ import com.lbins.meetlove.R;
 import com.lbins.meetlove.baidu.Utils;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.data.EmpData;
-import com.lbins.meetlove.module.Emp;
 import com.lbins.meetlove.util.StringUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -188,6 +189,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
 
+        DBHelper.getInstance(WelcomeActivity.this).saveEmp(emp);
 
         EMClient.getInstance().login(emp.getEmpid(), "123456", new EMCallBack() {
             @Override

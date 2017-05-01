@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.module.Emp;
+import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.util.StringUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
