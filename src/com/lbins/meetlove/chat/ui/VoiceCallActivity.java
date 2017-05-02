@@ -15,6 +15,7 @@
 package com.lbins.meetlove.chat.ui;
 
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.RingtoneManager;
 import android.media.SoundPool;
 import android.net.Uri;
@@ -35,10 +36,16 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
+import com.lbins.meetlove.MeetLoveApplication;
+import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.chat.DemoHelper;
 import com.lbins.meetlove.R;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.UUID;
 
@@ -65,6 +72,12 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
     private TextView netwrokStatusVeiw;
     private boolean monitor = false;
 
+    private Emp emp = null;
+    private ImageView swing_card;
+
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
+
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,6 +98,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 		handsFreeImage = (ImageView) findViewById(R.id.iv_handsfree);
 		callStateTextView = (TextView) findViewById(R.id.tv_call_state);
         TextView nickTextView = (TextView) findViewById(R.id.tv_nick);
+        swing_card = (ImageView) findViewById(R.id.swing_card);
         TextView durationTextView = (TextView) findViewById(R.id.tv_calling_duration);
 		chronometer = (Chronometer) findViewById(R.id.chronometer);
 		voiceContronlLayout = (LinearLayout) findViewById(R.id.ll_voice_control);
@@ -105,7 +119,13 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 
 		username = getIntent().getStringExtra("username");
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
-		nickTextView.setText(username);
+        emp = DBHelper.getInstance(VoiceCallActivity.this).getEmpById(username);
+        if(emp != null){
+            nickTextView.setText(emp.getNickname());
+            imageLoader.displayImage(emp.getCover(), swing_card, MeetLoveApplication.txOptions, animateFirstListener);
+        }else {
+            nickTextView.setText(username);
+        }
 		if (!isInComingCall) {// outgoing call
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.em_outgoing, 1);

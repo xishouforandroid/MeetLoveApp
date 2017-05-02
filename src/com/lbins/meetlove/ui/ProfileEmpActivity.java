@@ -25,6 +25,7 @@ import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.ui.ChatActivity;
+import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.dao.Friends;
 import com.lbins.meetlove.data.EmpData;
@@ -107,6 +108,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                                         emp = data.getData();
                                         if(emp != null){
                                             initData();
+                                            DBHelper.getInstance(ProfileEmpActivity.this).saveEmp(emp);
                                         }
                                     }
                                 }else {

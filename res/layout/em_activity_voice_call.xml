@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_is_p2p"
+            android:visibility="invisible"
             android:textColor="#fff"
             />
 
@@ -74,7 +75,6 @@
             android:layout_marginTop="10dp"
               android:textColor="@android:color/white"
               android:textSize="20sp"
-              android:text="张三"
             tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/tv_network_status"

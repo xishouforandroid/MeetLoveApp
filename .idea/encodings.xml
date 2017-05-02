@@ -161,6 +161,8 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_one.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_two.jpg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_green.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_white.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_login.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_active.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_unactive.png" charset="UTF-8" />
@@ -506,19 +508,13 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/media/MediaStoreCursorHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Area.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/City.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Emp.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/EmpKu.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/Friends.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandChoose.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandCompany.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandCxrz.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandGroup.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandHyrz.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandJw.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandLike.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandMessage.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandNews.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandNotice.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandOrder.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandPhoto.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/KefuTel.java" charset="UTF-8" />

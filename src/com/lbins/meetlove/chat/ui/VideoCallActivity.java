@@ -47,6 +47,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.media.EMLocalSurfaceView;
 import com.hyphenate.media.EMOppositeSurfaceView;
 import com.hyphenate.util.EMLog;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
 import com.superrtc.sdk.VideoView;
 
 import java.text.DateFormat;
@@ -111,6 +113,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
         }
     }
 
+    private Emp emp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,9 +170,12 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
         msgid = UUID.randomUUID().toString();
         isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
         username = getIntent().getStringExtra("username");
-
-        nickTextView.setText(username);
-
+        emp = DBHelper.getInstance(VideoCallActivity.this).getEmpById(username);
+        if(emp != null){
+            nickTextView.setText(emp.getNickname());
+        }else {
+            nickTextView.setText(username);
+        }
         // local surfaceview
         localSurface = (EMLocalSurfaceView) findViewById(R.id.local_surface);
         localSurface.setZOrderMediaOverlay(true);

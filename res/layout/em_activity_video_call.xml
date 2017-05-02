@@ -49,6 +49,7 @@
 
             <TextView
                 android:id="@+id/tv_is_p2p"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff" />
@@ -109,6 +110,7 @@
             android:id="@+id/tv_call_monitor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:layout_above="@+id/local_surface"
             android:layout_alignParentRight="true"
             android:textColor="#afff"

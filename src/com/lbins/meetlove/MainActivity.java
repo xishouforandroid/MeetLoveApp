@@ -50,6 +50,7 @@ import com.lbins.meetlove.data.MsgCountData;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
 import com.lbins.meetlove.fragment.ThreeFragment;
+import com.lbins.meetlove.fragment.TwoFragment;
 import com.lbins.meetlove.module.MsgCount;
 import com.lbins.meetlove.ui.LoginActivity;
 import com.lbins.meetlove.ui.MineMsgActivity;
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private FragmentManager fm;
 
     private OneFragment oneFragment;
-    private EaseConversationListFragment twoFragment;
+    private TwoFragment twoFragment;
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
 
@@ -156,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.foot_liner_two:
                 if (twoFragment == null) {
-                    twoFragment = new EaseConversationListFragment();
+                    twoFragment = new TwoFragment();
                     fragmentTransaction.add(R.id.content_frame, twoFragment);
                 } else {
                     fragmentTransaction.show(twoFragment);

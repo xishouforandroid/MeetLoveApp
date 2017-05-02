@@ -18,7 +18,6 @@ public class ChatActivity extends BaseActivity{
     public static ChatActivity activityInstance;
     private EaseChatFragment chatFragment;
     public String toChatUsername;
-    public  String nickname;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -27,7 +26,6 @@ public class ChatActivity extends BaseActivity{
         activityInstance = this;
         //get user id or group id
         toChatUsername = getIntent().getExtras().getString(Constant.EXTRA_USER_ID);
-        nickname = getIntent().getExtras().getString(Constant.EXTRA_USER_NICKNAME);
         //use EaseChatFratFragment
         chatFragment = new ChatFragment();
         //pass parameters to chat fragment

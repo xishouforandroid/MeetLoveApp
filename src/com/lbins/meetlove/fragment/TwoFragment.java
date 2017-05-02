@@ -5,14 +5,23 @@ import android.content.res.Resources;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.model.EaseAtMessageHelper;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.hyphenate.easeui.widget.EaseConversationList;
+import com.hyphenate.util.NetUtils;
+import com.lbins.meetlove.MainActivity;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemMessageAdapter;
 import com.lbins.meetlove.base.BaseFragment;
+import com.lbins.meetlove.chat.Constant;
+import com.lbins.meetlove.chat.db.InviteMessgeDao;
+import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
 import com.lbins.meetlove.ui.MineMsgActivity;
@@ -26,119 +35,120 @@ import java.util.List;
  * Created by zhl on 2016/7/1.
  * 推荐
  */
-public class TwoFragment extends BaseFragment implements View.OnClickListener  {
-    ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+public class TwoFragment  extends EaseConversationListFragment {
 
-    private View view;
-    private Resources res;
-    private TextView title;
-
-    private PullToRefreshListView lstv;
-    private ItemMessageAdapter adapter;
-    List<String> lists = new ArrayList<String>();
-    private int pageIndex = 1;
-    private static boolean IS_REFRESH = true;
-
-    private LinearLayout headLiner;
-
-    private ImageView notice_cover;
-    private TextView notice_number;
-    private TextView notice_title;
-    private TextView notice_msg;
-    private TextView notice_dateline;
+    private TextView errorText;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
+        super.initView();
+        View errorView = (LinearLayout) View.inflate(getActivity(),R.layout.em_chat_neterror_item, null);
+        errorItemContainer.addView(errorView);
+        errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.two_fragment, null);
-        res = getActivity().getResources();
-        initView();
-        return view;
-    }
+    protected void setUpView() {
+        super.setUpView();
+        // register context menu
+        registerForContextMenu(conversationListView);
+        conversationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-    void initView(){
-        lists.add("");
-        lists.add("");
-        lists.add("");
-        lists.add("");
-        lists.add("");
-        lists.add("");
-        lists.add("");
-        view.findViewById(R.id.back).setVisibility(View.GONE);
-        view.findViewById(R.id.btn_right).setVisibility(View.GONE);
-        title = (TextView) view.findViewById(R.id.title);
-        title.setText("消息");
-
-        lstv = (PullToRefreshListView) view.findViewById(R.id.lstv);
-        adapter = new ItemMessageAdapter(lists, getActivity());
-        headLiner = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.two_header, null);
-        notice_cover = (ImageView) headLiner.findViewById(R.id.notice_cover);
-        notice_number = (TextView) headLiner.findViewById(R.id.notice_number);
-        notice_title = (TextView) headLiner.findViewById(R.id.notice_title);
-        notice_msg = (TextView) headLiner.findViewById(R.id.notice_msg);
-        notice_dateline = (TextView) headLiner.findViewById(R.id.notice_dateline);
-
-
-        final ListView listView = lstv.getRefreshableView();
-        listView.addHeaderView(headLiner);
-
-        lstv.setMode(PullToRefreshBase.Mode.BOTH);
-        lstv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = true;
-                pageIndex = 1;
-                getData();
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = false;
-                pageIndex++;
-                getData();
-            }
-        });
-        lstv.setAdapter(adapter);
-        lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(lists.size()>(position-1)){
+                EMConversation conversation = conversationListView.getItem(position);
+                String username = conversation.conversationId();
+                if (username.equals(EMClient.getInstance().getCurrentUser()))
+                    Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
+                else {
+                    // start chat acitivity
+                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    if(conversation.isGroup()){
+                        if(conversation.getType() == EMConversation.EMConversationType.ChatRoom){
+                            // it's group chat
+                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_CHATROOM);
+                        }else{
+                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
+                        }
 
+                    }
+                    // it's single chat
+                    intent.putExtra(Constant.EXTRA_USER_ID, username);
+                    startActivity(intent);
                 }
-
             }
         });
-
-        headLiner.findViewById(R.id.relate_notice).setOnClickListener(this);
+        //red packet code : 红包回执消息在会话列表最后一条消息的展示
+//        conversationListView.setConversationListHelper(new EaseConversationList.EaseConversationListHelper() {
+//            @Override
+//            public String onSetItemSecondaryText(EMMessage lastMessage) {
+//                if (lastMessage.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
+//                    String sendNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_NAME, "");
+//                    String receiveNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");
+//                    String msg;
+//                    if (lastMessage.direct() == EMMessage.Direct.RECEIVE) {
+//                        msg = String.format(getResources().getString(R.string.msg_someone_take_red_packet), receiveNick);
+//                    } else {
+//                        if (sendNick.equals(receiveNick)) {
+//                            msg = getResources().getString(R.string.msg_take_red_packet);
+//                        } else {
+//                            msg = String.format(getResources().getString(R.string.msg_take_someone_red_packet), sendNick);
+//                        }
+//                    }
+//                    return msg;
+//                }
+//                return null;
+//            }
+//        });
+        super.setUpView();
+        //end of red packet code
     }
 
-
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.relate_notice:
-            {
-                //系统通知
-                Intent intent = new Intent(getActivity(), MineMsgActivity.class);
-                startActivity(intent);
-            }
-                break;
+    protected void onConnectionDisconnected() {
+        super.onConnectionDisconnected();
+        if (NetUtils.hasNetwork(getActivity())){
+            errorText.setText(R.string.can_not_connect_chat_server_connection);
+        } else {
+            errorText.setText(R.string.the_current_network);
         }
     }
 
-    void getData(){}
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getActivity().getMenuInflater().inflate(R.menu.em_delete_message, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        boolean deleteMessage = false;
+        if (item.getItemId() == R.id.delete_message) {
+            deleteMessage = true;
+        } else if (item.getItemId() == R.id.delete_conversation) {
+            deleteMessage = false;
+        }
+        EMConversation tobeDeleteCons = conversationListView.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
+        if (tobeDeleteCons == null) {
+            return true;
+        }
+        if(tobeDeleteCons.getType() == EMConversation.EMConversationType.GroupChat){
+            EaseAtMessageHelper.get().removeAtMeGroup(tobeDeleteCons.conversationId());
+        }
+        try {
+            // delete conversation
+            EMClient.getInstance().chatManager().deleteConversation(tobeDeleteCons.conversationId(), deleteMessage);
+            InviteMessgeDao inviteMessgeDao = new InviteMessgeDao(getActivity());
+            inviteMessgeDao.deleteMessage(tobeDeleteCons.conversationId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        refresh();
+
+        // update unread count
+        ((MainActivity) getActivity()).updateUnreadLabel();
+        return true;
+    }
+
 
 }

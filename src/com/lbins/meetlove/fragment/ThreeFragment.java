@@ -181,17 +181,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                                         friendses.addAll(data.getData());
                                         Collections.sort(friendses, new PinyinComparator());
                                         adapter.notifyDataSetChanged();
-                                        if(friendses != null){
-                                            for(Friends friends:friendses){
-                                                if(friends != null){
-                                                    Emp emp = new Emp();
-                                                    emp.setEmpid(friends.getEmpid2());
-                                                    emp.setCover(friends.getEmpid2Cover());
-                                                    emp.setNickname(friends.getEmpid2Nickname());
-                                                    DBHelper.getInstance(getActivity()).saveEmp(emp);
-                                                }
-                                            }
-                                        }
+
                                     }
                                 }else {
                                     Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
