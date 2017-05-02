@@ -22,6 +22,7 @@ public class DBHelper {
     private HappyHandMessageDao happyHandMessageDao;
     private HappyHandNewsDao happyHandNewsDao;
     private HappyHandNoticeDao happyHandNoticeDao;
+    private HappyHandGroupDao happyHandGroupDao;
 
     private DBHelper() {
     }
@@ -32,7 +33,7 @@ public class DBHelper {
             if (mContext == null) {
                 mContext = context;
             }
-            helper = new DaoMaster.DevOpenHelper(context, "meet_love_hm_db_t_20170501", null);
+            helper = new DaoMaster.DevOpenHelper(context, "meet_love_hm_db_t_20170502", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             instance.empDao = daoMaster.newSession().getEmpDao();
@@ -41,6 +42,7 @@ public class DBHelper {
             instance.happyHandMessageDao = daoMaster.newSession().getHappyHandMessageDao();
             instance.happyHandNewsDao = daoMaster.newSession().getHappyHandNewsDao();
             instance.happyHandNoticeDao = daoMaster.newSession().getHappyHandNoticeDao();
+            instance.happyHandGroupDao = daoMaster.newSession().getHappyHandGroupDao();
         }
         return instance;
     }
@@ -169,6 +171,24 @@ public class DBHelper {
         List<HappyHandNotice> lists = qb.list();
         return lists;
     }
+     //------happyHandGroup------
+    public long saveHappyHandGroup(HappyHandGroup friends) {
+        return happyHandGroupDao.insertOrReplace(friends);
+    }
+
+    public List<HappyHandGroup> getHappyHandGroupList() {
+        return happyHandGroupDao.loadAll();
+    }
+
+    public HappyHandGroup getHappyHandGroupById(String id) {
+        HappyHandGroup friends = happyHandGroupDao.load(id);
+        return friends;
+    }
+
+    public void updateHappyHandNotice(HappyHandGroup friends) {
+        happyHandGroupDao.update(friends);
+    }
+
 
 //    //查询是否存在该会员信息
 //    public boolean isSaved(String ID) {

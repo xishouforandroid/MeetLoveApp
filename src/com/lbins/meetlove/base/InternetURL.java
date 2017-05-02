@@ -98,6 +98,8 @@ public class InternetURL {
     public static final String appEmpGroupsSave = INTERNAL + "appEmpGroupsSave.do";
     //检查用户是否已经加入群聊
     public static final String appEmpIsExist = INTERNAL + "appEmpIsExist.do";
+    //查询公开库
+    public static final String appPublicGroups = INTERNAL + "appPublicGroups.do";
 
 
 
@@ -105,4 +107,7 @@ public class InternetURL {
     public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";
     //微信支付
     public static final String SEND_ORDER_TOSERVER_WX = INTERNAL + "orderSaveWx.do";
+
+    public static final String DEFAULT_GROUP_ID1 = "14989449560068";
+    public static final String DEFAULT_GROUP_ID2 = "14989470531585";
 }

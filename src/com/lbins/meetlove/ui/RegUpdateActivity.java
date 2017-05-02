@@ -27,6 +27,7 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.OnClickContentItemListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.data.HappyHandLikeData;
@@ -511,7 +512,6 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                                 if (Integer.parseInt(code) == 200) {
                                     EmpData data = getGson().fromJson(s, EmpData.class);
                                     saveAccount(data.getData());
-
                                 }  else {
                                     showMsg(RegUpdateActivity.this,  jo.getString("message"));
                                 }
@@ -530,7 +530,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                         if (progressDialog != null) {
                             progressDialog.dismiss();
                         }
-                        Toast.makeText(RegUpdateActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegUpdateActivity.this, "操作失败，请稍后重试！", Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {

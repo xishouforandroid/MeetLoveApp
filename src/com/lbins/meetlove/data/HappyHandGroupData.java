@@ -1,6 +1,7 @@
 package com.lbins.meetlove.data;
 
-import com.lbins.meetlove.module.HappyHandGroup;
+
+import com.lbins.meetlove.dao.HappyHandGroup;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.module.HappyHandGroup;
+import com.lbins.meetlove.dao.HappyHandGroup;
 import com.lbins.meetlove.widget.RoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;

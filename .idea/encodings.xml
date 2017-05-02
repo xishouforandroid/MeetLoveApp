@@ -481,6 +481,22 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/MyChronometer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/chat/widget/RecyclingImageView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/DBHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/DaoMaster.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/DaoSession.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/Emp.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/EmpDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/Friends.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/FriendsDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandGroup.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandGroupDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandJw.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandJwDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandMessage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandMessageDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandNews.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandNewsDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandNotice.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/dao/HappyHandNoticeDao.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/Data.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/data/OrderInfoAndSignDATA.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/gallery/BasePagerAdapter.java" charset="UTF-8" />

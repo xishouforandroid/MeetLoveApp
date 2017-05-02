@@ -46,12 +46,14 @@ import com.lbins.meetlove.chat.ui.GroupsActivity;
 import com.lbins.meetlove.chat.util.SharePrefConstant;
 import com.lbins.meetlove.dao.*;
 import com.lbins.meetlove.data.FriendsData;
+import com.lbins.meetlove.data.HappyHandGroupData;
 import com.lbins.meetlove.data.MsgCountData;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
 import com.lbins.meetlove.fragment.ThreeFragment;
 import com.lbins.meetlove.fragment.TwoFragment;
 import com.lbins.meetlove.module.MsgCount;
+import com.lbins.meetlove.ui.GroupDetailActivity;
 import com.lbins.meetlove.ui.LoginActivity;
 import com.lbins.meetlove.ui.MineMsgActivity;
 import com.lbins.meetlove.util.GuirenHttpUtils;
@@ -63,7 +65,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener , Runnable {
 
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fm;
@@ -123,6 +125,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //统计未读消息数
         getMsgCount();
         getFriendsCount();
+
+        // 启动一个线程
+        new Thread(MainActivity.this).start();
+
+
     }
     private void initView() {
         foot_one = (ImageView) this.findViewById(R.id.foot_one);
@@ -492,6 +499,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         };
         broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    public void run() {
+        //查询公开库
+        appPublicGroups();
     }
 
     public class MyContactListener implements EMContactListener {
@@ -922,6 +935,68 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid2", getGson().fromJson(getSp().getString("empid", ""), String.class));
                 params.put("is_check", "0");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    private void appPublicGroups() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appPublicGroups,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandGroupData data = getGson().fromJson(s, HappyHandGroupData.class);
+                                    if(data != null){
+                                        List<HappyHandGroup> groups = new ArrayList<>();
+                                        groups.addAll(data.getData());
+                                        if(groups != null){
+                                            for(HappyHandGroup group:groups){
+                                                DBHelper.getInstance(MainActivity.this).saveHappyHandGroup(group);
+                                            }
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(MainActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
                 return params;
             }
 

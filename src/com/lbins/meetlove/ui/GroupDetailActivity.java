@@ -20,8 +20,9 @@ import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.ui.ChatActivity;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.HappyHandGroup;
 import com.lbins.meetlove.data.HappyHandGroupDataSingle;
-import com.lbins.meetlove.module.HappyHandGroup;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -237,8 +238,7 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
             if(!StringUtil.isNullOrEmpty(happyHandGroup.getContent())){
                 content.setText(happyHandGroup.getContent());
             }
-            //判断当前用户是否已经在该群聊中
-            happyHandGroup.getLikeid();
+            DBHelper.getInstance(GroupDetailActivity.this).saveHappyHandGroup(happyHandGroup);
         }
     }
 
