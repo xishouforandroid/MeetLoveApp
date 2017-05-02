@@ -1,19 +1,25 @@
 package com.lbins.meetlove.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.hyphenate.chat.EMConversation;
 import com.lbins.meetlove.MeetLoveApplication;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
-import com.lbins.meetlove.data.HappyHandGroupData;
+import com.lbins.meetlove.chat.Constant;
+import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.data.HappyHandGroupDataSingle;
 import com.lbins.meetlove.module.HappyHandGroup;
 import com.lbins.meetlove.util.StringUtil;
@@ -38,6 +44,8 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
     private String groupid;
     private HappyHandGroup happyHandGroup;
 
+    private String flag = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +58,15 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getDetailGroups();
+        //判断用户是否已经加入群聊
+        isGroups();
     }
 
     private void initView() {
         this.findViewById(R.id.back).setOnClickListener(this);
         this.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) this.findViewById(R.id.title);
-        title.setText("电影群");
+        title.setText("群聊");
         cover = (ImageView) this.findViewById(R.id.cover);
         name = (TextView) this.findViewById(R.id.name);
         content = (TextView) this.findViewById(R.id.content);
@@ -133,10 +143,84 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.btn_1:
             {
                 //加群
+                if("1".equals(flag)){
+                    //发消息
+                    Intent intent = new Intent(GroupDetailActivity.this, ChatActivity.class);
+                    intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
+                    intent.putExtra(Constant.EXTRA_USER_ID, groupid);
+                    startActivity(intent);
+                }else  if("0".equals(flag)){
+                    progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+                    saveG();
+                }
             }
                 break;
         }
     }
+
+    private void saveG() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appEmpGroupsSave,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    showMsg(GroupDetailActivity.this, "加群成功！");
+                                    // start chat acitivity
+                                    Intent intent = new Intent(GroupDetailActivity.this, ChatActivity.class);
+                                    intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
+                                    intent.putExtra(Constant.EXTRA_USER_ID, groupid);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(GroupDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("groupid", groupid);
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
 
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
@@ -148,10 +232,73 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
             }
             if(!StringUtil.isNullOrEmpty(happyHandGroup.getTitle())){
                 name.setText(happyHandGroup.getTitle());
+                title.setText(happyHandGroup.getTitle());
             }
             if(!StringUtil.isNullOrEmpty(happyHandGroup.getContent())){
                 content.setText(happyHandGroup.getContent());
             }
+            //判断当前用户是否已经在该群聊中
+            happyHandGroup.getLikeid();
         }
+    }
+
+
+
+    private void isGroups() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appEmpIsExist,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    //已经加入群聊
+                                    flag = "1";
+                                    btn_1.setText("发消息");
+                                }else {
+                                    //尚未加入群聊
+                                    flag = "0";
+                                    btn_1.setText("加群");
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("groupid", groupid);
+                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
     }
 }

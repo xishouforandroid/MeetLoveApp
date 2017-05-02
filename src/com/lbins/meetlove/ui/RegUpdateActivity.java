@@ -406,8 +406,6 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             }
             break;
 
-
-
             case R.id.age_marry:
             {
                 //年龄-择偶
@@ -493,13 +491,13 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
-                reg();
+                updateProfile();
             }
                 break;
         }
     }
 
-    private void reg(){
+    private void updateProfile(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.appUpdateProfile,

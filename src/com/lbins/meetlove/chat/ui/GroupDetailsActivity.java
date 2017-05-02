@@ -23,14 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -47,6 +40,9 @@ import com.hyphenate.easeui.widget.EaseExpandGridView;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
+import com.lbins.meetlove.ui.GroupDetailActivity;
+import com.lbins.meetlove.ui.ProfileEmpActivity;
+import com.lbins.meetlove.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,7 +108,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		RelativeLayout changeGroupNameLayout = (RelativeLayout) findViewById(R.id.rl_change_group_name);
 		RelativeLayout changeGroupDescriptionLayout = (RelativeLayout) findViewById(R.id.rl_change_group_description);
 		RelativeLayout idLayout = (RelativeLayout) findViewById(R.id.rl_group_id);
-		idLayout.setVisibility(View.VISIBLE);
+		idLayout.setVisibility(View.GONE);
 		TextView idText = (TextView) findViewById(R.id.tv_group_id_value);
 
 		RelativeLayout rl_switch_block_groupmsg = (RelativeLayout) findViewById(R.id.rl_switch_block_groupmsg);
@@ -147,6 +143,19 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		membersAdapter = new GridAdapter(this, R.layout.em_grid_owner, new ArrayList<String>());
 		EaseExpandGridView userGridview = (EaseExpandGridView) findViewById(R.id.gridview);
 		userGridview.setAdapter(membersAdapter);
+		userGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String empid = memberList.get(position);
+				if(!StringUtil.isNullOrEmpty(empid)){
+					if(!empid.equals(getGson().fromJson(getSp().getString("empid",""), String.class))){
+						Intent intent = new Intent(GroupDetailsActivity.this, ProfileEmpActivity.class);
+						intent.putExtra("empid", empid);
+						startActivity(intent);
+					}
+				}
+			}
+		});
 
 		ownerAdminAdapter = new OwnerAdminAdapter(this, R.layout.em_grid_owner, new ArrayList<String>());
 		EaseExpandGridView ownerAdminGridview = (EaseExpandGridView) findViewById(R.id.owner_and_administrators_grid_view);

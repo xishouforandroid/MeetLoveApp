@@ -142,7 +142,7 @@
     <string name="Empty_the_chat_record">清空聊天记录</string>
     <string name="Shielding_of_the_message">屏蔽群消息</string>
     <string name="block_offline_group_push">屏蔽离线消息推送</string>
-    <string name="dismiss_group">解散群聊</string>
+    <string name="dismiss_group">解散该群</string>
     <string name="Select_the_contact">选择联系人</string>
     <string name="Group_chat_information">群聊资料</string>
     <string name="Group_of_Lord">群主</string>
@@ -166,7 +166,7 @@
     <string name="not_download">未下载:</string>
     <string name="Please_enter_a_username">请输入用户名</string>
     <string name="is_down_please_wait">正在下载视频请稍候</string>
-    <string name="Exit_the_group_chat">退出群聊</string>
+    <string name="Exit_the_group_chat">退出该群</string>
     <string name="accept_join_group">同意加入群：</string>
     <string name="refuse_join_group">拒绝加入群：</string>
     <string name="at_your_in_group">%s在群聊中@了你</string>

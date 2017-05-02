@@ -92,6 +92,12 @@ public class InternetURL {
     public static final String UPDATE_PUSH_ID = INTERNAL + "updatePushId.do";
     //系统通知列表
     public static final String appMsgAllList = INTERNAL + "appMsgAllList.do";
+    //获得用户的群
+    public static final String appEmpGroupsByEmpId = INTERNAL + "appEmpGroupsByEmpId.do";
+    //加群
+    public static final String appEmpGroupsSave = INTERNAL + "appEmpGroupsSave.do";
+    //检查用户是否已经加入群聊
+    public static final String appEmpIsExist = INTERNAL + "appEmpIsExist.do";
 
 
 

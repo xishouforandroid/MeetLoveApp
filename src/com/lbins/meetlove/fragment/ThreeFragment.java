@@ -23,12 +23,14 @@ import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ContactAdapter;
 import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.chat.ui.GroupsActivity;
 import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.dao.Friends;
 import com.lbins.meetlove.data.EmpsData;
 import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.ui.FriendsApplyActivity;
+import com.lbins.meetlove.ui.MineGroupsActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
 import com.lbins.meetlove.util.PinyinComparator;
 import com.lbins.meetlove.util.StringUtil;
@@ -158,6 +160,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
             case R.id.relate_groups:
             {
                 //群聊
+                startActivity(new Intent(getActivity(), MineGroupsActivity.class));
             }
                 break;
         }
@@ -181,7 +184,6 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                                         friendses.addAll(data.getData());
                                         Collections.sort(friendses, new PinyinComparator());
                                         adapter.notifyDataSetChanged();
-
                                     }
                                 }else {
                                     Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
