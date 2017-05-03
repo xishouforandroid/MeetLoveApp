@@ -30,9 +30,9 @@
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="match_parent"
                           android:textSize="15sp"
+                          android:id="@+id/fwtk"
                           android:padding="12dp"
                           android:lineSpacingMultiplier="1.2"
-                          android:text="1、幸福牵手吧是一款适用于各类团体单身用户组团相亲的婚恋APP。\n2、非团体形式的个人单身用户，注册后无法交友，只能分享，传播和宣传APP。\n3、欢迎并感谢您的关注和传播，我们会努力做得更好。\n4、温馨提示：非实名注册，会影响您婚恋交友，寻找幸福。\n5、最后祝所有单身朋友，都能找到幸福。"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
 

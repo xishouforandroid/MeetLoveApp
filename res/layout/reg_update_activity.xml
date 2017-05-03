@@ -390,7 +390,7 @@
                     android:textStyle="bold"
                     android:id="@+id/btn_login"
                     android:textSize="16sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textColortwo"
                     android:background="@drawable/btn_big_unactive"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

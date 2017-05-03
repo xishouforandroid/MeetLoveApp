@@ -94,6 +94,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mobile.addTextChangedListener(watcher);
         pwr.addTextChangedListener(watcher);
         btn_login.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+        btn_login.setTextColor(res.getColor(R.color.textColortwo));
 
     }
 
@@ -315,8 +316,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                    btn_login.setTextColor(res.getColor(R.color.white));
                 }else {
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                    btn_login.setTextColor(res.getColor(R.color.textColortwo));
                 }
             }
         }

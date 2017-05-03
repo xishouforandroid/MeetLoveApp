@@ -1,12 +1,12 @@
 package com.lbins.meetlove.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,6 +25,7 @@ import com.lbins.meetlove.dao.HappyHandGroup;
 import com.lbins.meetlove.data.HappyHandGroupDataSingle;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
+import com.lbins.meetlove.widget.SelectPhotoPopWindow;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import org.json.JSONObject;
@@ -151,15 +152,47 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
                     intent.putExtra(Constant.EXTRA_USER_ID, groupid);
                     startActivity(intent);
                 }else  if("0".equals(flag)){
-                    progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后",R.anim.custom_dialog_frame);
-                    progressDialog.setCancelable(true);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.show();
-                    saveG();
+                    //身份认证
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                        //身份认证了
+                        progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        saveG();
+                    }else {
+                        //未认证
+                        showMsgDialog();
+                    }
                 }
             }
                 break;
         }
+    }
+
+    private void showMsgDialog() {
+        final Dialog picAddDialog = new Dialog(GroupDetailActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupDetailActivity.this, MineRenzhengActivity.class);
+                startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     private void saveG() {

@@ -350,8 +350,10 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(sign.getText().toString()) && !StringUtil.isNullOrEmpty(nickname.getText().toString())&& !StringUtil.isNullOrEmpty(company.getText().toString())){
                 btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_login.setTextColor(getResources().getColor(R.color.white));
             }else{
                 btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
     };

@@ -36,7 +36,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private LinearLayout sex_liner;
 
-    private String sex = "1";//0女 1男
+    private String sex = "";//0女 1男
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         pwrsure.addTextChangedListener(watcher);
 
         btn_login.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+        btn_login.setTextColor(res.getColor(R.color.textColortwo));
     }
 
     @Override
@@ -114,6 +115,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 }
                 if(!pwr.getText().toString().equals(pwrsure.getText().toString())){
                     showMsg(RegisterActivity.this, res.getString(R.string.error_pwr_two_no));
+                    return;
+                }
+                if(StringUtil.isNullOrEmpty(sex)){
+                    showMsg(RegisterActivity.this, "请选择性别");
                     return;
                 }
 
@@ -163,8 +168,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().equals(pwrsure.getText().toString()) && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                    btn_login.setTextColor(res.getColor(R.color.white));
                 }else {
                     btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                    btn_login.setTextColor(res.getColor(R.color.textColortwo));
                 }
             }
         }
