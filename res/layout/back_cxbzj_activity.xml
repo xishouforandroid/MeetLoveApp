@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+
+    <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:minHeight="120dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="top"
+                    android:text="退还保证金"
+                    android:padding="10dp"
+                    android:textColor="#ff000000"/>
+           <LinearLayout android:layout_width="match_parent"
+                         android:background="@color/white"
+                         android:padding="25dp"
+                         android:orientation="vertical"
+                         android:layout_height="wrap_content">
+               <TextView android:layout_width="match_parent"
+                         android:text="详情"
+                         android:textColor="@color/textColor"
+                         android:textSize="16sp"
+                         android:layout_height="wrap_content"/>
+               <TextView android:layout_width="match_parent"
+                         android:text="·我们将会在三个工作日之内处理好您的申请;"
+                         android:textColor="@color/textColor"
+                         android:layout_marginTop="5dp"
+                         android:textSize="13sp"
+                         android:layout_height="wrap_content"/>
+               <TextView android:layout_width="match_parent"
+                         android:text="·如果有任何疑问请随时与我们联系，谢谢;"
+                         android:textColor="@color/textColor"
+                         android:layout_marginTop="3dp"
+                         android:textSize="13sp"
+                         android:layout_height="wrap_content"/>
+           </LinearLayout>
+
+
+            <Button android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_below="@+id/pwr"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="提交"
+                    android:textStyle="bold"
+                    android:id="@+id/btn_1"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_big_active"
+                    android:layout_height="wrap_content"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_below="@+id/btn_login"
+                          android:layout_marginLeft="20dp"
+                          android:layout_marginRight="20dp"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:text="客服热线"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:textColor="@color/main_color"
+                          android:textSize="14sp"
+                          android:id="@+id/btn_kfrx"
+                          android:layout_height="35dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.lbins.meetlove.widget.ReboundScrollView>
+</LinearLayout>

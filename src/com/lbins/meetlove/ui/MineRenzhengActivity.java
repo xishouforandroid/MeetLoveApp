@@ -192,27 +192,44 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.btn_2:
             {
-                //会员认证
-                if("1".equals(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
-                    //会员认证了
-                    showMsg(MineRenzhengActivity.this, "会员已认证!");
+                if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    //会员认证
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
+                        //会员认证了
+                        showMsg(MineRenzhengActivity.this, "会员已认证!");
+                    }else {
+                        //未认证
+                        Intent intent = new Intent(MineRenzhengActivity.this, PayEmpRzActivity.class);
+                        startActivity(intent);
+                    }
                 }else {
                     //未认证
-                    Intent intent = new Intent(MineRenzhengActivity.this, PayEmpRzActivity.class);
-                    startActivity(intent);
+                   showMsg(MineRenzhengActivity.this, "请先完成身份认证！");
                 }
+
             }
                 break;
             case R.id.btn_3:
             {
-                //诚信认证
-                if("1".equals(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
-                    //诚信认证了
-                    showMsg(MineRenzhengActivity.this, "诚信已认证!");
+                if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    //会员认证
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
+                        //诚信认证
+                        if("1".equals(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
+                            //诚信认证了
+                            showMsg(MineRenzhengActivity.this, "诚信已认证!");
+                        }else {
+                            //未认证
+                            Intent intent = new Intent(MineRenzhengActivity.this, PayEmpCxActivity.class);
+                            startActivity(intent);
+                        }
+                    }else {
+                        //未认证
+                        showMsg(MineRenzhengActivity.this, "请先完成会员认证！");
+                    }
                 }else {
                     //未认证
-                    Intent intent = new Intent(MineRenzhengActivity.this, PayEmpCxActivity.class);
-                    startActivity(intent);
+                    showMsg(MineRenzhengActivity.this, "请先完成身份认证！");
                 }
             }
                 break;
@@ -271,11 +288,25 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
             popWindow.dismiss();
             switch (v.getId()) {
                 case R.id.btn_xfzf: {
-                    showMsg(MineRenzhengActivity.this, "111");
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                        Intent intent = new Intent(MineRenzhengActivity.this, PayEmpRzActivity.class);
+                        startActivity(intent);
+                    }else {
+                        //未认证
+                        showMsg(MineRenzhengActivity.this, "请先完成身份认证！");
+                    }
                 }
                 break;
                 case R.id.btn_thbzj: {
-                    showMsg(MineRenzhengActivity.this, "222");
+                    if("1".equals(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
+                        //诚信认证了
+                       Intent intent = new Intent(MineRenzhengActivity.this, BackCxbzjActivity.class);
+                        startActivity(intent);
+                    }else {
+                        //未认证
+                        showMsg(MineRenzhengActivity.this, "您未缴纳诚信保证金！");
+                    }
+
                 }
                 break;
                 default:

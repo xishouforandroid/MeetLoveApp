@@ -1,7 +1,10 @@
 package com.lbins.meetlove.ui;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -26,12 +29,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.data.KefuTelData;
+import com.lbins.meetlove.module.KefuTel;
 import com.lbins.meetlove.receiver.SMSBroadcastReceiver;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,7 +67,7 @@ public class ForgetPwrActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forget_pwr_activity); res = getResources();
+        setContentView(R.layout.forget_pwr_activity);
         res = getResources();
         //mob短信无GUI
         SMSSDK.initSDK(this, APPKEY, APPSECRET, true);
@@ -230,6 +236,7 @@ public class ForgetPwrActivity extends BaseActivity implements View.OnClickListe
             case R.id.btn_tel:
             {
                 //联系我们
+                getTel();
             }
                 break;
             case R.id.btn_card:
@@ -341,4 +348,98 @@ public class ForgetPwrActivity extends BaseActivity implements View.OnClickListe
         };
         getRequestQueue().add(request);
     }
+
+    private void getTel() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appTel,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    KefuTelData data = getGson().fromJson(s, KefuTelData.class);
+                                    if(data != null){
+                                        List<KefuTel> tels = data.getData();
+                                        if(tels != null && tels.size()>0){
+                                            KefuTel kefuTel = tels.get(0);
+                                            if(kefuTel != null){
+                                                String mm_tel = kefuTel.getMm_tel();
+                                                if(!StringUtil.isNullOrEmpty(mm_tel)){
+                                                    showMsgDialog(mm_tel);
+                                                }
+                                            }
+                                        }
+                                    }else {
+                                        showMsg(ForgetPwrActivity.this, "暂无客服电话！");
+                                    }
+                                } else {
+                                    Toast.makeText(ForgetPwrActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(ForgetPwrActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(ForgetPwrActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    private void showMsgDialog(final String mm_tel) {
+        final Dialog picAddDialog = new Dialog(ForgetPwrActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_tel_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mm_tel));
+                ForgetPwrActivity.this.startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
 }

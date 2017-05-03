@@ -106,6 +106,8 @@ public class InternetURL {
     public static final String appSearchGroupsByKeywords = INTERNAL + "appSearchGroupsByKeywords.do";
     //客服电话
     public static final String appTel = INTERNAL + "appTel.do";
+    //申请退还保证金
+    public static final String appSaveApplyBack = INTERNAL + "appSaveApplyBack.do";
 
     //传订单给服务端--生成订单
     public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";
