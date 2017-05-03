@@ -506,7 +506,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                                     listjwdxs.addAll(data.getData());
                                     if(listjwdxs != null && listjwdxs.size()>0){
                                         HappyHandJw happyHandJw = listjwdxs.get(0);
-                                        Intent intent = new Intent(getActivity(), ProfileDetailActivity.class);
+                                        Intent intent = new Intent(getActivity(), ProfileDetailJwdxActivity.class);
                                         intent.putExtra("empid", happyHandJw.getEmpid2());
                                         startActivity(intent);
                                     }

@@ -80,7 +80,6 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         empid = getIntent().getExtras().getString("empid");
         res = getResources();
         initView();
-        initView();
         progressDialog = new CustomProgressDialog(ProfileEmpActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
@@ -186,6 +185,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         cover.setOnClickListener(this);
         nickname.setOnClickListener(this);
         this.findViewById(R.id.liner_photo).setOnClickListener(this);
+        this.findViewById(R.id.btn_right).setOnClickListener(this);
         btn_login = (Button) this.findViewById(R.id.btn_login);
     }
 
@@ -225,6 +225,13 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 }else {
                     showMsgDialog();
                 }
+            }
+                break;
+            case R.id.btn_right:
+            {
+                Intent intent = new Intent(ProfileEmpActivity.this, ProfileSetActivity.class);
+                intent.putExtra("empid", empid);
+                startActivity(intent);
             }
                 break;
         }

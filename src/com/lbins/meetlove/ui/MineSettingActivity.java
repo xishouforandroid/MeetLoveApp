@@ -20,6 +20,7 @@ import com.lbins.meetlove.base.ActivityTack;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.chat.DemoHelper;
 import com.lbins.meetlove.chat.DemoModel;
+import com.lbins.meetlove.chat.ui.BlacklistActivity;
 import com.lbins.meetlove.widget.QuitePopWindow;
 import com.lbins.meetlove.widget.SelectSuggestPopWindow;
 import com.lbins.meetlove.widget.UpdatePwrPopWindow;
@@ -190,6 +191,8 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
             case R.id.liner_black:
             {
                 //黑名单
+                Intent intent = new Intent(MineSettingActivity.this, BlacklistActivity.class);
+                startActivity(intent);
             }
                 break;
             case R.id.liner_suggest:
@@ -256,6 +259,7 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
                 break;
                 case R.id.btn_report: {
                     Intent intent = new Intent(MineSettingActivity.this, AddReportActivity.class);
+                    intent.putExtra("name" , "");
                     startActivity(intent);
                 }
                 break;

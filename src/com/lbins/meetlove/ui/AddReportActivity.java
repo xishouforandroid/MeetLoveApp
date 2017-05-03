@@ -42,10 +42,13 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
     private EditText nickname;
     private EditText content;
     private Button btn_1;
+    private String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_report_activity);
+        name = getIntent().getExtras().getString("name");
         initView();
     }
 
@@ -55,6 +58,9 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
         title = (TextView) this.findViewById(R.id.title);
         title.setText("投诉");
         nickname = (EditText) this.findViewById(R.id.nickname);
+        if(!StringUtil.isNullOrEmpty(name)){
+            nickname.setText(name);
+        }
         content = (EditText) this.findViewById(R.id.content);
         btn_1 = (Button) this.findViewById(R.id.btn_1);
         btn_1.setOnClickListener(this);

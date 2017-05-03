@@ -108,6 +108,10 @@ public class InternetURL {
     public static final String appTel = INTERNAL + "appTel.do";
     //申请退还保证金
     public static final String appSaveApplyBack = INTERNAL + "appSaveApplyBack.do";
+    //删除好友关系
+    public static final String appDeleteFriends = INTERNAL + "appDeleteFriends.do";
+    //解除交往对象
+    public static final String appDeleteJiaowangDx = INTERNAL + "appDeleteJiaowangDx.do";
 
     //传订单给服务端--生成订单
     public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";

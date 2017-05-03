@@ -418,6 +418,23 @@
                               android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="1dp"
+                          android:background="@color/white"
+                          android:id="@+id/liner_jcjw"
+                          android:visibility="gone"
+                          android:layout_marginBottom="15dp"
+                          android:gravity="center_vertical"
+                          android:layout_height="40dp">
+                <TextView android:layout_width="match_parent"
+                          android:text="解除交往"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:textSize="15sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="match_parent"/>
+            </LinearLayout>
             <Button android:layout_width="match_parent"
                     android:padding="8dp"
                     android:layout_marginTop="45dp"
