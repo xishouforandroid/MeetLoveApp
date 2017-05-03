@@ -122,7 +122,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.LoginActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
+        <activity android:name=".ui.LoginActivity" android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
         <activity android:name=".ui.AboutActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".MainActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.RegistMsgActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
@@ -359,7 +360,7 @@
                 android:name=".chat.ui.ChatActivity"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
-                android:theme="@style/horizontal_slide"
+                android:theme="@style/AppTheme"
                 android:windowSoftInputMode="adjustResize" />
         <!-- 添加好友 -->
         <activity
