@@ -94,13 +94,15 @@ public class AboutSettingActivity extends BaseActivity implements View.OnClickLi
                                 if (Integer.parseInt(code1) == 200) {
                                     VersonCodeObjData data = getGson().fromJson(s, VersonCodeObjData.class);
                                     VersonCodeObj versionUpdateObj = data.getData();
-                                    if(getV().equals(versionUpdateObj.getMm_version_code())){
-                                        showMsg(AboutSettingActivity.this, "已是最新版本");
-                                    }else{
-                                        //更新
-                                        final Uri uri = Uri.parse(InternetURL.UPDATE_URL);
-                                        final Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                                        startActivity(it);
+                                    if(versionUpdateObj != null){
+                                        if(getV().equals(versionUpdateObj.getMm_version_code())){
+                                            showMsg(AboutSettingActivity.this, "已是最新版本");
+                                        }else{
+                                            //更新
+                                            final Uri uri = Uri.parse(InternetURL.UPDATE_URL);
+                                            final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(it);
+                                        }
                                     }
                                 }
                             } catch (Exception e) {

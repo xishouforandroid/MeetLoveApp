@@ -7,7 +7,7 @@ public class InternetURL {
 
     public static final String QINIU_URL =  "http://oo4c4r583.bkt.clouddn.com/";
     //更新链接
-    public static final String UPDATE_URL =  "http://a.app.qq.com/o/simple.jsp?pkgname=com.lbins.myapp";
+    public static final String UPDATE_URL =  "http://a.app.qq.com/o/simple.jsp?pkgname=com.lbins.meetlove";
     //mob
     public static final String APP_MOB_KEY = "1cadf0af8fa55";
     public static final String APP_MOB_SCRECT = "0f7d21f71e2d1a02376e142298da8003";

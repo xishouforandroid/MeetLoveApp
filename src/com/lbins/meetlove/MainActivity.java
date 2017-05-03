@@ -1,10 +1,12 @@
 package com.lbins.meetlove;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +32,6 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
@@ -38,7 +40,6 @@ import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.DemoHelper;
 import com.lbins.meetlove.chat.db.InviteMessgeDao;
-import com.lbins.meetlove.chat.db.UserDao;
 import com.lbins.meetlove.chat.runtimepermissions.PermissionsManager;
 import com.lbins.meetlove.chat.runtimepermissions.PermissionsResultAction;
 import com.lbins.meetlove.chat.ui.ChatActivity;
@@ -48,14 +49,14 @@ import com.lbins.meetlove.dao.*;
 import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.data.HappyHandGroupData;
 import com.lbins.meetlove.data.MsgCountData;
+import com.lbins.meetlove.data.VersonCodeObjData;
 import com.lbins.meetlove.fragment.FourFragment;
 import com.lbins.meetlove.fragment.OneFragment;
 import com.lbins.meetlove.fragment.ThreeFragment;
 import com.lbins.meetlove.fragment.TwoFragment;
 import com.lbins.meetlove.module.MsgCount;
-import com.lbins.meetlove.ui.GroupDetailActivity;
+import com.lbins.meetlove.module.VersonCodeObj;
 import com.lbins.meetlove.ui.LoginActivity;
-import com.lbins.meetlove.ui.MineMsgActivity;
 import com.lbins.meetlove.util.GuirenHttpUtils;
 import com.lbins.meetlove.util.StringUtil;
 import org.json.JSONObject;
@@ -125,11 +126,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         //统计未读消息数
         getMsgCount();
         getFriendsCount();
+        checkVersion();
 
         // 启动一个线程
         new Thread(MainActivity.this).start();
-
-
     }
     private void initView() {
         foot_one = (ImageView) this.findViewById(R.id.foot_one);
@@ -239,64 +239,64 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         switchFragment(v.getId());
     }
 
-//    VersonCodeObj versionUpdateObj;
-//
-//    public void checkVersion() {
-//        StringRequest request = new StringRequest(
-//                Request.Method.POST,
-//                InternetURL.CHECK_VERSION_CODE_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String s) {
-//                        if (StringUtil.isJson(s)) {
-//                            try {
-//                                JSONObject jo = new JSONObject(s);
-//                                String code1 = jo.getString("code");
-//                                if (Integer.parseInt(code1) == 200) {
-//                                    VersionUpdateObjData data = getGson().fromJson(s, VersionUpdateObjData.class);
-//                                    versionUpdateObj = data.getData();
-//                                    if("true".equals(versionUpdateObj.getFlag())){
-//                                        showVersionDialog();
-//                                    }
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        } else {
-//                            Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-//                        }
-//                        if (progressDialog != null) {
-//                            progressDialog.dismiss();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError volleyError) {
-//                        if (progressDialog != null) {
-//                            progressDialog.dismiss();
-//                        }
-//                        Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//        ) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("mm_version_code", getV());
-//                params.put("mm_version_package", "com.Lbins.Mlt");
-//                return params;
-//            }
-//
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Content-Type", "application/x-www-form-urlencoded");
-//                return params;
-//            }
-//        };
-//        getRequestQueue().add(request);
-//    }
+    VersonCodeObj versionUpdateObj;
+
+    public void checkVersion() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.getVersionCode,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    VersonCodeObjData data = getGson().fromJson(s, VersonCodeObjData.class);
+                                    versionUpdateObj = data.getData();
+                                    if(versionUpdateObj != null){
+                                        if(!getV().equals(versionUpdateObj.getMm_version_code())){
+                                            showVersionDialog();
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
     String getV(){
         try {
@@ -309,32 +309,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         }
     }
 
-//    private void showVersionDialog() {
-//        final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.dialog);
-//        View picAddInflate = View.inflate(this, R.layout.dialog_new_version, null);
-//        ImageView btn_sure = (ImageView) picAddInflate.findViewById(R.id.btn_sure);
-//        btn_sure.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //更新
-//                final Uri uri = Uri.parse(versionUpdateObj.getDurl());
-//                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(it);
-//                picAddDialog.dismiss();
-//            }
-//        });
-//
-//        //取消
-//        ImageView btn_cancel = (ImageView) picAddInflate.findViewById(R.id.btn_cancel);
-//        btn_cancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                picAddDialog.dismiss();
-//            }
-//        });
-//        picAddDialog.setContentView(picAddInflate);
-//        picAddDialog.show();
-//    }
+    private void showVersionDialog() {
+        final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_version_dialog, null);
+        Button btn_sure = (Button) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //更新
+                final Uri uri = Uri.parse(InternetURL.UPDATE_URL);
+                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        Button btn_cancel = (Button) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
 
     // 定义一个变量，来标识是否退出
     private static boolean isExit = false;
