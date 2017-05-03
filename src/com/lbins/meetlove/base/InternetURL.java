@@ -104,14 +104,12 @@ public class InternetURL {
     public static final String appSearchPeoplesByKeyWords = INTERNAL + "appSearchPeoplesByKeyWords.do";
     //按条件查询群
     public static final String appSearchGroupsByKeywords = INTERNAL + "appSearchGroupsByKeywords.do";
-
-
+    //客服电话
+    public static final String appTel = INTERNAL + "appTel.do";
 
     //传订单给服务端--生成订单
     public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";
     //微信支付
     public static final String SEND_ORDER_TOSERVER_WX = INTERNAL + "orderSaveWx.do";
 
-    public static final String DEFAULT_GROUP_ID1 = "14989449560068";
-    public static final String DEFAULT_GROUP_ID2 = "14989470531585";
 }

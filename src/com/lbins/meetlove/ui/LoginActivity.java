@@ -53,17 +53,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         res = getResources();
-//        DemoHelper.getInstance().logout(false, new EMCallBack() {
-//            @Override
-//            public void onSuccess() {
-//            }
-//            @Override
-//            public void onError(int i, String s) {
-//            }
-//            @Override
-//            public void onProgress(int i, String s) {
-//            }
-//        });
         registerBoradcastReceiver();
         initView();
         //查看是否有用户  是否使用用户----0否 1是 2尚未维护资料

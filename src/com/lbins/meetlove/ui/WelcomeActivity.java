@@ -49,7 +49,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
     public void run() {
         try {
             // 3秒后跳转到登录界面
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             boolean isFirstRun = getSp().getBoolean("isFirstRun", true);
             if (isFirstRun) {
                 SharedPreferences.Editor editor = getSp().edit();
