@@ -188,6 +188,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable {
         save("heightlend", emp.getHeightlend());
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
+        save("is_push", emp.getIs_push());
 
         DBHelper.getInstance(WelcomeActivity.this).saveEmp(emp);
 

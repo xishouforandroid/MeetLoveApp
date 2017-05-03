@@ -87,7 +87,7 @@ public class MeetLoveApplication extends Application {
         PlatformConfig.setAlipay("2017041706780367");
         //环信
         EaseUI.getInstance().init(this, null);
-        EMClient.getInstance().setDebugMode(true);
+//        EMClient.getInstance().setDebugMode(true);
     }
 
     @Override

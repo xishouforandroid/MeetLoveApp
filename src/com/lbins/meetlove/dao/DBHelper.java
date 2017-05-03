@@ -33,7 +33,7 @@ public class DBHelper {
             if (mContext == null) {
                 mContext = context;
             }
-            helper = new DaoMaster.DevOpenHelper(context, "meet_love_hm_db_t_20170502", null);
+            helper = new DaoMaster.DevOpenHelper(context, "meet_love_hm_db_t_20170503", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             instance.empDao = daoMaster.newSession().getEmpDao();

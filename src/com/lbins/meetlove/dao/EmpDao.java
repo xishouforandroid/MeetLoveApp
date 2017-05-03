@@ -58,6 +58,7 @@ public class EmpDao extends AbstractDao<Emp, String> {
         public final static Property Marriagem = new Property(32, String.class, "marriagem", false, "MARRIAGEM");
         public final static Property Pname = new Property(33, String.class, "pname", false, "PNAME");
         public final static Property CityName = new Property(34, String.class, "cityName", false, "CITY_NAME");
+        public final static Property Is_push = new Property(35, String.class, "is_push", false, "IS_PUSH");
     };
 
     private DaoSession daoSession;
@@ -110,7 +111,8 @@ public class EmpDao extends AbstractDao<Emp, String> {
                 "'EDUCATIONM' TEXT," + // 31: educationm
                 "'MARRIAGEM' TEXT," + // 32: marriagem
                 "'PNAME' TEXT," + // 33: pname
-                "'CITY_NAME' TEXT);"); // 34: cityName
+                "'CITY_NAME' TEXT," + // 34: cityName
+                "'IS_PUSH' TEXT);"); // 35: is_push
     }
 
     /** Drops the underlying database table. */
@@ -294,6 +296,11 @@ public class EmpDao extends AbstractDao<Emp, String> {
         if (cityName != null) {
             stmt.bindString(35, cityName);
         }
+ 
+        String is_push = entity.getIs_push();
+        if (is_push != null) {
+            stmt.bindString(36, is_push);
+        }
     }
 
     @Override
@@ -346,7 +353,8 @@ public class EmpDao extends AbstractDao<Emp, String> {
             cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // educationm
             cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // marriagem
             cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // pname
-            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34) // cityName
+            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // cityName
+            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35) // is_push
         );
         return entity;
     }
@@ -389,6 +397,7 @@ public class EmpDao extends AbstractDao<Emp, String> {
         entity.setMarriagem(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
         entity.setPname(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
         entity.setCityName(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
+        entity.setIs_push(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
      }
     
     /** @inheritdoc */

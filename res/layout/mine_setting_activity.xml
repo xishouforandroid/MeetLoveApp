@@ -75,25 +75,134 @@
             <View android:layout_width="match_parent"
                   android:background="@color/sign_mood_nomal_0"
                   android:layout_height="0.1dp"></View>
-            <LinearLayout android:layout_width="match_parent"
-                          android:orientation="horizontal"
-                          android:padding="10dp"
-                          android:background="@drawable/btn_dark_shape"
-                          android:id="@+id/liner_msg"
-                          android:layout_height="wrap_content">
-                <TextView android:layout_width="wrap_content"
-                          android:text="接收新消息通知"
-                          android:layout_weight="1"
-                          android:layout_marginLeft="15dp"
-                          android:layout_gravity="center_vertical"
-                          android:textColor="@color/text_color"
-                          android:textSize="16sp"
-                          android:layout_height="wrap_content"/>
-                <ImageView android:layout_width="wrap_content"
-                           android:id="@+id/btn_switch"
-                           android:src="@drawable/icon_switchbtn_on"
-                           android:layout_height="wrap_content"/>
-            </LinearLayout>
+            <!--<LinearLayout android:layout_width="match_parent"-->
+                          <!--android:orientation="horizontal"-->
+                          <!--android:padding="10dp"-->
+                          <!--android:background="@drawable/btn_dark_shape"-->
+                          <!--android:id="@+id/liner_msg"-->
+                          <!--android:layout_height="wrap_content">-->
+                <!--<TextView android:layout_width="wrap_content"-->
+                          <!--android:text="接收新消息通知"-->
+                          <!--android:layout_weight="1"-->
+                          <!--android:layout_marginLeft="15dp"-->
+                          <!--android:layout_gravity="center_vertical"-->
+                          <!--android:textColor="@color/text_color"-->
+                          <!--android:textSize="16sp"-->
+                          <!--android:layout_height="wrap_content"/>-->
+                <!--<ImageView android:layout_width="wrap_content"-->
+                           <!--android:id="@+id/btn_switch"-->
+                           <!--android:src="@drawable/icon_switchbtn_on"-->
+                           <!--android:layout_height="wrap_content"/>-->
+            <!--</LinearLayout>-->
+            <RelativeLayout
+                    android:id="@+id/rl_switch_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:background="@drawable/btn_dark_shape"
+                    android:padding="10dip" >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="14dip"
+                        android:text="@string/newnotify"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+
+                <com.hyphenate.easeui.widget.EaseSwitchButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch_notification"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="0.1dp"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout
+                    android:id="@+id/rl_switch_sound"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:background="@drawable/btn_dark_shape"
+                    android:padding="10dip" >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="14dip"
+                        android:text="@string/voice"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+
+                <com.hyphenate.easeui.widget.EaseSwitchButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch_sound"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="0.1dp"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout
+                    android:id="@+id/rl_switch_vibrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:background="@drawable/btn_dark_shape"
+                    android:padding="10dip" >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="14dip"
+                        android:text="@string/shake"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+
+                <com.hyphenate.easeui.widget.EaseSwitchButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch_vibrate"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/sign_mood_nomal_0"
+                  android:layout_marginTop="0.1dp"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout
+                    android:id="@+id/rl_switch_speaker"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:visibility="gone"
+                    android:background="@drawable/btn_dark_shape"
+                    android:padding="10dip" >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dip"
+                        android:text="@string/yangshengqi"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+
+                <com.hyphenate.easeui.widget.EaseSwitchButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch_speaker"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+            </RelativeLayout>
             <View android:layout_width="match_parent"
                   android:background="@color/sign_mood_nomal_0"
                   android:layout_marginTop="15dp"

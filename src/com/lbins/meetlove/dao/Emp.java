@@ -48,6 +48,7 @@ public class Emp {
     private String marriagem;
     private String pname;
     private String cityName;
+    private String is_push;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -66,7 +67,7 @@ public class Emp {
         this.empid = empid;
     }
 
-    public Emp(String empid, String mobile, String password, String nickname, String cover, String sign, String age, String sex, String heightl, String education, String provinceid, String cityid, String areaid, String marriage, String company, String likeids, String state, String cardpic, String rzstate1, String rzstate2, String rzstate3, String is_use, String dateline, String userId, String channelId, String deviceType, String chooseid, String agestart, String ageend, String heightlstart, String heightlend, String educationm, String marriagem, String pname, String cityName) {
+    public Emp(String empid, String mobile, String password, String nickname, String cover, String sign, String age, String sex, String heightl, String education, String provinceid, String cityid, String areaid, String marriage, String company, String likeids, String state, String cardpic, String rzstate1, String rzstate2, String rzstate3, String is_use, String dateline, String userId, String channelId, String deviceType, String chooseid, String agestart, String ageend, String heightlstart, String heightlend, String educationm, String marriagem, String pname, String cityName, String is_push) {
         this.empid = empid;
         this.mobile = mobile;
         this.password = password;
@@ -102,6 +103,7 @@ public class Emp {
         this.marriagem = marriagem;
         this.pname = pname;
         this.cityName = cityName;
+        this.is_push = is_push;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -390,6 +392,14 @@ public class Emp {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public String getIs_push() {
+        return is_push;
+    }
+
+    public void setIs_push(String is_push) {
+        this.is_push = is_push;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

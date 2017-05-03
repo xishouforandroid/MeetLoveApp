@@ -9,12 +9,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.base.ActivityTack;
 import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.chat.DemoHelper;
+import com.lbins.meetlove.chat.DemoModel;
 import com.lbins.meetlove.widget.QuitePopWindow;
 import com.lbins.meetlove.widget.SelectSuggestPopWindow;
 import com.lbins.meetlove.widget.UpdatePwrPopWindow;
@@ -24,7 +29,31 @@ import com.lbins.meetlove.widget.UpdatePwrPopWindow;
  */
 public class MineSettingActivity extends BaseActivity implements View.OnClickListener {
     private TextView title;
-    private ImageView btn_switch;
+    /**
+     * new message notification
+     */
+    private RelativeLayout rl_switch_notification;
+    /**
+     * sound
+     */
+    private RelativeLayout rl_switch_sound;
+    /**
+     * vibration
+     */
+    private RelativeLayout rl_switch_vibrate;
+    /**
+     * speaker
+     */
+    private RelativeLayout rl_switch_speaker;
+
+    private EaseSwitchButton notifySwitch;
+    private EaseSwitchButton soundSwitch;
+    private EaseSwitchButton vibrateSwitch;
+    private EaseSwitchButton speakerSwitch;
+
+    private DemoModel settingsModel;
+    private EMOptions chatOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +66,6 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
         this.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) this.findViewById(R.id.title);
         title.setText("设置");
-        btn_switch= (ImageView) this.findViewById(R.id.btn_switch);
-        btn_switch.setOnClickListener(this);
 
         this.findViewById(R.id.liner_mobile).setOnClickListener(this);
         this.findViewById(R.id.liner_pwr).setOnClickListener(this);
@@ -46,6 +73,57 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
         this.findViewById(R.id.liner_suggest).setOnClickListener(this);
         this.findViewById(R.id.liner_about).setOnClickListener(this);
         this.findViewById(R.id.liner_quite).setOnClickListener(this);
+
+        notifySwitch = (EaseSwitchButton) findViewById(R.id.switch_notification);
+        soundSwitch = (EaseSwitchButton) findViewById(R.id.switch_sound);
+        vibrateSwitch = (EaseSwitchButton)findViewById(R.id.switch_vibrate);
+        speakerSwitch = (EaseSwitchButton) findViewById(R.id.switch_speaker);
+
+        rl_switch_notification = (RelativeLayout) findViewById(R.id.rl_switch_notification);
+        rl_switch_sound = (RelativeLayout) findViewById(R.id.rl_switch_sound);
+        rl_switch_vibrate = (RelativeLayout)findViewById(R.id.rl_switch_vibrate);
+        rl_switch_speaker = (RelativeLayout) findViewById(R.id.rl_switch_speaker);
+
+        rl_switch_notification.setOnClickListener(this);
+        rl_switch_sound.setOnClickListener(this);
+        rl_switch_vibrate.setOnClickListener(this);
+        rl_switch_speaker.setOnClickListener(this);
+
+
+
+        settingsModel = DemoHelper.getInstance().getModel();
+        chatOptions = EMClient.getInstance().getOptions();
+
+
+        // the vibrate and sound notification are allowed or not?
+        if (settingsModel.getSettingMsgNotification()) {
+            notifySwitch.openSwitch();
+        } else {
+            notifySwitch.closeSwitch();
+        }
+
+        // sound notification is switched on or not?
+        if (settingsModel.getSettingMsgSound()) {
+            soundSwitch.openSwitch();
+        } else {
+            soundSwitch.closeSwitch();
+        }
+
+        // vibrate notification is switched on or not?
+        if (settingsModel.getSettingMsgVibrate()) {
+            vibrateSwitch.openSwitch();
+        } else {
+            vibrateSwitch.closeSwitch();
+        }
+
+        // the speaker is switched on or not?
+        if (settingsModel.getSettingMsgSpeaker()) {
+            speakerSwitch.openSwitch();
+        } else {
+            speakerSwitch.closeSwitch();
+        }
+
+
     }
 
     private SelectSuggestPopWindow selectSuggestPopWindow;
@@ -53,10 +131,48 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.rl_switch_notification:
+                if (notifySwitch.isSwitchOpen()) {
+                    notifySwitch.closeSwitch();
+                    rl_switch_sound.setVisibility(View.GONE);
+                    rl_switch_vibrate.setVisibility(View.GONE);
+                    settingsModel.setSettingMsgNotification(false);
+                } else {
+                    notifySwitch.openSwitch();
+                    rl_switch_sound.setVisibility(View.VISIBLE);
+                    rl_switch_vibrate.setVisibility(View.VISIBLE);
+                    settingsModel.setSettingMsgNotification(true);
+                }
+                break;
+            case R.id.rl_switch_sound:
+                if (soundSwitch.isSwitchOpen()) {
+                    soundSwitch.closeSwitch();
+                    settingsModel.setSettingMsgSound(false);
+                } else {
+                    soundSwitch.openSwitch();
+                    settingsModel.setSettingMsgSound(true);
+                }
+                break;
+            case R.id.rl_switch_vibrate:
+                if (vibrateSwitch.isSwitchOpen()) {
+                    vibrateSwitch.closeSwitch();
+                    settingsModel.setSettingMsgVibrate(false);
+                } else {
+                    vibrateSwitch.openSwitch();
+                    settingsModel.setSettingMsgVibrate(true);
+                }
+                break;
+            case R.id.rl_switch_speaker:
+                if (speakerSwitch.isSwitchOpen()) {
+                    speakerSwitch.closeSwitch();
+                    settingsModel.setSettingMsgSpeaker(false);
+                } else {
+                    speakerSwitch.openSwitch();
+                    settingsModel.setSettingMsgVibrate(true);
+                }
+                break;
             case R.id.back:
                 finish();
-                break;
-            case R.id.btn_switch:
                 break;
             case R.id.liner_mobile:
             {

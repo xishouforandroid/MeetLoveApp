@@ -256,6 +256,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("heightlend", emp.getHeightlend());
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
+        save("is_push", emp.getIs_push());
 
         DBHelper.getInstance(LoginActivity.this).saveEmp(emp);
 
