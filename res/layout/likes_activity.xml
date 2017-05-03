@@ -6,28 +6,25 @@
               android:layout_height="match_parent">
     <include
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
             layout="@layout/top"/>
-    <com.lbins.meetlove.widget.PictureGridview
+    <GridView
             android:id="@+id/gridview"
-            android:layout_weight="1"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:gravity="center"
             android:layout_marginLeft="15dp"
             android:horizontalSpacing="15dip"
             android:numColumns="4"
+            android:layout_weight="1"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="25dip"
+            android:verticalSpacing="15dip"
             />
 
     <Button android:layout_width="match_parent"
             android:padding="8dp"
             android:layout_below="@+id/pwr"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"

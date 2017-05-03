@@ -10,11 +10,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
-import com.lbins.meetlove.adapter.ItemTuijianPeopleAdapter;
+import com.lbins.meetlove.adapter.ItemTuijianGroupAdapter;
+import com.lbins.meetlove.adapter.TuijianGroupdapter;
 import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
-import com.lbins.meetlove.dao.Emp;
-import com.lbins.meetlove.data.EmpsData;
+import com.lbins.meetlove.dao.HappyHandGroup;
+import com.lbins.meetlove.data.HappyHandGroupData;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
@@ -24,49 +25,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by zhl on 2016/8/30.
- */
-public class TuijianPeopleActivity extends BaseActivity implements View.OnClickListener {
+
+public class SearchGroupsActivity extends BaseActivity implements View.OnClickListener {
     private TextView title;
     private ListView lstv;
-    private ItemTuijianPeopleAdapter adapter;
-    private List<Emp> lists = new ArrayList<Emp>();
+    private ItemTuijianGroupAdapter adapter;
+    private List<HappyHandGroup> lists = new ArrayList<HappyHandGroup>();
     private ImageView search_null;
+
+    private String keywords;
+    private String likeids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuijian_people_activity);
+        keywords = getIntent().getExtras().getString("keywords");
+        likeids = getIntent().getExtras().getString("likeids");
+
         initView();
-        progressDialog = new CustomProgressDialog(TuijianPeopleActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(SearchGroupsActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
-        getTuijianren1();
-        getTuijianren2();
+        getData();
     }
 
     private void initView() {
         this.findViewById(R.id.back).setOnClickListener(this);
         this.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) this.findViewById(R.id.title);
-        title.setText("推荐列表");
+        title.setText("搜索结果");
 
         search_null = (ImageView) this.findViewById(R.id.search_null);
         search_null.setVisibility(View.GONE);
 
         lstv = (ListView) this.findViewById(R.id.lstv);
-        adapter = new ItemTuijianPeopleAdapter(lists, TuijianPeopleActivity.this);
+        adapter = new ItemTuijianGroupAdapter(lists, SearchGroupsActivity.this);
         lstv.setAdapter(adapter);
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(lists.size()>position){
-                    Emp emp = lists.get(position);
-                    if(emp != null){
-                        Intent intent =  new Intent(TuijianPeopleActivity.this, ProfileEmpActivity.class);
-                        intent.putExtra("empid", emp.getEmpid());
+                    HappyHandGroup group = lists.get(position);
+                    if(group != null){
+                        Intent intent =  new Intent(SearchGroupsActivity.this, GroupDetailActivity.class);
+                        intent.putExtra("groupid", group.getGroupid());
                         startActivity(intent);
                     }
                 }
@@ -83,11 +87,11 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    //推荐人-单身中
-    private void getTuijianren1() {
+
+    private void getData() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                InternetURL.appTuijianPeoples,
+                InternetURL.appSearchGroupsByKeywords,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -96,14 +100,20 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
                                 JSONObject jo = new JSONObject(s);
                                 int code1 = jo.getInt("code");
                                 if (code1 == 200) {
-                                    EmpsData data = getGson().fromJson(s, EmpsData.class);
+                                    HappyHandGroupData data = getGson().fromJson(s, HappyHandGroupData.class);
                                     if(data != null){
                                         lists.addAll(data.getData());
                                     }
                                     adapter.notifyDataSetChanged();
-
+                                    if(lists.size()>0){
+                                        search_null.setVisibility(View.GONE);
+                                        lstv.setVisibility(View.VISIBLE);
+                                    }else{
+                                        search_null.setVisibility(View.VISIBLE);
+                                        lstv.setVisibility(View.GONE);
+                                    }
                                 }else {
-                                    Toast.makeText(TuijianPeopleActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SearchGroupsActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -128,69 +138,12 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
-                params.put("state", "1");
-                params.put("size", "5");
-                params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
-    //推荐人-交往中
-    private void getTuijianren2() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.appTuijianPeoples,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                int code1 = jo.getInt("code");
-                                if (code1 == 200) {
-                                    EmpsData data = getGson().fromJson(s, EmpsData.class);
-                                    if(data != null){
-                                        lists.addAll(data.getData());
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }else {
-                                    Toast.makeText(TuijianPeopleActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                        }
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
+                if(!StringUtil.isNullOrEmpty(keywords)){
+                    params.put("keywords", keywords);
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
-                params.put("state", "2");
-                params.put("size", "5");
+                if(!StringUtil.isNullOrEmpty(likeids)){
+                    params.put("likeids", likeids);
+                }
                 return params;
             }
 
@@ -203,4 +156,5 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
         };
         getRequestQueue().add(request);
     }
+
 }

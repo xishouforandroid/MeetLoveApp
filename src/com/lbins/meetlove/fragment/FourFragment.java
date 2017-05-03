@@ -233,6 +233,8 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             case R.id.btn_right:
             {
                 //搜索
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
                 break;
             case R.id.liner_photo:

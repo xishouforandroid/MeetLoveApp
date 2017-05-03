@@ -24,10 +24,7 @@ import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.dao.HappyHandGroup;
 import com.lbins.meetlove.data.EmpsData;
 import com.lbins.meetlove.data.HappyHandGroupData;
-import com.lbins.meetlove.ui.GroupDetailActivity;
-import com.lbins.meetlove.ui.ProfileEmpActivity;
-import com.lbins.meetlove.ui.TuijianGroupActivity;
-import com.lbins.meetlove.ui.TuijianPeopleActivity;
+import com.lbins.meetlove.ui.*;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.PictureGridview;
@@ -155,6 +152,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
             case R.id.btn_right:
             {
                 //搜索
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
             break;
         }
@@ -281,6 +280,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
                 params.put("state", "2");
+                params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
                 params.put("size", "1");
                 return params;
             }

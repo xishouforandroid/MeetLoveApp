@@ -1,10 +1,15 @@
-package com.lbins.meetlove.ui;
+package com.lbins.meetlove.fragment;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -13,13 +18,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.ItemLikesAdapter;
-import com.lbins.meetlove.base.BaseActivity;
+import com.lbins.meetlove.base.BaseFragment;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.data.HappyHandLikeData;
 import com.lbins.meetlove.module.HappyHandLike;
+import com.lbins.meetlove.ui.SearchGroupsActivity;
+import com.lbins.meetlove.ui.SearchPeopleActivity;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
-import com.lbins.meetlove.widget.PictureGridview;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,39 +33,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by zhl on 2016/8/30.
- */
-public class LikesActivity extends BaseActivity implements View.OnClickListener {
-    private TextView title;
+public class SearchTwoFragment extends BaseFragment implements View.OnClickListener  {
+
+    private View view;
+    private Resources res;
+
+    private EditText keywords;
+    private Button btn_login;
 
     private GridView gridview;
     private ItemLikesAdapter adapterGrid;
     private List<HappyHandLike> lists = new ArrayList<HappyHandLike>();
-    private Button btnSure;
 
+    private String likeids= "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.likes_activity);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.search_two_fragment, null);
+        res = getActivity().getResources();
+
         initView();
-        progressDialog = new CustomProgressDialog(LikesActivity.this, "请稍后",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog( getActivity(), "请稍后",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getDataLikes();
+
+        return view;
     }
 
-    private void initView() {
-        this.findViewById(R.id.back).setOnClickListener(this);
-        this.findViewById(R.id.btn_right).setVisibility(View.GONE);
-        title = (TextView) this.findViewById(R.id.title);
-        title.setText("兴趣爱好选择");
-        btnSure = (Button) this.findViewById(R.id.btnSure);
-        btnSure.setOnClickListener(this);
-        gridview = (GridView) this.findViewById(R.id.gridview);
-        adapterGrid = new ItemLikesAdapter(lists, LikesActivity.this);
+    void initView(){
+        keywords = (EditText) view.findViewById(R.id.keywords);
+        keywords.addTextChangedListener(watcher);
+        btn_login = (Button) view.findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(this);
+        gridview = (GridView) view.findViewById(R.id.gridview);
+        adapterGrid = new ItemLikesAdapter(lists, getActivity());
         gridview.setAdapter(adapterGrid);
         gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,64 +82,77 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                 if(lists.size()>position){
                     HappyHandLike happyHandLike = lists.get(position);
                     if(happyHandLike != null){
-                        //先判断是否已经选中的够三个了
-                        List<HappyHandLike> listSelect = new ArrayList<>();
-                        for(HappyHandLike cell:lists){
-                            if("3".equals(cell.getIs_use())){
-                                listSelect.add(cell);
+                        if("0".equals(happyHandLike.getIs_use())){
+                            Toast.makeText(getActivity(), "暂不可用!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            for(int i= 0 ;i<lists.size();i++){
+                                HappyHandLike cell = lists.get(i);
+                                if("3".equals(cell.getIs_use())){
+                                    lists.get(i).setIs_use("1");
+                                }
                             }
-                        }
-                        if(listSelect.size()==3){
-                            //已经选中三个了
-                            showMsg(LikesActivity.this, "最多选择三个兴趣爱好！");
-                        }else {
                             if(!"0".equals(happyHandLike.getIs_use())){
                                 //只要不是禁用的爱好兴趣 就选中状态
                                 lists.get(position).setIs_use("3");
+                                likeids = lists.get(position).getLikeid();
                             }
                             adapterGrid.notifyDataSetChanged();
+                            btn_login.setBackground(getResources().getDrawable(R.drawable.btn_big_active));
+                            btn_login.setTextColor(getResources().getColor(R.color.white));
                         }
-
                     }
                 }
             }
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.back:
-                finish();
-                break;
-            case R.id.btnSure:
+    private TextWatcher watcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!StringUtil.isNullOrEmpty(keywords.getText().toString())
+                    || !StringUtil.isNullOrEmpty(likeids)
+                    )
             {
-                if(lists != null){
-                    List<HappyHandLike> listSelect = new ArrayList<>();
-                    for(HappyHandLike happyHandLike:lists){
-                        if("3".equals(happyHandLike.getIs_use())){
-                            listSelect.add(happyHandLike);
-                        }
-                    }
-                    if(listSelect.size()==3){
-                        //说明选中了三个兴趣爱好
-                        String likeNames = listSelect.get(0).getLikename()+","+listSelect.get(1).getLikename()+","+listSelect.get(2).getLikename();
-                        String likesids = listSelect.get(0).getLikeid()+","+listSelect.get(1).getLikeid()+","+listSelect.get(2).getLikeid();
-                        Intent intent = new Intent();
-                        intent.putExtra("likeNames", likeNames);
-                        intent.putExtra("likesids", likesids);
-                        setResult(1001, intent);
-                        finish();
-                    }else {
-                        showMsg(LikesActivity.this, "选择三个兴趣爱好！");
-                    }
-                }else {
-                    showMsg(LikesActivity.this, "选择三个兴趣爱好！");
+                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                btn_login.setTextColor(getResources().getColor(R.color.white));
+            } else {
+                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_unactive));
+                btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
+            }
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_login:
+            {
+                //查找
+                if(!StringUtil.isNullOrEmpty(keywords.getText().toString())
+                        || !StringUtil.isNullOrEmpty(likeids)
+                        ){
+                    Intent intent = new Intent(getActivity(), SearchGroupsActivity.class);
+                    intent.putExtra("keywords", keywords.getText().toString());
+                    intent.putExtra("likeids", likeids);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(), "请选择查询条件!", Toast.LENGTH_SHORT).show();
                 }
             }
                 break;
         }
     }
+
     private void getDataLikes() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -145,14 +172,14 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                                         adapterGrid.notifyDataSetChanged();
                                     }
                                 } else {
-                                    Toast.makeText(LikesActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
                         } else {
-                            Toast.makeText(LikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
                         if(progressDialog != null){
                             progressDialog.dismiss();
@@ -165,7 +192,7 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                         if(progressDialog != null){
                             progressDialog.dismiss();
                         }
-                        Toast.makeText(LikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
@@ -184,6 +211,5 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
         };
         getRequestQueue().add(request);
     }
-
 
 }

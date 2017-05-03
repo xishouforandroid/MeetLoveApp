@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Created by zhl on 2016/8/30.
  */
-public class LikesActivity extends BaseActivity implements View.OnClickListener {
+public class SearchPeopleLikesActivity extends BaseActivity implements View.OnClickListener {
     private TextView title;
 
     private GridView gridview;
@@ -44,7 +44,7 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.likes_activity);
         initView();
-        progressDialog = new CustomProgressDialog(LikesActivity.this, "请稍后",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(SearchPeopleLikesActivity.this, "请稍后",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -59,7 +59,7 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
         btnSure = (Button) this.findViewById(R.id.btnSure);
         btnSure.setOnClickListener(this);
         gridview = (GridView) this.findViewById(R.id.gridview);
-        adapterGrid = new ItemLikesAdapter(lists, LikesActivity.this);
+        adapterGrid = new ItemLikesAdapter(lists, SearchPeopleLikesActivity.this);
         gridview.setAdapter(adapterGrid);
         gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,22 +68,24 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                 if(lists.size()>position){
                     HappyHandLike happyHandLike = lists.get(position);
                     if(happyHandLike != null){
-                        //先判断是否已经选中的够三个了
+                        //先判断是否已经选中的够1个了
                         List<HappyHandLike> listSelect = new ArrayList<>();
                         for(HappyHandLike cell:lists){
                             if("3".equals(cell.getIs_use())){
                                 listSelect.add(cell);
                             }
                         }
-                        if(listSelect.size()==3){
-                            //已经选中三个了
-                            showMsg(LikesActivity.this, "最多选择三个兴趣爱好！");
+                        if(listSelect.size()==1){
+                            //已经选中1个了
+                            showMsg(SearchPeopleLikesActivity.this, "兴趣爱好只能选择一个！");
+                            btnSure.setBackground(getResources().getDrawable(R.drawable.btn_big_active));
                         }else {
                             if(!"0".equals(happyHandLike.getIs_use())){
                                 //只要不是禁用的爱好兴趣 就选中状态
                                 lists.get(position).setIs_use("3");
                             }
                             adapterGrid.notifyDataSetChanged();
+                            btnSure.setBackground(getResources().getDrawable(R.drawable.btn_big_active));
                         }
 
                     }
@@ -107,20 +109,20 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                             listSelect.add(happyHandLike);
                         }
                     }
-                    if(listSelect.size()==3){
-                        //说明选中了三个兴趣爱好
-                        String likeNames = listSelect.get(0).getLikename()+","+listSelect.get(1).getLikename()+","+listSelect.get(2).getLikename();
-                        String likesids = listSelect.get(0).getLikeid()+","+listSelect.get(1).getLikeid()+","+listSelect.get(2).getLikeid();
+                    if(listSelect.size()==1){
+                        //说明选中了1个兴趣爱好
+                        String likeNames = listSelect.get(0).getLikename();
+                        String likesids = listSelect.get(0).getLikeid();
                         Intent intent = new Intent();
                         intent.putExtra("likeNames", likeNames);
                         intent.putExtra("likesids", likesids);
                         setResult(1001, intent);
                         finish();
                     }else {
-                        showMsg(LikesActivity.this, "选择三个兴趣爱好！");
+                        showMsg(SearchPeopleLikesActivity.this, "请选择一个兴趣爱好！");
                     }
                 }else {
-                    showMsg(LikesActivity.this, "选择三个兴趣爱好！");
+                    showMsg(SearchPeopleLikesActivity.this, "请选择一个兴趣爱好！");
                 }
             }
                 break;
@@ -145,14 +147,14 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                                         adapterGrid.notifyDataSetChanged();
                                     }
                                 } else {
-                                    Toast.makeText(LikesActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SearchPeopleLikesActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
                         } else {
-                            Toast.makeText(LikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchPeopleLikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
                         if(progressDialog != null){
                             progressDialog.dismiss();
@@ -165,7 +167,7 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                         if(progressDialog != null){
                             progressDialog.dismiss();
                         }
-                        Toast.makeText(LikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchPeopleLikesActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {

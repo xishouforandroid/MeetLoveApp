@@ -100,6 +100,10 @@ public class InternetURL {
     public static final String appEmpIsExist = INTERNAL + "appEmpIsExist.do";
     //查询公开库
     public static final String appPublicGroups = INTERNAL + "appPublicGroups.do";
+    //按条件查询会员
+    public static final String appSearchPeoplesByKeyWords = INTERNAL + "appSearchPeoplesByKeyWords.do";
+    //按条件查询群
+    public static final String appSearchGroupsByKeywords = INTERNAL + "appSearchGroupsByKeywords.do";
 
 
 

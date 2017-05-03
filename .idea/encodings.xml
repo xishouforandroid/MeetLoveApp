@@ -172,6 +172,7 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_passwd.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_input_phone.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_navbar_back.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_navbar_profile.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_switchbtn_on.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_verify_checkbox_checked.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/launcher.png" charset="UTF-8" />
@@ -227,6 +228,7 @@
     <file url="file://$PROJECT_DIR$/res/drawable/em_tab_chat_bg.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/em_tab_contact_list_bg.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/em_tab_setting_bg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/et_bule_radio_bg.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/indicator_bg_bottom.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/indicator_bg_top.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/mm_listitem.xml" charset="UTF-8" />
@@ -530,7 +532,6 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandChoose.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandCompany.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandCxrz.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandGroup.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandHyrz.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandLike.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/module/HappyHandOrder.java" charset="UTF-8" />

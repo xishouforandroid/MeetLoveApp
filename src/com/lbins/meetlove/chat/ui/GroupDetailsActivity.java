@@ -138,7 +138,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		groupChangeListener = new GroupChangeListener();
 		EMClient.getInstance().groupManager().addGroupChangeListener(groupChangeListener);
 		
-		((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount() + st);
+		((TextView) findViewById(R.id.group_name)).setText(group.getGroupName());
 
 		membersAdapter = new GridAdapter(this, R.layout.em_grid_owner, new ArrayList<String>());
 		EaseExpandGridView userGridview = (EaseExpandGridView) findViewById(R.id.gridview);
@@ -291,7 +291,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 								EMClient.getInstance().groupManager().changeGroupName(groupId, returnData);
 								runOnUiThread(new Runnable() {
 									public void run() {
-										((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount() + ")");
+										((TextView) findViewById(R.id.group_name)).setText(group.getGroupName());
 										progressDialog.dismiss();
 										Toast.makeText(getApplicationContext(), st6, Toast.LENGTH_SHORT).show();
 									}
@@ -513,8 +513,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 					refreshMembersAdapter();
 					runOnUiThread(new Runnable() {
 						public void run() {
-							((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount()
-									+ st);
+							((TextView) findViewById(R.id.group_name)).setText(group.getGroupName());
 							progressDialog.dismiss();
 						}
 					});
@@ -1055,8 +1054,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 							refreshMembersAdapter();
 
 //							refreshUIVisibility();
-							((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getMemberCount()
-									+ ")");
+							((TextView) findViewById(R.id.group_name)).setText(group.getGroupName());
 							loadingPB.setVisibility(View.INVISIBLE);
 
 							if (EMClient.getInstance().getCurrentUser().equals(group.getOwner())) {
