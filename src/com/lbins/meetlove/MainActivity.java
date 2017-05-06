@@ -76,10 +76,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
 
-    private ImageView foot_one;
-    private ImageView foot_two;
-    private ImageView foot_three;
-    private ImageView foot_four;
+    private Button foot_one;
+    private Button foot_two;
+    private Button foot_three;
+    private Button foot_four;
 
     //设置底部图标
     Resources res;
@@ -132,14 +132,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         new Thread(MainActivity.this).start();
     }
     private void initView() {
-        foot_one = (ImageView) this.findViewById(R.id.foot_one);
-        foot_two = (ImageView) this.findViewById(R.id.foot_two);
-        foot_three = (ImageView) this.findViewById(R.id.foot_three);
-        foot_four = (ImageView) this.findViewById(R.id.foot_four);
-        this.findViewById(R.id.foot_liner_one).setOnClickListener(this);
-        this.findViewById(R.id.foot_liner_two).setOnClickListener(this);
-        this.findViewById(R.id.foot_liner_three).setOnClickListener(this);
-        this.findViewById(R.id.foot_liner_four).setOnClickListener(this);
+        foot_one = (Button) this.findViewById(R.id.foot_one);
+        foot_two = (Button) this.findViewById(R.id.foot_two);
+        foot_three = (Button) this.findViewById(R.id.foot_three);
+        foot_four = (Button) this.findViewById(R.id.foot_four);
+        this.findViewById(R.id.foot_one).setOnClickListener(this);
+        this.findViewById(R.id.foot_two).setOnClickListener(this);
+        this.findViewById(R.id.foot_three).setOnClickListener(this);
+        this.findViewById(R.id.foot_four).setOnClickListener(this);
 
         unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
@@ -149,56 +149,58 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         fragmentTransaction = fm.beginTransaction();
         hideFragments(fragmentTransaction);
         switch (id) {
-            case R.id.foot_liner_one:
+            case R.id.foot_one:
                 if (oneFragment == null) {
                     oneFragment = new OneFragment();
                     fragmentTransaction.add(R.id.content_frame, oneFragment);
                 } else {
                     fragmentTransaction.show(oneFragment);
                 }
-                foot_one.setImageResource(R.drawable.tabicon_recommand_p);
-                foot_two.setImageResource(R.drawable.tabicon_msg);
-                foot_three.setImageResource(R.drawable.tabicon_contact);
-                foot_four.setImageResource(R.drawable.tabicon_mine);
+                foot_one.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_recommand_p), null, null);
+                foot_two.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_msg), null, null);
+                foot_three.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_contact), null, null);
+                foot_four.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_mine), null, null);
                 index = 0;
                 break;
-            case R.id.foot_liner_two:
+            case R.id.foot_two:
                 if (twoFragment == null) {
                     twoFragment = new TwoFragment();
                     fragmentTransaction.add(R.id.content_frame, twoFragment);
                 } else {
                     fragmentTransaction.show(twoFragment);
                 }
-                foot_one.setImageResource(R.drawable.tabicon_recommand);
-                foot_two.setImageResource(R.drawable.tabicon_msg_p);
-                foot_three.setImageResource(R.drawable.tabicon_contact);
-                foot_four.setImageResource(R.drawable.tabicon_mine);
+
+                foot_one.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_recommand), null, null);
+                foot_two.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_msg_p), null,null);
+                foot_three.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_contact), null, null);
+                foot_four.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_mine), null, null);
                 index = 1;
                 break;
-            case R.id.foot_liner_three:
+            case R.id.foot_three:
                 if (threeFragment == null) {
                     threeFragment = new ThreeFragment();
                     fragmentTransaction.add(R.id.content_frame, threeFragment);
                 } else {
                     fragmentTransaction.show(threeFragment);
                 }
-                foot_one.setImageResource(R.drawable.tabicon_recommand);
-                foot_two.setImageResource(R.drawable.tabicon_msg);
-                foot_three.setImageResource(R.drawable.tabicon_contact_p);
-                foot_four.setImageResource(R.drawable.tabicon_mine);
+
+                foot_one.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_recommand), null, null);
+                foot_two.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_msg), null, null);
+                foot_three.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_contact_p), null, null);
+                foot_four.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_mine), null, null);
                 index = 2;
                 break;
-            case R.id.foot_liner_four:
+            case R.id.foot_four:
                 if (fourFragment == null) {
                     fourFragment = new FourFragment();
                     fragmentTransaction.add(R.id.content_frame, fourFragment);
                 } else {
                     fragmentTransaction.show(fourFragment);
                 }
-                foot_one.setImageResource(R.drawable.tabicon_recommand);
-                foot_two.setImageResource(R.drawable.tabicon_msg);
-                foot_three.setImageResource(R.drawable.tabicon_contact);
-                foot_four.setImageResource(R.drawable.tabicon_mine_p);
+                foot_one.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_recommand), null, null);
+                foot_two.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_msg), null, null);
+                foot_three.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_contact), null, null);
+                foot_four.setCompoundDrawablesWithIntrinsicBounds(null, res.getDrawable(R.drawable.tabicon_mine_p), null, null);
                 index = 3;
                 break;
 

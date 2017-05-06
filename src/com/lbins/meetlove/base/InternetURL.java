@@ -1,8 +1,8 @@
 package com.lbins.meetlove.base;
 
 public class InternetURL {
-//    public static final String INTERNAL = "http://192.168.0.224:8080/";
-    public static final String INTERNAL = "http://157j1274e3.iask.in/";
+    public static final String INTERNAL = "http://192.168.0.225:8080/";
+//    public static final String INTERNAL = "http://157j1274e3.iask.in/";
 //    public static final String INTERNAL =  "http://www.qianshoulove.com/";
 
     public static final String QINIU_URL =  "http://oo4c4r583.bkt.clouddn.com/";

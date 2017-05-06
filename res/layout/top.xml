@@ -35,13 +35,22 @@
                 android:layout_marginRight="45dp"
                 android:id="@+id/title"
                 />
-        <ImageView android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:gravity="center_vertical"
-                  android:layout_marginRight="8dp"
-                  android:src="@drawable/icon_navbar_more"
-                  android:layout_alignParentRight="true"
-                  android:id="@+id/btn_right"
-                />
+
+        <RelativeLayout
+                android:id="@+id/right_layout"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ease_common_tab_bg" >
+
+            <ImageView
+                    android:id="@+id/btn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_navbar_more"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerInside" />
+        </RelativeLayout>
+
     </RelativeLayout>
 </LinearLayout>

@@ -32,6 +32,7 @@ import com.lbins.meetlove.data.FriendsData;
 import com.lbins.meetlove.ui.FriendsApplyActivity;
 import com.lbins.meetlove.ui.MineGroupsActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
+import com.lbins.meetlove.ui.SearchActivity;
 import com.lbins.meetlove.util.PinyinComparator;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
@@ -67,6 +68,8 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
     private TextView new_friends_number;
     private RelativeLayout relate_groups;
 
+    private ImageView btn_right;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +103,6 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
 
     void initView(){
         view.findViewById(R.id.back).setVisibility(View.GONE);
-        view.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) view.findViewById(R.id.title);
         title.setText("通讯录");
 
@@ -145,6 +147,10 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
 
         headLiner.findViewById(R.id.relate_new_friends).setOnClickListener(this);
         headLiner.findViewById(R.id.relate_groups).setOnClickListener(this);
+
+        btn_right = (ImageView) view.findViewById(R.id.btn_right);
+        btn_right.setImageDrawable(res.getDrawable(R.drawable.icon_navbar_search));
+        btn_right.setOnClickListener(this);
     }
 
     @Override
@@ -161,6 +167,13 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
             {
                 //群聊
                 startActivity(new Intent(getActivity(), MineGroupsActivity.class));
+            }
+                break;
+            case R.id.btn_right:
+            {
+                //搜索
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
                 break;
         }
