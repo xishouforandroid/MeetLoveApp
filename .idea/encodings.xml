@@ -161,6 +161,8 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_green.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_white.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_verify_honesty.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_verify_v.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_active.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_unactive.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_sex_left_disable.png" charset="UTF-8" />
@@ -189,6 +191,7 @@
     <file url="file://$PROJECT_DIR$/res/drawable/btn_white_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/checkbox_checked_style.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/custom_progress_bar.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable/edit_white_normal_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/em_appitem_del_btn.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/em_btn_bottom_selector.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/em_btn_gray_normal_shape.xml" charset="UTF-8" />
@@ -332,6 +335,7 @@
     <file url="file://$PROJECT_DIR$/res/layout/item_mine_news.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_mine_notices.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_photo.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_quite.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_rzxf.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_pop_select_suggest.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/item_tuijian_group.xml" charset="UTF-8" />
@@ -345,6 +349,7 @@
     <file url="file://$PROJECT_DIR$/res/layout/msg_delete_jw_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_friends_dialog.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/msg_msg_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_reg_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_tel_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_version_dialog.xml" charset="UTF-8" />
@@ -586,6 +591,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/ReboundScrollView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/ReportPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectPhotoPopWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectPopQuiteWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectRzxfPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SelectSuggestPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/widget/SquareLayout.java" charset="UTF-8" />
@@ -594,5 +600,6 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/wxapi" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/wxpay/MD5.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/wxpay/Util.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../easeui/res/drawable/edit_white_normal_shape.xml" charset="UTF-8" />
   </component>
 </project>

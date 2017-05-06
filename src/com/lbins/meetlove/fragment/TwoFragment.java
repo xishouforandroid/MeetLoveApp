@@ -1,5 +1,6 @@
 package com.lbins.meetlove.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.Image;
@@ -7,6 +8,11 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.*;
 import android.widget.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
@@ -19,17 +25,25 @@ import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.AnimateFirstDisplayListener;
 import com.lbins.meetlove.adapter.ItemMessageAdapter;
 import com.lbins.meetlove.base.BaseFragment;
+import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.chat.Constant;
 import com.lbins.meetlove.chat.db.InviteMessgeDao;
 import com.lbins.meetlove.chat.ui.ChatActivity;
+import com.lbins.meetlove.dao.DBHelper;
+import com.lbins.meetlove.dao.Emp;
+import com.lbins.meetlove.data.EmpData;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
 import com.lbins.meetlove.ui.MineMsgActivity;
+import com.lbins.meetlove.util.StringUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/7/1.
@@ -61,23 +75,45 @@ public class TwoFragment  extends EaseConversationListFragment {
                 if (username.equals(EMClient.getInstance().getCurrentUser()))
                     Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
                 else {
-                    // start chat acitivity
-                    Intent intent = new Intent(getActivity(), ChatActivity.class);
-                    if(conversation.isGroup()){
-                        if(conversation.getType() == EMConversation.EMConversationType.ChatRoom){
-                            // it's group chat
-                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_CHATROOM);
-                        }else{
-                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
-                        }
+                    if(conversation.getType() == EMConversation.EMConversationType.Chat){
+                        //如果是单聊的话 判断是否您在交往状态  对方是否在交往状态
+                        Emp empT = DBHelper.getInstance(getActivity()).getEmpById(username);
 
+                        if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                            showDialogMsg("对方不是你的交往对象，不能发消息");
+                            return;
+                        }else {
+                            if(empT != null && !StringUtil.isNullOrEmpty(empT.getState())){
+                                if("2".equals(empT.getState())){
+                                    showDialogMsg("对方已有交往对象，不能发消息");
+                                }else {
+                                    getEmpById(username);
+                                }
+                            }else{
+                                getEmpById(username);
+                            }
+                        }
+                    }else {
+                        // start chat acitivity
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        if(conversation.isGroup()){
+                            if(conversation.getType() == EMConversation.EMConversationType.ChatRoom){
+                                // it's group chat
+                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_CHATROOM);
+                            }else{
+                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
+                            }
+
+                        }
+                        // it's single chat
+                        intent.putExtra(Constant.EXTRA_USER_ID, username);
+                        startActivity(intent);
                     }
-                    // it's single chat
-                    intent.putExtra(Constant.EXTRA_USER_ID, username);
-                    startActivity(intent);
+
                 }
             }
         });
+
         //red packet code : 红包回执消息在会话列表最后一条消息的展示
 //        conversationListView.setConversationListHelper(new EaseConversationList.EaseConversationListHelper() {
 //            @Override
@@ -104,6 +140,73 @@ public class TwoFragment  extends EaseConversationListFragment {
         //end of red packet code
     }
 
+    private void getEmpById(final String empid) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appEmpByEmpId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    EmpData data = getGson().fromJson(s, EmpData.class);
+                                    if(data != null){
+                                        Emp emp = data.getData();
+                                        if(emp != null){
+                                            DBHelper.getInstance(getActivity()).saveEmp(emp);
+                                            if("2".equals(emp.getState())){
+                                                showDialogMsg("对方已有交往对象，不能发消息");
+                                            }else {
+                                                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                                intent.putExtra(Constant.EXTRA_USER_ID, empid);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid", empid);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
     @Override
     protected void onConnectionDisconnected() {
         super.onConnectionDisconnected();
@@ -114,6 +217,21 @@ public class TwoFragment  extends EaseConversationListFragment {
         }
     }
 
+    private void showDialogMsg(String msgStr) {
+        final Dialog picAddDialog = new Dialog(getActivity(), R.style.dialog);
+        View picAddInflate = View.inflate(getActivity(), R.layout.msg_msg_dialog, null);
+        final TextView msg = (TextView) picAddInflate.findViewById(R.id.msg);
+        msg.setText(msgStr);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

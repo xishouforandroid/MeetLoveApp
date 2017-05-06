@@ -97,6 +97,12 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(lists.size()>(position-1)){
+                    HappyHandJw happyHandJw = lists.get(position-1);
+                    if(happyHandJw != null){
+                        Intent intent = new Intent(JwdxApplyActivity.this, ProfileEmpActivity.class);
+                        intent.putExtra("empid", happyHandJw.getEmpid1());
+                        startActivity(intent);
+                    }
                 }
             }
         });

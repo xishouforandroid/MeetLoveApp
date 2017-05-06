@@ -94,7 +94,12 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(lists.size()>(position-1)){
-
+                    Friends friends = lists.get(position-1);
+                    if(friends != null){
+                        Intent intent = new Intent(FriendsApplyActivity.this, ProfileEmpActivity.class);
+                        intent.putExtra("empid", friends.getEmpid1());
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -213,7 +218,12 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
                                     //调用广播，刷新主页
                                     Intent intent1 = new Intent("update_contact_success");
                                     sendBroadcast(intent1);
-                                }else {
+                                }else if(code1 == 2){
+                                    //对方已经是好友了 删除这条请求
+                                    lists.remove(tmpSelect);
+                                    adapter.notifyDataSetInvalidated();
+                                }
+                                else {
                                     Toast.makeText(FriendsApplyActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {

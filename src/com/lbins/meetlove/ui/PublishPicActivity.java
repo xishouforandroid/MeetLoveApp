@@ -1,9 +1,12 @@
 package com.lbins.meetlove.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,6 +32,7 @@ import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import com.lbins.meetlove.widget.NoScrollGridView;
 import com.lbins.meetlove.widget.SelectPhotoPopWindow;
+import com.lbins.meetlove.widget.SelectPopQuiteWindow;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -109,13 +114,47 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                 }
             }
         });
+        publish_moopd_gridview_image.setSelector(new ColorDrawable(Color.TRANSPARENT));
     }
+
+    private SelectPopQuiteWindow selectPopQuiteWindow;
+
+    public void showQuitePop(){
+        selectPopQuiteWindow = new SelectPopQuiteWindow(PublishPicActivity.this, itemsOnClickQuite);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPopQuiteWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPopQuiteWindow.setFocusable(true);
+        selectPopQuiteWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPopQuiteWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+
+    private View.OnClickListener itemsOnClickQuite = new View.OnClickListener() {
+        public void onClick(View v) {
+            selectPopQuiteWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btnQuite: {
+                    finish();
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back:
-                finish();
+                showQuitePop();
                 break;
             case R.id.btn_right:
                 uploadPaths.clear();
@@ -331,6 +370,9 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                     Bitmap bitmap = ImageUtils.getUriBitmap(this, uri, 400, 400);
                     String cameraImagePath = FileUtils.saveBitToSD(bitmap, System.currentTimeMillis() + ".jpg");
 
+                    if(dataList.size()>0){
+                        dataList.remove(dataList.size()-1);
+                    }
                     dataList.add(cameraImagePath);
                     if (dataList.size() < 9) {
                         dataList.add("camera_default");
@@ -356,6 +398,9 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                 case CommonDefine.DELETE_IMAGE:
                     int position = data.getIntExtra("position", -1);
                     dataList.remove(position);
+                    if (dataList.size() < 9) {
+                        dataList.add("camera_default");
+                    }
                     adapter.notifyDataSetChanged();
                     break;
             }

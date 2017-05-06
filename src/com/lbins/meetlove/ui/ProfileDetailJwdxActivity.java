@@ -582,7 +582,6 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
         picAddDialog.show();
     }
 
-
     private void deleteYq() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,

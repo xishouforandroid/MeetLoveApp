@@ -144,14 +144,8 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_1:
             {
-                //加群
-                if("1".equals(flag)){
-                    //发消息
-                    Intent intent = new Intent(GroupDetailActivity.this, ChatActivity.class);
-                    intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
-                    intent.putExtra(Constant.EXTRA_USER_ID, groupid);
-                    startActivity(intent);
-                }else  if("0".equals(flag)){
+                if(InternetURL.DEFAULT_GROUPS_ID1.equals(happyHandGroup.getGroupid())){
+                    //如果是沈阳用户交流群 只允许身份认证之后的进入该群
                     //身份认证
                     if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
                         //身份认证了
@@ -164,7 +158,43 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
                         //未认证
                         showMsgDialog();
                     }
+                }else if(InternetURL.DEFAULT_GROUPS_ID2.equals(happyHandGroup.getGroupid())){
+                    //沈阳情侣群
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //只有交往中的才能进入该群
+                        progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        saveG();
+                    }else {
+                        //未认证
+                        showMsg(GroupDetailActivity.this, "您暂无交往对象，不能进入该群");
+                    }
+                }else{
+                    //加群
+                    if("1".equals(flag)){
+                        //发消息
+                        Intent intent = new Intent(GroupDetailActivity.this, ChatActivity.class);
+                        intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
+                        intent.putExtra(Constant.EXTRA_USER_ID, groupid);
+                        startActivity(intent);
+                    }else  if("0".equals(flag)){
+                        //身份认证
+                        if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                            //身份认证了
+                            progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后",R.anim.custom_dialog_frame);
+                            progressDialog.setCancelable(true);
+                            progressDialog.setIndeterminate(true);
+                            progressDialog.show();
+                            saveG();
+                        }else {
+                            //未认证
+                            showMsgDialog();
+                        }
+                    }
                 }
+
             }
                 break;
         }

@@ -1,6 +1,7 @@
 package com.lbins.meetlove.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,10 +11,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -95,6 +98,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
     private PopAgeProfileWindow popAgeProfileWindow;
     private PopHeightlProfileWindow popHeightlProfileWindow;
     private PopAreaWindow popAreaWindow;
+    private SelectPopQuiteWindow selectPopQuiteWindow;
 
     private String empid;//注册成功返回的会员ID
 
@@ -155,7 +159,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             ageStr = getGson().fromJson(getSp().getString("age", ""), String.class);
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightl", ""), String.class))){
-            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class)+"cm");
+            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class)+"CM");
             heightlStr = getGson().fromJson(getSp().getString("heightl", ""), String.class);
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("education", ""), String.class))){
@@ -214,7 +218,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             }
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("company", ""), String.class))){
-            company.setText(getGson().fromJson(getSp().getString("company", ""), String.class)+"cm");
+            company.setText(getGson().fromJson(getSp().getString("company", ""), String.class));
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("likeids", ""), String.class))){
             likeids = getGson().fromJson(getSp().getString("likeids", ""), String.class);
@@ -348,33 +352,56 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         }
     };
 
+    void hiddenKeyBoard(View v){
+         /*隐藏软键盘*/
+        InputMethodManager imm = (InputMethodManager) v
+                .getContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(
+                    v.getApplicationWindowToken(), 0);
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.back:
-                finish();
+                hiddenKeyBoard(view);
+//                if (!TextUtils.isEmpty(et_sendmessage.getText().toString().trim())|| dataList.size()!=0) {   //这里trim()作用是去掉首位空格，防止不必要的错误
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(sign.getWindowToken(), 0); //强制隐藏键盘
+                    showQuitePop();
+//                } else {
+//                    finish();
+//                }
                 break;
             case R.id.cover:
             {
                 //头像点击
+                hiddenKeyBoard(view);
                 showDialogPhoto();
             }
                 break;
             case R.id.age:
             {
                 //年龄
+                hiddenKeyBoard(view);
                 showAgeProfile();
             }
                 break;
             case R.id.heightl:
             {
                 //身高
+                hiddenKeyBoard(view);
                 showPopHeightlProfile();
             }
             break;
             case R.id.education:
             {
                 //学历
+                hiddenKeyBoard(view);
                 showPopEducation();
             }
             break;
@@ -388,6 +415,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             case R.id.marragie:
             {
                 //婚姻状况
+                hiddenKeyBoard(view);
                 showPopMarry();
             }
             break;
@@ -402,24 +430,28 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
             case R.id.age_marry:
             {
                 //年龄-择偶
+                hiddenKeyBoard(view);
                 showPopAge();
             }
             break;
             case R.id.heightl_marry:
             {
                 //身高--择偶
+                hiddenKeyBoard(view);
                 showPopHeightl();
             }
             break;
             case R.id.education_marry:
             {
                 //学历-择偶
+                hiddenKeyBoard(view);
                 showPopEducation2();
             }
             break;
             case R.id.marry_marry:
             {
                 //婚姻状况-择偶
+                hiddenKeyBoard(view);
                 showPopMarry2();
             }
             break;
@@ -516,6 +548,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                                 if (Integer.parseInt(code) == 200) {
                                     EmpData data = getGson().fromJson(s, EmpData.class);
                                     saveAccount(data.getData());
+                                    //调用广播，刷新主页
+                                    Intent intent1 = new Intent("update_mine_profile_success");
+                                    sendBroadcast(intent1);
                                 }  else {
                                     showMsg(RegUpdateActivity.this,  jo.getString("message"));
                                 }
@@ -609,19 +644,20 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         save("heightlend", emp.getHeightlend());
         save("educationm", emp.getEducationm());
         save("marriagem", emp.getMarriagem());
+        save("is_push", emp.getIs_push());
 
-        boolean isFirstRun = getSp().getBoolean("isFirstRunUpdate", true);
-        if (isFirstRun) {
-            SharedPreferences.Editor editor = getSp().edit();
-            editor.putBoolean("isFirstRunUpdate", false);
-            editor.commit();
+//        boolean isFirstRun = getSp().getBoolean("isFirstRunUpdate", true);
+//        if (isFirstRun) {
+//            SharedPreferences.Editor editor = getSp().edit();
+//            editor.putBoolean("isFirstRunUpdate", false);
+//            editor.commit();
             Intent intent = new Intent(RegUpdateActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        } else {
-            //已经登录过了
-            finish();
-        }
+//        } else {
+//            //已经登录过了
+//            finish();
+//        }
 
     }
     public void showDialogPhoto(){
@@ -1488,4 +1524,36 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         };
         getRequestQueue().add(request);
     }
+
+    public void showQuitePop(){
+        selectPopQuiteWindow = new SelectPopQuiteWindow(RegUpdateActivity.this, itemsOnClickQuite);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPopQuiteWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPopQuiteWindow.setFocusable(true);
+        selectPopQuiteWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPopQuiteWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+
+    private View.OnClickListener itemsOnClickQuite = new View.OnClickListener() {
+        public void onClick(View v) {
+            selectPopQuiteWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btnQuite: {
+                    finish();
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
 }

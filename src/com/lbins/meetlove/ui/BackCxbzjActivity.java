@@ -159,7 +159,9 @@ public class BackCxbzjActivity extends BaseActivity implements View.OnClickListe
                                             if(kefuTel != null){
                                                 String mm_tel = kefuTel.getMm_tel();
                                                 if(!StringUtil.isNullOrEmpty(mm_tel)){
-                                                    showMsgDialog(mm_tel);
+                                                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mm_tel));
+                                                    BackCxbzjActivity.this.startActivity(intent);
+//                                                    showMsgDialog(mm_tel);
                                                 }
                                             }
                                         }

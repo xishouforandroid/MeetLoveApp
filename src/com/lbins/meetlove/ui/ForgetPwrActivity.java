@@ -191,7 +191,7 @@ public class ForgetPwrActivity extends BaseActivity implements View.OnClickListe
                     saveData();
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     //已经验证
-                    Toast.makeText(getApplicationContext(), R.string.code_msg_one, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), R.string.code_msg_one, Toast.LENGTH_SHORT).show();
                 }
 
             } else {

@@ -15,14 +15,12 @@ import com.lbins.meetlove.base.BaseActivity;
 import com.lbins.meetlove.base.InternetURL;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.data.EmpsData;
+import com.lbins.meetlove.util.PinyinComparator;
 import com.lbins.meetlove.util.StringUtil;
 import com.lbins.meetlove.widget.CustomProgressDialog;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhl on 2016/8/30.
@@ -44,7 +42,6 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getTuijianren1();
-        getTuijianren2();
     }
 
     private void initView() {
@@ -100,6 +97,7 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
                                     if(data != null){
                                         lists.addAll(data.getData());
                                     }
+                                    Collections.sort(lists, new PinyinComparator());
                                     adapter.notifyDataSetChanged();
 
                                 }else {
@@ -129,7 +127,6 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
-                params.put("state", "1");
                 params.put("size", "5");
                 params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
                 return params;
@@ -144,63 +141,5 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
         };
         getRequestQueue().add(request);
     }
-    //推荐人-交往中
-    private void getTuijianren2() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.appTuijianPeoples,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                int code1 = jo.getInt("code");
-                                if (code1 == 200) {
-                                    EmpsData data = getGson().fromJson(s, EmpsData.class);
-                                    if(data != null){
-                                        lists.addAll(data.getData());
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }else {
-                                    Toast.makeText(TuijianPeopleActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
 
-                        } else {
-                        }
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
-                params.put("state", "2");
-                params.put("size", "5");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
 }

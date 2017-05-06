@@ -243,21 +243,55 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 //进行身份认证了 可以添加好友申请了
                 if(isFriends == 0){
                     //不是好友  添加好友
-                    showFriendsDialog();
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        showDialogMsg("对方不是你的交往对象，不能添加好友");
+                        return;
+                    }else if("2".equals(emp.getState())){
+                        showDialogMsg("对方已有交往对象，不能添加好友");
+                        return;
+                    }else{
+                        showFriendsDialog();
+                    }
                 }else if(isFriends == 1){
-                    //已经是好友  发消息
-                    Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
-                    intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
-                    intent.putExtra(Constant.EXTRA_USER_ID, empid);
-                    intent.putExtra(Constant.EXTRA_USER_NICKNAME, emp.getNickname());
-                    startActivity(intent);
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        showDialogMsg("对方不是你的交往对象，不能发消息");
+                        return;
+                    }else if("2".equals(emp.getState())){
+                        showDialogMsg("对方已有交往对象，不能发消息");
+                        return;
+                    }else{
+                        //已经是好友  发消息
+                        Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
+                        intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                        intent.putExtra(Constant.EXTRA_USER_ID, empid);
+                        intent.putExtra(Constant.EXTRA_USER_NICKNAME, emp.getNickname());
+                        startActivity(intent);
+                    }
                 }
             }else {
+                //未进行身份认证
                 showMsgDialog();
             }
         }else {
+            //未进行身份认证
             showMsgDialog();
         }
+    }
+
+    private void showDialogMsg(String msgStr) {
+        final Dialog picAddDialog = new Dialog(ProfileEmpActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_msg_dialog, null);
+        final TextView msg = (TextView) picAddInflate.findViewById(R.id.msg);
+        msg.setText(msgStr);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     private void showFriendsDialog() {

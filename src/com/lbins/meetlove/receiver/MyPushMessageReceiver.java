@@ -96,6 +96,20 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                     context.sendBroadcast(intent1);
                 }
                     break;
+                case 6:
+                {
+                    //解除交往关系
+                    Intent intent1 = new Intent("update_state_to_1_success");
+                    context.sendBroadcast(intent1);
+                }
+                    break;
+                case 7:
+                {
+                    //交往成功
+                    Intent intent1 = new Intent("update_state_to_2_success");
+                    context.sendBroadcast(intent1);
+                }
+                    break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -230,6 +244,18 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                     break;
                 case 5:
                     intent.setClass(context.getApplicationContext(), FriendsApplyActivity.class);
+                    break;
+                case 6:
+                {
+                    //解除戒网对象--系统消息
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                }
+                    break;
+                case 7:
+                {
+                    //交往成功--系统消息
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                }
                     break;
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

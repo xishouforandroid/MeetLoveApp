@@ -75,7 +75,7 @@ public class ItemTuijianPeopleAdapter extends BaseAdapter {
                     holder.state.setText("交往中");
                 }
             }
-            String str = "";
+            String str = cell.getNickname()+" ";
             if (!StringUtil.isNullOrEmpty(cell.getAge())){
                 str += cell.getAge().substring(2,4)+"年 ";
             }

@@ -219,7 +219,6 @@ public class ProfileSetActivity extends BaseActivity implements View.OnClickList
                 //删除好友
                 if("1".equals(is_friends)){
                     //删除好友
-
                     showVersionDialog();
                 }else{
                     showMsg(ProfileSetActivity.this ,"对方不是您的好友，无法删除！");
@@ -278,6 +277,8 @@ public class ProfileSetActivity extends BaseActivity implements View.OnClickList
                                 int code1 = jo.getInt("code");
                                 if (code1 == 200) {
                                     showMsg(ProfileSetActivity.this, "删除好友关系成功！");
+                                    Intent intent1 = new Intent("delete_friends_success");
+                                    sendBroadcast(intent1);
                                 }else {
                                     Toast.makeText(ProfileSetActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

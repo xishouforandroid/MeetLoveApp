@@ -245,6 +245,10 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
             if (action.equals("update_contact_success")) {
                 getFriends();
             }
+            if (action.equals("delete_friends_success")) {
+                //删除了好友
+                getFriends();
+            }
         }
     };
 
@@ -252,6 +256,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("update_contact_success");
+        myIntentFilter.addAction("delete_friends_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

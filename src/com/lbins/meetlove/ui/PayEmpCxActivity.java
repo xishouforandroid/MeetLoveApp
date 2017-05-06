@@ -1,6 +1,9 @@
 package com.lbins.meetlove.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -104,6 +107,7 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_emp_cx_activity);
+        registerBoradcastReceiver();
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
         MeetLoveApplication.is_dxk_order = "1";
         initView();
@@ -132,7 +136,6 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_1:
             {
                 //点击微信支付
-                showMsg(PayEmpCxActivity.this, "微信支付");
                 selectPayWay = 0;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
@@ -148,7 +151,6 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_2:
             {
                 //支付宝支付
-                showMsg(PayEmpCxActivity.this, "支付宝支付");
                 selectPayWay = 1;
                 Order order = new Order();
                 order.setEmpid(getGson().fromJson(getSp().getString("empid", ""), String.class));
@@ -407,6 +409,30 @@ public class PayEmpCxActivity extends BaseActivity implements View.OnClickListen
         return appSign;
     }
 
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("rzstate3_success")) {
+                //会员认证了
+                finish();
+            }
+        }
+    };
 
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("rzstate3_success");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 
 }

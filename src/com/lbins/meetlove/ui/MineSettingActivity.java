@@ -1,6 +1,7 @@
 package com.lbins.meetlove.ui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -178,8 +179,14 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
             case R.id.liner_mobile:
             {
                 //手机号码
-                Intent intent = new Intent(MineSettingActivity.this, UpdateMobileActivity.class);
-                startActivity(intent);
+                if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
+                    //认证之后不能修改手机号了
+                    showDialogMsg("身份认证之后不能修改手机号，请联系客服");
+                }else {
+                    Intent intent = new Intent(MineSettingActivity.this, UpdateMobileActivity.class);
+                    startActivity(intent);
+                }
+
             }
                 break;
             case R.id.liner_pwr:
@@ -216,6 +223,23 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
+    private void showDialogMsg(String msgStr) {
+        final Dialog picAddDialog = new Dialog(MineSettingActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_msg_dialog, null);
+        final TextView msg = (TextView) picAddInflate.findViewById(R.id.msg);
+        msg.setText(msgStr);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
 
     private void showDialog() {
         selectSuggestPopWindow = new SelectSuggestPopWindow(MineSettingActivity.this, itemsOnClick);

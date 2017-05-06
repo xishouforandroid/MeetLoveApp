@@ -69,4 +69,5 @@ public class Publish_mood_GridView_Adapter extends BaseAdapter {
     static class ViewHolder {
         ImageView imageview;
     }
+
 }

@@ -80,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/switch_camera"
+            android:visibility="gone"
             android:layout_below="@id/btn_record_video"
             />
         <Button
@@ -87,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/capture_image"
+            android:visibility="gone"
             android:layout_below="@id/btn_switch_camera"
             />
         <SeekBar
@@ -95,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_capture_image"
             android:max="200"
+            android:visibility="gone"
             android:progress="100"
             />
         <!--     <Button 
@@ -121,6 +124,7 @@
             android:id="@+id/local_surface"
             android:layout_width="100dp"
             android:layout_height="120dp"
+            android:visibility="gone"
             android:layout_above="@+id/ll_surface_baseline"
             android:layout_alignParentRight="true" />
 

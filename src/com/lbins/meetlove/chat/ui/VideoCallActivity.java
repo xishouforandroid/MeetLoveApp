@@ -203,7 +203,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
             }, 300);
         } else { // incoming call
 
-            callStateTextView.setText("Ringing");
+            callStateTextView.setText("正在接通");
             if(EMClient.getInstance().callManager().getCallState() == EMCallStateChangeListener.CallState.IDLE
                     || EMClient.getInstance().callManager().getCallState() == EMCallStateChangeListener.CallState.DISCONNECTED) {
                 // the call has ended

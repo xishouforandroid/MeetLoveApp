@@ -132,10 +132,11 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
             sign.setText("个性签名:"+getGson().fromJson(getSp().getString("sign", ""), String.class));
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("age", ""), String.class))){
-            age.setText(getGson().fromJson(getSp().getString("age", ""), String.class) + "年");
+            String agemine = getGson().fromJson(getSp().getString("age", ""), String.class);
+            age.setText(agemine.substring(2,4) + "年");
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightl", ""), String.class))){
-            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class) + "cm");
+            heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class) + "CM");
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityName", ""), String.class))){
             address.setText(getGson().fromJson(getSp().getString("cityName", ""), String.class));
@@ -591,6 +592,50 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                 vip_3.setImageDrawable(res.getDrawable(R.drawable.icon_verify_honesty_enabled));
                 vip_4.setTextColor(res.getColor(R.color.main_color));
             }
+            if(action.equals("update_mine_profile_success")){
+                initData();
+            }
+            if(action.equals("update_state_to_1_success")){
+                save("state", "1");
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //单身
+                        is_state.setText("单身");
+                    }
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //交往中
+                        is_state.setText("交往中");
+                    }
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("选择交往对象");
+                    }
+
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("交往对象资料");
+                    }
+                }
+            }
+            if(action.equals("update_state_to_2_success")){
+                //交往成功
+                save("state", "2");
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //单身
+                        is_state.setText("单身");
+                    }
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        //交往中
+                        is_state.setText("交往中");
+                    }
+                    if("1".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("选择交往对象");
+                    }
+
+                    if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
+                        jwdx_txt.setText("交往对象资料");
+                    }
+                }
+            }
         }
     };
 
@@ -602,6 +647,9 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         myIntentFilter.addAction("rzstate3_success");
         myIntentFilter.addAction("update_photo_success");
         myIntentFilter.addAction("update_jwdx_success");
+        myIntentFilter.addAction("update_mine_profile_success");
+        myIntentFilter.addAction("update_state_to_1_success");
+        myIntentFilter.addAction("update_state_to_2_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

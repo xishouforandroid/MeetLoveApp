@@ -43,6 +43,7 @@ import com.hyphenate.util.PathUtil;
 import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
+import com.lbins.meetlove.util.StringUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -302,7 +303,20 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             selectFileFromLocal();
             break;
         case ITEM_VOICE_CALL:
-            startVoiceCall();
+//            startVoiceCall();
+        {
+            //获得对方手机号
+            Emp emp = DBHelper.getInstance(getActivity()).getEmpById(toChatUsername);
+            if(emp != null){
+                if(!StringUtil.isNullOrEmpty(emp.getMobile())){
+                    Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + emp.getMobile()));
+                    getActivity().startActivity(intent1);
+                }
+            }else {
+                //暂无对方信息
+                Toast.makeText(getActivity(), "暂无对方电话信息，不能拨打！", Toast.LENGTH_SHORT).show();
+            }
+        }
             break;
         case ITEM_VIDEO_CALL:
             startVideoCall();

@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         fm = getSupportFragmentManager();
         initView();
 
-        switchFragment(R.id.foot_liner_one);
+        switchFragment(R.id.foot_one);
         inviteMessgeDao = new InviteMessgeDao(this);
         registerBroadcastReceiver();
         EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
@@ -363,8 +363,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         moveTaskToBack(false);
         if (!isExit) {
             isExit = true;
-            Toast.makeText(getApplicationContext(), "再按一次退出幸福牵手吧",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "再按一次退出幸福牵手吧",
+//                    Toast.LENGTH_SHORT).show();
             // 利用handler延迟发送更改状态信息
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
@@ -1035,6 +1035,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             if (action.equals("update_contact_success")) {
                 getFriendsCount();
             }
+            if (action.equals("update_state_to_1_success")) {
+                save("state", "1");
+            }
+            if(action.equals("update_state_to_2_success")){
+                //交往成功
+                save("state", "2");
+            }
         }
     };
 
@@ -1045,6 +1052,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         myIntentFilter.addAction("update_jwdx_success");
         myIntentFilter.addAction("update_jwdx_refuse");
         myIntentFilter.addAction("update_contact_success");
+        myIntentFilter.addAction("update_state_to_1_success");
+        myIntentFilter.addAction("update_state_to_2_success");
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

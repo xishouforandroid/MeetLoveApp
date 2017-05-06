@@ -73,7 +73,6 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         getTuijianren1();
-        getTuijianren2();
         getTuijianGroups();
         return view;
     }
@@ -213,7 +212,6 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
                 params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
-                params.put("state", "1");
                 params.put("size", "1");
                 return params;
             }
@@ -227,74 +225,6 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         };
         getRequestQueue().add(request);
     }
-    //推荐人-交往中
-    private void getTuijianren2() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.appTuijianPeoples,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                int code1 = jo.getInt("code");
-                                if (code1 == 200) {
-                                    EmpsData data = getGson().fromJson(s, EmpsData.class);
-                                    if(data != null){
-                                        list1.addAll(data.getData());
-                                    }
-                                    adapter1.notifyDataSetChanged();
-                                    if(list1.size() < 1){
-                                        liner_1.setVisibility(View.GONE);
-                                        no_data.setVisibility(View.VISIBLE);
-                                    }else {
-                                        liner_1.setVisibility(View.VISIBLE);
-                                        no_data.setVisibility(View.GONE);
-                                    }
-                                }else {
-                                    Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                        }
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("empid", getGson().fromJson(getSp().getString("empid", ""), String.class));
-                params.put("state", "2");
-                params.put("sex", getGson().fromJson(getSp().getString("sex", ""), String.class));
-                params.put("size", "1");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
-
 
     private void getTuijianGroups() {
         StringRequest request = new StringRequest(
