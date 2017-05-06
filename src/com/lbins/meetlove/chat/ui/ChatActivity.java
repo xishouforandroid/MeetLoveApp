@@ -37,9 +37,7 @@ public class ChatActivity extends BaseActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(activityInstance != null){
-            activityInstance = null;
-        }
+        activityInstance = null;
     }
     
     @Override

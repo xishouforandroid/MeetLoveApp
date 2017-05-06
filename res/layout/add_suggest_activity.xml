@@ -37,7 +37,7 @@
                     android:background="@drawable/panel_aleart_bg"
                     android:textSize="16sp"
                     android:gravity="top"
-                    android:hint="......"
+                    android:hint="请输入"
                     android:padding="10dp"
                     android:textColor="#ff000000"/>
 

@@ -17,8 +17,8 @@ import org.json.JSONObject;
 public class AboutActivity extends BaseActivity implements View.OnClickListener {
     private static final int PICTURE_COUNT = 2;
 
-    private static final int[] PICTURE_RESOURCES = {R.drawable.about_one,
-            R.drawable.about_two};
+    private static final int[] PICTURE_RESOURCES = {R.drawable.intropage_1,
+            R.drawable.intropage_2};
 
     private static final String[] PICTURE_TITLE = {"", ""};
     private JSONArray jsonArray;

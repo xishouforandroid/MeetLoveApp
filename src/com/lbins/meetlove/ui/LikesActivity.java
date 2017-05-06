@@ -1,6 +1,7 @@
 package com.lbins.meetlove.ui;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -38,11 +39,13 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
     private List<HappyHandLike> lists = new ArrayList<HappyHandLike>();
     private Button btnSure;
 
+    private Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.likes_activity);
+        res = getResources();
         initView();
         progressDialog = new CustomProgressDialog(LikesActivity.this, "请稍后",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -77,13 +80,37 @@ public class LikesActivity extends BaseActivity implements View.OnClickListener 
                         }
                         if(listSelect.size()==3){
                             //已经选中三个了
-                            showMsg(LikesActivity.this, "最多选择三个兴趣爱好！");
+                            if("3".equals(happyHandLike.getIs_use())){
+                                lists.get(position).setIs_use("1");
+                                adapterGrid.notifyDataSetChanged();
+                            }else{
+                                showMsg(LikesActivity.this, "最多选择三个兴趣爱好！");
+                            }
                         }else {
                             if(!"0".equals(happyHandLike.getIs_use())){
-                                //只要不是禁用的爱好兴趣 就选中状态
-                                lists.get(position).setIs_use("3");
+                                if("3".equals(happyHandLike.getIs_use())){
+                                    lists.get(position).setIs_use("1");
+                                }else{
+                                    //只要不是禁用的爱好兴趣 就选中状态
+                                    lists.get(position).setIs_use("3");
+                                }
                             }
                             adapterGrid.notifyDataSetChanged();
+                        }
+
+
+                        List<HappyHandLike> listSelect1 = new ArrayList<>();
+                        for(HappyHandLike cell:lists){
+                            if("3".equals(cell.getIs_use())){
+                                listSelect1.add(cell);
+                            }
+                        }
+                        if(listSelect1.size()>0){
+                            btnSure.setBackgroundResource(R.drawable.btn_big_active);
+                            btnSure.setTextColor(res.getColor(R.color.white));
+                        }else {
+                            btnSure.setBackgroundResource(R.drawable.btn_big_unactive);
+                            btnSure.setTextColor(res.getColor(R.color.textColortwo));
                         }
 
                     }

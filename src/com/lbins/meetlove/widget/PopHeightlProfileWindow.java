@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.lbins.meetlove.R;
 import com.lbins.meetlove.adapter.ItemAgeAdapter;
+import com.lbins.meetlove.adapter.ItemHeightlAdapter;
 import com.lbins.meetlove.adapter.OnClickContentItemListener;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class PopHeightlProfileWindow extends PopupWindow {
     private TextView  btnSure;
     private ListView lstv1;
     private View mMenuView;
-    private ItemAgeAdapter adapter1,adapter2;
+    private ItemHeightlAdapter adapter1,adapter2;
     private List<String> arrays1 = new ArrayList<String>();
 
     private TextView startage;
@@ -46,7 +47,7 @@ public class PopHeightlProfileWindow extends PopupWindow {
         this.arrays1 = arrays1;
         lstv1 = (ListView) mMenuView.findViewById(R.id.lstv1);
         btnSure = (TextView) mMenuView.findViewById(R.id.btnSure);
-        adapter1 = new ItemAgeAdapter(arrays1, context);
+        adapter1 = new ItemHeightlAdapter(arrays1, context);
         lstv1.setAdapter(adapter1);
 
         startage = (TextView) mMenuView.findViewById(R.id.startage);
@@ -56,7 +57,11 @@ public class PopHeightlProfileWindow extends PopupWindow {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(arrays1.size()>position){
                     String string = arrays1.get(position);
-                    startage.setText(string);
+                    if("不限".equals(string)){
+                        startage.setText(string);
+                    }else {
+                        startage.setText(string+"CM");
+                    }
                 }
             }
         });

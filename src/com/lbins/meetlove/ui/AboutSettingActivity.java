@@ -1,5 +1,6 @@
 package com.lbins.meetlove.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -49,6 +50,7 @@ public class AboutSettingActivity extends BaseActivity implements View.OnClickLi
         title.setText("关于幸福牵手吧");
 
         this.findViewById(R.id.liner_about).setOnClickListener(this);
+        this.findViewById(R.id.tel).setOnClickListener(this);
         this.findViewById(R.id.liner_version).setOnClickListener(this);
     }
 
@@ -77,8 +79,38 @@ public class AboutSettingActivity extends BaseActivity implements View.OnClickLi
                 initData();
             }
                 break;
+            case R.id.tel:
+            {
+                showMsgDialog("02431054568");
+            }
+                break;
         }
     }
+
+    private void showMsgDialog(final String mm_tel) {
+        final Dialog picAddDialog = new Dialog(AboutSettingActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_tel_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mm_tel));
+                AboutSettingActivity.this.startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
 
     public void initData() {
         StringRequest request = new StringRequest(

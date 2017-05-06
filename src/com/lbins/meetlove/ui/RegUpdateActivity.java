@@ -161,14 +161,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("education", ""), String.class))){
             educationID = getGson().fromJson(getSp().getString("education", ""), String.class);
             switch (Integer.parseInt(getGson().fromJson(getSp().getString("education", ""), String.class))){
-                case 1:
-                {
-                    education.setText("高中及以下");
-                }
-                    break;
                 case 2:
                 {
-                    education.setText("中专");
+                    education.setText("专科以下");
                 }
                 break;
                 case 3:
@@ -233,7 +228,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
 
         }
         if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightlstart", ""), String.class)) && !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightlend", ""), String.class))){
-            heightl_marry.setText(getGson().fromJson(getSp().getString("heightlstart", ""), String.class)+"-" + getGson().fromJson(getSp().getString("heightlend", ""), String.class)+"年");
+            heightl_marry.setText(getGson().fromJson(getSp().getString("heightlstart", ""), String.class)+"-" + getGson().fromJson(getSp().getString("heightlend", ""), String.class)+"CM");
             heightlstart = getGson().fromJson(getSp().getString("heightlstart", ""), String.class);
             heightlend = getGson().fromJson(getSp().getString("heightlend", ""), String.class);
         }
@@ -241,14 +236,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("educationm", ""), String.class))){
             educationID2 = getGson().fromJson(getSp().getString("educationm", ""), String.class);
             switch (Integer.parseInt(getGson().fromJson(getSp().getString("educationm", ""), String.class))){
-                case 1:
-                {
-                    education_marry.setText("高中及以下");
-                }
-                break;
                 case 2:
                 {
-                    education_marry.setText("中专");
+                    education_marry.setText("专科以下");
                 }
                 break;
                 case 3:
@@ -349,10 +339,10 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(sign.getText().toString()) && !StringUtil.isNullOrEmpty(nickname.getText().toString())&& !StringUtil.isNullOrEmpty(company.getText().toString())){
-                btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_login.setBackgroundResource(R.drawable.btn_big_active);
                 btn_login.setTextColor(getResources().getColor(R.color.white));
             }else{
-                btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
@@ -439,8 +429,16 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                     showMsg(RegUpdateActivity.this, "请输入个性签名");
                     return;
                 }
+                if(sign.getText().toString().length()>30){
+                    showMsg(RegUpdateActivity.this, "个性签名字数超限");
+                    return;
+                }
                 if(StringUtil.isNullOrEmpty(nickname.getText().toString())){
                     showMsg(RegUpdateActivity.this, "请输入姓名");
+                    return;
+                }
+                if(nickname.getText().toString().length()>10){
+                    showMsg(RegUpdateActivity.this, "姓名太长，请检查！");
                     return;
                 }
                 if(StringUtil.isNullOrEmpty(ageStr)){
@@ -465,6 +463,10 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                 }
                 if(StringUtil.isNullOrEmpty(company.getText().toString())){
                     showMsg(RegUpdateActivity.this, "请输入工作单位");
+                    return;
+                }
+                if(company.getText().toString().length()>30){
+                    showMsg(RegUpdateActivity.this, "工作单位字数超限");
                     return;
                 }
                 if(StringUtil.isNullOrEmpty(likeids)){
@@ -541,9 +543,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empid", empid);
                 params.put("sign", sign.getText().toString());
-                params.put("nickname", nickname.getText().toString());
-                params.put("age", ageStr);
-                params.put("heightl", heightlStr);
+                params.put("nickname", nickname.getText().toString().trim());
+                params.put("age", ageStr.replace("年", ""));
+                params.put("heightl", heightlStr.replace("CM", ""));
                 params.put("education", educationID);
                 params.put("provinceid", provinceid);
                 params.put("cityid", cityid);
@@ -883,13 +885,9 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         public void onClick(View v) {
             popEducationWindow.dismiss();
             switch (v.getId()) {
-                case R.id.btn1: {
-                    education.setText("高中及以下");
-                    educationID = "1";
-                }
-                break;
+
                 case R.id.btn2: {
-                    education.setText("中专");
+                    education.setText("专科以下");
                     educationID = "2";
                 }
                 break;
@@ -1106,12 +1104,12 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                             if("不限".equals(arrs[0])){
                                 agestart = "1970";
                             }else {
-                                agestart = arrs[0];
+                                agestart = arrs[0].replaceAll("年", "");
                             }
                             if("不限".equals(arrs[1])){
                                 ageend = "1999";
                             }else {
-                                ageend = arrs[1];
+                                ageend = arrs[1].replaceAll("年", "");
                             }
                         }
                     }
@@ -1130,12 +1128,12 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                             if("不限".equals(arrs[0])){
                                 heightlstart = "150";
                             }else {
-                                heightlstart = arrs[0];
+                                heightlstart = arrs[0].replace("CM", "");
                             }
                             if("不限".equals(arrs[1])){
                                 heightlend = "190";
                             }else {
-                                heightlend = arrs[1];
+                                heightlend = arrs[1].replace("CM", "");
                             }
                         }
                     }
@@ -1355,13 +1353,8 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         public void onClick(View v) {
             popEducationWindow.dismiss();
             switch (v.getId()) {
-                case R.id.btn1: {
-                    education_marry.setText("高中及以下");
-                    educationID2 = "1";
-                }
-                break;
                 case R.id.btn2: {
-                    education_marry.setText("中专");
+                    education_marry.setText("专科以下");
                     educationID2 = "2";
                 }
                 break;

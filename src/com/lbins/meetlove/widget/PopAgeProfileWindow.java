@@ -56,7 +56,11 @@ public class PopAgeProfileWindow extends PopupWindow {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(arrays1.size()>position){
                     String string = arrays1.get(position);
-                    startage.setText(string);
+                    if("不限".equals(string)){
+                        startage.setText(string);
+                    }else {
+                        startage.setText(string+"年");
+                    }
                 }
             }
         });

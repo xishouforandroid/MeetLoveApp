@@ -1,6 +1,7 @@
 package com.lbins.meetlove.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,6 +11,8 @@ import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.*;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -94,6 +97,55 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
         btn_login.setOnClickListener(this);
         keywords = (EditText) view.findViewById(R.id.keywords);
         keywords.addTextChangedListener(watcher);
+        keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                /*判断是否是“GO”键*/
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    /*隐藏软键盘*/
+                    InputMethodManager imm = (InputMethodManager) v
+                            .getContext().getSystemService(
+                                    Context.INPUT_METHOD_SERVICE);
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(
+                                v.getApplicationWindowToken(), 0);
+                    }
+
+                    if(!StringUtil.isNullOrEmpty(keywords.getText().toString())
+                            || !StringUtil.isNullOrEmpty(agestart)
+                            || !StringUtil.isNullOrEmpty(ageend)
+                            || !StringUtil.isNullOrEmpty(heightlstart)
+                            || !StringUtil.isNullOrEmpty(heightlend)
+                            || !StringUtil.isNullOrEmpty(educationID2)
+                            || !StringUtil.isNullOrEmpty(marragieID)
+                            || !StringUtil.isNullOrEmpty(likeids)
+                            )
+                    {
+//                        btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                        btn_login.setBackgroundResource(R.drawable.btn_big_active);
+                        btn_login.setTextColor(getResources().getColor(R.color.white));
+                        Intent intent = new Intent(getActivity(), SearchPeopleActivity.class);
+                        intent.putExtra("keywords", keywords.getText().toString());
+                        intent.putExtra("agestart", agestart);
+                        intent.putExtra("ageend", ageend);
+                        intent.putExtra("heightlstart", heightlstart);
+                        intent.putExtra("heightlend", heightlend);
+                        intent.putExtra("educationID2", educationID2);
+                        intent.putExtra("marragieID", marragieID);
+                        intent.putExtra("likeids", likeids);
+                        startActivity(intent);
+                    } else {
+                        btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
+                        btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
+                        Toast.makeText(getActivity(), "请选择查询条件!", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private TextWatcher watcher = new TextWatcher() {
@@ -119,11 +171,11 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
                     || !StringUtil.isNullOrEmpty(likeids)
                     )
             {
-                    btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
-                    btn_login.setTextColor(getResources().getColor(R.color.white));
+                btn_login.setBackgroundResource(R.drawable.btn_big_active);
+                btn_login.setTextColor(getResources().getColor(R.color.white));
             } else {
-                    btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_unactive));
-                    btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
+                btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
+                btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
     };
@@ -139,24 +191,28 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
             case R.id.age:
             {
                 //年龄
+                hiddenKeyBoard(v);
                 showPopAge();
             }
                 break;
             case R.id.heightl:
             {
                 //身高
+                hiddenKeyBoard(v);
                 showPopHeightl();
             }
             break;
             case R.id.education:
             {
                 //学历
+                hiddenKeyBoard(v);
                 showPopEducation2();
             }
             break;
             case R.id.marragie:
             {
                 //婚姻状况
+                hiddenKeyBoard(v);
                 showPopMarry();
             }
             break;
@@ -207,7 +263,7 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
                     if(!StringUtil.isNullOrEmpty(likeNames)){
                         likes.setText(likeNames);
                     }
-                    btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                    btn_login.setBackgroundResource(R.drawable.btn_big_active);
                     btn_login.setTextColor(getResources().getColor(R.color.white));
                 }
             }
@@ -238,7 +294,7 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
     private View.OnClickListener itemsOnClickMarry = new View.OnClickListener() {
         public void onClick(View v) {
             popMarryWindow.dismiss();
-            btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+            btn_login.setBackgroundResource(R.drawable.btn_big_active);
             btn_login.setTextColor(getResources().getColor(R.color.white));
             switch (v.getId()) {
                 case R.id.btn1: {
@@ -281,16 +337,11 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
     private View.OnClickListener itemsOnClickEducation2 = new View.OnClickListener() {
         public void onClick(View v) {
             popEducationWindow.dismiss();
-            btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+            btn_login.setBackgroundResource(R.drawable.btn_big_active);
             btn_login.setTextColor(getResources().getColor(R.color.white));
             switch (v.getId()) {
-                case R.id.btn1: {
-                    education.setText("高中及以下");
-                    educationID2 = "1";
-                }
-                break;
                 case R.id.btn2: {
-                    education.setText("中专");
+                    education.setText("专科以下");
                     educationID2 = "2";
                 }
                 break;
@@ -530,7 +581,7 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
             case 0:
             {
                 popAgeWindow.dismiss();
-                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                btn_login.setBackgroundResource(R.drawable.btn_big_active);
                 btn_login.setTextColor(getResources().getColor(R.color.white));
                 String ageStr = (String) object;
                 if(!StringUtil.isNullOrEmpty(ageStr)){
@@ -556,7 +607,7 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
             case 1:
             {
                 popHeightlWindow.dismiss();
-                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                btn_login.setBackgroundResource(R.drawable.btn_big_active);
                 btn_login.setTextColor(getResources().getColor(R.color.white));
                 String ageStr = (String) object;
                 if(!StringUtil.isNullOrEmpty(ageStr)){
@@ -579,6 +630,17 @@ public class SearchOneFragment extends BaseFragment implements View.OnClickListe
                 }
             }
             break;
+        }
+    }
+
+    void hiddenKeyBoard(View v){
+         /*隐藏软键盘*/
+        InputMethodManager imm = (InputMethodManager) v
+                .getContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(
+                    v.getApplicationWindowToken(), 0);
         }
     }
 }

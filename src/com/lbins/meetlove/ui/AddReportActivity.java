@@ -133,10 +133,10 @@ public class AddReportActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(content.getText().toString()) && !StringUtil.isNullOrEmpty(nickname.getText().toString())){
-                btn_1.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_1.setBackgroundResource(R.drawable.btn_big_active);
                 btn_1.setTextColor(getResources().getColor(R.color.white));
             }else {
-                btn_1.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_1.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_1.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }

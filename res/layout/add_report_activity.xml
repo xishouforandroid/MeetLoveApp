@@ -17,7 +17,7 @@
                       android:orientation="vertical"
                       android:layout_height="match_parent">
             <TextView android:layout_width="match_parent"
-                      android:text="要投诉的人"
+                      android:text="投诉对象"
                       android:padding="12dp"
                       android:textSize="14sp"
                       android:textColor="@color/text_color"
@@ -36,7 +36,7 @@
                     android:background="@drawable/panel_aleart_bg"
                     android:textSize="16sp"
                     android:gravity="top"
-                    android:hint="......"
+                    android:hint="请输入"
                     android:padding="10dp"
                     android:textColor="#ff000000"/>
 
@@ -62,7 +62,7 @@
                     android:background="@drawable/panel_aleart_bg"
                     android:textSize="16sp"
                     android:gravity="top"
-                    android:hint="......"
+                    android:hint="请输入"
                     android:padding="10dp"
                     android:textColor="#ff000000"/>
 

@@ -63,7 +63,12 @@ public class PopAgeWindow extends PopupWindow {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(arrays1.size()>position){
                     String string = arrays1.get(position);
-                    startage.setText(string);
+
+                    if("不限".equals(string)){
+                        startage.setText(string);
+                    }else {
+                        startage.setText(string+"年");
+                    }
                 }
             }
         });
@@ -72,7 +77,11 @@ public class PopAgeWindow extends PopupWindow {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(arrays2.size()>position){
                     String string = arrays2.get(position);
-                    endage.setText(string);
+                    if("不限".equals(string)){
+                        endage.setText(string);
+                    }else {
+                        endage.setText(string+"年");
+                    }
                 }
             }
         });

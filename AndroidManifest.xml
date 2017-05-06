@@ -3,8 +3,8 @@
           package="com.lbins.meetlove"
           xmlns:tools="http://schemas.android.com/tools"
           android:versionCode="1"
-          android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="21"   tools:overrideLibrary="com.easemob.redpacket"/>
+          android:versionName="1.6">
+    <uses-sdk android:minSdkVersion="14"   tools:overrideLibrary="com.easemob.redpacket"/>
 
     <!-- 允许程序打开网络sockets(必选配置) -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -172,6 +172,7 @@
         <activity android:name=".ui.BackCxbzjActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ProfileSetActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ProfileDetailJwdxActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.MineBlackListActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
         <meta-data

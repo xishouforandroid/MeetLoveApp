@@ -95,10 +95,10 @@ public class AddSuggestActivity extends BaseActivity implements View.OnClickList
         @Override
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(content.getText().toString())){
-                btn_1.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_1.setBackgroundResource(R.drawable.btn_big_active);
                 btn_1.setTextColor(getResources().getColor(R.color.white));
             }else{
-                btn_1.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_1.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_1.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }

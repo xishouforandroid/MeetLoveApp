@@ -159,11 +159,8 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_count_bg.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_dot.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/launcher.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_one.jpg" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/about_two.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_green.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_white.9.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_login.jpg" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_active.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_unactive.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_sex_left_disable.png" charset="UTF-8" />
@@ -342,10 +339,12 @@
     <file url="file://$PROJECT_DIR$/res/layout/list_position.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/listview_item_layout.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/login_activity.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/msg_black_emp_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_delete_friends_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_delete_jw_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_friends_dialog.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/layout/msg_reg_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_tel_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/msg_version_dialog.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/layout/pay_result.xml" charset="UTF-8" />
@@ -392,6 +391,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AnimateFirstDisplayListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemAgeAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemFriendsApplyAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemHeightlAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemJwdxAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemJwdxApplyAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemLikesAdapter.java" charset="UTF-8" />

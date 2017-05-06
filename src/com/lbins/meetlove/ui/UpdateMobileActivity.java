@@ -129,10 +129,10 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(mobile.getText().toString()) && !StringUtil.isNullOrEmpty(card.getText().toString())){
-                btn_save.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_save.setBackgroundResource(R.drawable.btn_short_active);
                 btn_save.setTextColor(getResources().getColor(R.color.white));
             }else {
-                btn_save.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_save.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_save.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }
@@ -153,7 +153,7 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
                 SMSSDK.getVerificationCode("86", mobile.getText().toString());//发送请求验证码，手机10s之内会获得短信验证码
                 phString = mobile.getText().toString();
                 btn_card.setClickable(false);//不可点击
-                btn_card.setBackground(res.getDrawable(R.drawable.btn_short_unactive));
+                btn_card.setBackgroundResource(R.drawable.btn_short_unactive);
                 MyTimer myTimer = new MyTimer(60000, 1000);
                 myTimer.start();
             }
@@ -188,7 +188,7 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         public void onFinish() {
             btn_card.setText(res.getString(R.string.daojishi_three));
             btn_card.setClickable(true);//可点击
-            btn_card.setBackground(res.getDrawable(R.drawable.btn_short_active));
+            btn_card.setBackgroundResource(R.drawable.btn_short_active);
         }
 
         @Override

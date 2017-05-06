@@ -29,7 +29,7 @@
                         android:lineSpacingMultiplier="1.2"
                         android:gravity="center|left"
                         android:padding="14dp"
-                        android:text="您应保证您的投诉行为基于善意，并代表您本人真实意思。幸福牵手吧作为中立的服务者，收到您投诉后，会尽快按照服务条款与隐私保护处理。谢谢！"
+                        android:text="您应保证您的投诉行为基于善意，并代表您本人真实意思。幸福牵手吧作为中立的服务者，收到您投诉后，会尽快按照服务条款处理。谢谢！"
                         android:textStyle="bold"
                         android:textColor="@color/textColortwo"
                         android:textSize="15sp"/>

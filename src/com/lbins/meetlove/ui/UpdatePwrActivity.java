@@ -72,10 +72,10 @@ public class UpdatePwrActivity extends BaseActivity implements View.OnClickListe
         public void afterTextChanged(Editable s) {
             if(!StringUtil.isNullOrEmpty(pwr1.getText().toString()) && !StringUtil.isNullOrEmpty(pwr2.getText().toString()) && !StringUtil.isNullOrEmpty(pwr3
             .getText().toString()) && pwr2.getText().toString().equals(pwr3.getText().toString())){
-                btn_save.setBackground(getDrawable(R.drawable.btn_big_active));
+                btn_save.setBackgroundResource(R.drawable.btn_big_active);
                 btn_save.setTextColor(getResources().getColor(R.color.white));
             }else {
-                btn_save.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                btn_save.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_save.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }

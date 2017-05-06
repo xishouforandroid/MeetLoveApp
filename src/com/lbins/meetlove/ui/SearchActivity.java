@@ -63,7 +63,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 }
                 btn1.setTextColor(res.getColor(R.color.white));
                 btn2.setTextColor(res.getColor(R.color.text_color));
-                liner1.setBackground(res.getDrawable(R.drawable.btn_switch_navbar_left));
+                liner1.setBackgroundResource(R.drawable.btn_switch_navbar_left);
                 break;
             case R.id.btn2:
                 if (twoFragment == null) {
@@ -74,7 +74,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 }
                 btn1.setTextColor(res.getColor(R.color.text_color));
                 btn2.setTextColor(res.getColor(R.color.white));
-                liner1.setBackground(res.getDrawable(R.drawable.btn_switch_navbar_right));
+                liner1.setBackgroundResource(R.drawable.btn_switch_navbar_right);
                 break;
 
         }

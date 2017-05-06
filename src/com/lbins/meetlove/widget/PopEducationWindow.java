@@ -17,7 +17,7 @@ import com.lbins.meetlove.R;
  * Time: 20:58
  */
 public class PopEducationWindow extends PopupWindow {
-    private TextView btn1, btn2, btn3, btn4, btn5, btn_cancel;
+    private TextView  btn2, btn3, btn4, btn5, btn_cancel;
     private View mMenuView;
 
     public PopEducationWindow(Activity context, View.OnClickListener itemsOnClick) {
@@ -25,7 +25,6 @@ public class PopEducationWindow extends PopupWindow {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mMenuView = inflater.inflate(R.layout.pop_education, null);
-        btn1 = (TextView) mMenuView.findViewById(R.id.btn1);
         btn2 = (TextView) mMenuView.findViewById(R.id.btn2);
         btn3 = (TextView) mMenuView.findViewById(R.id.btn3);
         btn4 = (TextView) mMenuView.findViewById(R.id.btn4);
@@ -40,7 +39,6 @@ public class PopEducationWindow extends PopupWindow {
             }
         });
         //设置按钮监听
-        btn1.setOnClickListener(itemsOnClick);
         btn2.setOnClickListener(itemsOnClick);
         btn3.setOnClickListener(itemsOnClick);
         btn4.setOnClickListener(itemsOnClick);

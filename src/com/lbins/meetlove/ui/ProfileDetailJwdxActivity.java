@@ -163,10 +163,10 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
                     //进行身份认证了
                     nickname.setText(emp.getNickname());
                 }else {
-                    nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                    nickname.setBackgroundResource(R.drawable.btn_profile_check);
                 }
             }else {
-                nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                nickname.setBackgroundResource(R.drawable.btn_profile_check);
             }
         }
         if(!StringUtil.isNullOrEmpty(emp.getCover())){
@@ -182,10 +182,10 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
                     //进行身份认证了
                     mobile.setText(emp.getMobile());
                 }else {
-                    mobile.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                    mobile.setBackgroundResource(R.drawable.btn_profile_check);
                 }
             }else {
-                mobile.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                mobile.setBackgroundResource(R.drawable.btn_profile_check);
             }
         }
         if(!StringUtil.isNullOrEmpty(emp.getState())){
@@ -204,14 +204,10 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
         }
         if(!StringUtil.isNullOrEmpty(emp.getEducation())){
             switch (Integer.parseInt(emp.getEducation())){
-                case 1:
-                {
-                    education.setText("高中及以下");
-                }
-                    break;
+
                 case 2:
                 {
-                    education.setText("中专");
+                    education.setText("专科以下");
                 }
                 break;
                 case 3:
@@ -260,10 +256,10 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
                     //进行身份认证了
                     company.setText(emp.getCompany());
                 }else {
-                    company.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                    company.setBackgroundResource(R.drawable.btn_profile_check);
                 }
             }else {
-                company.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                company.setBackgroundResource(R.drawable.btn_profile_check);
             }
         }
         if(!StringUtil.isNullOrEmpty(emp.getLikeids())){
@@ -314,14 +310,10 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
 
         if(!StringUtil.isNullOrEmpty(emp.getEducationm())){
             switch (Integer.parseInt(emp.getEducationm())){
-                case 1:
-                {
-                    education_marry.setText("高中及以下");
-                }
-                break;
+
                 case 2:
                 {
-                    education_marry.setText("中专");
+                    education_marry.setText("专科以下");
                 }
                 break;
                 case 3:

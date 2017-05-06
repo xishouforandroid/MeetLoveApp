@@ -52,7 +52,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <EditText android:layout_width="wrap_content"
-                              android:hint="未填写"
+                              android:hint="未填写 30字以内"
                               android:id="@+id/sign"
                               android:gravity="top"
                               android:paddingTop="8dp"
@@ -125,7 +125,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="范围：1970-1999年"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:drawablePadding="8dp"
                               android:textSize="15sp"
@@ -148,7 +148,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="范围：150-190cm"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/heightl"
@@ -171,7 +171,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="高中以下,中专,专科,本科,研究生以上"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/education"
@@ -194,7 +194,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="选择省市"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/address"
@@ -217,7 +217,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="未婚,离异,丧偶"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/marragie"
@@ -240,7 +240,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <EditText android:layout_width="wrap_content"
-                              android:hint="未填写"
+                              android:hint="未填写 30字以内"
                               android:gravity="top"
                               android:paddingTop="8dp"
                               android:paddingLeft="8dp"
@@ -266,7 +266,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="读书,音乐,电影"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:id="@+id/likes"
                               android:textSize="15sp"
@@ -300,7 +300,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="范围：1970-1999年"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/age_marry"
@@ -323,7 +323,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="范围：150-190cm"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:id="@+id/heightl_marry"
                               android:textSize="15sp"
@@ -346,7 +346,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="高中以下,中专,专科,本科,研究生以上"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/education_marry"
@@ -369,7 +369,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="未婚,离异,丧偶"
+                              android:text="点击选择"
                               android:layout_weight="1"
                               android:textSize="15sp"
                               android:id="@+id/marry_marry"

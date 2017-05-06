@@ -1,10 +1,12 @@
 package com.lbins.meetlove.ui;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -181,7 +183,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 if (Integer.parseInt(code) == 200) {
                                     EmpData data = getGson().fromJson(s, EmpData.class);
                                     saveAccount(data.getData());
-                                }  else {
+                                }else if(Integer.parseInt(code) == 2){
+                                    //未注册 提示注册
+                                    showRegDialog();
+                                } else {
                                     showMsg(LoginActivity.this,  jo.getString("message"));
                                 }
                             } catch (JSONException e) {
@@ -219,6 +224,31 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         };
         getRequestQueue().add(request);
+    }
+
+    private void showRegDialog() {
+        final Dialog picAddDialog = new Dialog(LoginActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_reg_dialog, null);
+        Button btn_sure = (Button) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        Button btn_cancel = (Button) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     public void saveAccount(final Emp emp) {
@@ -315,10 +345,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //都不是空的
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
-                    btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                    btn_login.setBackgroundResource(R.drawable.btn_big_active);
                     btn_login.setTextColor(res.getColor(R.color.white));
                 }else {
-                    btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                    btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
                     btn_login.setTextColor(res.getColor(R.color.textColortwo));
                 }
             }

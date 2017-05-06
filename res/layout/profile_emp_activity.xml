@@ -11,12 +11,13 @@
             layout="@layout/top"/>
     <LinearLayout android:layout_width="match_parent"
                   android:background="@color/white"
-                  android:padding="10dp"
+                  android:padding="16dp"
                   android:orientation="horizontal"
                   android:layout_height="wrap_content">
         <com.lbins.meetlove.widget.RoundImageView
-                android:layout_width="108dp"
-                android:layout_height="108dp"
+                android:layout_width="138dp"
+                android:layout_height="138dp"
+                android:src="@drawable/default_cover1"
                 android:layout_margin="6dp"
                 android:id="@+id/cover"
                 />
@@ -26,13 +27,13 @@
             <TextView android:layout_width="wrap_content"
                       android:id="@+id/nickname"
                       android:layout_centerHorizontal="true"
-                      android:textSize="22sp"
+                      android:textSize="32sp"
                       android:textColor="@color/textColor"
                       android:layout_marginTop="15dp"
                       android:layout_height="wrap_content"/>
 
             <TextView android:layout_width="wrap_content"
-                      android:text="企业推荐"
+                      android:text="单位推荐"
                       android:id="@+id/is_tuijian"
                       android:layout_marginLeft="15dp"
                       android:layout_marginTop="8dp"
@@ -49,7 +50,10 @@
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
                       android:padding="12dp"
+                      android:lines="2"
+                      android:ellipsize="end"
                       android:id="@+id/sign"
+                      android:lineSpacingMultiplier="1.2"
                       android:textColor="@color/textColortwo"
                       android:layout_below="@+id/is_tuijian"
                       android:layout_height="wrap_content"/>
@@ -64,7 +68,7 @@
         <LinearLayout android:layout_width="108dp"
                       android:layout_gravity="center"
                       android:gravity="center"
-                      android:layout_marginLeft="8dp"
+                      android:layout_marginLeft="18dp"
                       android:layout_height="wrap_content">
             <ImageView android:layout_width="18dp"
                        android:id="@+id/vip_1"
@@ -95,6 +99,7 @@
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
                       android:id="@+id/age"
+                      android:text="28"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"
                       android:gravity="center"
@@ -102,6 +107,7 @@
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
                       android:id="@+id/heightl"
+                      android:text="198CM"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"
                       android:gravity="center"
@@ -109,6 +115,7 @@
             <TextView android:layout_width="0dp"
                       android:layout_weight="1"
                       android:id="@+id/address"
+                      android:text="沈阳"
                       android:textColor="@color/textColortwo"
                       android:layout_gravity="center"
                       android:gravity="center"

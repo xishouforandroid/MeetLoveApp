@@ -55,7 +55,12 @@ public class ItemAgeAdapter extends BaseAdapter {
 
         final String cell = records.get(position);
         if (cell != null) {
-            holder.title.setText(cell);
+            if(!"不限".equals(cell)){
+                holder.title.setText(cell+"年");
+            }else {
+                holder.title.setText(cell);
+            }
+
         }
         return convertView;
     }

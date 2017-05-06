@@ -120,34 +120,34 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
         }
         if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
             //身份认证了
-            btn_1.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+            btn_1.setBackgroundResource(R.drawable.btn_big_unactive);
             btn_1.setTextColor(res.getColor(R.color.textColortwo));
             btn_1.setText("身份已认证");
         }else {
             //未认证
-            btn_1.setBackground(res.getDrawable(R.drawable.btn_big_active));
+            btn_1.setBackgroundResource(R.drawable.btn_big_active);
             btn_1.setTextColor(res.getColor(R.color.white));
             btn_1.setText("身份认证");
         }
         if("1".equals(getGson().fromJson(getSp().getString("rzstate2", ""), String.class))){
             //会员认证了
-            btn_2.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+            btn_2.setBackgroundResource(R.drawable.btn_big_unactive);
             btn_2.setTextColor(res.getColor(R.color.textColortwo));
             btn_2.setText("会员已认证");
         }else {
             //未认证
-            btn_2.setBackground(res.getDrawable(R.drawable.btn_big_active));
+            btn_2.setBackgroundResource(R.drawable.btn_big_active);
             btn_2.setTextColor(res.getColor(R.color.white));
             btn_2.setText("会员认证");
         }
         if("1".equals(getGson().fromJson(getSp().getString("rzstate3", ""), String.class))){
             //诚信认证了
-            btn_3.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+            btn_3.setBackgroundResource(R.drawable.btn_big_unactive);
             btn_3.setTextColor(res.getColor(R.color.textColortwo));
             btn_3.setText("诚信已认证");
         }else {
             //未认证
-            btn_3.setBackground(res.getDrawable(R.drawable.btn_big_active));
+            btn_3.setBackgroundResource(R.drawable.btn_big_active);
             btn_3.setTextColor(res.getColor(R.color.white));
             btn_3.setText("诚信认证");
         }
@@ -463,7 +463,7 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
                                 if(Integer.parseInt(code) == 200) {
                                     save("cardpic", InternetURL.QINIU_URL + uploadpic);
                                     save("rzstate1", "1");
-                                    btn_1.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+                                    btn_1.setBackgroundResource(R.drawable.btn_big_unactive);
                                     btn_1.setTextColor(res.getColor(R.color.textColortwo));
                                     btn_1.setText("身份已认证");
                                     showMsg(MineRenzhengActivity.this, "身份认证成功！");
@@ -519,13 +519,13 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
             String action = intent.getAction();
             if (action.equals("rzstate2_success")) {
                 //会员认证了
-                btn_2.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+                btn_2.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_2.setTextColor(res.getColor(R.color.textColortwo));
                 btn_2.setText("会员已认证");
             }
             if (action.equals("rzstate3_success")) {
                 //诚信认证了
-                btn_3.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+                btn_3.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_3.setTextColor(res.getColor(R.color.textColortwo));
                 btn_3.setText("诚信已认证");
             }

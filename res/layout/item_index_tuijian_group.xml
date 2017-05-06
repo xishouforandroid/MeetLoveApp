@@ -22,7 +22,6 @@
                         android:padding="8dp"
                         android:layout_height="wrap_content">
             <TextView android:layout_width="wrap_content"
-                      android:text="读书群"
                       android:layout_centerHorizontal="true"
                       android:textSize="18sp"
                       android:id="@+id/nickname"
@@ -30,7 +29,6 @@
                       android:layout_height="wrap_content"/>
 
             <TextView android:layout_width="wrap_content"
-                      android:text="书籍是最有耐心，最能忍耐和最让人愉快的伙伴。这里有爱好读书的一群人。"
                       android:textColor="@color/textColortwo"
                       android:layout_marginTop="6dp"
                       android:singleLine="true"

@@ -328,10 +328,10 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                     //进行身份认证了
                     nickname.setText(emp.getNickname());
                 }else {
-                    nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                    nickname.setBackgroundResource(R.drawable.btn_profile_check);
                 }
             }else {
-                nickname.setBackground(res.getDrawable(R.drawable.btn_profile_check));
+                nickname.setBackgroundResource(R.drawable.btn_profile_check);
             }
         }
         if(!StringUtil.isNullOrEmpty(emp.getCover())){
@@ -349,12 +349,16 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         }
         if(!StringUtil.isNullOrEmpty(emp.getSign())){
             sign.setText("个性签名:"+ emp.getSign());
+        }else{
+            sign.setText("个性签名:暂未填写");
         }
         if(!StringUtil.isNullOrEmpty(emp.getAge())){
-            age.setText(emp.getAge() + "年");
+            if(emp.getAge().length() == 4){
+                age.setText(emp.getAge().substring(2, 4) + "年");
+            }
         }
         if(!StringUtil.isNullOrEmpty(emp.getHeightl())){
-            heightl.setText(emp.getHeightl() + "cm");
+            heightl.setText(emp.getHeightl() + "CM");
         }
         if(!StringUtil.isNullOrEmpty(emp.getCityName())){
             address.setText(emp.getCityName());

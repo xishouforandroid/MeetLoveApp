@@ -1,5 +1,6 @@
 package com.lbins.meetlove.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -7,9 +8,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -97,11 +101,43 @@ public class SearchTwoFragment extends BaseFragment implements View.OnClickListe
                                 likeids = lists.get(position).getLikeid();
                             }
                             adapterGrid.notifyDataSetChanged();
-                            btn_login.setBackground(getResources().getDrawable(R.drawable.btn_big_active));
+                            btn_login.setBackgroundResource(R.drawable.btn_big_active);
                             btn_login.setTextColor(getResources().getColor(R.color.white));
                         }
                     }
                 }
+            }
+        });
+
+        keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                /*判断是否是“GO”键*/
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    /*隐藏软键盘*/
+                    InputMethodManager imm = (InputMethodManager) v
+                            .getContext().getSystemService(
+                                    Context.INPUT_METHOD_SERVICE);
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(
+                                v.getApplicationWindowToken(), 0);
+                    }
+
+                    //查找
+                    if(!StringUtil.isNullOrEmpty(keywords.getText().toString())
+                            || !StringUtil.isNullOrEmpty(likeids)
+                            ){
+                        Intent intent = new Intent(getActivity(), SearchGroupsActivity.class);
+                        intent.putExtra("keywords", keywords.getText().toString());
+                        intent.putExtra("likeids", likeids);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getActivity(), "请选择查询条件!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -123,10 +159,10 @@ public class SearchTwoFragment extends BaseFragment implements View.OnClickListe
                     || !StringUtil.isNullOrEmpty(likeids)
                     )
             {
-                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_active));
+                btn_login.setBackgroundResource(R.drawable.btn_big_active);
                 btn_login.setTextColor(getResources().getColor(R.color.white));
             } else {
-                btn_login.setBackground(getActivity().getDrawable(R.drawable.btn_big_unactive));
+                btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
                 btn_login.setTextColor(getResources().getColor(R.color.textColortwo));
             }
         }

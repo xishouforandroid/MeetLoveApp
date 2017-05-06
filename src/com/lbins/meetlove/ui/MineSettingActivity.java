@@ -191,7 +191,7 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
             case R.id.liner_black:
             {
                 //黑名单
-                Intent intent = new Intent(MineSettingActivity.this, BlacklistActivity.class);
+                Intent intent = new Intent(MineSettingActivity.this, MineBlackListActivity.class);
                 startActivity(intent);
             }
                 break;
@@ -294,6 +294,37 @@ public class MineSettingActivity extends BaseActivity implements View.OnClickLis
                         @Override
                         public void onSuccess() {
                             save("password", "");
+                            save("empid", "");
+                            save("nickname", "");
+                            save("cover", "");
+                            save("sign", "");
+                            save("age", "");
+                            save("sex", "");
+                            save("heightl", "");
+                            save("education", "");
+                            save("provinceid", "");
+                            save("cityid", "");
+                            save("areaid","");
+                            save("marriage", "");
+                            save("company", "");
+                            save("likeids", "");
+                            save("state", "");
+                            save("cardpic", "");
+                            save("rzstate1", "");
+                            save("rzstate2", "");
+                            save("rzstate3", "");
+                            save("is_use", "");
+                            save("pname", "");
+                            save("cityName", "");
+
+                            save("chooseid", "");
+                            save("agestart", "");
+                            save("ageend", "");
+                            save("heightlstart", "");
+                            save("heightlend", "");
+                            save("educationm", "");
+                            save("marriagem", "");
+                            save("is_push", "");
                             ActivityTack.getInstanse().popUntilActivity(LoginActivity.class);
                             finish();
                         }

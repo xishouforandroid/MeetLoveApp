@@ -38,7 +38,7 @@
                               android:layout_marginTop="15dp"
                               android:layout_height="wrap_content"/>
                     <TextView android:layout_width="wrap_content"
-                              android:text="企业推荐"
+                              android:text="单位推荐"
                               android:id="@+id/is_tuijian"
                               android:layout_marginLeft="15dp"
                               android:layout_marginTop="8dp"

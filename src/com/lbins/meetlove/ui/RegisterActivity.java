@@ -70,7 +70,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         pwr.addTextChangedListener(watcher);
         pwrsure.addTextChangedListener(watcher);
 
-        btn_login.setBackground(res.getDrawable(R.drawable.btn_big_unactive));
+        btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
         btn_login.setTextColor(res.getColor(R.color.textColortwo));
     }
 
@@ -97,7 +97,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_login:
             {
                 //点击注册
-                if(StringUtil.isNullOrEmpty(mobile.getText().toString())){
+                if(StringUtil.isNullOrEmpty(mobile.getText().toString().trim())){
                     showMsg(RegisterActivity.this, res.getString(R.string.error_login_one));
                     return;
                 }
@@ -132,7 +132,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.sex_man:
             {
                 //男
-                sex_liner.setBackground(res.getDrawable(R.drawable.btn_sex_left));
+                sex_liner.setBackgroundResource(R.drawable.btn_sex_left);
                 sex_man.setTextColor(res.getColor(R.color.white));
                 sex_woman.setTextColor(res.getColor(R.color.main_color));
                 sex = "1";
@@ -141,7 +141,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.sex_woman:
             {
                 //女
-                sex_liner.setBackground(res.getDrawable(R.drawable.btn_sex_right));
+                sex_liner.setBackgroundResource(R.drawable.btn_sex_right);
                 sex_man.setTextColor(res.getColor(R.color.main_color));
                 sex_woman.setTextColor(res.getColor(R.color.white));
                 sex = "0";
@@ -167,10 +167,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 //都不是空的
                 if(mobile.getText().toString().length() == 11 && pwr.getText().toString().equals(pwrsure.getText().toString()) && pwr.getText().toString().length() > 5 && pwr.getText().toString().length()<19){
                     //手机号是11位 两次输入密码一致 密码大于6位小于18位
-                    btn_login.setBackground(getDrawable(R.drawable.btn_big_active));
+                    btn_login.setBackgroundResource(R.drawable.btn_big_active);
                     btn_login.setTextColor(res.getColor(R.color.white));
                 }else {
-                    btn_login.setBackground(getDrawable(R.drawable.btn_big_unactive));
+                    btn_login.setBackgroundResource(R.drawable.btn_big_unactive);
                     btn_login.setTextColor(res.getColor(R.color.textColortwo));
                 }
             }
@@ -223,7 +223,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("mobile", mobile.getText().toString());
+                params.put("mobile", mobile.getText().toString().trim());
                 params.put("password", pwr.getText().toString());
                 params.put("sex", sex);
                 return params;
