@@ -49,26 +49,26 @@ public class EmojiconExampleGroupData {
     };
     
     
-    private static final EaseEmojiconGroupEntity DATA = createData();
+//    private static final EaseEmojiconGroupEntity DATA = createData();
     
-    private static EaseEmojiconGroupEntity createData(){
-        EaseEmojiconGroupEntity emojiconGroupEntity = new EaseEmojiconGroupEntity();
-        EaseEmojicon[] datas = new EaseEmojicon[icons.length];
-        for(int i = 0; i < icons.length; i++){
-            datas[i] = new EaseEmojicon(icons[i], null, Type.BIG_EXPRESSION);
-            datas[i].setBigIcon(bigIcons[i]);
-            //you can replace this to any you want
-            datas[i].setName(MeetLoveApplication.getInstance().getApplicationContext().getString(R.string.emojicon_test_name)+ (i+1));
-            datas[i].setIdentityCode("em"+ (1000+i+1));
-        }
-        emojiconGroupEntity.setEmojiconList(Arrays.asList(datas));
-        emojiconGroupEntity.setIcon(R.drawable.ee_2);
-        emojiconGroupEntity.setType(Type.BIG_EXPRESSION);
-        return emojiconGroupEntity;
-    }
+//    private static EaseEmojiconGroupEntity createData(){
+//        EaseEmojiconGroupEntity emojiconGroupEntity = new EaseEmojiconGroupEntity();
+//        EaseEmojicon[] datas = new EaseEmojicon[icons.length];
+//        for(int i = 0; i < icons.length; i++){
+//            datas[i] = new EaseEmojicon(icons[i], null, Type.BIG_EXPRESSION);
+//            datas[i].setBigIcon(bigIcons[i]);
+//            //you can replace this to any you want
+//            datas[i].setName(MeetLoveApplication.getInstance().getApplicationContext().getString(R.string.emojicon_test_name)+ (i+1));
+//            datas[i].setIdentityCode("em"+ (1000+i+1));
+//        }
+//        emojiconGroupEntity.setEmojiconList(Arrays.asList(datas));
+//        emojiconGroupEntity.setIcon(R.drawable.ee_2);
+//        emojiconGroupEntity.setType(Type.BIG_EXPRESSION);
+//        return emojiconGroupEntity;
+//    }
     
     
-    public static EaseEmojiconGroupEntity getData(){
-        return DATA;
-    }
+//    public static EaseEmojiconGroupEntity getData(){
+//        return DATA;
+//    }
 }

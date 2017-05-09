@@ -63,17 +63,23 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
             }
             @Override
             public void onPageSelected(int position) {
-                for (int j = 0; j < circles.length; j++) {
-                    if(j == 1){
+//                for (int j = 0; j < circles.length; j++) {
+                    if(position == 1){
                         txt.setVisibility(View.VISIBLE);
                     }else {
                         txt.setVisibility(View.GONE);
                     }
-                }
+//                }
             }
             @Override
             public void onPageScrollStateChanged(int i) {
-
+//                for (int j = 0; j < circles.length; j++) {
+//                    if(j == 1){
+//                        txt.setVisibility(View.VISIBLE);
+//                    }else {
+//                        txt.setVisibility(View.GONE);
+//                    }
+//                }
             }
         });
     }

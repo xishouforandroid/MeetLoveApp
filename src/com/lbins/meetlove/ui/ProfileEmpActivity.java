@@ -28,10 +28,8 @@ import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
 import com.lbins.meetlove.dao.Friends;
-import com.lbins.meetlove.data.EmpData;
-import com.lbins.meetlove.data.EmpsData;
-import com.lbins.meetlove.data.FriendsData;
-import com.lbins.meetlove.data.HappyHandPhotoData;
+import com.lbins.meetlove.dao.HappyHandJw;
+import com.lbins.meetlove.data.*;
 import com.lbins.meetlove.module.HappyHandPhoto;
 import com.lbins.meetlove.util.PinyinComparator;
 import com.lbins.meetlove.util.StringUtil;
@@ -80,7 +78,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         empid = getIntent().getExtras().getString("empid");
         res = getResources();
         initView();
-        progressDialog = new CustomProgressDialog(ProfileEmpActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(ProfileEmpActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -187,6 +185,8 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         this.findViewById(R.id.liner_photo).setOnClickListener(this);
         this.findViewById(R.id.btn_right).setOnClickListener(this);
         btn_login = (Button) this.findViewById(R.id.btn_login);
+
+        this.findViewById(R.id.top_cover).setOnClickListener(this);
     }
 
     @Override
@@ -195,6 +195,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
             case R.id.back:
                 finish();
                 break;
+            case R.id.top_cover:
             case R.id.cover:
             {
                 //头像
@@ -244,27 +245,24 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
                 if(isFriends == 0){
                     //不是好友  添加好友
                     if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
-                        showDialogMsg("对方不是你的交往对象，不能添加好友");
-                        return;
+                        showDialogMsg("您已有交往对象，不能添加好友");
                     }else if("2".equals(emp.getState())){
                         showDialogMsg("对方已有交往对象，不能添加好友");
-                        return;
                     }else{
                         showFriendsDialog();
                     }
                 }else if(isFriends == 1){
+
                     if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
-                        showDialogMsg("对方不是你的交往对象，不能发消息");
-                        return;
+                        //查询您的交往对象
+                        getJwdx1();
                     }else if("2".equals(emp.getState())){
-                        showDialogMsg("对方已有交往对象，不能发消息");
-                        return;
+                        getJwdx2();
                     }else{
                         //已经是好友  发消息
                         Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
                         intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
                         intent.putExtra(Constant.EXTRA_USER_ID, empid);
-                        intent.putExtra(Constant.EXTRA_USER_NICKNAME, emp.getNickname());
                         startActivity(intent);
                     }
                 }
@@ -277,6 +275,148 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
             showMsgDialog();
         }
     }
+
+    //查询我的交往对象
+    List<HappyHandJw> listjwdxs = new ArrayList<>();
+    private void getJwdx1() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appJiaowangs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandJwDatas data = getGson().fromJson(s, HappyHandJwDatas.class);
+                                    listjwdxs.clear();
+                                    listjwdxs.addAll(data.getData());
+                                    if(listjwdxs != null && listjwdxs.size()>0){
+                                        HappyHandJw happyHandJw = listjwdxs.get(0);
+                                        if(happyHandJw != null){
+                                            if(!emp.getEmpid().equals(happyHandJw.getEmpid2())){
+                                                showDialogMsg("对方不是你的交往对象，不能发消息");
+                                            }else{
+                                                Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
+                                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                                                intent.putExtra(Constant.EXTRA_USER_ID, empid);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("is_check", "1");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    //查询对方的交往对象
+    List<HappyHandJw> listjwdxs1 = new ArrayList<>();
+    private void getJwdx2() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appJiaowangs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandJwDatas data = getGson().fromJson(s, HappyHandJwDatas.class);
+                                    listjwdxs1.clear();
+                                    listjwdxs1.addAll(data.getData());
+                                    if(listjwdxs1 != null && listjwdxs1.size()>0){
+                                        HappyHandJw happyHandJw = listjwdxs1.get(0);
+                                        if(happyHandJw != null){
+                                            if(!getGson().fromJson(getSp().getString("empid", ""), String.class).equals(happyHandJw.getEmpid2())){
+                                                showDialogMsg("对方已有交往对象，不能发消息");
+                                            }else{
+                                                Intent intent = new Intent(ProfileEmpActivity.this, ChatActivity.class);
+                                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                                                intent.putExtra(Constant.EXTRA_USER_ID, empid);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", empid);
+                params.put("is_check", "1");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 
     private void showDialogMsg(String msgStr) {
         final Dialog picAddDialog = new Dialog(ProfileEmpActivity.this, R.style.dialog);
@@ -388,7 +528,7 @@ public class ProfileEmpActivity extends BaseActivity implements View.OnClickList
         }
         if(!StringUtil.isNullOrEmpty(emp.getAge())){
             if(emp.getAge().length() == 4){
-                age.setText(emp.getAge().substring(2, 4) + "年");
+                age.setText(emp.getAge() + "年");
             }
         }
         if(!StringUtil.isNullOrEmpty(emp.getHeightl())){

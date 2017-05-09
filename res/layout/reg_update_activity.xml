@@ -17,14 +17,14 @@
                       android:orientation="vertical"
                       android:layout_height="match_parent">
 
-            <com.lbins.meetlove.widget.RoundImageView
-                    android:layout_width="98dp"
+            <ImageView
+                    android:layout_width="118dp"
                     android:layout_marginTop="15dp"
                     android:layout_margin="6dp"
                     android:id="@+id/cover"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/icon_profile_headpic"
-                    android:layout_height="98dp"/>
+                    android:layout_height="118dp"/>
 
             <TextView android:layout_width="wrap_content"
                       android:text="上传照片"
@@ -52,7 +52,7 @@
                               android:textColor="@color/text_color"
                               android:layout_height="wrap_content"/>
                     <EditText android:layout_width="wrap_content"
-                              android:hint="未填写 30字以内"
+                              android:hint="未填写 32字以内"
                               android:id="@+id/sign"
                               android:gravity="top"
                               android:paddingTop="8dp"

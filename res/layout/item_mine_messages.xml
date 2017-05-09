@@ -18,7 +18,7 @@
               android:textColor="@color/white"
               android:layout_height="wrap_content"/>
 
-    <com.lbins.meetlove.widget.RoundImageView
+    <ImageView
             android:layout_width="45dp"
             android:layout_below="@+id/dateline"
             android:layout_height="45dp"

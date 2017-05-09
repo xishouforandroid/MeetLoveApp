@@ -49,7 +49,7 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.friends_apply_activity);
         res = getResources();
         initView();
-        progressDialog = new CustomProgressDialog(FriendsApplyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(FriendsApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -188,19 +188,33 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
                     if(friends != null){
                         //接受
                         tmpSelect = position;
-                        progressDialog = new CustomProgressDialog(FriendsApplyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog = new CustomProgressDialog(FriendsApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                         progressDialog.setCancelable(true);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
-                        saveAcctept(friends);
+                        saveAcctept(friends, "1");
                     }
+                }
+            }
+                break;
+            case 2:
+            {
+                //拒绝
+                Friends friends = lists.get(position);
+                if(friends != null){
+                    tmpSelect = position;
+                    progressDialog = new CustomProgressDialog(FriendsApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+                    saveAcctept(friends, "2");
                 }
             }
                 break;
         }
     }
 
-    private void saveAcctept(final Friends friends) {
+    private void saveAcctept(final Friends friends, final String ischeck) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.appAcceptFriends,
@@ -221,7 +235,10 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
                                 }else if(code1 == 2){
                                     //对方已经是好友了 删除这条请求
                                     lists.remove(tmpSelect);
-                                    adapter.notifyDataSetInvalidated();
+                                    adapter.notifyDataSetChanged();
+                                    //调用广播，刷新主页
+                                    Intent intent1 = new Intent("update_contact_success");
+                                    sendBroadcast(intent1);
                                 }
                                 else {
                                     Toast.makeText(FriendsApplyActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
@@ -250,7 +267,7 @@ public class FriendsApplyActivity extends BaseActivity implements View.OnClickLi
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("friendsid", friends.getFriendsid());
-                params.put("is_check", "1");
+                params.put("is_check", ischeck);
                 params.put("empid1", friends.getEmpid1());
                 params.put("empid2", friends.getEmpid2());
                 return params;

@@ -82,7 +82,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         mWindowManager = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         res = getActivity().getResources();
         initView();
-        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(getActivity(), "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -237,6 +237,74 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         getRequestQueue().add(request);
     }
 
+
+    private void getFriendsCount() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appFriends,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    FriendsData data = getGson().fromJson(s, FriendsData.class);
+                                    if(data != null){
+                                        List<Friends> listsFriends = new ArrayList<>();
+                                        listsFriends.addAll(data.getData());
+                                        int friendsCountUnRead = listsFriends.size();
+                                        if(friendsCountUnRead> 0){
+                                            new_friends_number.setVisibility(View.VISIBLE);
+                                            new_friends_number.setText(String.valueOf(friendsCountUnRead));
+                                        }else {
+                                            new_friends_number.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid2", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("is_check", "0");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -244,10 +312,12 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
             String action = intent.getAction();
             if (action.equals("update_contact_success")) {
                 getFriends();
+                getFriendsCount();
             }
             if (action.equals("delete_friends_success")) {
                 //删除了好友
                 getFriends();
+                getFriendsCount();
             }
         }
     };

@@ -40,7 +40,7 @@ public class NoticesDetailActivity extends BaseActivity implements View.OnClickL
         noticeid = getIntent().getExtras().getString("noticeid");
 
         initView();
-        progressDialog = new CustomProgressDialog(NoticesDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(NoticesDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

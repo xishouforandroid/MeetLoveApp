@@ -22,14 +22,12 @@
                           android:orientation="vertical"
                           android:padding="8dp"
                           android:layout_height="wrap_content">
-                <com.lbins.meetlove.widget.RoundImageView
+                <ImageView
                         android:layout_width="108dp"
                         android:id="@+id/cover"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/default_read_book"
                         android:layout_height="108dp"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="读书群"
                           android:id="@+id/name"
                           android:layout_marginTop="12dp"
                           android:layout_marginBottom="6dp"
@@ -43,10 +41,10 @@
                           android:layout_marginLeft="35dp"
                           android:layout_marginRight="35dp"
                           android:id="@+id/content"
-                          android:text="书籍至最有耐心 最能忍耐和最令人愉快的伙伴 这里有爱好读书的一群人"
                           android:padding="8dp"
+                          android:text=""
                           android:textSize="13sp"
-                          android:gravity="center|left"
+                          android:gravity="center"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
 

@@ -46,14 +46,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/ease_unread_count_bg"
                 android:gravity="center"
+                android:textSize="10sp"
                 android:textColor="@android:color/white"
-                android:textSize="12sp"
                 />
     </RelativeLayout>
+
     <RelativeLayout android:layout_width="0dp"
                     android:layout_weight="1"
                     android:id="@+id/foot_liner_three"
@@ -76,21 +77,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/ease_unread_count_bg"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:textColor="@android:color/white"
                  />
     </RelativeLayout>
+
     <RelativeLayout android:layout_width="0dp"
                   android:layout_weight="1"
                   android:id="@+id/foot_liner_four"
                   android:layout_gravity="center"
                   android:gravity="center"
                   android:layout_height="match_parent">
-        <!--<ImageView android:layout_width="wrap_content"-->
-                   <!--android:id="@+id/foot_four"-->
-                   <!--android:layout_centerInParent="true"-->
-                   <!--android:src="@drawable/tabicon_mine"-->
-                   <!--android:layout_height="wrap_content"/>-->
         <Button
                 android:id="@+id/foot_four"
                 android:layout_width="match_parent"
@@ -103,7 +104,5 @@
                 android:scaleType="matrix"
                 android:textSize="12sp" />
     </RelativeLayout>
-
-
 
 </LinearLayout>

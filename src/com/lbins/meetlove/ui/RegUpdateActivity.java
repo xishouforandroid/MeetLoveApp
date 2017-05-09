@@ -289,7 +289,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
         this.findViewById(R.id.back).setOnClickListener(this);
         this.findViewById(R.id.btn_right).setVisibility(View.GONE);
         title = (TextView) this.findViewById(R.id.title);
-        title.setText("填写资料");
+        title.setText("个人资料");
 
         cover = (ImageView) this.findViewById(R.id.cover);
         sign = (EditText) this.findViewById(R.id.sign);
@@ -461,7 +461,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                     showMsg(RegUpdateActivity.this, "请输入个性签名");
                     return;
                 }
-                if(sign.getText().toString().length()>30){
+                if(sign.getText().toString().length()>32){
                     showMsg(RegUpdateActivity.this, "个性签名字数超限");
                     return;
                 }
@@ -524,7 +524,7 @@ public class RegUpdateActivity extends BaseActivity implements View.OnClickListe
                     showMsg(RegUpdateActivity.this, "请选择择偶婚姻状况");
                     return;
                 }
-                progressDialog = new CustomProgressDialog(RegUpdateActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog = new CustomProgressDialog(RegUpdateActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();

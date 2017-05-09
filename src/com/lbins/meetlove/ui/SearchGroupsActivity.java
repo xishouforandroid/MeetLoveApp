@@ -44,7 +44,7 @@ public class SearchGroupsActivity extends BaseActivity implements View.OnClickLi
         likeids = getIntent().getExtras().getString("likeids");
 
         initView();
-        progressDialog = new CustomProgressDialog(SearchGroupsActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(SearchGroupsActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

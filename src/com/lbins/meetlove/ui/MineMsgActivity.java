@@ -56,7 +56,7 @@ public class MineMsgActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.mine_msg_activity);
         registerBoradcastReceiver();
         initView();
-        progressDialog = new CustomProgressDialog(MineMsgActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(MineMsgActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

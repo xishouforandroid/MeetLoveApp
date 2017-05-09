@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lbins.meetlove.MeetLoveApplication;
@@ -52,7 +53,7 @@ public class TuijianGroupdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.item_index_tuijian_group, parent, false);
-            holder.cover = (RoundImageView) convertView.findViewById(R.id.cover);
+            holder.cover = (ImageView) convertView.findViewById(R.id.cover);
             holder.nickname = (TextView) convertView.findViewById(R.id.nickname);
             holder.content = (TextView) convertView.findViewById(R.id.content);
             convertView.setTag(holder);
@@ -69,7 +70,7 @@ public class TuijianGroupdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        RoundImageView cover;
+        ImageView cover;
         TextView nickname;
         TextView content;
     }

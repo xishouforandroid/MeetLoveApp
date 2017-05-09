@@ -88,7 +88,7 @@ public class ProfileDetailJwdxActivity extends BaseActivity implements View.OnCl
 
         empid =getIntent().getExtras().getString("empid");
         initView();
-        progressDialog = new CustomProgressDialog(ProfileDetailJwdxActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(ProfileDetailJwdxActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

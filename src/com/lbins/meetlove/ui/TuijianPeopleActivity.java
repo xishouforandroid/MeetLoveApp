@@ -37,7 +37,7 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuijian_people_activity);
         initView();
-        progressDialog = new CustomProgressDialog(TuijianPeopleActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(TuijianPeopleActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -94,12 +94,19 @@ public class TuijianPeopleActivity extends BaseActivity implements View.OnClickL
                                 int code1 = jo.getInt("code");
                                 if (code1 == 200) {
                                     EmpsData data = getGson().fromJson(s, EmpsData.class);
+                                    lists.clear();
                                     if(data != null){
                                         lists.addAll(data.getData());
                                     }
-                                    Collections.sort(lists, new PinyinComparator());
+//                                    Collections.sort(lists, new PinyinComparator());
                                     adapter.notifyDataSetChanged();
-
+                                    if(lists.size()>0){
+                                        lstv.setVisibility(View.VISIBLE);
+                                        search_null.setVisibility(View.GONE);
+                                    }else {
+                                        search_null.setVisibility(View.VISIBLE);
+                                        lstv.setVisibility(View.GONE);
+                                    }
                                 }else {
                                     Toast.makeText(TuijianPeopleActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

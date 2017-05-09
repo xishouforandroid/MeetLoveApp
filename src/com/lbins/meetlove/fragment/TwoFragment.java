@@ -31,7 +31,9 @@ import com.lbins.meetlove.chat.db.InviteMessgeDao;
 import com.lbins.meetlove.chat.ui.ChatActivity;
 import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
+import com.lbins.meetlove.dao.HappyHandJw;
 import com.lbins.meetlove.data.EmpData;
+import com.lbins.meetlove.data.HappyHandJwDatas;
 import com.lbins.meetlove.library.PullToRefreshBase;
 import com.lbins.meetlove.library.PullToRefreshListView;
 import com.lbins.meetlove.ui.MineMsgActivity;
@@ -80,12 +82,14 @@ public class TwoFragment  extends EaseConversationListFragment {
                         Emp empT = DBHelper.getInstance(getActivity()).getEmpById(username);
 
                         if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
-                            showDialogMsg("对方不是你的交往对象，不能发消息");
-                            return;
+//                            showDialogMsg("对方不是你的交往对象，不能发消息");
+//                            return;
+                            getJwdx1(username);
                         }else {
                             if(empT != null && !StringUtil.isNullOrEmpty(empT.getState())){
                                 if("2".equals(empT.getState())){
-                                    showDialogMsg("对方已有交往对象，不能发消息");
+//                                    showDialogMsg("对方已有交往对象，不能发消息");
+                                    getJwdx2(username);
                                 }else {
                                     getEmpById(username);
                                 }
@@ -139,6 +143,150 @@ public class TwoFragment  extends EaseConversationListFragment {
         super.setUpView();
         //end of red packet code
     }
+
+
+    //查询我的交往对象
+    List<HappyHandJw> listjwdxs = new ArrayList<>();
+    private void getJwdx1(final String username) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appJiaowangs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandJwDatas data = getGson().fromJson(s, HappyHandJwDatas.class);
+                                    listjwdxs.clear();
+                                    listjwdxs.addAll(data.getData());
+                                    if(listjwdxs != null && listjwdxs.size()>0){
+                                        HappyHandJw happyHandJw = listjwdxs.get(0);
+                                        if(happyHandJw != null){
+                                            if(!username.equals(happyHandJw.getEmpid2())){
+                                                showDialogMsg("对方不是你的交往对象，不能发消息");
+                                            }else{
+                                                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                                                intent.putExtra(Constant.EXTRA_USER_ID, username);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", getGson().fromJson(getSp().getString("empid", ""), String.class));
+                params.put("is_check", "1");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    //查询对方的交往对象
+    List<HappyHandJw> listjwdxs1 = new ArrayList<>();
+    private void getJwdx2(final String username) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.appJiaowangs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                int code1 = jo.getInt("code");
+                                if (code1 == 200) {
+                                    HappyHandJwDatas data = getGson().fromJson(s, HappyHandJwDatas.class);
+                                    listjwdxs1.clear();
+                                    listjwdxs1.addAll(data.getData());
+                                    if(listjwdxs1 != null && listjwdxs1.size()>0){
+                                        HappyHandJw happyHandJw = listjwdxs1.get(0);
+                                        if(happyHandJw != null){
+                                            if(!getGson().fromJson(getSp().getString("empid", ""), String.class).equals(happyHandJw.getEmpid2())){
+                                                showDialogMsg("对方已有交往对象，不能发消息");
+                                            }else{
+                                                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                                intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_SINGLE);
+                                                intent.putExtra(Constant.EXTRA_USER_ID, username);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empid1", username);
+                params.put("is_check", "1");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
 
     private void getEmpById(final String empid) {
         StringRequest request = new StringRequest(

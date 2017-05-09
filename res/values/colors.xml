@@ -109,6 +109,8 @@
     <color name="gray_color">#908e8f</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="top_top_bg">#303135</color>
+    <color name="top_bg">#393a3e</color>
     <color name="login_user_bgcolor">#ffffff</color>
     <color name="zhuye_item_bgh">#f1f1f1</color>
     <color name="text_color">#535353</color>
@@ -324,7 +326,7 @@
     <color name="holo_red_light">#ffff4444</color>
 
 
-    <color name="top_bar_normal_bg">#ff121f2d</color>
+    <color name="top_bar_normal_bg">#393a3e</color>
 
     <color name="list_itease_secondary_color">#888888</color>
     <color name="list_itease_primary_color">#000</color>

@@ -56,6 +56,7 @@ import com.lbins.meetlove.fragment.ThreeFragment;
 import com.lbins.meetlove.fragment.TwoFragment;
 import com.lbins.meetlove.module.MsgCount;
 import com.lbins.meetlove.module.VersonCodeObj;
+import com.lbins.meetlove.ui.AboutActivity;
 import com.lbins.meetlove.ui.LoginActivity;
 import com.lbins.meetlove.util.GuirenHttpUtils;
 import com.lbins.meetlove.util.StringUtil;
@@ -116,8 +117,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         res = getResources();
         fm = getSupportFragmentManager();
         initView();
+        boolean isFirstRun = getSp().getBoolean("isFirstRunMain", true);
+        if (isFirstRun) {
+            SharedPreferences.Editor editor = getSp().edit();
+            editor.putBoolean("isFirstRunMain", false);
+            editor.commit();
+            switchFragment(R.id.foot_one);
+        } else {
+            switchFragment(R.id.foot_two);
+        }
 
-        switchFragment(R.id.foot_one);
         inviteMessgeDao = new InviteMessgeDao(this);
         registerBroadcastReceiver();
         EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
@@ -578,9 +587,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             public void run() {
 //                int count = getUnreadAddressCountTotal();
                 if (friendsCountUnRead > 0) {
-                    if(currentTabIndex == 2){
+//                    if(currentTabIndex == 2){
                         threeFragment.refresh();
-                    }
+//                    }
                     unreadAddressLable.setText(String.valueOf(friendsCountUnRead));
                     unreadAddressLable.setVisibility(View.VISIBLE);
                 } else {
@@ -1019,11 +1028,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals("update_message_success")) {
-                initDataCount();
-                if (currentTabIndex == 1) {
+                getMsgCount();
+//                if (currentTabIndex == 1) {
                     if (twoFragment != null) {
                         twoFragment.refresh();
-                    }
+//                    }
                 }
             }
             if (action.equals("update_jwdx_success")) {

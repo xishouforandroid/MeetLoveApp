@@ -46,7 +46,7 @@ public class ProfileSetActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.profile_set_activity);
         empid = getIntent().getExtras().getString("empid");
         initView();
-        progressDialog = new CustomProgressDialog(ProfileSetActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(ProfileSetActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

@@ -65,7 +65,7 @@ public class TuijianPeopledapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.item_index_tuijian_people, parent, false);
-            holder.cover = (RoundImageView) convertView.findViewById(R.id.cover);
+            holder.cover = (ImageView) convertView.findViewById(R.id.cover);
             holder.nickname = (TextView) convertView.findViewById(R.id.nickname);
             holder.state = (TextView) convertView.findViewById(R.id.state);
             holder.vip1_img = (ImageView) convertView.findViewById(R.id.vip1_img);
@@ -144,7 +144,7 @@ public class TuijianPeopledapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        RoundImageView cover;
+        ImageView cover;
         TextView nickname;
         TextView state;
         ImageView vip1_img;

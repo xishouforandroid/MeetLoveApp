@@ -52,7 +52,7 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.jwdx_apply_activity);
         res = getResources();
         initView();
-        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -190,7 +190,7 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
                     if(friends != null){
                         //接受
                         tmpSelect = position;
-                        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                         progressDialog.setCancelable(true);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
@@ -207,7 +207,7 @@ public class JwdxApplyActivity extends BaseActivity implements View.OnClickListe
                     if(friends != null){
                         //拒绝
                         tmpSelect = position;
-                        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog = new CustomProgressDialog(JwdxApplyActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                         progressDialog.setCancelable(true);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();

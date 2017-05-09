@@ -55,7 +55,7 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
         groupid = getIntent().getExtras().getString("groupid");
 
         initView();
-        progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(GroupDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

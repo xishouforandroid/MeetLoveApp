@@ -102,7 +102,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         registerBoradcastReceiver();
         mShareListener = new CustomShareListener(getActivity());
         initView();
-        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(getActivity(), "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -133,7 +133,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("age", ""), String.class))){
             String agemine = getGson().fromJson(getSp().getString("age", ""), String.class);
-            age.setText(agemine.substring(2,4) + "年");
+            age.setText(agemine + "年");
         }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("heightl", ""), String.class))){
             heightl.setText(getGson().fromJson(getSp().getString("heightl", ""), String.class) + "CM");
@@ -225,6 +225,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         if("2".equals(getGson().fromJson(getSp().getString("state", ""), String.class))){
             jwdx_txt.setText("交往对象资料");
         }
+        view.findViewById(R.id.top_cover).setOnClickListener(this);
     }
 
 
@@ -304,6 +305,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                 startActivity(intent);
             }
             break;
+            case R.id.top_cover:
             case R.id.cover:
             {
                 //头像点击

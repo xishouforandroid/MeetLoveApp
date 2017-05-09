@@ -27,8 +27,8 @@ public class SideBar extends View {
 	        init();  
 	    }  
 	    private void init() {  
-	        l = new char[] {'#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',  
-	                'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };  
+	        l = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+	                'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 	    }  
 	    public SideBar(Context context, AttributeSet attrs, int defStyle) {
 	        super(context, attrs, defStyle); 
@@ -70,7 +70,7 @@ public class SideBar extends View {
 	        Paint paint = new Paint();
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 	        paint.setColor(getResources().getColor(R.color.black));
-	        paint.setTextSize(28);
+	        paint.setTextSize(26);
 	        paint.setTextAlign(Paint.Align.CENTER);
 	        float widthCenter = getMeasuredWidth() / 2;  
 	        for (int i = 0; i < l.length; i++) {  

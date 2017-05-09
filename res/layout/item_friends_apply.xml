@@ -30,6 +30,13 @@
               android:layout_marginTop="4dp"
               android:layout_height="wrap_content"/>
     <ImageView android:layout_width="wrap_content"
+               android:layout_toLeftOf="@+id/accept"
+               android:layout_centerVertical="true"
+               android:id="@+id/reject"
+               android:src="@drawable/btn_newfirend_refuse"
+               android:layout_marginRight="15dp"
+               android:layout_height="wrap_content"/>
+    <ImageView android:layout_width="wrap_content"
                android:layout_alignParentRight="true"
                android:layout_centerVertical="true"
                android:id="@+id/accept"

@@ -20,7 +20,7 @@
                   android:padding="6dp"
                   android:textColorHint="@color/textColor"
                   android:id="@+id/keywords"
-                  android:hint="手机号"
+                  android:hint="请输入"
                   android:paddingLeft="8dp"
                   android:background="@color/white"
                   android:textSize="15sp"

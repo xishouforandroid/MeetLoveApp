@@ -39,7 +39,7 @@ public class TuijianGroupActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuijian_group_activity);
         initView();
-        progressDialog = new CustomProgressDialog(TuijianGroupActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(TuijianGroupActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

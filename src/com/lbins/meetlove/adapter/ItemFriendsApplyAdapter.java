@@ -62,6 +62,7 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
             holder.item_cover = (ImageView) convertView.findViewById(R.id.item_cover);
             holder.content = (TextView) convertView.findViewById(R.id.content);
             holder.accept = (ImageView) convertView.findViewById(R.id.accept);
+            holder.reject = (ImageView) convertView.findViewById(R.id.reject);
             holder.nickname = (TextView) convertView.findViewById(R.id.nickname);
             convertView.setTag(holder);
         } else {
@@ -74,18 +75,31 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
             holder.nickname.setText(cell.getEmpid1Nickname());
             holder.content.setText(cell.getApplytitle());
             if("0".equals(cell.getIs_check())){
+                holder.accept.setVisibility(View.VISIBLE);
+                holder.reject.setVisibility(View.VISIBLE);
                 holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfirend_accept));
+                holder.reject.setImageDrawable(res.getDrawable(R.drawable.btn_newfirend_refuse));
             }
             if("1".equals(cell.getIs_check())){
+                holder.accept.setVisibility(View.VISIBLE);
+                holder.reject.setVisibility(View.GONE);
                 holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfriend_alreadyis));
             }
             if("2".equals(cell.getIs_check())){
+                holder.accept.setVisibility(View.VISIBLE);
+                holder.reject.setVisibility(View.GONE);
                 holder.accept.setImageDrawable(res.getDrawable(R.drawable.btn_newfriend_refused));
             }
             holder.accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onClickContentItemListener.onClickContentItem(position, 1, "1000");
+                }
+            });
+            holder.reject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickContentItemListener.onClickContentItem(position, 2, "1000");
                 }
             });
         }
@@ -96,6 +110,7 @@ public class ItemFriendsApplyAdapter extends BaseAdapter {
         ImageView item_cover;
         TextView content;
         ImageView accept;
+        ImageView reject;
         TextView nickname;
     }
 }

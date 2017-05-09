@@ -110,6 +110,25 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                     context.sendBroadcast(intent1);
                 }
                     break;
+                case 8:
+                {
+                    //你删除了好友 或者对方删除了你
+                    Intent intent1 = new Intent("delete_friends_success");
+                    context.sendBroadcast(intent1);
+                }
+                    break;
+                case 9:
+                {
+                    //同意好友请求
+                    Intent intent1 = new Intent("update_contact_success");
+                    context.sendBroadcast(intent1);
+                }
+                    break;
+                case 10:
+                {
+                    //拒绝好友请求
+                }
+                    break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -254,6 +273,24 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                 case 7:
                 {
                     //交往成功--系统消息
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                }
+                    break;
+                case 8:
+                {
+                    //删除好友关系--系统消息
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                }
+                    break;
+                case 9:
+                {
+                    //同意好友请求
+                    intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
+                }
+                    break;
+                case 10:
+                {
+                    //拒绝好友请求
                     intent.setClass(context.getApplicationContext(), MineMsgActivity.class);
                 }
                     break;

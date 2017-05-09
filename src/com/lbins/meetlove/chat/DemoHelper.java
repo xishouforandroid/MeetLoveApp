@@ -305,25 +305,25 @@ public class DemoHelper {
             }
         });
         //set emoji icon provider
-        easeUI.setEmojiconInfoProvider(new EaseEmojiconInfoProvider() {
-            
-            @Override
-            public EaseEmojicon getEmojiconInfo(String emojiconIdentityCode) {
-                EaseEmojiconGroupEntity data = EmojiconExampleGroupData.getData();
-                for(EaseEmojicon emojicon : data.getEmojiconList()){
-                    if(emojicon.getIdentityCode().equals(emojiconIdentityCode)){
-                        return emojicon;
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            public Map<String, Object> getTextEmojiconMapping() {
-                return null;
-            }
-        });
-        
+//        easeUI.setEmojiconInfoProvider(new EaseEmojiconInfoProvider() {
+//
+//            @Override
+//            public EaseEmojicon getEmojiconInfo(String emojiconIdentityCode) {
+//                EaseEmojiconGroupEntity data = EmojiconExampleGroupData.getData();
+//                for(EaseEmojicon emojicon : data.getEmojiconList()){
+//                    if(emojicon.getIdentityCode().equals(emojiconIdentityCode)){
+//                        return emojicon;
+//                    }
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            public Map<String, Object> getTextEmojiconMapping() {
+//                return null;
+//            }
+//        });
+//
         //set notification options, will use default if you don't set it
         easeUI.getNotifier().setNotificationInfoProvider(new EaseNotificationInfoProvider() {
             
@@ -624,7 +624,7 @@ public class DemoHelper {
             msg.setFrom(inviter);
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
-            msg.addBody(new EMTextMessageBody(inviter + " " +st3));
+            msg.addBody(new EMTextMessageBody(st3));
             msg.setStatus(EMMessage.Status.SUCCESS);
             // save invitation as messages
             EMClient.getInstance().chatManager().saveMessage(msg);

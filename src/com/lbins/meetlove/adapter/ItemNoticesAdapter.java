@@ -57,7 +57,6 @@ public class ItemNoticesAdapter extends BaseAdapter {
 
         final HappyHandNotice cell = records.get(position);
         if (cell != null) {
-//            imageLoader.displayImage(cell, holder.item_pic, MeetLoveApplication.txOptions, animateFirstListener);
             holder.title.setText(cell.getTitle());
             holder.dateline.setText(cell.getDateline());
         }

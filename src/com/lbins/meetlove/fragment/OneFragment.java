@@ -51,7 +51,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     private List<Emp> list1 = new ArrayList<Emp>();
     private List<HappyHandGroup> list2 = new ArrayList<HappyHandGroup>();
 
-    private LinearLayout liner_1;
+    private RelativeLayout liner_1;
     private TextView no_data;
 
     private ImageView btn_right;
@@ -68,7 +68,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         res = getActivity().getResources();
 
         initView();
-        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(getActivity(), "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -82,7 +82,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
         title.setText("推荐");
         view.findViewById(R.id.back).setVisibility(View.GONE);
 
-        liner_1 = (LinearLayout) view.findViewById(R.id.liner_1);
+        liner_1 = (RelativeLayout) view.findViewById(R.id.liner_1);
         no_data = (TextView) view.findViewById(R.id.no_data);
 
         gridView1 = (PictureGridview) view.findViewById(R.id.gridView1);
@@ -159,7 +159,6 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
     }
 
 
-    //推荐人-单身中
     private void getTuijianren1() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -174,15 +173,16 @@ public class OneFragment extends BaseFragment implements View.OnClickListener  {
                                 if (code1 == 200) {
                                     EmpsData data = getGson().fromJson(s, EmpsData.class);
                                     if(data != null){
+                                        list1.clear();
                                         list1.addAll(data.getData());
                                     }
                                     adapter1.notifyDataSetChanged();
-                                    if(list1.size() < 1){
-                                        liner_1.setVisibility(View.GONE);
-                                        no_data.setVisibility(View.VISIBLE);
-                                    }else {
+                                    if(list1.size() > 0){
                                         liner_1.setVisibility(View.VISIBLE);
                                         no_data.setVisibility(View.GONE);
+                                    }else {
+                                        liner_1.setVisibility(View.GONE);
+                                        no_data.setVisibility(View.VISIBLE);
                                     }
                                 }else {
                                     Toast.makeText(getActivity(), jo.getString("message"), Toast.LENGTH_SHORT).show();

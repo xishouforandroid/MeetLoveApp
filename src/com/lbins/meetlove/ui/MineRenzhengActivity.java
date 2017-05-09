@@ -401,7 +401,7 @@ public class MineRenzhengActivity extends BaseActivity implements View.OnClickLi
             if (photo != null) {
                 pics = CompressPhotoUtil.saveBitmap2file(photo, System.currentTimeMillis() + ".jpg", PHOTO_CACHE_DIR);
                 idcard.setImageBitmap(photo);
-                progressDialog = new CustomProgressDialog(MineRenzhengActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog = new CustomProgressDialog(MineRenzhengActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();

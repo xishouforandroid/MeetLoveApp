@@ -48,7 +48,7 @@ public class SelectJwdxActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.jwdx_activity);
         initView();
         adapter.isCheckMap.clear();
-        progressDialog = new CustomProgressDialog(SelectJwdxActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(SelectJwdxActivity.this, "请稍后...",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -179,7 +179,7 @@ public class SelectJwdxActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
                 String empid2 = listEmpSelect.get(0);
-                progressDialog = new CustomProgressDialog(SelectJwdxActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog = new CustomProgressDialog(SelectJwdxActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
