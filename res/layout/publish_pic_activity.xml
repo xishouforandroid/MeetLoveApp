@@ -49,12 +49,19 @@
                    android:id="@+id/btn_right"
                 />
     </RelativeLayout>
-    <com.lbins.meetlove.widget.NoScrollGridView
+    <GridView
             android:id="@+id/publish_moopd_gridview_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:horizontalSpacing="5dip"
             android:numColumns="4"
             android:padding="10dip"
             android:verticalSpacing="5dip"/>
+    <ImageView android:layout_width="wrap_content"
+               android:layout_gravity="center"
+               android:layout_margin="8dp"
+               android:id="@+id/btn_add"
+               android:src="@drawable/icon_choosephoto"
+               android:layout_height="wrap_content"/>
 </LinearLayout>

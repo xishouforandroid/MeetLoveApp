@@ -58,11 +58,11 @@ public class Publish_mood_GridView_Adapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         String path = dataList.get(position);
-        if (path.contains("camera_default")) {
-            viewHolder.imageview.setImageResource(R.drawable.icon_choosephoto);
-        } else {
+//        if (path.contains("camera_default") && position == (dataList.size()-1)) {
+//            viewHolder.imageview.setImageResource(R.drawable.icon_choosephoto);
+//        } else {
             imageLoader.displayImage("file://" + path, viewHolder.imageview, MeetLoveApplication.options);
-        }
+//        }
         return convertView;
     }
 

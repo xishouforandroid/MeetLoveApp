@@ -59,7 +59,7 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
     private String typeid = "";
     private final static int SELECT_LOCAL_PHOTO = 110;
 
-    private NoScrollGridView publish_moopd_gridview_image;//图片
+    private GridView publish_moopd_gridview_image;//图片
     private Publish_mood_GridView_Adapter adapter;
 
     private ArrayList<String> dataList = new ArrayList<String>();
@@ -91,11 +91,12 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
 
     private void initView() {
         this.findViewById(R.id.back).setOnClickListener(this);
+        this.findViewById(R.id.btn_add).setOnClickListener(this);
         title = (TextView) this.findViewById(R.id.title);
         btn_right = (TextView) this.findViewById(R.id.btn_right);
         btn_right.setVisibility(View.VISIBLE);
         btn_right.setOnClickListener(this);
-        publish_moopd_gridview_image = (NoScrollGridView) this.findViewById(R.id.publish_moopd_gridview_image);
+        publish_moopd_gridview_image = (GridView) this.findViewById(R.id.publish_moopd_gridview_image);
         adapter = new Publish_mood_GridView_Adapter(this, dataList);
         publish_moopd_gridview_image.setAdapter(adapter);
         publish_moopd_gridview_image.setOnItemClickListener(new GridView.OnItemClickListener() {
@@ -104,15 +105,15 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String path = dataList.get(position);
-                if (path.contains("camera_default") && position == dataList.size() - 1 && dataList.size() - 1 != 9) {
-                    showSelectImageDialog();
-                } else {
+//                if (path.contains("camera_default") && position == dataList.size() - 1 && dataList.size() - 1 != 9) {
+//                    showSelectImageDialog();
+//                } else {
                     Intent intent = new Intent(PublishPicActivity.this, ImageDelActivity.class);
                     intent.putExtra("position", position);
                     intent.putExtra("path", dataList.get(position));
                     startActivityForResult(intent, CommonDefine.DELETE_IMAGE);
                 }
-            }
+//            }
         });
         publish_moopd_gridview_image.setSelector(new ColorDrawable(Color.TRANSPARENT));
     }
@@ -153,16 +154,20 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_add:
+            {
+                showSelectImageDialog();
+            }
+                break;
             case R.id.back:
                 showQuitePop();
                 break;
             case R.id.btn_right:
                 uploadPaths.clear();
-                if (dataList.size() == 0|| dataList.size()==1) {
+                if (dataList.size() == 0) {
                     showMsg(PublishPicActivity.this, "请选择图片！");
                     return;
                 }
-                dataList.remove(dataList.size()-1);
                 progressDialog = new CustomProgressDialog(PublishPicActivity.this, "请稍后...",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
@@ -350,13 +355,13 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                     if (tDataList != null) {
                         for (int i = 0; i < tDataList.size(); i++) {
                             String string = tDataList.get(i);
-                            if (!string.contains("camera_default")) {
+//                            if (!string.contains("camera_default")) {
                                 dataList.add(string);
-                            }
+//                            }
                         }
-                        if (dataList.size() < 9) {
-                            dataList.add("camera_default");
-                        }
+//                        if (dataList.size() < 9) {
+//                            dataList.add("camera_default");
+//                        }
                         adapter.notifyDataSetChanged();
                     } else {
                         finish();
@@ -370,13 +375,13 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                     Bitmap bitmap = ImageUtils.getUriBitmap(this, uri, 400, 400);
                     String cameraImagePath = FileUtils.saveBitToSD(bitmap, System.currentTimeMillis() + ".jpg");
 
-                    if(dataList.size()>0){
-                        dataList.remove(dataList.size()-1);
-                    }
+//                    if(dataList.size()>0){
+//                        dataList.remove(dataList.size()-1);
+//                    }
                     dataList.add(cameraImagePath);
-                    if (dataList.size() < 9) {
-                        dataList.add("camera_default");
-                    }
+//                    if (dataList.size() < 9) {
+//                        dataList.add("camera_default");
+//                    }
                     adapter.notifyDataSetChanged();
                     break;
                 case CommonDefine.TAKE_PICTURE_FROM_GALLERY:
@@ -389,18 +394,18 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                                 dataList.add(string);
                             }
                         }
-                        if (dataList.size() < 9) {
-                            dataList.add("camera_default");
-                        }
+//                        if (dataList.size() < 9) {
+//                            dataList.add("camera_default");
+//                        }
                         adapter.notifyDataSetChanged();
                     }
                     break;
                 case CommonDefine.DELETE_IMAGE:
                     int position = data.getIntExtra("position", -1);
                     dataList.remove(position);
-                    if (dataList.size() < 9) {
-                        dataList.add("camera_default");
-                    }
+//                    if (dataList.size() < 9) {
+//                        dataList.add("camera_default");
+//                    }
                     adapter.notifyDataSetChanged();
                     break;
             }
