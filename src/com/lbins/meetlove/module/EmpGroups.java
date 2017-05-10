@@ -16,6 +16,25 @@ public class EmpGroups {
     private String pic;
     private String is_use;
 
+    private String nickname;
+    private String cover;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public String getEmpgroupsid() {
         return empgroupsid;
     }

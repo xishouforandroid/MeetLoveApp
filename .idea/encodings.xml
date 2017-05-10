@@ -159,8 +159,6 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_count_bg.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/em_unread_dot.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xhdpi/launcher.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_green.9.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bg_chat_item_white.9.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_verify_honesty.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/bigpic_verify_v.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/btn_big_active.png" charset="UTF-8" />
@@ -176,12 +174,12 @@
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_navbar_profile.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_switchbtn_on.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/icon_verify_checkbox_checked.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/intropage_1.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/intropage_2.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/launcher.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/no_pic.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/pull_to_refresh_arrow.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable/bg_chat_item.9.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable/bg_chat_item_green.9.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/res/drawable/bg_chat_item_white.9.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/res/drawable-xxhdpi/welcome_loading.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_blue_selector.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_dark_shape.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/drawable/btn_jubao_normal_shape.xml" charset="UTF-8" />
@@ -395,6 +393,7 @@
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AlbumGridViewAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/AnimateFirstDisplayListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemAgeAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemEmpGroupsAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemFriendsApplyAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemHeightlAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/lbins/meetlove/adapter/ItemJwdxAdapter.java" charset="UTF-8" />

@@ -405,6 +405,8 @@
     <string name="attach_red_packet">红包</string>
     <string name="red_packet_record">红包记录</string>
     <string name="exclusive_red_packet">专属红包</string>
+    <string name="umeng_sharebutton_custom_wx">微信</string>
+    <string name="umeng_sharebutton_custom_sina">新浪</string>
 
 
 </resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/bg_gray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top"/>
+    <com.lbins.meetlove.widget.ReboundScrollView android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                          android:background="@color/white"
+                          android:padding="10dp"
+                          android:orientation="horizontal"
+                          android:layout_height="wrap_content">
+                <ImageView
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:layout_margin="6dp"
+                        android:id="@+id/cover"/>
+                <RelativeLayout android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:id="@+id/titleName"
+                              android:layout_centerHorizontal="true"
+                              android:textSize="32sp"
+                              android:textColor="@color/textColor"
+                              android:layout_marginTop="15dp"
+                              android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_marginLeft="15dp"
+                              android:layout_marginRight="15dp"
+                              android:layout_marginTop="15dp"
+                              android:id="@+id/content"
+                              android:lineSpacingMultiplier="1.2"
+                              android:textColor="@color/textColortwo"
+                              android:layout_below="@+id/titleName"
+                              android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.lbins.meetlove.widget.PictureGridview
+                    android:id="@+id/gridview"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:horizontalSpacing="8dip"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="8dip"
+                    />
+            <TextView android:layout_width="match_parent"
+                      android:text="查看全部群成员"
+                      android:layout_gravity="center"
+                      android:padding="8dp"
+                      android:textColor="@color/textColor"
+                      android:gravity="center"
+                      android:id="@+id/selectAllEmp"
+                      android:layout_height="wrap_content"/>
+
+            <Button
+                    android:id="@+id/btn_exit_grp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="11dp"
+                    android:background="@drawable/btn_big_active"
+                    android:onClick="exitGroup"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:text="@string/Exit_the_group_chat"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+        </LinearLayout>
+    </com.lbins.meetlove.widget.ReboundScrollView>
+
+
+</LinearLayout>

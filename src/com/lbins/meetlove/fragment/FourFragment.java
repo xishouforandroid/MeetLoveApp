@@ -45,7 +45,9 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.shareboard.ShareBoardConfig;
+import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.Log;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
@@ -284,7 +286,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                  /*无自定按钮的分享面板*/
                 mShareAction = new ShareAction(getActivity()).setDisplayList(
                         SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
-                        SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+                        SHARE_MEDIA.SINA
                         )
                         .withText(content)
                         .withTitle(title)
@@ -296,6 +298,10 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
                 config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
                 config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
                 mShareAction.open(config);
+//                new ShareAction(getActivity()).setDisplayList()
+//                        .addButton("umeng_sharebutton_custom_wx", "umeng_sharebutton_custom_wx", "icon_share_weixin", "icon_share_weixin")
+//                        .addButton("umeng_sharebutton_custom_sina","umeng_sharebutton_custom_sina","icon_share_sina","icon_share_sina")
+//                        .setShareboardclickCallback(shareBoardlistener).open();
             }
             break;
             case R.id.liner_set:
@@ -322,30 +328,28 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         }
     }
 
-    private void showMsgDialog() {
-        final Dialog picAddDialog = new Dialog(getActivity(), R.style.dialog);
-        View picAddInflate = View.inflate(getActivity(), R.layout.msg_dialog, null);
-        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
-        btn_sure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MineRenzhengActivity.class);
-                startActivity(intent);
-                picAddDialog.dismiss();
-            }
-        });
+    private ShareBoardlistener shareBoardlistener = new  ShareBoardlistener() {
 
-        //取消
-        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                picAddDialog.dismiss();
+        @Override
+        public void onclick(SnsPlatform snsPlatform,SHARE_MEDIA share_media) {
+            if (share_media==null){
+                if (snsPlatform.mKeyword.equals("umeng_sharebutton_custom_wx")){
+                    //微信朋友圈分享
+                }
+                if (snsPlatform.mKeyword.equals("umeng_sharebutton_custom_sina")){
+                    //新浪分享
+                }
             }
-        });
-        picAddDialog.setContentView(picAddInflate);
-        picAddDialog.show();
-    }
+            else {
+                new ShareAction(getActivity()).setPlatform(share_media).setCallback(mShareListener)
+                        .withText("多平台分享")
+                        .share();
+            }
+        }
+    };
+
+
+
 
     private static class CustomShareListener implements UMShareListener {
 
@@ -419,6 +423,32 @@ public class FourFragment extends BaseFragment implements View.OnClickListener  
         super.onConfigurationChanged(newConfig);
         mShareAction.close();
     }
+
+    private void showMsgDialog() {
+        final Dialog picAddDialog = new Dialog(getActivity(), R.style.dialog);
+        View picAddInflate = View.inflate(getActivity(), R.layout.msg_dialog, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MineRenzhengActivity.class);
+                startActivity(intent);
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
 
     private void getPhotos() {
         StringRequest request = new StringRequest(

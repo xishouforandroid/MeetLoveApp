@@ -9,10 +9,8 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_margin="3dp"
-            android:src="@drawable/default_cover2"
             android:id="@+id/item_cover"/>
     <TextView android:layout_width="wrap_content"
-              android:text="文采"
               android:layout_marginLeft="6dp"
               style="@style/MMFontTitleInList"
               android:id="@+id/nickname"
@@ -20,7 +18,6 @@
               android:layout_marginTop="6dp"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
-              android:text="我是文采一"
               android:textColor="@color/textColortwo"
               android:textSize="13sp"
               android:layout_marginLeft="6dp"

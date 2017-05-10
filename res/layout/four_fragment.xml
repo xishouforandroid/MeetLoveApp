@@ -158,13 +158,13 @@
 
 
             <View android:layout_width="match_parent"
-                  android:layout_marginTop="15dp"
+                  android:layout_marginTop="10dp"
                   android:background="@color/sign_mood_nomal_0"
                   android:layout_height="0.1dp"></View>
 
                 <LinearLayout android:layout_width="match_parent"
                               android:orientation="horizontal"
-                              android:padding="10dp"
+                              android:padding="8dp"
                               android:gravity="center_vertical"
                               android:background="@drawable/btn_dark_shape"
                               android:id="@+id/liner_photo"
@@ -201,7 +201,7 @@
 
             <View android:layout_width="match_parent"
                   android:background="@color/sign_mood_nomal_0"
-                  android:layout_marginTop="15dp"
+                  android:layout_marginTop="8dp"
                   android:layout_height="0.1dp"></View>
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
@@ -274,7 +274,7 @@
 
 
             <View android:layout_width="match_parent"
-                  android:layout_marginTop="15dp"
+                  android:layout_marginTop="8dp"
                   android:background="@color/sign_mood_nomal_0"
                   android:layout_height="0.1dp"></View>
             <LinearLayout android:layout_width="match_parent"

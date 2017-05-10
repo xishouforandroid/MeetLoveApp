@@ -115,6 +115,10 @@ public class InternetURL {
     public static final String appDeleteFriends = INTERNAL + "appDeleteFriends.do";
     //解除交往对象
     public static final String appDeleteJiaowangDx = INTERNAL + "appDeleteJiaowangDx.do";
+    //退出群组
+    public static final String appDeleteGroupsById = INTERNAL + "appDeleteGroupsById.do";
+    //获得群组成员
+    public static final String appEmpByGroupId = INTERNAL + "appEmpByGroupId.do";
 
     //传订单给服务端--生成订单
     public static final String SEND_ORDER_TOSERVER = INTERNAL + "orderSave.do";

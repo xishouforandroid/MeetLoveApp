@@ -42,6 +42,7 @@ import com.hyphenate.util.EasyUtils;
 import com.hyphenate.util.PathUtil;
 import com.lbins.meetlove.dao.DBHelper;
 import com.lbins.meetlove.dao.Emp;
+import com.lbins.meetlove.ui.GroupsInfoActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
 import com.lbins.meetlove.util.StringUtil;
 
@@ -235,7 +236,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 return;
             }
             startActivityForResult(
-                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)),
+                    (new Intent(getActivity(), GroupsInfoActivity.class).putExtra("groupId", toChatUsername)),
+//                    (new Intent(getActivity(), GroupDetailsActivity.class).putExtra("groupId", toChatUsername)),
                     REQUEST_CODE_GROUP_DETAIL);
         }else if(chatType == Constant.CHATTYPE_CHATROOM){
         	startActivityForResult(new Intent(getActivity(), ChatRoomDetailsActivity.class).putExtra("roomId", toChatUsername), REQUEST_CODE_GROUP_DETAIL);

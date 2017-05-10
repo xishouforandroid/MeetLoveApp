@@ -179,6 +179,7 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
                         intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
                         intent.putExtra(Constant.EXTRA_USER_ID, groupid);
                         startActivity(intent);
+                        finish();
                     }else  if("0".equals(flag)){
                         //身份认证
                         if("1".equals(getGson().fromJson(getSp().getString("rzstate1", ""), String.class))){
@@ -243,6 +244,7 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
                                     intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
                                     intent.putExtra(Constant.EXTRA_USER_ID, groupid);
                                     startActivity(intent);
+                                    finish();
                                 }else {
                                     Toast.makeText(GroupDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

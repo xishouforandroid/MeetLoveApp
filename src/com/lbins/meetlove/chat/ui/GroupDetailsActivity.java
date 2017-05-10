@@ -25,6 +25,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
@@ -40,13 +45,14 @@ import com.hyphenate.easeui.widget.EaseExpandGridView;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
+import com.lbins.meetlove.base.InternetURL;
+import com.lbins.meetlove.data.HappyHandLikeData;
 import com.lbins.meetlove.ui.GroupDetailActivity;
 import com.lbins.meetlove.ui.ProfileEmpActivity;
 import com.lbins.meetlove.util.StringUtil;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GroupDetailsActivity extends BaseActivity implements OnClickListener {
 	private static final String TAG = "GroupDetailsActivity";
@@ -443,9 +449,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 						public void run() {
 							progressDialog.dismiss();
 							setResult(RESULT_OK);
-							finish();
-							if(ChatActivity.activityInstance != null)
-							    ChatActivity.activityInstance.finish();
+							//退出群之后，删除数据库信息
+							deleteById();
+
 						}
 					});
 				} catch (final Exception e) {
@@ -458,6 +464,66 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 				}
 			}
 		}).start();
+	}
+
+	private void deleteById() {
+		StringRequest request = new StringRequest(
+				Request.Method.POST,
+				InternetURL.appDeleteGroupsById,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String s) {
+						if (StringUtil.isJson(s)) {
+							try {
+								JSONObject jo = new JSONObject(s);
+								int code1 = jo.getInt("code");
+								if (code1 == 200) {
+
+									finish();
+									if(ChatActivity.activityInstance != null){
+										ChatActivity.activityInstance.finish();
+									}
+								} else {
+									Toast.makeText(GroupDetailsActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						} else {
+							Toast.makeText(GroupDetailsActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+						}
+						if(progressDialog != null){
+							progressDialog.dismiss();
+						}
+					}
+				},
+				new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError volleyError) {
+						if(progressDialog != null){
+							progressDialog.dismiss();
+						}
+						Toast.makeText(GroupDetailsActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+					}
+				}
+		) {
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("empid", getGson().fromJson(getSp().getString("empid",""), String.class));
+				params.put("groupid", groupId);
+				return params;
+			}
+
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("Content-Type", "application/x-www-form-urlencoded");
+				return params;
+			}
+		};
+		getRequestQueue().add(request);
 	}
 
 	/**
